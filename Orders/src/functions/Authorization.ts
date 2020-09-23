@@ -12,9 +12,11 @@ class Authorization {
   static async authorizationUser(dispatch: Dispatch<any>, userData: AuthBody) {
     // get userToken
     const body: AuthBody = userData;
+    console.log('body',body)
+    console.log('body if',body.login === '' || body.password === '')
     // @ts-ignore
-    if (typeof body.login === undefined || typeof body.password === undefined) {
-      Alert('ERROR 1');
+    if (body.login === '' || body.password === '') {
+      alert('ERROR 1');
       return;
     }
     body.deviceInfo = await this.createFetchBody();
@@ -22,7 +24,7 @@ class Authorization {
       const authorization = await AuthorizationData.AuthorizationFetch(body);
       if (authorization.statusCode !== 200) {
         // @ts-ignore
-        Alert('ERROR 2');
+        alert('ERROR 2');
       }
       // save user token
       currentUser().userToken = authorization.data.accessToken;
@@ -31,7 +33,7 @@ class Authorization {
       console.log('authorization',authorization)
       navigator().changeNavigationStateAuth(false, dispatch);
     } catch (ex) {
-      Alert('ERROR 3');
+      alert('ERROR 3');
       AppLog.error('Authorization authorizationUser', ex);
     }
     // send firebase token to server

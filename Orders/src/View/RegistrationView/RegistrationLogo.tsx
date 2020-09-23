@@ -24,21 +24,21 @@ const styles = StyleSheet.create({
 
     },
     logoContainer: {
-  
+
     },
     logoImgContainer: {
-  
-    }
+
+    },
     logoImg: {
-  
+
     },
     logoDescView: {
-  
+
     },
     logoDescTitle: {
-  
+
     },
     logoDescContext: {
-  
+
     }
 })
