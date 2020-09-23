@@ -32,8 +32,8 @@ class AuthorizationData {
     });
   }
   static async saveTokenToDatabase(
-    userToken: string | null,
-    deviceToken: string,
+      userToken: string | null,
+      deviceToken: unknown,
   ) {
     const deviceInfo = await PhoneInfo.getDeviceInfo();
     const body: AuthBodyToken = {
