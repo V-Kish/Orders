@@ -1,7 +1,7 @@
 import {TEST} from '../types';
 
 const initialState = {
-  startApp: true,
+  startApp: 'This text from Redux',
 };
 export const appStartReducer = (state = initialState, action) => {
   switch (action.type) {

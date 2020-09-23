@@ -10,6 +10,7 @@ export const MainStack = () => {
         <Stack.Screen
           name="RegistrationScreen"
           component={RegistrationScreen}
+          options={{ headerShown: false }}
         />
         {/*<Stack.Screen name="HomeScreen" component={HomeScreen} />*/}
       </Stack.Navigator>
