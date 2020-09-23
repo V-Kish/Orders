@@ -15,7 +15,7 @@ export const fetchData = async (
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        'access-token': 'C7FA59B1-7522-485B-9AE0-64A021300939',
+        'access-token': 'F5E4C34D-0D3E-4BC7-8EBD-2D2AC4D626EA',
         'user-token': token,
       },
       body:
