@@ -6,7 +6,7 @@ import {navigator} from "../../Core/Navigator";
 import { RegistrationTextInput } from './RegistrationTextInput';
 import { RegistrationSubmitButton } from './RegistrationSubmitButton';
 
-export const RegistrationView = () => {
+export const RegistrationForm = () => {
   const dispatch = useDispatch();
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
