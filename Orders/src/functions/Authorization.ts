@@ -12,6 +12,7 @@ class Authorization {
   static async authorizationUser(dispatch: Dispatch<any>, userData: AuthBody) {
     // get userToken
     const body: AuthBody = userData;
+    // @ts-ignore
     if (typeof body.login === undefined || typeof body.password === undefined) {
       Alert('ERROR 1');
       return;
