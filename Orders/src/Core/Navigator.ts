@@ -4,7 +4,7 @@ import {currentUser} from './CurrentUser';
 import {readData} from './readData';
 import {saveData} from './saveData';
 import {ChangeStackNavigation} from '../store/actions/AppStart';
-import { Dispatch } from 'redux';
+import {Dispatch} from 'redux';
 
 type state = {
   prevScreen: Array<any>;
@@ -28,7 +28,7 @@ type navigateParams = {
  */
 class NavigatorImpl {
   private _navigation: navigation | null;
-  private _state: { appState: { isBackground: boolean }; prevScreen: any[] };
+  private _state: {appState: {isBackground: boolean}; prevScreen: any[]};
   private _currentScreen: string;
 
   constructor() {
@@ -79,8 +79,8 @@ class NavigatorImpl {
    * @param params
    */
   navigate(
-      name: string,
-      params: navigateParams = {screen: null, data: {}, key: undefined},
+    name: string,
+    params: navigateParams = {screen: null, data: {}, key: undefined},
   ) {
     type route = {
       name: string;
