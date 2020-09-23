@@ -11,3 +11,8 @@ export type AuthBody =
       deviceInfo: string | undefined;
     }
   | undefined;
+
+export type AuthBodyToken = {
+  token: string;
+  deviceInfo: string;
+};

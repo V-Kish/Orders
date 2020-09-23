@@ -5,6 +5,7 @@ import {Dispatch} from 'redux';
 import {AppLog} from '../Common/AppLog';
 import {PhoneInfo} from '../Core/PhoneInfo';
 import {AuthBody} from '../Types';
+import {currentUser} from '../Core/CurrentUser';
 
 class Authorization {
   // Список регіонів
@@ -28,6 +29,16 @@ class Authorization {
       AppLog.error('Authorization authorizationUser', ex);
     }
     // send firebase token to server
+    try {
+      await AuthorizationData.getTokenFireBase().then((deviceToken) => {
+        AuthorizationData.saveTokenToDatabase(
+          currentUser().userToken,
+          deviceToken,
+        );
+      });
+    } catch (ex) {
+      console.warn('Auth getTokenFireBase', ex);
+    }
   }
   // Create body for fetch
   private static async createFetchBody() {
