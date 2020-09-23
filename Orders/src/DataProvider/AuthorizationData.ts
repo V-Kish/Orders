@@ -47,7 +47,7 @@ class AuthorizationData {
       )
         .then(
           (response) => {
-            AppLog.log('response 1', response);
+            AppLog.log('send firebase token', response);
             resolve(response);
           },
           (error) => {
