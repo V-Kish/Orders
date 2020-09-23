@@ -1,6 +1,6 @@
 class AppSettings {
   static get endpoint() {
-    return 'https://api-torello.rake.tech/';
+    return 'https://api-torello.rake.tech';
   }
 }
 

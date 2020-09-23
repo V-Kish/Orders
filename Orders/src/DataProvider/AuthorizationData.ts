@@ -7,8 +7,9 @@ import {AppLog} from '../Common/AppLog';
 class AuthorizationData {
   // Список регіонів
   static async AuthorizationFetch(body) {
+    console.log('authorization body2',body)
     return fetchData(
-      `/rest/v1/${currentUser().userToken}/dictionaries/regions`,
+      `/rest/v1/tokens/register`,
       'POST',
       body,
     );

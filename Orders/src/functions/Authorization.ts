@@ -24,6 +24,8 @@ class Authorization {
         // @ts-ignore
         Alert('ERROR 2');
       }
+      console.log('authorization body',body)
+      console.log('authorization',authorization)
       navigator().changeNavigationStateAuth(false, dispatch);
     } catch (ex) {
       Alert('ERROR 3');
