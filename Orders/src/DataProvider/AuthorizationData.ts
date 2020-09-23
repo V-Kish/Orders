@@ -7,12 +7,7 @@ import {AppLog} from '../Common/AppLog';
 class AuthorizationData {
   // Список регіонів
   static async AuthorizationFetch(body) {
-    console.log('authorization body2',body)
-    return fetchData(
-      `/rest/v1/tokens/register`,
-      'POST',
-      body,
-    );
+    return fetchData('/rest/v1/tokens/register', 'POST', body);
   }
   static async getTokenFireBase() {
     return new Promise((resolve, reject) => {
@@ -33,8 +28,8 @@ class AuthorizationData {
     });
   }
   static async saveTokenToDatabase(
-      userToken: string | null,
-      deviceToken: unknown,
+    userToken: string | null,
+    deviceToken: unknown,
   ) {
     const deviceInfo = await PhoneInfo.getDeviceInfo();
     const body: AuthBodyToken = {
@@ -43,7 +38,9 @@ class AuthorizationData {
     };
     return new Promise((resolve, reject) => {
       fetchData(
-        `/rest/v1/${userToken}/user/firebase/cloud-messaging/save-token`,
+        `/rest/v1/${currentUser().userId}/${
+          currentUser().userToken
+        }/user/firebase/cloud-messaging/save-token`,
         'POST',
         body,
         userToken,

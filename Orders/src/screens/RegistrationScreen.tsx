@@ -11,8 +11,8 @@ export const RegistrationScreen = () => {
       <TouchableOpacity
         onPress={() =>
           Authorization.authorizationUser(dispatch, {
-            login: 'ZDOXTeCFYE',
-            password: 'vasilKrivosraka',
+            login: 'qa misha',
+            password: '12345678',
             deviceInfo: '',
           })
         }>
