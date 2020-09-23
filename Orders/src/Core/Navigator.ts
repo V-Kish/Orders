@@ -3,7 +3,8 @@ import {AppLog} from '../Common/AppLog';
 import {currentUser} from './CurrentUser';
 import {readData} from './readData';
 import {saveData} from './saveData';
-import {ChangeStackNavigation} from "../store/actions/AppStart";
+import {ChangeStackNavigation} from '../store/actions/AppStart';
+import { Dispatch } from 'redux';
 
 type state = {
   prevScreen: Array<any>;
@@ -27,8 +28,9 @@ type navigateParams = {
  */
 class NavigatorImpl {
   private _navigation: navigation | null;
-  private _state: {appState: {isBackground: boolean}; prevScreen: any[]};
+  private _state: { appState: { isBackground: boolean }; prevScreen: any[] };
   private _currentScreen: string;
+
   constructor() {
     this._navigation = null;
     this._state = {
@@ -41,6 +43,7 @@ class NavigatorImpl {
     this.saveNavigatorState = this.saveNavigatorState.bind(this);
     this.restoreNavigatorState = this.restoreNavigatorState.bind(this);
     this.handleBackground = this.handleBackground.bind(this);
+    this.changeNavigationStateAuth = this.changeNavigationStateAuth.bind(this);
   }
 
   get navigation(): navigation | null {
@@ -76,8 +79,8 @@ class NavigatorImpl {
    * @param params
    */
   navigate(
-    name: string,
-    params: navigateParams = {screen: null, data: {}, key: undefined},
+      name: string,
+      params: navigateParams = {screen: null, data: {}, key: undefined},
   ) {
     type route = {
       name: string;
@@ -168,7 +171,8 @@ class NavigatorImpl {
         break;
     }
   }
-  changeNavigationStateAuth(value: boolean) {
+
+  changeNavigationStateAuth(value: boolean, dispatch: Dispatch<any>) {
     dispatch(ChangeStackNavigation(value));
   }
 }
