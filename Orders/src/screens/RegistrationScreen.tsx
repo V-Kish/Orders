@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {navigator} from '../../Core/Navigator';
+import {navigator} from '../Core/Navigator';
 import {useDispatch} from 'react-redux';
 export const RegistrationScreen = () => {
   const dispatch = useDispatch();

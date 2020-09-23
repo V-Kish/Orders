@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {RegistrationScreen} from '../screens/RegistrationScreen/RegistrationScreen';
+import {RegistrationScreen} from '../screens/RegistrationScreen';
 import {NavigationContainer} from '@react-navigation/native';
 const Stack = createStackNavigator();
 export const AuthStack = () => {

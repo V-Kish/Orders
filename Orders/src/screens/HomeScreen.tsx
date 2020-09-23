@@ -1,9 +1,15 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {navigator} from '../Core/Navigator';
+import {useDispatch} from 'react-redux';
 export const HomeScreen = () => {
+  const dispatch = useDispatch();
   return (
     <View>
-      <Text>HOME BITCH</Text>
+      <TouchableOpacity
+        onPress={() => navigator().changeNavigationStateAuth(true, dispatch)}>
+        <Text>Home</Text>
+      </TouchableOpacity>
     </View>
   );
 };
