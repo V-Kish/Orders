@@ -4,3 +4,8 @@ export type reduxTypes = {
     isAuthStack: boolean;
   };
 };
+export type AuthBody = {
+      login: string;
+      password: string;
+      deviceInfo: string;
+    } | undefined;
