@@ -1,7 +1,4 @@
-//Packages
 import {Dimensions, PixelRatio} from 'react-native';
-import {useWindowDimensions} from 'react-native';
-//Get the current device window width and height in dp
 export const DEVICE_WIDTH = Dimensions.get('window').width;
 export const DEVICE_HEIGHT = Dimensions.get('window').height;
 
@@ -11,7 +8,7 @@ export const MOCKUP_WIDTH = 414;
 export const MOCKUP_HEIGHT = 896;
 
 //Converts dp from mockup to current device
-export const mockupWidthToDP = mockupWidth => {
+export const mockupWidthToDP = (mockupWidth: number) => {
   if (MOCKUP_WIDTH > DEVICE_WIDTH) {
     return PixelRatio.roundToNearestPixel(
       mockupWidth * (Math.round((DEVICE_WIDTH / MOCKUP_WIDTH) * 1000) / 1000),
@@ -22,7 +19,7 @@ export const mockupWidthToDP = mockupWidth => {
     );
   }
 };
-export const mockupHeightToDP = mockupHeight => {
+export const mockupHeightToDP = (mockupHeight: number) => {
   if (MOCKUP_HEIGHT > DEVICE_HEIGHT) {
     return PixelRatio.roundToNearestPixel(
       mockupHeight *
@@ -34,4 +31,3 @@ export const mockupHeightToDP = mockupHeight => {
     );
   }
 };
-
