@@ -4,12 +4,14 @@ import {AppLog} from '../Common/AppLog';
 import AsyncStorage from '@react-native-community/async-storage';
 type user = {
   userToken: string | null;
+  userId: string | null;
 };
 class CurrentUserImpl {
   private _user: user;
   constructor() {
     this._user = {
       userToken: null,
+      userId: null,
     };
   }
 
@@ -19,6 +21,13 @@ class CurrentUserImpl {
 
   get userToken() {
     return this.user.userToken;
+  }
+  set userId(userId) {
+    this.user.userId = userId;
+  }
+
+  get userId() {
+    return this.user.userId;
   }
 
   // use background

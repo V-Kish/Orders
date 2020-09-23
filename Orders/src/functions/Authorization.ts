@@ -24,6 +24,11 @@ class Authorization {
         // @ts-ignore
         Alert('ERROR 2');
       }
+      // save user token
+      currentUser().userToken = authorization.data.accessToken;
+      currentUser().userId = authorization.data.userId;
+      console.log('authorization body',body)
+      console.log('authorization',authorization)
       navigator().changeNavigationStateAuth(false, dispatch);
     } catch (ex) {
       Alert('ERROR 3');
