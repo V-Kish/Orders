@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage';
  *  @return {null|error} Promise returns nothing if success and error in case of failure
  */
 
-export const saveData = async (name, value) => {
+export const saveData = async (name: any, value: any) => {
   if (typeof value !== 'string') {
     const receivedValue = JSON.stringify(value);
     try {

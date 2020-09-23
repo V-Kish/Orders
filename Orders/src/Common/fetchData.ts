@@ -1,9 +1,9 @@
 import {AppSettings} from './AppSettings';
-import {AppLog} from './AppLog';
+import {AppLog} from "./AppLog";
 export const fetchData = async (
   url: string,
   type: string,
-  body: null,
+  body: object | null = null,
   token: string | null = null,
   context = null,
 ) => {
