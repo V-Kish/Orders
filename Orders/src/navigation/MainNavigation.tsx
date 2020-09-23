@@ -1,8 +1,6 @@
-import React  from 'react';
+import React from 'react';
+import {MainStack} from './MainStack';
 
 export const MainNavigation = () => {
-
-    return(
-        {authPassed ? <AuthStack /> : <MainStack />}
-    )
-}
+  return <MainStack />;
+};
