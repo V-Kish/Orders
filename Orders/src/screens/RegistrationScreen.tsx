@@ -7,7 +7,13 @@ export const RegistrationScreen = () => {
   return (
     <View>
       <TouchableOpacity
-        onPress={() => Authorization.authorizationUser(dispatch)}>
+        onPress={() =>
+          Authorization.authorizationUser(dispatch, {
+            password: '12321',
+            login: 'qweqw',
+            deviceInfo: '',
+          })
+        }>
         <Text>Увійти</Text>
       </TouchableOpacity>
     </View>
