@@ -44,13 +44,13 @@ export const HomeScreen = () => {
       />
       <View style={styles.container}>
         <HomeView/>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => navigator().changeNavigationStateAuth(true, dispatch)}>
           <Text>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => GetOrderInfo.getOrders(dispatch, '1')}>
           <Text>СОРТУВАННЯ</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </>
   );
