@@ -11,13 +11,17 @@ export type reduxTypes = {
     ordersStatus: Array<any>;
     orders: Array<any>;
   };
+  ditUser: {
+    editUser: Array<any>;
+    orderData: Array<any>;
+  };
 };
 export type AuthBody =
   | {
       login: string;
       password: string;
       deviceInfo: string | undefined;
-      appCode?:string
+      appCode?: string;
     }
   | undefined;
 
@@ -44,4 +48,20 @@ export type Orders = {
   status: number;
   departmentId: number;
   sQuery: string;
-}
+};
+export type userDataTypes = {
+  user: {
+    hash: string;
+    name: string;
+    password: string;
+    phone: string;
+  };
+  cards: Array<{
+    balance: {total: number; writeoff: number; diff: number};
+    group: {id: number; name: string};
+    hash: string;
+    number: string;
+    operations: {buyCount: number; saleCount: number};
+    reshta: {totalIn: number; totalOut: number; current: number};
+  }>;
+};

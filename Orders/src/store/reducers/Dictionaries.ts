@@ -5,6 +5,7 @@ import {
   OPERATION_TYPES,
   LOAD_STATUS,
   GET_ORDERS,
+  ORDER_DATA,
 } from '../types';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   operationTypes: [],
   ordersStatus: [],
   orders: [],
+  orderData: [],
 };
 export const Dictionaries = (
   state = initialState,
@@ -49,6 +51,17 @@ export const Dictionaries = (
       return {
         ...state,
         orders: action.payload,
+      };
+    case ORDER_DATA:
+      const orderData: any[] = [];
+      state.orders.Items.forEach((item) => {
+        if (item.system.orderId === action.payload) {
+          orderData.push(item);
+        }
+      });
+      return {
+        ...state,
+        orderData: orderData,
       };
     default:
       return state;

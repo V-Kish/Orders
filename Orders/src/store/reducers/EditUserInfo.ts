@@ -1,7 +1,8 @@
-import {EDIT_USER_INFO} from '../types';
+import {EDIT_USER_INFO, ORDER_DATA} from '../types';
 
 const initialState = {
   editUser: [],
+  orderData: [],
 };
 export const EditUser = (
   state = initialState,
