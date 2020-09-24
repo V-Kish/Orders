@@ -1,4 +1,4 @@
-import {AuthorizationData} from '../DataProvider/AuthorizationData';
+import {UserDataProvider} from '../DataProvider/UserDataProvider';
 import {Alert} from 'react-native';
 import {navigator} from '../Core/Navigator';
 import {Dispatch} from 'redux';
@@ -21,25 +21,27 @@ class Authorization {
     }
     body.deviceInfo = await this.createFetchBody();
     try {
-      const authorization = await AuthorizationData.AuthorizationFetch(body);
+      const authorization = await UserDataProvider.AuthorizationFetch(body);
+      console.log('authorization',authorization)
       if (authorization.statusCode !== 200) {
         // @ts-ignore
-        alert('ERROR 2');
+        alert(authorization.data.message);
+        return
       }
       // save user token
       currentUser().userToken = authorization.data.accessToken;
       currentUser().userId = authorization.data.userId;
       console.log('authorization body',body)
-      console.log('authorization',authorization)
       navigator().changeNavigationStateAuth(false, dispatch);
     } catch (ex) {
       alert('ERROR 3');
+      return
       AppLog.error('Authorization authorizationUser', ex);
     }
     // send firebase token to server
     try {
-      await AuthorizationData.getTokenFireBase().then((deviceToken) => {
-        AuthorizationData.saveTokenToDatabase(
+      await UserDataProvider.getTokenFireBase().then((deviceToken) => {
+        UserDataProvider.saveTokenToDatabase(
           currentUser().userToken,
           deviceToken,
         );
