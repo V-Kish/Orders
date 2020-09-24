@@ -1,13 +1,11 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {navigator} from '../Core/Navigator';
+import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {reduxTypes} from '../Types';
 import {HeaderView} from '../View/HeaderView/HeaderView';
 import {ICONS} from '../constants/icons';
-import {GetOrderInfo} from "../functions/GetOrderInfo";
 import { HomeView } from '../View/HomeView/HomeView';
-import {MethodsRequest} from '../DataProvider/MethodsRequest';
+import { GetOrderInfo } from '../functions/GetOrderInfo';
 export const HomeScreen = () => {
   const dispatch = useDispatch();
   const listCurrencies = useSelector(
