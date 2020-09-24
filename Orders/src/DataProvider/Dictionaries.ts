@@ -8,10 +8,11 @@ import {
   loadDepartmentsGroups,
   loadOperationTypes,
   loadOrdersStatus,
-  getOrders
+  getOrders,
 } from '../store/actions/Dictionaries';
-import {MethodsRequest} from "./MethodsRequest";
-import {GetOrderInfo} from "../functions/GetOrderInfo";
+import {MethodsRequest} from './MethodsRequest';
+import {GetOrderInfo} from '../functions/GetOrderInfo';
+import {navigator} from '../Core/Navigator';
 
 class Dictionaries {
   private _onDictionariesLoad: () => void;
@@ -30,19 +31,17 @@ class Dictionaries {
     this._typesOperationStatus = false;
     this._ordersStatusesStatus = false;
     this._getOrdersStatus = false;
-
   }
   static InitDictionaries(onDictionariesLoad: () => void, dispatch) {
     if (typeof onDictionariesLoad === 'function') {
       this._onDictionariesLoad = onDictionariesLoad;
     }
-    // this._loadDepartments(dispatch).then();
+    this._getOrders(dispatch).then();
     this._loadDepartments(dispatch).then();
     this._loadCurrencies(dispatch).then();
     this._loadDepartmentsGroups(dispatch).then();
     this._loadTypesOperation(dispatch).then();
     this._LoadOrdersStatus(dispatch).then();
-    this._getOrders(dispatch).then();
   }
 
   // Валюти
@@ -96,7 +95,14 @@ class Dictionaries {
   // Статус загрузки словників
   //якщо === true всі словники завантажені
   private static isLoaded() {
-    if (this._listCurrenciesStatus &&  this._getOrdersStatus && this._listDepartmentsStatus && this._departmentsStatus  && this._typesOperationStatus && this._ordersStatusesStatus) {
+    if (
+      this._listCurrenciesStatus &&
+      this._getOrdersStatus &&
+      this._listDepartmentsStatus &&
+      this._departmentsStatus &&
+      this._typesOperationStatus &&
+      this._ordersStatusesStatus
+    ) {
       return true;
     }
     return false;
@@ -201,8 +207,22 @@ class Dictionaries {
   static async _getOrders(dispatch) {
     this._getOrdersStatus = false;
     try {
-      await GetOrderInfo.getOrders(dispatch, '');
-      this._getOrdersStatus = true;
+      const response = await MethodsRequest.getOrders({
+        pageIndex: 1,
+        pageSize: 10,
+        operationType: 'all',
+        status: -1,
+        departmentId: -1,
+        sQuery: '',
+      });
+      if (response.statusCode === 200) {
+        dispatch(getOrders(response.data));
+        this._getOrdersStatus = true;
+      }
+      if (response.statusCode !== 200) {
+        await currentUser().logout();
+        return;
+      }
     } catch (ex) {
       console.warn('MethodsRequest getOrders', ex);
     }

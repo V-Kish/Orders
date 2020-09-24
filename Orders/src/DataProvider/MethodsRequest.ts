@@ -4,7 +4,6 @@ import {Orders} from '../Types';
 class MethodsRequest {
   // Пошук заявок
   static async getOrders(body: Orders) {
-    console.log('body12312312KI',body)
     return fetchData(
       `/rest/v1/${currentUser().userId}/${
         currentUser().userToken
