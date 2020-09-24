@@ -2,30 +2,35 @@ import {fetchData} from '../Common/fetchData';
 import {currentUser} from '../Core/CurrentUser';
 import {Departments, DictionariesLoadStatusType} from '../Types';
 import {AppLog} from '../Common/AppLog';
-import {ListDepartments, listCurrencies} from '../store/actions/Dictionaries';
+import {ListDepartments, listCurrencies, loadDepartmentsGroups, loadOperationTypes, loadOrdersStatus} from '../store/actions/Dictionaries';
 
 class Dictionaries {
   private _onDictionariesLoad: () => void;
   private static _loadStatus: DictionariesLoadStatusType;
   private _departmentsStatus: boolean;
   private _listCurrenciesStatus: boolean;
-  private _regionsStatus: boolean;
+  private _typesOperationStatus: boolean;
   private _ordersStatusesStatus: boolean;
   private _listDepartmentsStatus: boolean;
   constructor() {
     this._onDictionariesLoad = null;
-    this._departmentsStatus = false;
-    this._listCurrenciesStatus = false;
-    this._regionsStatus = false;
-    this._ordersStatusesStatus = false;
     this._listDepartmentsStatus = false;
+    this._listCurrenciesStatus = false;
+    this._departmentsStatus = false;
+    this._typesOperationStatus = false;
+    this._ordersStatusesStatus = false;
+
   }
   static InitDictionaries(onDictionariesLoad: () => void, dispatch) {
     if (typeof onDictionariesLoad === 'function') {
       this._onDictionariesLoad = onDictionariesLoad;
     }
     // this._loadDepartments(dispatch).then();
+    this._loadDepartments(dispatch).then();
     this._loadCurrencies(dispatch).then();
+    this._loadDepartmentsGroups(dispatch).then();
+    this._loadTypesOperation(dispatch).then();
+    this._LoadOrdersStatus(dispatch).then();
   }
 
   // Валюти
@@ -67,7 +72,7 @@ class Dictionaries {
   // Список відділень
   static async loadDepartments(body: Departments = {rootType: 0, sQuery: ''}) {
     return fetchData(
-      ` /rest/v1/${currentUser().userId}/${
+      `/rest/v1/${currentUser().userId}/${
         currentUser().userToken
       }/departments/load`,
       'POST',
@@ -79,11 +84,7 @@ class Dictionaries {
   // Статус загрузки словників
   //якщо === true всі словники завантажені
   private static isLoaded() {
-    // this._loadStatus.departments &&
-    // this._loadStatus.ordersStatuses &&
-    // this._loadStatus.regions &&
-    // this._listDepartmentsStatus &&
-    if (this._listCurrenciesStatus) {
+    if (this._listCurrenciesStatus && this._listDepartmentsStatus && this._departmentsStatus  && this._typesOperationStatus && this._ordersStatusesStatus) {
       return true;
     }
     return false;
@@ -128,6 +129,60 @@ class Dictionaries {
       this.onComplete();
     } catch (ex) {
       AppLog.error('_loadCurrencies', ex);
+      await currentUser().logout();
+    }
+  }
+  // групи відділень
+  static async _loadDepartmentsGroups(dispatch) {
+    this._departmentsStatus = false;
+    try {
+      const response = await Dictionaries.departmentsGroups();
+      console.log('_loadDepartmentsGroups', response);
+      if (response.statusCode !== 200) {
+        await currentUser().logout();
+        return;
+      }
+      dispatch(loadDepartmentsGroups(response.data));
+      this._departmentsStatus = true;
+      this.onComplete();
+    } catch (ex) {
+      AppLog.error('_loadDepartmentsGroups', ex);
+      await currentUser().logout();
+    }
+  }
+  // Типи операцій
+  static async _loadTypesOperation(dispatch) {
+    this._typesOperationStatus = false;
+    try {
+      const response = await Dictionaries.operationTypes();
+      console.log('_loadTypesOperation', response);
+      if (response.statusCode !== 200) {
+        await currentUser().logout();
+        return;
+      }
+      dispatch(loadOperationTypes(response.data));
+      this._typesOperationStatus = true;
+      this.onComplete();
+    } catch (ex) {
+      AppLog.error('_loadTypesOperation', ex);
+      await currentUser().logout();
+    }
+  }
+  // Статуси заявок
+  static async _LoadOrdersStatus(dispatch) {
+    this._ordersStatusesStatus = false;
+    try {
+      const response = await Dictionaries.operationTypes();
+      console.log('_LoadOrdersStatus', response);
+      if (response.statusCode !== 200) {
+        await currentUser().logout();
+        return;
+      }
+      dispatch(loadOrdersStatus(response.data));
+      this._ordersStatusesStatus = true;
+      this.onComplete();
+    } catch (ex) {
+      AppLog.error('_LoadOrdersStatus', ex);
       await currentUser().logout();
     }
   }

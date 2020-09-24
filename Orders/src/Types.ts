@@ -6,6 +6,9 @@ export type reduxTypes = {
   dictionaries: {
     listDepartments: Array<any>;
     listCurrencies: Array<any>;
+    listDepartmentGroup: Array<any>;
+    operationTypes: Array<any>;
+    ordersStatus: Array<any>;
   };
 };
 export type AuthBody =
