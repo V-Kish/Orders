@@ -49,9 +49,6 @@ export const HomeScreen = () => {
           onPress={() => navigator().changeNavigationStateAuth(true, dispatch)}>
           <Text>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => GetOrderInfo.getOrders(dispatch, '1')}>
-          <Text>СОРТУВАННЯ</Text>
-        </TouchableOpacity>
       </View>
     </>
   );
