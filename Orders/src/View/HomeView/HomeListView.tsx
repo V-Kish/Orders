@@ -22,6 +22,6 @@ export const HomeListView = () => {
 
 const styles = StyleSheet.create({
     container: {
-
+        backgroundColor: 'rgba(255,255,255,1)',
     }
 })
