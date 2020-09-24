@@ -13,13 +13,7 @@ class Authorization {
   static async authorizationUser(dispatch: Dispatch<any>, userData: AuthBody) {
     // get userToken
     const body: AuthBody = userData;
-    console.log('body', body);
-    console.log('body if', body.login === '' || body.password === '');
     // @ts-ignore
-    if (body.login === '' || body.password === '') {
-      alert('ERROR 1');
-      return;
-    }
     body.deviceInfo = await this.createFetchBody();
     try {
       const authorization = await UserDataProvider.AuthorizationFetch(body);
@@ -27,7 +21,7 @@ class Authorization {
       if (authorization.statusCode !== 200) {
         // @ts-ignore
         alert(authorization.data.message);
-        return;
+        return false;
       }
       // save user token
       currentUser().userToken = authorization.data.accessToken;
