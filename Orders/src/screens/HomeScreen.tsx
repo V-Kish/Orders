@@ -43,11 +43,16 @@ export const HomeScreen = () => {
         desc={`Нових замовлень: `}
         counter={`${orderDataCount}`}
       />
-      <HomeView/>
+      <View style={styles.container}>
+        <HomeView/>
+      </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    backgroundColor: 'rgba(255,255,255,1)',
+    flex:1
+  },
 });
