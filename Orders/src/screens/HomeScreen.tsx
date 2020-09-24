@@ -44,7 +44,7 @@ export const HomeScreen = () => {
       />
       <View style={styles.container}>
         <HomeView/>
-        {/* <TouchableOpacity
+        <TouchableOpacity
           onPress={() => navigator().changeNavigationStateAuth(true, dispatch)}>
           <Text>Home</Text>
         </TouchableOpacity>
