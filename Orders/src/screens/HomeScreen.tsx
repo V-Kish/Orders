@@ -5,7 +5,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {reduxTypes} from '../Types';
 import {HeaderView} from '../View/HeaderView/HeaderView';
 import {ICONS} from '../constants/icons';
-import {GetOrderInfo} from "../functions/GetOrderInfo";
+import {GetOrderInfo} from '../functions/GetOrderInfo';
+import {MethodsRequest} from '../DataProvider/MethodsRequest';
 export const HomeScreen = () => {
   const dispatch = useDispatch();
   const listCurrencies = useSelector(
@@ -42,8 +43,8 @@ export const HomeScreen = () => {
           onPress={() => navigator().changeNavigationStateAuth(true, dispatch)}>
           <Text>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => GetOrderInfo.getOrder(dispatch, 145)}>
-          <Text>ORDERSCREEN</Text>
+        <TouchableOpacity onPress={() => GetOrderInfo.getOrders(dispatch,{})}>
+          <Text>СОРТУВАННЯ</Text>
         </TouchableOpacity>
       </View>
     </>
