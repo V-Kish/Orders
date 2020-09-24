@@ -61,15 +61,8 @@ export const Dictionaries = (
         orderDataCount: action.payload[0].count,
       };
     case ORDER_DATA:
-      let orderData = state.orders.Items.find(
-        (item) => item.system.orderId === action.payload,
-      );
-      orderData.detail.currencyIdCode = state.listCurrencies.find(
-        (item) => item.id === orderData.detail.currencyId,
-      ).code;
-      orderData.detail.currencyToIdCode = state.listCurrencies.find(
-        (item) => item.id === orderData.detail.currencyToId,
-      ).code;
+      let orderData = action.payload
+      console.log('orderData',orderData)
       const selectedDepartments = state.listDepartments.filter(
         (item) => item.id === orderData.detail.departmentId,
       );

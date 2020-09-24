@@ -48,7 +48,7 @@ export const OrderUserView = () => {
       <View style={styles.blockContainer}>
         <View style={styles.containers}>
           <Text style={styles.textDefaultSecond}>До отримання: </Text>
-          <Text style={styles.money}>100 {orderData.detail.currencyIdCode} доробити</Text>
+          <Text style={styles.money}>100 {orderData.detail.currencyCode} доробити</Text>
         </View>
         <View style={styles.containers}>
           <Text style={styles.textDefaultSecond}>Курс операції: </Text>
@@ -56,7 +56,7 @@ export const OrderUserView = () => {
         </View>
         <View style={styles.containers}>
           <Text style={styles.textDefaultSecond}>До видачі: </Text>
-          <Text style={styles.money}>3345.00 {orderData.detail.currencyToIdCode}доробити</Text>
+          <Text style={styles.money}>3345.00 {orderData.detail.currencyToCode}доробити</Text>
         </View>
       </View>
       <View style={styles.lastBlock}>

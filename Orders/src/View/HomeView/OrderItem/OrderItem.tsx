@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import {StyleSheet, View, Text, Image} from 'react-native';
-import { useSelector } from 'react-redux';
+import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { OperationType } from './OperationType';
 import {
     mockupHeightToDP as hp,
@@ -8,8 +8,10 @@ import {
   } from '../../../constants/Dimensions';
 import { reduxTypes } from '../../../Types';
 import { OrderSystemInfo } from './OrderSystemInfo';
+import { GetOrderInfo } from '../../../functions/GetOrderInfo';
 
 export const OrderItem = ({item}) => {
+    const dispatch = useDispatch()
     const listCurrencies = useSelector(
         (state: reduxTypes) => state.dictionaries.listCurrencies,
       );
@@ -22,8 +24,13 @@ export const OrderItem = ({item}) => {
   const orderNum = item.system.orderNum.split("-")
   const orderAllNumber = `${orderNum[0]}-${orderNum[1]}-`
   const orderBoldNumber = orderNum[2]
+  
+  const handleItemPress = () => {
+    console.log('item',item)
+    GetOrderInfo.getOrder(dispatch,item)
+  }
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={handleItemPress} activeOpacity={0.9}>
         <OperationType type={item.detail.operationType}/>
         <View style={styles.orderMainView}>
             <View style={styles.orderNumberView}>
@@ -37,7 +44,7 @@ export const OrderItem = ({item}) => {
             </View>
         </View>
         <OrderSystemInfo item={item}/>
-    </View>
+    </TouchableOpacity>
   );
 };
 
