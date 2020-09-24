@@ -27,27 +27,29 @@ export const DropDownSelector = ({dropdown}) => {
           ? {...styles.dropDown, ...styles.dropDownShowed}
           : styles.dropDown
       }>
-      {ordersStatus &&
-        ordersStatus.map((item) => {
-          return (
-            <View key={item.id} style={styles.container}>
-              <View style={styles.wrapCircle}>
-                <View
-                  style={[styles.circle, {borderColor: COLORS.HEADER_BLUE}]}>
-                  <View style={styles.circleActive} />
+      <View style={styles.containerList}>
+        {ordersStatus &&
+          ordersStatus.map((item) => {
+            return (
+              <View key={item.id} style={styles.container}>
+                <View style={styles.wrapCircle}>
+                  <View
+                    style={[styles.circle, {borderColor: COLORS.HEADER_BLUE}]}>
+                    <View style={styles.circleActive} />
+                  </View>
+                </View>
+                <View style={styles.wrapText}>
+                  <Text style={styles.text}>{item.name}</Text>
+                </View>
+                <View>
+                  <Text style={{...styles.statusText, ...styles.text_done}}>
+                    Виконано
+                  </Text>
                 </View>
               </View>
-              <View style={styles.wrapText}>
-                <Text style={styles.text}>{item.name}</Text>
-              </View>
-              <View>
-                <Text style={{...styles.statusText, ...styles.text_done}}>
-                  Виконано
-                </Text>
-              </View>
-            </View>
-          );
-        })}
+            );
+          })}
+      </View>
     </Animated.View>
   );
 };
@@ -57,6 +59,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: hp(20),
     marginBottom: hp(30),
+  },
+  containerList: {
+    //backgroundColor: 'red',
+    backgroundColor: 'rgba(255,255,255,1)',
   },
   wrapCircle: {
     marginRight: hp(15),
@@ -69,7 +75,7 @@ const styles = StyleSheet.create({
     top: hp(80),
     right: 0,
     left: 0,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: 'rgba(255,255,255,0.5)',
     overflow: 'hidden',
     height: 0,
     zIndex: 999999,
