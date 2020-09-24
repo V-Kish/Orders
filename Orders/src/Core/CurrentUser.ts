@@ -2,6 +2,7 @@ import {saveData} from './saveData';
 import {readData} from './readData';
 import {AppLog} from '../Common/AppLog';
 import AsyncStorage from '@react-native-community/async-storage';
+import { UserDataProvider } from '../DataProvider/UserDataProvider';
 type user = {
   userToken: string | null;
   userId: string | null;
@@ -57,8 +58,10 @@ class CurrentUserImpl {
     this._user = value;
   }
   async logout() {
+    const logoutUser = await UserDataProvider.userLogout();
     this._user = {
       userToken: null,
+      userId: null,
     };
     await AsyncStorage.removeItem('secureUserData');
     await AsyncStorage.removeItem('appState');

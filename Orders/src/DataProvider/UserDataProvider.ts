@@ -4,11 +4,19 @@ import messaging from '@react-native-firebase/messaging';
 import {PhoneInfo} from '../Core/PhoneInfo';
 import {AuthBodyToken} from '../Types';
 import {AppLog} from '../Common/AppLog';
-class AuthorizationData {
-  // Список регіонів
+class UserDataProvider {
+  // Авторизація користувача
   static async AuthorizationFetch(body) {
     return fetchData('/rest/v1/tokens/register', 'POST', body);
   }
+  // Logout user
+  static async userLogout() {
+    return fetchData(
+      `rest/v1/${currentUser().userId}/${currentUser().userToken}/user/logout`,
+      'PUT',
+    );
+  }
+
   static async getTokenFireBase() {
     return new Promise((resolve, reject) => {
       messaging()
@@ -60,4 +68,4 @@ class AuthorizationData {
     });
   }
 }
-export {AuthorizationData};
+export {UserDataProvider};
