@@ -1,8 +1,10 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {navigator} from '../Core/Navigator';
 import {useDispatch, useSelector} from 'react-redux';
 import {reduxTypes} from '../Types';
+import { HeaderView } from '../View/HeaderView/HeaderView';
+import { ICONS } from '../constants/icons';
 export const HomeScreen = () => {
   const dispatch = useDispatch();
     const listCurrencies  = useSelector((state: reduxTypes) => state.dictionaries.listCurrencies);
@@ -18,11 +20,24 @@ export const HomeScreen = () => {
     console.log('ordersStatus',ordersStatus)
     console.log('orders',orders)
   return (
-    <View>
+    <>
+    <HeaderView
+      icon={ICONS.logoSmall}
+      title="Робота з замовленнями"
+      // desc={`Нових замовлень: ${}`}
+    />
+    <View style={styles.container}>
       <TouchableOpacity
         onPress={() => navigator().changeNavigationStateAuth(true, dispatch)}>
         <Text>Home</Text>
       </TouchableOpacity>
     </View>
+    </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+
+  }
+})
