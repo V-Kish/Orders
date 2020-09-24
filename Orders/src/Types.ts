@@ -10,10 +10,10 @@ export type reduxTypes = {
     operationTypes: Array<any>;
     ordersStatus: Array<any>;
     orders: Array<any>;
+    orderData: orderDataTypes;
   };
   ditUser: {
-    editUser: Array<any>;
-    orderData: Array<any>;
+    editUser: userDataTypes;
   };
 };
 export type AuthBody =
@@ -64,4 +64,37 @@ export type userDataTypes = {
     operations: {buyCount: number; saleCount: number};
     reshta: {totalIn: number; totalOut: number; current: number};
   }>;
+};
+export type orderDataTypes = {
+  detail: {
+    cardGroupId: number;
+    cardNumber: string;
+    clientId: number;
+    clientName: string;
+    clientPhone: string;
+    comment: string;
+    currencyId: number;
+    currencyIdCode:string;
+    currencyToId: number;
+    currencyToIdCode:string;
+    departmentId: number;
+    operationType: string;
+    rate: number;
+    rateCurrency: {
+      sale: number;
+      buy: number;
+    };
+    rateCurrencyTo: {
+      sale: number;
+      buy: number;
+    };
+  };
+  system: {
+    QR:string;
+    createDate: string;
+    orderId: number;
+    orderNum: string;
+    status: number;
+    statusDate: string;
+  };
 };

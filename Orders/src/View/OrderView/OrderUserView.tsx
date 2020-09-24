@@ -8,13 +8,14 @@ import {ICONS} from '../../constants/icons';
 import {COLORS} from '../../constants/colors';
 import {ButtonView} from './ButtonView';
 import {useSelector} from 'react-redux';
-import {reduxTypes, userDataTypes} from '../../Types';
+import {reduxTypes, userDataTypes, orderDataTypes} from '../../Types';
 export const OrderUserView = () => {
   let statusType = 'new';
   const userData: userDataTypes = useSelector(
     (state: reduxTypes) => state.ditUser.editUser,
-  );  const orderData = useSelector(
-    (state: reduxTypes) => state.ditUser.orderData,
+  );
+  const orderData: orderDataTypes = useSelector(
+    (state: reduxTypes) => state.dictionaries.orderData,
   );
   console.log('userKISH', userData);
   console.log('userKISH orderData', orderData);
@@ -36,21 +37,23 @@ export const OrderUserView = () => {
         </View>
         <View style={styles.containers}>
           <Text style={styles.textDefault}>Операція обміну: </Text>
-          <Text style={styles.operationType}>Купівля</Text>
+          <Text style={styles.operationType}>
+            {orderData.detail.operationType === 'buy' ? 'Продаж' : 'Купівля'}
+          </Text>
         </View>
       </View>
       <View style={styles.blockContainer}>
         <View style={styles.containers}>
           <Text style={styles.textDefaultSecond}>До отримання: </Text>
-          <Text style={styles.money}>100 EUR</Text>
+          <Text style={styles.money}>100 {orderData.detail.currencyIdCode}</Text>
         </View>
         <View style={styles.containers}>
           <Text style={styles.textDefaultSecond}>Курс операції: </Text>
-          <Text style={styles.money}>33.45</Text>
+          <Text style={styles.money}>{orderData.detail.rate}</Text>
         </View>
         <View style={styles.containers}>
           <Text style={styles.textDefaultSecond}>До видачі: </Text>
-          <Text style={styles.money}>3345.00 UA</Text>
+          <Text style={styles.money}>3345.00 {orderData.detail.currencyToIdCode}</Text>
         </View>
       </View>
       <View style={styles.lastBlock}>

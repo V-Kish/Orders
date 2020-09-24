@@ -15,7 +15,7 @@ const initialState = {
   operationTypes: [],
   ordersStatus: [],
   orders: [],
-  orderData: [],
+  orderData: {},
 };
 export const Dictionaries = (
   state = initialState,
@@ -53,15 +53,13 @@ export const Dictionaries = (
         orders: action.payload,
       };
     case ORDER_DATA:
-      const orderData: any[] = [];
-      state.orders.Items.forEach((item) => {
-        if (item.system.orderId === action.payload) {
-          orderData.push(item);
-        }
-      });
+      let orderData = state.orders.Items.find((item) => item.system.orderId === action.payload);
+      orderData.detail.currencyIdCode = state.listCurrencies.find(item =>item.id === orderData.detail.currencyId).code;
+      orderData.detail.currencyToIdCode = state.listCurrencies.find(item =>item.id === orderData.detail.currencyToId).code;
+      console.log('orderDataZZZZ',orderData)
       return {
         ...state,
-        orderData: orderData,
+        orderData: orderData !== undefined ? orderData : [],
       };
     default:
       return state;
