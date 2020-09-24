@@ -7,6 +7,8 @@ import {PhoneInfo} from '../Core/PhoneInfo';
 import {AuthBody} from '../Types';
 import {currentUser} from '../Core/CurrentUser';
 import {Dictionaries} from '../DataProvider/Dictionaries';
+import {MethodsRequest} from '../DataProvider/MethodsRequest';
+import {getOrders} from '../store/actions/Dictionaries';
 
 class Authorization {
   // Список регіонів
@@ -16,8 +18,13 @@ class Authorization {
     // @ts-ignore
     body.deviceInfo = await this.createFetchBody();
     try {
-      const authorization = await UserDataProvider.AuthorizationFetch(body);
+       const authorization = await UserDataProvider.AuthorizationFetch(body);
       console.log('authorization', authorization);
+      if (authorization.statusCode === 403 && authorization.statusMessage === 'forbidden') {
+        // @ts-ignore
+       navigator().navigate('ErrorScreen')
+        return false;
+      }
       if (authorization.statusCode !== 200) {
         // @ts-ignore
         alert(authorization.data.message);
@@ -43,6 +50,7 @@ class Authorization {
     } catch (ex) {
       console.warn('Auth getTokenFireBase', ex);
     }
+    currentUser().saveUser();
     // load Dictionaries
     try {
       await Dictionaries.InitDictionaries(function () {
@@ -51,7 +59,17 @@ class Authorization {
     } catch (ex) {
       console.warn('Auth getTokenFireBase', ex);
     }
+    try {
+      const response = await MethodsRequest.getOrders();
+      if (response.statusCode !== 200) {
+        return;
+      }
+      dispatch(getOrders(response.data));
+    } catch (ex) {
+      console.warn('MethodsRequest getOrders', ex);
+    }
   }
+
   // Create body for fetch
   private static async createFetchBody() {
     try {

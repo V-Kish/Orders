@@ -12,11 +12,13 @@ export const HomeScreen = () => {
     const listDepartments  = useSelector((state: reduxTypes) => state.dictionaries.listDepartments);
     const operationTypes  = useSelector((state: reduxTypes) => state.dictionaries.operationTypes);
     const ordersStatus  = useSelector((state: reduxTypes) => state.dictionaries.ordersStatus);
+    const orders  = useSelector((state: reduxTypes) => state.dictionaries.orders);
     console.log('listCurrencies',listCurrencies)
     console.log('listDepartmentGroup',listDepartmentGroup)
     console.log('listDepartments',listDepartments)
     console.log('operationTypes',operationTypes)
     console.log('ordersStatus',ordersStatus)
+    console.log('orders',orders)
   return (
     <>
     <HeaderView

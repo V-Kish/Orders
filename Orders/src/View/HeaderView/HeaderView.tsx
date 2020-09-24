@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: hp(90),
+    height: hp(60),
     paddingHorizontal: wp(20),
     shadowColor: '#000',
     shadowOffset: {

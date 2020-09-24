@@ -4,6 +4,7 @@ import {
   DEPARTMENT_GROUP,
   OPERATION_TYPES,
   LOAD_STATUS,
+    GET_ORDERS
 } from '../types';
 
 export const ListDepartments = (value) => {
@@ -33,6 +34,12 @@ export const loadOperationTypes = (value) => {
 export const loadOrdersStatus = (value) => {
   return {
     type: LOAD_STATUS,
+    payload: value,
+  };
+};
+export const getOrders = (value) => {
+  return {
+    type: GET_ORDERS,
     payload: value,
   };
 };
