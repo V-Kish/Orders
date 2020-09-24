@@ -17,6 +17,8 @@ class Authorization {
     const body: AuthBody = userData;
     // @ts-ignore
     body.deviceInfo = await this.createFetchBody();
+    body.appCode = 'OrdersApp';
+    console.log('authorization body', body);
     try {
       const authorization = await UserDataProvider.AuthorizationFetch(body);
       console.log('authorization', authorization);
@@ -26,7 +28,12 @@ class Authorization {
       ) {
         // @ts-ignore
         navigator().navigate('ErrorScreen');
-        return false;
+        return;
+      }
+      if (authorization.statusCode === 403) {
+        alert(authorization.data.message);
+        navigator().navigate('ErrorScreen');
+        return;
       }
       if (authorization.statusCode !== 200) {
         // @ts-ignore

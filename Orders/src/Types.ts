@@ -17,6 +17,7 @@ export type AuthBody =
       login: string;
       password: string;
       deviceInfo: string | undefined;
+      appCode?:string
     }
   | undefined;
 
