@@ -6,7 +6,13 @@ import {
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
 
-export const HeaderView = ({icon, title, desc, color = COLORS.HEADER_BLUE}) => {
+export const HeaderView = ({
+  icon,
+  title,
+  desc,
+  color = COLORS.HEADER_BLUE,
+  counter = 0,
+}) => {
   return (
     <View style={{...styles.container, backgroundColor: color}}>
       <View style={styles.imageView}>
@@ -14,7 +20,10 @@ export const HeaderView = ({icon, title, desc, color = COLORS.HEADER_BLUE}) => {
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>
-        {desc !== undefined && <Text style={styles.desc}>{desc}</Text>}
+        <View style={styles.wrap}>
+          {desc !== undefined && <Text style={styles.desc}>{desc}</Text>}
+          {counter !== 0 && <Text style={styles.count}>{counter}</Text>}
+        </View>
       </View>
     </View>
   );
@@ -49,5 +58,16 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
-  desc: {},
+  wrap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  desc: {
+    fontSize: hp(14),
+    color: 'white',
+  },
+  count: {
+    fontSize: hp(20),
+    color: 'white',
+  },
 });
