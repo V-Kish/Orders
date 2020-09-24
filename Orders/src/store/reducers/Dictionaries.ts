@@ -5,6 +5,7 @@ import {
   OPERATION_TYPES,
   LOAD_STATUS,
   GET_ORDERS,
+  ORDER_DATA,
 } from '../types';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   operationTypes: [],
   ordersStatus: [],
   orders: [],
+  orderData: {},
 };
 export const Dictionaries = (
   state = initialState,
@@ -49,6 +51,15 @@ export const Dictionaries = (
       return {
         ...state,
         orders: action.payload,
+      };
+    case ORDER_DATA:
+      let orderData = state.orders.Items.find((item) => item.system.orderId === action.payload);
+      orderData.detail.currencyIdCode = state.listCurrencies.find(item =>item.id === orderData.detail.currencyId).code;
+      orderData.detail.currencyToIdCode = state.listCurrencies.find(item =>item.id === orderData.detail.currencyToId).code;
+      console.log('orderDataZZZZ',orderData)
+      return {
+        ...state,
+        orderData: orderData !== undefined ? orderData : [],
       };
     default:
       return state;

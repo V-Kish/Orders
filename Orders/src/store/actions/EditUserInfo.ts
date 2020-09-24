@@ -1,4 +1,4 @@
-import {EDIT_USER_INFO} from '../types';
+import {EDIT_USER_INFO, ORDER_DATA} from '../types';
 
 export const editUserInfo = (value) => {
   return {
