@@ -40,17 +40,15 @@ export const HomeScreen = () => {
       <HeaderView
         icon={ICONS.logoSmall}
         title="Робота з замовленнями"
-        desc={`Нових замовлень: ${orderDataCount}`}
+        desc={`Нових замовлень: `}
+        counter={`${orderDataCount}`}
       />
       <View style={styles.container}>
         <HomeView/>
-        {/* <TouchableOpacity
+        <TouchableOpacity
           onPress={() => navigator().changeNavigationStateAuth(true, dispatch)}>
           <Text>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => GetOrderInfo.getOrders(dispatch, '1')}>
-          <Text>СОРТУВАННЯ</Text>
-        </TouchableOpacity> */}
       </View>
     </>
   );
