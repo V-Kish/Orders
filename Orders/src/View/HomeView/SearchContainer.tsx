@@ -52,6 +52,9 @@ export const SearchContainer = ({changeDropDownVisible,dropdown}) => {
 const styles = StyleSheet.create({
   container: {
     // position: 'relative'
+    height:hp(60),
+    justifyContent:'center',
+    paddingHorizontal:wp(5),
     marginHorizontal: hp(10),
     marginVertical: hp(5),
     shadowColor: 'rgba(0,0,0,0)',
@@ -69,7 +72,6 @@ const styles = StyleSheet.create({
   searchInputView: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: wp(15),
   },
   searchIconView: {},
   dropdownButton: {},
