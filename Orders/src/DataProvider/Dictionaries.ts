@@ -11,6 +11,7 @@ import {
   getOrders
 } from '../store/actions/Dictionaries';
 import {MethodsRequest} from "./MethodsRequest";
+import {GetOrderInfo} from "../functions/GetOrderInfo";
 
 class Dictionaries {
   private _onDictionariesLoad: () => void;
@@ -41,6 +42,7 @@ class Dictionaries {
     this._loadDepartmentsGroups(dispatch).then();
     this._loadTypesOperation(dispatch).then();
     this._LoadOrdersStatus(dispatch).then();
+    this._getOrders(dispatch).then();
   }
 
   // Валюти
@@ -199,11 +201,7 @@ class Dictionaries {
   static async _getOrders(dispatch) {
     this._getOrdersStatus = false;
     try {
-      const response = await MethodsRequest.getOrders();
-      if (response.statusCode !== 200) {
-        return;
-      }
-      dispatch(getOrders(response.data));
+      await GetOrderInfo.getOrders(dispatch, '');
       this._getOrdersStatus = true;
     } catch (ex) {
       console.warn('MethodsRequest getOrders', ex);
