@@ -9,7 +9,7 @@ class GetOrderInfo {
   static async getOrder(dispatch: Dispatch<any>, selectedIdItem) {
     try {
       dispatch(orderData(selectedIdItem));
-      const response = await MethodsRequest.getUserInfo(47);
+      const response = await MethodsRequest.getUserInfo(selectedIdItem.detail.clientId);
       console.log('response kish', response);
       if (response.statusCode === 200) {
         dispatch(editUserInfo(response.data));
