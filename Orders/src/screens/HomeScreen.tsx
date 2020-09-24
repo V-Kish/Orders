@@ -43,13 +43,7 @@ export const HomeScreen = () => {
         desc={`Нових замовлень: `}
         counter={`${orderDataCount}`}
       />
-      <View style={styles.container}>
-        <HomeView/>
-        <TouchableOpacity
-          onPress={() => navigator().changeNavigationStateAuth(true, dispatch)}>
-          <Text>Home</Text>
-        </TouchableOpacity>
-      </View>
+      <HomeView/>
     </>
   );
 };
