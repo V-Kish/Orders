@@ -16,6 +16,7 @@ import {
 import {useSelector} from 'react-redux';
 import {COLORS} from '../../constants/colors';
 import { OrderStatus } from '../Components/OrderStatus';
+import { statusToType } from '../../helpers/StatusToType';
 
 export const DropDownSelector = ({dropdown}) => {
   const ordersStatus = useSelector(
@@ -40,9 +41,9 @@ export const DropDownSelector = ({dropdown}) => {
                   </View>
                 </View>
                 <View style={styles.wrapText}>
-                  <Text style={styles.text}>{item.name}</Text>
+                  <Text style={styles.text}>Тільки статус</Text>
                 </View>
-                  <OrderStatus type="done"/>
+                  <OrderStatus type={statusToType(item.id)}/>
               </View>
             );
           })}

@@ -6,15 +6,17 @@ import {
     mockupWidthToDP as wp,
   } from '../../../constants/Dimensions';
 
-export const OperationType = ({type}) => {
+export const OperationType = ({item}) => {
+    const type = item.detail.operationType
     let circleText = ''
     let operationText = ''
+    let style = type
     switch(type){
         case 'buy':
             circleText = 'К'
             operationText = 'купівля'
             break;
-        case 'sell':
+        case 'sale':
             circleText = 'П'
             operationText = 'продаж'
             break;
@@ -22,13 +24,20 @@ export const OperationType = ({type}) => {
             circleText = 'Кк'
             operationText = 'крос-курс'
             break;
-        case 'decline':
+    }
+    switch(item.system.type){
+        case 'reject':
             circleText = 'В'
             operationText = 'продаж відхилено'
+            style = 'reject'
+            break;
+        case 'done':
+            circleText = 'В'
+            style = 'done'
             break;
     }
     return <View style={styles.operationTypeView}>
-        <View style={{...styles.operationTypeCircle, ...styles[`operationTypeCircle_${type}`]}}>
+        <View style={{...styles.operationTypeCircle, ...styles[`operationTypeCircle_${style}`]}}>
             <Text style={styles.operationTypeCircleText}>
                 {circleText}
             </Text>
@@ -58,23 +67,28 @@ const styles = StyleSheet.create({
     operationTypeCircle_buy: {
         backgroundColor: COLORS.STATUS_RED
     },
-    operationTypeCircle_sell: {
+    operationTypeCircle_sale: {
         backgroundColor: COLORS.STATUS_GREEN
     },
     operationTypeCircle_cross: {
         backgroundColor: COLORS.STATUS_YELLOW
     },
-    operationTypeCircle_decline: {
+    operationTypeCircle_reject: {
         backgroundColor: COLORS.STATUS_GRAY
+    },
+    operationTypeCircle_done: {
+        backgroundColor: COLORS.STATUS_GREEN_WHITE
     },
     operationTypeCircleText: {
         color: 'white',
         fontSize: wp(30),
-        fontWeight: '100'
+        fontWeight: '100',
+        textAlign: 'center'
     },
     operationTypeText: {
         fontSize: wp(12),
         paddingVertical: wp(5),
-        color: COLORS.STATUS_GRAY_DARK
+        color: COLORS.STATUS_GRAY_DARK,
+        textAlign: 'center'
     },
 })

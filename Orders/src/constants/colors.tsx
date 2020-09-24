@@ -19,6 +19,7 @@ export const COLORS = {
   STATUS_YELLOW: 'rgba(242,201,76,1)',
   STATUS_RED: 'rgba(235,87,87,1)',
   STATUS_GREEN: 'rgba(33,150,83,1)',
+  STATUS_GREEN_WHITE: 'rgba(39,174,96,1)',
   STATUS_BLUE: 'rgba(47,128,237,1)',
   STATUS_GRAY_DARK: 'rgba(130,130,130,1)',
   STATUS_GRAY: 'rgba(224,224,224,1)'

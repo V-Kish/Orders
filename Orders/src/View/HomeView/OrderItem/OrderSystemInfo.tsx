@@ -16,7 +16,7 @@ export const OrderSystemInfo = ({item}) => {
                 <Text style={styles.orderDate}>{dateTimeToTimeString(
                         dateParse(convertToUTCString(item.system.statusDate)))}</Text>
             </View>
-            <OrderStatus type="new"/>
+            <OrderStatus type={item.system.type}/>
         </View>
   );
 };

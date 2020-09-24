@@ -9,6 +9,8 @@ import {
 import { reduxTypes } from '../../../Types';
 import { OrderSystemInfo } from './OrderSystemInfo';
 import { GetOrderInfo } from '../../../functions/GetOrderInfo';
+import { OrderMainInfo } from './OrderMainInfo';
+import { statusToType } from '../../../helpers/StatusToType';
 
 export const OrderItem = ({item}) => {
     const dispatch = useDispatch()
@@ -21,29 +23,17 @@ export const OrderItem = ({item}) => {
     item.detail.currencyToCode = listCurrencies.find(
         (currency) => currency.id === item.detail.currencyToId,
     ).code;
-  const orderNum = item.system.orderNum.split("-")
-  const orderAllNumber = `${orderNum[0]}-${orderNum[1]}-`
-  const orderBoldNumber = orderNum[2]
-  
+  item.system.type = statusToType(item.system.status)
   const handleItemPress = () => {
-    console.log('item',item)
     GetOrderInfo.getOrder(dispatch,item)
   }
   return (
-    <TouchableOpacity style={styles.container} onPress={handleItemPress} activeOpacity={0.9}>
-        <OperationType type={item.detail.operationType}/>
-        <View style={styles.orderMainView}>
-            <View style={styles.orderNumberView}>
-                <Text style={styles.orderNumber}>{`${orderAllNumber}`}</Text>
-                <Text style={styles.orderNumberBold}>{orderBoldNumber}</Text>
-            </View>
-            <View style={styles.exchangeOperationView}>
-                <Text style={styles.operationValueText}>{`${item.detail.sum} ${item.detail.currencyCode}`}</Text>
-                <Text style={styles.operationArrow}>{`>`}</Text>
-                <Text style={styles.operationValueText}>{`${(item.detail.sum*item.detail.rate).toFixed(2)} ${item.detail.currencyToCode}`}</Text>
-            </View>
+    <TouchableOpacity onPress={handleItemPress} activeOpacity={0.9}>
+        <View style={{...styles.container, ...styles[`${item.system.type}`]}}>
+            <OperationType item={item}/>
+            <OrderMainInfo item={item}/>
+            <OrderSystemInfo item={item}/>
         </View>
-        <OrderSystemInfo item={item}/>
     </TouchableOpacity>
   );
 };
@@ -52,53 +42,22 @@ export const OrderItem = ({item}) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        padding: wp(5)
+        padding: wp(5),
+        backgroundColor: 'white',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        elevation: 1,
     },
-
-
-    orderMainView: {
-        width: '60%',
-        paddingVertical: hp(10)
+    new: {
+        backgroundColor: '#F5FFF9'
     },
-    orderNumberView: {
-        flexDirection: 'row'
+    reject: {
+        backgroundColor: '#F2F2F2',
+        opacity: 0.5,
     },
-    orderNumber: {
-        fontSize: wp(12),
-    },
-    orderNumberBold: {
-        fontSize: wp(12),
-        fontWeight: 'bold'
-    },
-
-    exchangeOperationView: {
-        flexDirection: 'row',
-
-    },
-    operationValueText: {
-        
-    },
-    operationArrow: {
-        paddingHorizontal: wp(5)
-    },
-
-
-    orderInfoView: {
-        width: '20%',
-        alignItems: 'flex-end',
-        justifyContent: 'space-between',
-        paddingVertical: hp(10)
-        // backgroundColor: 'red'
-    },
-    orderInfoDates: {
-        alignItems: 'flex-end'
-    },
-    orderDate: {
-        fontSize: wp(12),
-        textAlign: "right"
-    },
-    orderStatus: {
-
-    }
-
 })
