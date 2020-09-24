@@ -6,3 +6,4 @@ export const DEPARTMENT_GROUP = 'DEPARTMENT_GROUP';
 export const OPERATION_TYPES = 'OPERATION_TYPES';
 export const LOAD_STATUS = 'LOAD_STATUS';
 export const GET_ORDERS = 'GET_ORDERS';
+export const EDIT_USER_INFO = 'EDIT_USER_INFO';
