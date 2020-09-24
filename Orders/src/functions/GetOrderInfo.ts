@@ -33,10 +33,8 @@ class GetOrderInfo {
   ) {
     let bodyRequest = body;
     bodyRequest.sQuery = searchText;
-    console.warn('bodyRequest',bodyRequest)
     try {
       const response = await MethodsRequest.getOrders(bodyRequest);
-      console.log('response getOrdersKISH(!', response);
       if (response.statusCode === 200) {
         dispatch(getOrders(response.data));
       }
