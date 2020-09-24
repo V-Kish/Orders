@@ -23,7 +23,7 @@ export const HomeView = () => {
   };
   return (
     <View style={styles.container}>
-      <SearchContainer changeDropDownVisible={switchDropDown} />
+      <SearchContainer changeDropDownVisible={switchDropDown} dropdown={dropdown}/>
       <DropDownSelector dropdown={dropdown} />
       <HomeListView />
     </View>

@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
   containerList: {
     //backgroundColor: 'red',
     backgroundColor: 'rgba(255,255,255,1)',
+    paddingTop:hp(20),
   },
   wrapCircle: {
     marginRight: hp(15),

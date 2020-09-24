@@ -13,15 +13,16 @@ import {
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
 import {GetOrderInfo} from '../../functions/GetOrderInfo';
-import {useDispatch} from "react-redux";
+import {useDispatch} from 'react-redux';
+import {ICONS} from "../../constants/icons";
 
-export const SearchContainer = ({changeDropDownVisible}) => {
+export const SearchContainer = ({changeDropDownVisible,dropdown}) => {
   const [myTimeout, setMyTimeout] = useState();
   const dispatch = useDispatch();
   const onChangeText = (text: string) => {
     clearTimeout(myTimeout);
     setMyTimeout(
-      setTimeout( () => {
+      setTimeout(() => {
         GetOrderInfo.getOrders(dispatch, text);
       }, 400),
     );
@@ -34,12 +35,12 @@ export const SearchContainer = ({changeDropDownVisible}) => {
             onPress={changeDropDownVisible}
             activeOpacity={0.9}
             style={styles.dropdownButton}>
-            <Text>Show</Text>
+            <Image source={dropdown ? ICONS.gambrActive :ICONS.gambrDisabled } style={styles.img}/>
           </TouchableOpacity>
         </View>
         <View style={styles.searchTextInputView}>
           <TextInput
-            placeholder="Пошук по замовленням"
+            placeholder="Пошук по номеру замовлення"
             onChangeText={onChangeText}
           />
         </View>
@@ -51,13 +52,32 @@ export const SearchContainer = ({changeDropDownVisible}) => {
 const styles = StyleSheet.create({
   container: {
     // position: 'relative'
+    marginHorizontal: hp(10),
+    marginVertical: hp(5),
+    shadowColor: 'rgba(0,0,0,0)',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 10.32,
+
+    elevation: 4,
+    backgroundColor: 'white',
+    borderRadius: 5,
   },
   searchInputView: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: wp(20),
+    padding: wp(15),
   },
   searchIconView: {},
   dropdownButton: {},
   searchTextInputView: {},
+  img:{
+    resizeMode:'contain',
+    width:wp(25),
+    height:hp(25),
+    marginRight:hp(10)
+  }
 });
