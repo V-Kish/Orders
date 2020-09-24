@@ -7,7 +7,6 @@ import {
   } from '../../constants/Dimensions';
 
 export const OperationType = ({type}) => {
-    console.log('type', type)
     let circleText = ''
     let operationText = ''
     switch(type){

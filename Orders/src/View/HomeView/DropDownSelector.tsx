@@ -15,6 +15,7 @@ import {
 } from '../../constants/Dimensions';
 import {useSelector} from 'react-redux';
 import {COLORS} from '../../constants/colors';
+import { OrderStatus } from '../Components/OrderStatus';
 
 export const DropDownSelector = ({dropdown}) => {
   const ordersStatus = useSelector(
@@ -40,11 +41,7 @@ export const DropDownSelector = ({dropdown}) => {
               <View style={styles.wrapText}>
                 <Text style={styles.text}>{item.name}</Text>
               </View>
-              <View>
-                <Text style={{...styles.statusText, ...styles.text_done}}>
-                  Виконано
-                </Text>
-              </View>
+              <OrderStatus type="done"/>
             </View>
           );
         })}
@@ -98,31 +95,5 @@ const styles = StyleSheet.create({
   text: {
     fontSize: hp(16),
     color: COLORS.FONT_BLACK,
-  },
-  statusText: {
-    fontSize: hp(14),
-    paddingHorizontal: hp(10),
-    paddingVertical: hp(5),
-    borderRadius: 50,
-  },
-  text_new: {
-    color: COLORS.FONT_WHITE,
-    backgroundColor: COLORS.BUTTON_GREEN,
-  },
-  text_accept: {
-    color: COLORS.FONT_WHITE,
-    backgroundColor: COLORS.HEADER_BLUE,
-  },
-  text_wait: {
-    color: COLORS.FONT_BLACK,
-    backgroundColor: COLORS.FONT_YELLOW,
-  },
-  text_reject: {
-    color: COLORS.FONT_BLACK,
-    backgroundColor: COLORS.TEXT_REJECT,
-  },
-  text_done: {
-    color: COLORS.FONT_WHITE,
-    backgroundColor: COLORS.TEXT_DONE,
   },
 });
