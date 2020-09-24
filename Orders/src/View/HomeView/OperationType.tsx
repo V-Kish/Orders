@@ -1,5 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { COLORS } from '../../constants/colors'
+import {
+    mockupHeightToDP as hp,
+    mockupWidthToDP as wp,
+  } from '../../constants/Dimensions';
 
 export const OperationType = ({type}) => {
     console.log('type', type)
@@ -45,11 +50,32 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     operationTypeCircle: {
-        // width: 
+        width: wp(60),
+        height: wp(60),
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 100,
     },
     operationTypeCircle_buy: {
-        backgroundColor: 'red'
+        backgroundColor: COLORS.STATUS_RED
     },
-    operationTypeCircleText: {},
-    operationTypeText: {},
+    operationTypeCircle_sell: {
+        backgroundColor: COLORS.STATUS_GREEN
+    },
+    operationTypeCircle_cross: {
+        backgroundColor: COLORS.STATUS_YELLOW
+    },
+    operationTypeCircle_decline: {
+        backgroundColor: COLORS.STATUS_GRAY
+    },
+    operationTypeCircleText: {
+        color: 'white',
+        fontSize: wp(30),
+        fontWeight: '100'
+    },
+    operationTypeText: {
+        fontSize: wp(12),
+        paddingVertical: wp(5),
+        color: COLORS.STATUS_GRAY_DARK
+    },
 })

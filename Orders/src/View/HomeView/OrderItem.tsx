@@ -8,7 +8,7 @@ export const OrderItem = ({item}) => {
     <View style={styles.container}>
         <OperationType type={item.detail.operationType}/>
         <View style={styles.orderMainView}>
-
+            {/* <Text>list</Text> */}
         </View>
         <View style={styles.orderInfoView}>
 
@@ -20,6 +20,14 @@ export const OrderItem = ({item}) => {
 
 const styles = StyleSheet.create({
     container: {
-
+        flexDirection: 'row'
+    },
+    orderMainView: {
+        width: '60%',
+        backgroundColor: 'red'
+    },
+    orderInfoView: {
+        width: '20%',
+        backgroundColor: 'yellow'
     }
 })
