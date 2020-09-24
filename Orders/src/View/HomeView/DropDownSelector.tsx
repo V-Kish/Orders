@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   dropDown: {
     position: 'absolute',
-    top: hp(80),
+    top: hp(70),
     right: 0,
     left: 0,
     backgroundColor: 'rgba(255,255,255,0.5)',
