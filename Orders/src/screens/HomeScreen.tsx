@@ -24,7 +24,7 @@ export const HomeScreen = () => {
     <HeaderView
       icon={ICONS.logoSmall}
       title="Робота з замовленнями"
-      // desc={`Нових замовлень: ${}`}
+      desc={`Нових замовлень:`}
     />
     <View style={styles.container}>
       <TouchableOpacity
