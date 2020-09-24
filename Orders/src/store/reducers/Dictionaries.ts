@@ -16,6 +16,7 @@ const initialState = {
   ordersStatus: [],
   orders: [],
   orderData: {},
+  selectedDepartments: [],
 };
 export const Dictionaries = (
   state = initialState,
@@ -56,10 +57,12 @@ export const Dictionaries = (
       let orderData = state.orders.Items.find((item) => item.system.orderId === action.payload);
       orderData.detail.currencyIdCode = state.listCurrencies.find(item =>item.id === orderData.detail.currencyId).code;
       orderData.detail.currencyToIdCode = state.listCurrencies.find(item =>item.id === orderData.detail.currencyToId).code;
+     const selectedDepartments =  state.listDepartments.filter(item =>item.id === orderData.detail.departmentId);
       console.log('orderDataZZZZ',orderData)
       return {
         ...state,
         orderData: orderData !== undefined ? orderData : [],
+        selectedDepartments: selectedDepartments !== undefined ? selectedDepartments : [],
       };
     default:
       return state;

@@ -42,7 +42,7 @@ export const HomeScreen = () => {
           onPress={() => navigator().changeNavigationStateAuth(true, dispatch)}>
           <Text>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => GetOrderInfo.getOrder(dispatch, 140)}>
+        <TouchableOpacity onPress={() => GetOrderInfo.getOrder(dispatch, 145)}>
           <Text>ORDERSCREEN</Text>
         </TouchableOpacity>
       </View>

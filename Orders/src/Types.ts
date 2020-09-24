@@ -11,6 +11,7 @@ export type reduxTypes = {
     ordersStatus: Array<any>;
     orders: Array<any>;
     orderData: orderDataTypes;
+    selectedDepartments: Array<any>;
   };
   ditUser: {
     editUser: userDataTypes;
