@@ -59,7 +59,6 @@ class CurrentUserImpl {
   }
   async logout() {
     const logoutUser = await UserDataProvider.userLogout();
-    console.log('logoutUser',logoutUser)
     this._user = {
       userToken: null,
       userId: null,
