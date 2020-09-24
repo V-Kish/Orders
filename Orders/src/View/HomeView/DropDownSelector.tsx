@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import {StyleSheet, View, Text, Image, Dimensions, Animated} from 'react-native';
 import { HomeListView } from './HomeListView';
 import { SearchContainer } from './SearchContainer';
@@ -6,27 +6,25 @@ import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
-import { DropDownSelector } from './DropDownSelector';
+import { useSelector } from 'react-redux';
 
-export const HomeView = () => {
-  const [dropdown, setDropdown] = useState(false)
-  
-  const switchDropDown = () => {
-      setDropdown(!dropdown)
-  }
+export const DropDownSelector = ({dropdown}) => {
+    const ordersStatus = useSelector(
+        (state: reduxTypes) => state.dictionaries.ordersStatus,
+      );
   return (
-    <View style={styles.container}>
-        <SearchContainer changeDropDownVisible={switchDropDown}/>
-        <DropDownSelector dropdown={dropdown}/>
-        <HomeListView/>
-    </View>
+    <Animated.View style={dropdown ? {...styles.dropDown, ...styles.dropDownShowed } : styles.dropDown}>
+        {ordersStatus && ordersStatus.map(item=>{
+            return <Text key={item.id}>{item.name}</Text>
+        })}
+    </Animated.View>
   );
 };
 
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
+
     },
     dropDown: {
         position: 'absolute',
@@ -35,14 +33,10 @@ const styles = StyleSheet.create({
         left: 0,
         backgroundColor: 'rgba(0,0,0,.3)',
         overflow: 'hidden',
-        // height: 200,
+        height: 0,
         zIndex: 999999
     },
     dropDownShowed: {
         height: Dimensions.get('screen').height
-    },
-    content: {
-        backgroundColor: 'red',
-        minHeight: Dimensions.get('screen').height
     }
 })

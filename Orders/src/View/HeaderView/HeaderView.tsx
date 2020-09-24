@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 20,
+    fontSize: wp(20),
     color: 'white',
     fontWeight: 'bold',
   },

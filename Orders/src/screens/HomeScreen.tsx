@@ -5,7 +5,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {reduxTypes} from '../Types';
 import {HeaderView} from '../View/HeaderView/HeaderView';
 import {ICONS} from '../constants/icons';
-import {GetOrderInfo} from '../functions/GetOrderInfo';
+import {GetOrderInfo} from "../functions/GetOrderInfo";
+import { HomeView } from '../View/HomeView/HomeView';
 import {MethodsRequest} from '../DataProvider/MethodsRequest';
 export const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ export const HomeScreen = () => {
         counter={`${orderDataCount}`}
       />
       <View style={styles.container}>
+        <HomeView/>
         <TouchableOpacity
           onPress={() => navigator().changeNavigationStateAuth(true, dispatch)}>
           <Text>Home</Text>
