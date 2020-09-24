@@ -1,10 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { COLORS } from '../../constants/colors'
+import { COLORS } from '../../../constants/colors'
 import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,
-  } from '../../constants/Dimensions';
+  } from '../../../constants/Dimensions';
 
 export const OperationType = ({type}) => {
     let circleText = ''

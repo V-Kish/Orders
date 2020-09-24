@@ -5,43 +5,38 @@ import { OperationType } from './OperationType';
 import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,
-  } from '../../constants/Dimensions';
-import { reduxTypes } from '../../Types';
-import { OrderStatus } from '../Components/OrderStatus'
-import { convertToUTCString, dateParse, dateTimeToDateString, dateTimeToTimeString } from '../../helpers/DateParse';
+  } from '../../../constants/Dimensions';
+import { reduxTypes } from '../../../Types';
+import { OrderSystemInfo } from './OrderSystemInfo';
 
 export const OrderItem = ({item}) => {
     const listCurrencies = useSelector(
         (state: reduxTypes) => state.dictionaries.listCurrencies,
       );
-    item.detail.currencyIdCode = listCurrencies.find(
+    item.detail.currencyCode = listCurrencies.find(
         (currency) => currency.id === item.detail.currencyId,
       ).code;
-    item.detail.currencyToIdCode = listCurrencies.find(
+    item.detail.currencyToCode = listCurrencies.find(
         (currency) => currency.id === item.detail.currencyToId,
     ).code;
-
+  const orderNum = item.system.orderNum.split("-")
+  const orderAllNumber = `${orderNum[0]}-${orderNum[1]}-`
+  const orderBoldNumber = orderNum[2]
   return (
     <View style={styles.container}>
         <OperationType type={item.detail.operationType}/>
         <View style={styles.orderMainView}>
             <View style={styles.orderNumberView}>
-                <Text style={styles.orderNumber}>031231-123123-</Text>
-                <Text style={styles.orderNumberBold}>12312312</Text>
+                <Text style={styles.orderNumber}>{`${orderAllNumber}`}</Text>
+                <Text style={styles.orderNumberBold}>{orderBoldNumber}</Text>
             </View>
             <View style={styles.exchangeOperationView}>
-                <Text style={styles.operationValueText}> EUR</Text>
+                <Text style={styles.operationValueText}>{`${item.detail.sum} ${item.detail.currencyCode}`}</Text>
                 <Text style={styles.operationArrow}>{`>`}</Text>
-                <Text style={styles.operationValueText}>3200 UAH</Text>
+                <Text style={styles.operationValueText}>{`${(item.detail.sum*item.detail.rate).toFixed(2)} ${item.detail.currencyToCode}`}</Text>
             </View>
         </View>
-        <View style={styles.orderInfoView}>
-            <Text style={styles.orderDate}>{dateTimeToDateString(
-                    dateParse(convertToUTCString(item.system.statusDate)))}</Text>
-            <Text style={styles.orderDate}>{dateTimeToTimeString(
-                    dateParse(convertToUTCString(item.system.statusDate)))}</Text>
-            <OrderStatus type="wait"/>
-        </View>
+        <OrderSystemInfo item={item}/>
     </View>
   );
 };
@@ -56,6 +51,7 @@ const styles = StyleSheet.create({
 
     orderMainView: {
         width: '60%',
+        paddingVertical: hp(10)
     },
     orderNumberView: {
         flexDirection: 'row'
@@ -83,7 +79,12 @@ const styles = StyleSheet.create({
     orderInfoView: {
         width: '20%',
         alignItems: 'flex-end',
+        justifyContent: 'space-between',
+        paddingVertical: hp(10)
         // backgroundColor: 'red'
+    },
+    orderInfoDates: {
+        alignItems: 'flex-end'
     },
     orderDate: {
         fontSize: wp(12),

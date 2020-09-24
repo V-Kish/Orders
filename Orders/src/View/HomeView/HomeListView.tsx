@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
-import { OrderItem } from './OrderItem';
+import { OrderItem } from './OrderItem/OrderItem';
 
 export const HomeListView = () => {
     const orders = useSelector((state: reduxTypes) => state.dictionaries.orders);
