@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {Authorization} from '../../functions/Authorization';
-import {navigator} from "../../Core/Navigator";
+import {StyleSheet, View, Text, Image} from 'react-native';
+import { ICONS } from '../../constants/icons';
 
 export const RegistrationLogo = () => {
   return (
     <View style={styles.logoContainer}>
         <View style={styles.logoImgContainer}>
-          {/* <Image source=""/> */}
+          <Image 
+            style={styles.logoImg} 
+            source={ICONS.logoSmall}
+          />
         </View>
         <View style={styles.logoDescView}>
           <Text style={styles.logoDescTitle}>torello.exchange</Text>
@@ -20,11 +21,11 @@ export const RegistrationLogo = () => {
 
 
 const styles = StyleSheet.create({
-    container: {
-
-    },
     logoContainer: {
-
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 40,
+        // paddingHorizontal: 20,
     },
     logoImgContainer: {
 
@@ -33,12 +34,14 @@ const styles = StyleSheet.create({
 
     },
     logoDescView: {
-
+        paddingHorizontal: 10
     },
     logoDescTitle: {
-
+        fontSize: 20,
+        fontWeight: '700',
     },
     logoDescContext: {
-
+        fontSize: 12,
+        color: 'hsl(0,0%,30%)'
     }
 })
