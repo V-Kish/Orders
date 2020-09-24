@@ -16,7 +16,6 @@ export const MainNavigation = () => {
       .secureUserDataGet()
       .then(async (response) => {
         const date = JSON.parse(response);
-        console.log('date', date);
         if (date === null || date.userToken === null) {
           navigator().changeNavigationStateAuth(true, dispatch);
         } else {
@@ -40,7 +39,9 @@ export const MainNavigation = () => {
           navigator().changeNavigationStateAuth(false, dispatch);
         }
       })
-      .catch((error) => {});
+      .catch((error) => {
+        // add preloader
+      });
   }
   useEffect(() => {
     console.log('useEffect');

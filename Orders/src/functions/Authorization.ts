@@ -18,8 +18,13 @@ class Authorization {
     // @ts-ignore
     body.deviceInfo = await this.createFetchBody();
     try {
-      const authorization = await UserDataProvider.AuthorizationFetch(body);
+       const authorization = await UserDataProvider.AuthorizationFetch(body);
       console.log('authorization', authorization);
+      if (authorization.statusCode === 403 && authorization.statusMessage === 'forbidden') {
+        // @ts-ignore
+       navigator().navigate('ErrorScreen')
+        return false;
+      }
       if (authorization.statusCode !== 200) {
         // @ts-ignore
         alert(authorization.data.message);
