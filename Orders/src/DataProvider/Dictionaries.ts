@@ -2,7 +2,16 @@ import {fetchData} from '../Common/fetchData';
 import {currentUser} from '../Core/CurrentUser';
 import {Departments, DictionariesLoadStatusType} from '../Types';
 import {AppLog} from '../Common/AppLog';
-import {ListDepartments, listCurrencies, loadDepartmentsGroups, loadOperationTypes, loadOrdersStatus} from '../store/actions/Dictionaries';
+import {
+  ListDepartments,
+  listCurrencies,
+  loadDepartmentsGroups,
+  loadOperationTypes,
+  loadOrdersStatus,
+  getOrders
+} from '../store/actions/Dictionaries';
+import {MethodsRequest} from "./MethodsRequest";
+import {GetOrderInfo} from "../functions/GetOrderInfo";
 
 class Dictionaries {
   private _onDictionariesLoad: () => void;
@@ -12,6 +21,7 @@ class Dictionaries {
   private _typesOperationStatus: boolean;
   private _ordersStatusesStatus: boolean;
   private _listDepartmentsStatus: boolean;
+  private _getOrdersStatus: boolean;
   constructor() {
     this._onDictionariesLoad = null;
     this._listDepartmentsStatus = false;
@@ -19,6 +29,7 @@ class Dictionaries {
     this._departmentsStatus = false;
     this._typesOperationStatus = false;
     this._ordersStatusesStatus = false;
+    this._getOrdersStatus = false;
 
   }
   static InitDictionaries(onDictionariesLoad: () => void, dispatch) {
@@ -31,6 +42,7 @@ class Dictionaries {
     this._loadDepartmentsGroups(dispatch).then();
     this._loadTypesOperation(dispatch).then();
     this._LoadOrdersStatus(dispatch).then();
+    this._getOrders(dispatch).then();
   }
 
   // Валюти
@@ -84,7 +96,7 @@ class Dictionaries {
   // Статус загрузки словників
   //якщо === true всі словники завантажені
   private static isLoaded() {
-    if (this._listCurrenciesStatus && this._listDepartmentsStatus && this._departmentsStatus  && this._typesOperationStatus && this._ordersStatusesStatus) {
+    if (this._listCurrenciesStatus &&  this._getOrdersStatus && this._listDepartmentsStatus && this._departmentsStatus  && this._typesOperationStatus && this._ordersStatusesStatus) {
       return true;
     }
     return false;
@@ -184,6 +196,15 @@ class Dictionaries {
     } catch (ex) {
       AppLog.error('_LoadOrdersStatus', ex);
       await currentUser().logout();
+    }
+  } // Загрузити замовлення
+  static async _getOrders(dispatch) {
+    this._getOrdersStatus = false;
+    try {
+      await GetOrderInfo.getOrders(dispatch, '');
+      this._getOrdersStatus = true;
+    } catch (ex) {
+      console.warn('MethodsRequest getOrders', ex);
     }
   }
 }

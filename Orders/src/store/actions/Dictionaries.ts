@@ -4,7 +4,8 @@ import {
   DEPARTMENT_GROUP,
   OPERATION_TYPES,
   LOAD_STATUS,
-  GET_ORDERS, ORDER_DATA
+  GET_ORDERS, ORDER_DATA,
+  ORDER_DATA_COUNT
 } from '../types';
 
 export const ListDepartments = (value) => {
@@ -46,6 +47,12 @@ export const getOrders = (value) => {
 export const orderData = (value) => {
   return {
     type: ORDER_DATA,
+    payload: value,
+  };
+};
+export const getOrdersCount = (value) => {
+  return {
+    type: ORDER_DATA_COUNT,
     payload: value,
   };
 };

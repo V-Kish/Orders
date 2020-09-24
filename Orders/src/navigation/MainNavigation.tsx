@@ -8,7 +8,7 @@ import {navigator} from '../Core/Navigator';
 import {currentUser} from '../Core/CurrentUser';
 import {Dictionaries} from '../DataProvider/Dictionaries';
 import {MethodsRequest} from '../DataProvider/MethodsRequest';
-import {getOrders} from '../store/actions/Dictionaries';
+import {getOrders, getOrdersCount} from '../store/actions/Dictionaries';
 export const MainNavigation = () => {
   const dispatch = useDispatch();
   async function getUserData() {
@@ -28,13 +28,12 @@ export const MainNavigation = () => {
             console.warn('Auth getTokenFireBase', ex);
           }
           try {
-            const response = await MethodsRequest.getOrders();
-            if (response.statusCode !== 200) {
-              return;
+            const response = await MethodsRequest.getOrdersNumber();
+            if (response.statusCode === 200){
+              dispatch(getOrdersCount(response.result))
             }
-            dispatch(getOrders(response.data));
-          } catch (ex) {
-            console.warn('MethodsRequest getOrders', ex);
+          }catch (ex) {
+            console.warn('MethodsRequest.getOrdersNumber',ex)
           }
           navigator().changeNavigationStateAuth(false, dispatch);
         }

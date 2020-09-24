@@ -10,15 +10,18 @@ import {ButtonView} from './ButtonView';
 import {useSelector} from 'react-redux';
 import {reduxTypes, userDataTypes, orderDataTypes} from '../../Types';
 export const OrderUserView = () => {
-  let statusType = 'new';
   const userData: userDataTypes = useSelector(
     (state: reduxTypes) => state.ditUser.editUser,
   );
   const orderData: orderDataTypes = useSelector(
     (state: reduxTypes) => state.dictionaries.orderData,
   );
+  const selectedDepartments: Array<any> = useSelector(
+      (state: reduxTypes) => state.dictionaries.selectedDepartments,
+  );
   console.log('userKISH', userData);
   console.log('userKISH orderData', orderData);
+  console.log('userKISH selectedDepartments', selectedDepartments);
   return (
     <View>
       <View style={styles.blockContainer}>
@@ -45,7 +48,7 @@ export const OrderUserView = () => {
       <View style={styles.blockContainer}>
         <View style={styles.containers}>
           <Text style={styles.textDefaultSecond}>До отримання: </Text>
-          <Text style={styles.money}>100 {orderData.detail.currencyIdCode}</Text>
+          <Text style={styles.money}>100 {orderData.detail.currencyIdCode} доробити</Text>
         </View>
         <View style={styles.containers}>
           <Text style={styles.textDefaultSecond}>Курс операції: </Text>
@@ -53,18 +56,18 @@ export const OrderUserView = () => {
         </View>
         <View style={styles.containers}>
           <Text style={styles.textDefaultSecond}>До видачі: </Text>
-          <Text style={styles.money}>3345.00 {orderData.detail.currencyToIdCode}</Text>
+          <Text style={styles.money}>3345.00 {orderData.detail.currencyToIdCode}доробити</Text>
         </View>
       </View>
       <View style={styles.lastBlock}>
         <View style={styles.containers}>
-          {statusType === 'new' && (
+          {orderData.system.status === 3 && (
             <>
               <Text style={styles.textDefaultSecond}>Відділення: </Text>
-              <Text style={styles.department}>Капушанська 22</Text>
+              <Text style={styles.department}>{selectedDepartments[0].name}</Text>
             </>
           )}
-          {statusType === 'accept' && (
+          {orderData.system.status === 3 && (
             //Жека в'єби тернар
             <></>
           )}
@@ -77,14 +80,14 @@ export const OrderUserView = () => {
           textColor={'white'}
         />
         <View style={{width: wp(20)}} />
-        {statusType === 'new' && (
+        {orderData.system.status === 3 && (
           <ButtonView
             title={'Взяти в роботу'}
             color={COLORS.BUTTON_LIGHT_GREEN}
             textColor={'white'}
           />
         )}
-        {statusType === 'accept' && (
+        {orderData.system.status === 2 && (
           <ButtonView
             title={'Відправити на видачу'}
             color={COLORS.BUTTON_BUY_SALE_YELLOW}

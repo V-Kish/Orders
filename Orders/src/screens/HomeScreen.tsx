@@ -7,6 +7,7 @@ import {HeaderView} from '../View/HeaderView/HeaderView';
 import {ICONS} from '../constants/icons';
 import {GetOrderInfo} from "../functions/GetOrderInfo";
 import { HomeView } from '../View/HomeView/HomeView';
+import {MethodsRequest} from '../DataProvider/MethodsRequest';
 export const HomeScreen = () => {
   const dispatch = useDispatch();
   const listCurrencies = useSelector(
@@ -25,6 +26,9 @@ export const HomeScreen = () => {
     (state: reduxTypes) => state.dictionaries.ordersStatus,
   );
   const orders = useSelector((state: reduxTypes) => state.dictionaries.orders);
+  const orderDataCount = useSelector(
+    (state: reduxTypes) => state.dictionaries.orderDataCount,
+  );
   console.log('listCurrencies', listCurrencies);
   console.log('listDepartmentGroup', listDepartmentGroup);
   console.log('listDepartments', listDepartments);
@@ -36,7 +40,7 @@ export const HomeScreen = () => {
       <HeaderView
         icon={ICONS.logoSmall}
         title="Робота з замовленнями"
-        // desc={`Нових замовлень: ${}`}
+        desc={`Нових замовлень: ${orderDataCount}`}
       />
       <View style={styles.container}>
         <HomeView/>
@@ -44,9 +48,9 @@ export const HomeScreen = () => {
           onPress={() => navigator().changeNavigationStateAuth(true, dispatch)}>
           <Text>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => GetOrderInfo.getOrder(dispatch, 140)}>
-          <Text>ORDERSCREEN</Text>
-        </TouchableOpacity> */}
+        <TouchableOpacity onPress={() => GetOrderInfo.getOrders(dispatch, '1')}>
+          <Text>СОРТУВАННЯ</Text>
+        </TouchableOpacity>
       </View>
     </>
   );
