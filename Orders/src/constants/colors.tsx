@@ -11,4 +11,5 @@ export const COLORS = {
   BORDER: 'rgba(254, 212, 0, 0.502267)',
   DRAWER_BACKGROUND_GREY: 'rgba(25, 23, 12, 1)',
   BUTTON_GREEN: '#57B460',
+  HEADER_BLUE: 'rgba(47,128,237,1)'
 };

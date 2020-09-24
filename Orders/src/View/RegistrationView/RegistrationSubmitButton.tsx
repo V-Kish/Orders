@@ -3,17 +3,37 @@ import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 export const RegistrationSubmitButton = ({authSubmit}) => {
   const [title, setTitle] = useState('Увійти');
+  const [disabled, setDisabled] = useState(false)
   const handlePress = () => {
     setTitle('Авторизація...');
-    authSubmit();
+    setDisabled(true)
+    authSubmit((newTitle:string)=>{
+        setTitle(newTitle)
+        setDisabled(false)
+    });
   };
   return (
-    <View>
-      <TouchableOpacity onPress={handlePress}>
-        <Text>{title}</Text>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={handlePress} style={styles.buttonView} activeOpacity={1} disabled={disabled}>
+        <Text style={styles.buttonText}>{title}</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    container: {
+        alignItems: 'center',
+        paddingVertical: 10
+    },
+    buttonView: {
+        backgroundColor: 'rgba(33,150,83,1)',
+        width: '50%',
+        paddingVertical: 10,
+        borderRadius: 5
+    },
+    buttonText: {
+        color: 'white',
+        textAlign: 'center'
+    }
+});
