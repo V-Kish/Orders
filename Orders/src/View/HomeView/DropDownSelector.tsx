@@ -41,7 +41,9 @@ export const DropDownSelector = ({dropdown}) => {
                 <Text style={styles.text}>{item.name}</Text>
               </View>
               <View>
-                <Text style={styles.statusTextNew}>нове</Text>
+                <Text style={{...styles.statusText, ...styles.text_done}}>
+                  Виконано
+                </Text>
               </View>
             </View>
           );
@@ -64,10 +66,10 @@ const styles = StyleSheet.create({
   },
   dropDown: {
     position: 'absolute',
-    top: hp(100),
+    top: hp(80),
     right: 0,
     left: 0,
-    backgroundColor: 'rgba(0,0,0,.3)',
+    backgroundColor: 'rgba(255,255,255,0.2)',
     overflow: 'hidden',
     height: 0,
     zIndex: 999999,
@@ -97,12 +99,30 @@ const styles = StyleSheet.create({
     fontSize: hp(16),
     color: COLORS.FONT_BLACK,
   },
-  statusTextNew: {
+  statusText: {
     fontSize: hp(14),
-    color: COLORS.FONT_WHITE,
     paddingHorizontal: hp(10),
     paddingVertical: hp(5),
     borderRadius: 50,
+  },
+  text_new: {
+    color: COLORS.FONT_WHITE,
     backgroundColor: COLORS.BUTTON_GREEN,
+  },
+  text_accept: {
+    color: COLORS.FONT_WHITE,
+    backgroundColor: COLORS.HEADER_BLUE,
+  },
+  text_wait: {
+    color: COLORS.FONT_BLACK,
+    backgroundColor: COLORS.FONT_YELLOW,
+  },
+  text_reject: {
+    color: COLORS.FONT_BLACK,
+    backgroundColor: COLORS.TEXT_REJECT,
+  },
+  text_done: {
+    color: COLORS.FONT_WHITE,
+    backgroundColor: COLORS.TEXT_DONE,
   },
 });

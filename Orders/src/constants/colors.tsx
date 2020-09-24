@@ -13,5 +13,7 @@ export const COLORS = {
   BUTTON_GREEN: '#57B460',
   BUTTON_LIGHT_GREEN: '#27AE60',
   HEADER_BLUE: 'rgba(47,128,237,1)',
+  TEXT_REJECT: 'rgba(224,224,224,1)',
+  TEXT_DONE: 'rgba(130,130,130,1)',
   HEADER_RED: '#EB5757'
 };
