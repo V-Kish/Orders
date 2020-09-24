@@ -7,6 +7,8 @@ import {PhoneInfo} from '../Core/PhoneInfo';
 import {AuthBody} from '../Types';
 import {currentUser} from '../Core/CurrentUser';
 import {Dictionaries} from '../DataProvider/Dictionaries';
+import {MethodsRequest} from '../DataProvider/MethodsRequest';
+import {getOrders} from '../store/actions/Dictionaries';
 
 class Authorization {
   // Список регіонів
@@ -43,6 +45,7 @@ class Authorization {
     } catch (ex) {
       console.warn('Auth getTokenFireBase', ex);
     }
+    currentUser().saveUser();
     // load Dictionaries
     try {
       await Dictionaries.InitDictionaries(function () {
@@ -51,7 +54,17 @@ class Authorization {
     } catch (ex) {
       console.warn('Auth getTokenFireBase', ex);
     }
+    try {
+      const response = await MethodsRequest.getOrders();
+      if (response.statusCode !== 200) {
+        return;
+      }
+      dispatch(getOrders(response.data));
+    } catch (ex) {
+      console.warn('MethodsRequest getOrders', ex);
+    }
   }
+
   // Create body for fetch
   private static async createFetchBody() {
     try {

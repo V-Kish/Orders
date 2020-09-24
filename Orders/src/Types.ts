@@ -9,6 +9,7 @@ export type reduxTypes = {
     listDepartmentGroup: Array<any>;
     operationTypes: Array<any>;
     ordersStatus: Array<any>;
+    orders: Array<any>;
   };
 };
 export type AuthBody =
@@ -35,3 +36,11 @@ export type DictionariesLoadStatusType = {
   ordersStatuses: boolean;
   listDepartments: boolean;
 };
+export type Orders = {
+  pageIndex: number;
+  pageSize: number;
+  operationType: string;
+  status: number;
+  departmentId: number;
+  sQuery: string;
+}

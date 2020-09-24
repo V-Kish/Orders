@@ -3,7 +3,8 @@ import {
   LIST_CURRENCIES,
   DEPARTMENT_GROUP,
   OPERATION_TYPES,
-    LOAD_STATUS
+  LOAD_STATUS,
+  GET_ORDERS,
 } from '../types';
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   listDepartmentGroup: [],
   operationTypes: [],
   ordersStatus: [],
+  orders: [],
 };
 export const Dictionaries = (
   state = initialState,
@@ -42,6 +44,11 @@ export const Dictionaries = (
       return {
         ...state,
         ordersStatus: action.payload,
+      };
+    case GET_ORDERS:
+      return {
+        ...state,
+        orders: action.payload,
       };
     default:
       return state;
