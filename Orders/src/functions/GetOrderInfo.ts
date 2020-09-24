@@ -4,6 +4,7 @@ import {Dispatch} from 'react';
 import {editUserInfo} from '../store/actions/EditUserInfo';
 import {orderData, getOrders} from '../store/actions/Dictionaries';
 import {Orders} from '../Types';
+import {currentUser} from "../Core/CurrentUser";
 
 class GetOrderInfo {
   static async getOrder(dispatch: Dispatch<any>, selectedIdItem) {

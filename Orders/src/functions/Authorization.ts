@@ -73,6 +73,7 @@ class Authorization {
     try {
       await Dictionaries.InitDictionaries(function () {
         navigator().changeNavigationStateAuth(false, dispatch);
+        navigator().state.prevScreen.push({name: "HomeScreen", params: {data: {},key: undefined, screen: null}});
       }, dispatch);
     } catch (ex) {
       console.warn('Auth getTokenFireBase', ex);

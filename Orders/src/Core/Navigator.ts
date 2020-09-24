@@ -104,6 +104,7 @@ class NavigatorImpl {
       }
       this.navigation.dispatch(CommonActions.navigate(route));
       this.state.prevScreen.push({name, params});
+      console.log('this.state.prevScreen',this.state.prevScreen)
       return true;
     } catch (ex) {
       AppLog.log('NavigatorImpl navigate ex => ', ex);
@@ -128,12 +129,16 @@ class NavigatorImpl {
   }
 
   toGoBack() {
+    console.log('toGoBack',this.getCurrentScreen())
+
     const length = this.state.prevScreen.length;
+    console.log('toGoBack length',this.state.prevScreen)
     if (length < 2) {
       return;
     }
     this.navigate(this.state.prevScreen[this.state.prevScreen.length - 2].name);
     this.state.prevScreen.splice(length - 1, 2);
+    console.log('toGoBack',this.getCurrentScreen())
   }
 
   getCurrentScreen() {
