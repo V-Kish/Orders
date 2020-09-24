@@ -8,6 +8,7 @@ import {
   } from '../../constants/Dimensions';
 import { reduxTypes } from '../../Types';
 import { OrderStatus } from '../Components/OrderStatus'
+import { convertToUTCString, dateParse, dateTimeToDateString, dateTimeToTimeString } from '../../helpers/DateParse';
 
 export const OrderItem = ({item}) => {
     const listCurrencies = useSelector(
@@ -35,8 +36,10 @@ export const OrderItem = ({item}) => {
             </View>
         </View>
         <View style={styles.orderInfoView}>
-            <Text style={styles.orderDate}>12.42.2132</Text>
-            <Text style={styles.orderDate}>12:23:34</Text>
+            <Text style={styles.orderDate}>{dateTimeToDateString(
+                    dateParse(convertToUTCString(item.system.statusDate)))}</Text>
+            <Text style={styles.orderDate}>{dateTimeToTimeString(
+                    dateParse(convertToUTCString(item.system.statusDate)))}</Text>
             <OrderStatus type="wait"/>
         </View>
     </View>
