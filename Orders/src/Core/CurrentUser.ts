@@ -46,6 +46,7 @@ class CurrentUserImpl {
     if (typeof string !== 'undefined' || string !== false || string !== null) {
       let jsonData = JSON.parse(string);
       this.user.userToken = jsonData.userToken;
+      this.user.userId = jsonData.userId;
       AppLog.log('isUserPinCode save', this.user);
     }
   }
