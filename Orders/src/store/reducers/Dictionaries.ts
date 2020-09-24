@@ -1,8 +1,17 @@
-import {LIST_DEPARTMENTS, LIST_CURRENCIES} from '../types';
+import {
+  LIST_DEPARTMENTS,
+  LIST_CURRENCIES,
+  DEPARTMENT_GROUP,
+  OPERATION_TYPES,
+    LOAD_STATUS
+} from '../types';
 
 const initialState = {
   listDepartments: [],
   listCurrencies: [],
+  listDepartmentGroup: [],
+  operationTypes: [],
+  ordersStatus: [],
 };
 export const Dictionaries = (
   state = initialState,
@@ -15,11 +24,24 @@ export const Dictionaries = (
         listDepartments: action.payload,
       };
     case LIST_CURRENCIES:
-      console.log('LIST_CURRENCIES1',action)
-      console.log('LIST_CURRENCIES2',action.payload)
       return {
         ...state,
         listCurrencies: action.payload,
+      };
+    case DEPARTMENT_GROUP:
+      return {
+        ...state,
+        listDepartmentGroup: action.payload,
+      };
+    case OPERATION_TYPES:
+      return {
+        ...state,
+        operationTypes: action.payload,
+      };
+    case LOAD_STATUS:
+      return {
+        ...state,
+        ordersStatus: action.payload,
       };
     default:
       return state;
