@@ -6,6 +6,7 @@ import {
   LOAD_STATUS,
   GET_ORDERS,
   ORDER_DATA,
+  ORDER_DATA_COUNT,
 } from '../types';
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   ordersStatus: [],
   orders: [],
   orderData: {},
+  orderDataCount: 0,
   selectedDepartments: [],
 };
 export const Dictionaries = (
@@ -53,16 +55,30 @@ export const Dictionaries = (
         ...state,
         orders: action.payload,
       };
+    case ORDER_DATA_COUNT:
+      return {
+        ...state,
+        orderDataCount: action.payload[0].count,
+      };
     case ORDER_DATA:
-      let orderData = state.orders.Items.find((item) => item.system.orderId === action.payload);
-      orderData.detail.currencyIdCode = state.listCurrencies.find(item =>item.id === orderData.detail.currencyId).code;
-      orderData.detail.currencyToIdCode = state.listCurrencies.find(item =>item.id === orderData.detail.currencyToId).code;
-     const selectedDepartments =  state.listDepartments.filter(item =>item.id === orderData.detail.departmentId);
-      console.log('orderDataZZZZ',orderData)
+      let orderData = state.orders.Items.find(
+        (item) => item.system.orderId === action.payload,
+      );
+      orderData.detail.currencyIdCode = state.listCurrencies.find(
+        (item) => item.id === orderData.detail.currencyId,
+      ).code;
+      orderData.detail.currencyToIdCode = state.listCurrencies.find(
+        (item) => item.id === orderData.detail.currencyToId,
+      ).code;
+      const selectedDepartments = state.listDepartments.filter(
+        (item) => item.id === orderData.detail.departmentId,
+      );
+      console.log('orderDataZZZZ', orderData);
       return {
         ...state,
         orderData: orderData !== undefined ? orderData : [],
-        selectedDepartments: selectedDepartments !== undefined ? selectedDepartments : [],
+        selectedDepartments:
+          selectedDepartments !== undefined ? selectedDepartments : [],
       };
     default:
       return state;

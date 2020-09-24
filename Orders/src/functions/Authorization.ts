@@ -8,7 +8,7 @@ import {AuthBody} from '../Types';
 import {currentUser} from '../Core/CurrentUser';
 import {Dictionaries} from '../DataProvider/Dictionaries';
 import {MethodsRequest} from '../DataProvider/MethodsRequest';
-import {getOrders} from '../store/actions/Dictionaries';
+import {getOrders, getOrdersCount} from '../store/actions/Dictionaries';
 
 class Authorization {
   // Список регіонів
@@ -61,6 +61,14 @@ class Authorization {
       console.warn('Auth getTokenFireBase', ex);
     }
     currentUser().saveUser();
+    try {
+      const response = await MethodsRequest.getOrdersNumber();
+      if (response.statusCode === 200){
+        dispatch(getOrdersCount(response.result))
+      }
+    }catch (ex) {
+      console.warn('MethodsRequest.getOrdersNumber',ex)
+    }
     // load Dictionaries
     try {
       await Dictionaries.InitDictionaries(function () {
@@ -68,15 +76,6 @@ class Authorization {
       }, dispatch);
     } catch (ex) {
       console.warn('Auth getTokenFireBase', ex);
-    }
-    try {
-      const response = await MethodsRequest.getOrders();
-      if (response.statusCode !== 200) {
-        return;
-      }
-      dispatch(getOrders(response.data));
-    } catch (ex) {
-      console.warn('MethodsRequest getOrders', ex);
     }
   }
 

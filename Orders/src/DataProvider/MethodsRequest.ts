@@ -54,5 +54,15 @@ class MethodsRequest {
       body,
     );
   }
+  // -- Метод вертає кількість замовленя за статусом
+  static async getOrdersNumber(
+    body: {ordersStatus: Array<string>} = {ordersStatus:[1]},
+  ) {
+    return fetchData(
+      `rest/v1/${currentUser().userId}/${currentUser().userToken}/loyaltyProg/orders/stat`,
+      'POST',
+      body,
+    );
+  }
 }
 export {MethodsRequest};

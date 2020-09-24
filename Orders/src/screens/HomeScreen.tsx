@@ -25,6 +25,9 @@ export const HomeScreen = () => {
     (state: reduxTypes) => state.dictionaries.ordersStatus,
   );
   const orders = useSelector((state: reduxTypes) => state.dictionaries.orders);
+  const orderDataCount = useSelector(
+    (state: reduxTypes) => state.dictionaries.orderDataCount,
+  );
   console.log('listCurrencies', listCurrencies);
   console.log('listDepartmentGroup', listDepartmentGroup);
   console.log('listDepartments', listDepartments);
@@ -36,14 +39,14 @@ export const HomeScreen = () => {
       <HeaderView
         icon={ICONS.logoSmall}
         title="Робота з замовленнями"
-        // desc={`Нових замовлень: ${}`}
+        desc={`Нових замовлень: ${orderDataCount}`}
       />
       <View style={styles.container}>
         <TouchableOpacity
           onPress={() => navigator().changeNavigationStateAuth(true, dispatch)}>
           <Text>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => GetOrderInfo.getOrders(dispatch,{})}>
+        <TouchableOpacity onPress={() => GetOrderInfo.getOrders(dispatch, {})}>
           <Text>СОРТУВАННЯ</Text>
         </TouchableOpacity>
       </View>
