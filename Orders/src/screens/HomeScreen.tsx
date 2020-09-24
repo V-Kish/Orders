@@ -6,6 +6,7 @@ import {reduxTypes} from '../Types';
 import {HeaderView} from '../View/HeaderView/HeaderView';
 import {ICONS} from '../constants/icons';
 import {GetOrderInfo} from "../functions/GetOrderInfo";
+import { HomeView } from '../View/HomeView/HomeView';
 export const HomeScreen = () => {
   const dispatch = useDispatch();
   const listCurrencies = useSelector(
@@ -38,13 +39,14 @@ export const HomeScreen = () => {
         // desc={`Нових замовлень: ${}`}
       />
       <View style={styles.container}>
-        <TouchableOpacity
+        <HomeView/>
+        {/* <TouchableOpacity
           onPress={() => navigator().changeNavigationStateAuth(true, dispatch)}>
           <Text>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => GetOrderInfo.getOrder(dispatch, 140)}>
           <Text>ORDERSCREEN</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </>
   );

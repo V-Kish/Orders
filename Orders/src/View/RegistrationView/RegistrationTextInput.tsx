@@ -6,6 +6,10 @@ import {navigator} from "../../Core/Navigator";
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { ICONS } from '../../constants/icons';
 import { COLORS } from '../../constants/colors';
+import {
+    mockupHeightToDP as hp,
+    mockupWidthToDP as wp,
+  } from '../../constants/Dimensions';
 
 export const RegistrationTextInput = ({title, placeholder = '', value, setValue, secureTextEntry, isError = false}) => {
     const [secure, setSecure] = useState(secureTextEntry)
@@ -47,11 +51,11 @@ export const RegistrationTextInput = ({title, placeholder = '', value, setValue,
 
 const styles = StyleSheet.create({
     container:{
-        paddingVertical: 10,
+        paddingVertical: hp(10),
         justifyContent: 'center'
     },
     title: {
-        fontSize: 12,
+        fontSize: hp(12),
         color: 'hsl(0,0%,30%)',
     },
     inputView: {
@@ -75,7 +79,7 @@ const styles = StyleSheet.create({
 
     },
     secureEye: {
-        width: 20,
-        height: 20
+        width: hp(20),
+        height: hp(20)
     }
 })
