@@ -4,7 +4,6 @@ import {Dispatch} from 'react';
 import {editUserInfo} from '../store/actions/EditUserInfo';
 import {orderData, getOrders} from '../store/actions/Dictionaries';
 import {Orders} from '../Types';
-import {currentUser} from "../Core/CurrentUser";
 
 class GetOrderInfo {
   static async getOrder(dispatch: Dispatch<any>, selectedIdItem) {
@@ -34,6 +33,7 @@ class GetOrderInfo {
       sQuery: '',
     },
   ) {
+      console.log('start 2');
     let bodyRequest = body;
     bodyRequest.sQuery = searchText;
     bodyRequest.status = status;
@@ -42,6 +42,7 @@ class GetOrderInfo {
       if (response.statusCode === 200) {
         dispatch(getOrders(response.data));
       }
+      console.log('responseMethodsRequest',response)
     } catch (ex) {
       console.warn('GetOrderInfo getOrder', ex);
     }
