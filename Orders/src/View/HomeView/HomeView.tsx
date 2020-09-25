@@ -17,22 +17,19 @@ export const HomeView = () => {
     const preparedList = departmentList.map(d=>{
         return {id: d.id, text: d.name}
     })
-    const [selectedDepartment, setSelectedDepartment] = useState(preparedList[0])
-    
+
     const switchModalVisible = () => {
         setModalVisible(!modalVisible)
     }
   return (
     <View style={styles.container}>
-      <Button title="on" onPress={switchModalVisible}/>
+      {/* <Button title="on" onPress={switchModalVisible}/> */}
       <CustomModal 
         type="LIST"
         modalVisible={modalVisible}
         changeModalVisible={switchModalVisible}
         title="Зміна відділення видачі"
         list={preparedList}
-        listSelectedItem={selectedDepartment}
-        setListSelectedItem={setSelectedDepartment}
       />
       <SearchView/>
       <HomeListView />

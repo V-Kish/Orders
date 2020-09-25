@@ -13,9 +13,7 @@ export const CustomModal = ({
   title = "Alert", 
   content = "",
   inputs = [],
-  list = [],
-  listSelectedItem,
-  setListSelectedItem = (item) => {}
+  list = []
 }) => {
   let CurrentModal = () => <></>
   switch(type){
@@ -48,8 +46,6 @@ export const CustomModal = ({
             confirmAction={changeModalVisible}
             title={title}
             list={list}
-            selectedItem={listSelectedItem}
-            setSelectedItem={setListSelectedItem}
         />;
         break
     default: return null

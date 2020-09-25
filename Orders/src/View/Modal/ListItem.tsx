@@ -14,15 +14,19 @@ import {
 import {COLORS} from '../../constants/colors';
 import { OrderStatus } from '../Components/OrderStatus';
 import { statusToType } from '../../helpers/StatusToType';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectedDepartment } from '../../store/actions/EditUserInfo';
 
 export const ListItem = ({
     item = {id: 0, text: ''}, 
-    changeActiveItem = (item) => {}, 
-    activeItem = {id: -1}
 }) => {
-    const isActive = activeItem.id === item.id
+    const dispatch = useDispatch()
+    const selectedDepartmentSelector = useSelector(
+        (state: reduxTypes) => state.ditUser.selectedDepartment,
+    );
+    const isActive = selectedDepartmentSelector.id === item.id
     const handlePress = () => {
-        changeActiveItem(item)
+        dispatch(selectedDepartment(item))
     }
     return (
         <TouchableOpacity
