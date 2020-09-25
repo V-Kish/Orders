@@ -8,6 +8,8 @@ import {
 import { COLORS } from '../../constants/colors';
 import {ListViewScroll} from './ListViewScroll'
 import { ICONS } from '../../constants/icons';
+import { useSelector } from 'react-redux';
+import { reduxTypes } from '../../Types';
 
 export const ListModal = ({
     title = "",
@@ -16,18 +18,26 @@ export const ListModal = ({
     confirmAction = (item) => {},
     list = []
 }) => {
-    const [selectedItem, setSelectedItem] = useState(null)
+    const listDepartments = useSelector(
+      (state: reduxTypes) => state.dictionaries.listDepartments,
+    );
+    const selectedDepartments = useSelector(
+      (state: reduxTypes) => state.dictionaries.selectedDepartments,
+    );
+    const [selectedItem, setSelectedItem] = useState(selectedDepartments)
     const [scrollView, setScrollView] = useState()
     const confirmFunc = () => {
-      if(selectedItem===null){
-        closeModal()
-      }
       // scrollToIndex(selectedItem.id)
         confirmAction(selectedItem)
     }
     const scrollToIndex = (index) => {
-      scrollView.scrollTo({y: index*10, animated: true});
+      scrollView.scrollTo({y: index*20, animated: true});
     }
+    listDepartments.forEach((d,i)=>{
+      if(d.id === selectedDepartments.id){
+        scrollToIndex(i)
+      }
+    })
     return <View style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.modalHeaderView}>
