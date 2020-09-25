@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, Animated, ScrollView, Image} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image} from 'react-native';
 import { CustomModalButtons } from './CustomModalButtons';
 import {
     mockupHeightToDP as hp,
@@ -8,7 +8,6 @@ import {
 import { COLORS } from '../../constants/colors';
 import {ListViewScroll} from './ListViewScroll'
 import { ICONS } from '../../constants/icons';
-import {ListItem} from "./ListItem";
 
 export const ListModal = ({
     title = "",
@@ -17,18 +16,14 @@ export const ListModal = ({
     confirmAction = (item) => {},
     list = []
 }) => {
-    let scrollListReftop = React.createRef();
-    let _ssnodes = React.createRef();
-
     const [selectedItem, setSelectedItem] = useState()
+    const [scrollView, setScrollView] = useState()
     const confirmFunc = () => {
-        scrollListReftop.getNode().scrollTo({ x: 500, animated: true });
-        // confirmAction(selectedItem)
+      // scrollToIndex(selectedItem.id)
+        confirmAction(selectedItem)
     }
-   function scrollToElement (indexOf){
-        const node = _ssnodes.get(indexOf);
-        const position = findNodeHandle(node);
-       scrollListReftop.scrollTo({ x: 0, y: position, animated: true });
+    const scrollToIndex = (index) => {
+      scrollView.scrollTo({y: index*10, animated: true});
     }
     return <View style={styles.container}>
             <View style={styles.content}>
@@ -42,12 +37,9 @@ export const ListModal = ({
                     <Text style={styles.modalHeaderText}>{title}</Text>
                 </View>
                 <ScrollView  ref={ref => {
-                    scrollListReftop = ref;
+                    setScrollView(ref);
                 }}>
-                    {list && list.map((item, i)=>{
-                        return <ListItem key={i} ref={ref => _ssnodes.set(idx, ref)} item={item} setItem={setSelectedItem}/>
-                    })}
-                    {/*<ListViewScroll list={list} setSelectedItem={setSelectedItem}/>*/}
+                    <ListViewScroll list={list} setSelectedItem={setSelectedItem}/>
                 </ScrollView>
             </View>
             <View style={styles.buttonsView}>

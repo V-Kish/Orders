@@ -18,8 +18,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectedDepartment } from '../../store/actions/EditUserInfo';
 
 export const ListItem = ({
-    item = {id: 0, text: ''}, 
-    setItem = (item) => {}
+    item = {id: 0, text: ''},
+    setItem = (item) => {},
 }) => {
     const dispatch = useDispatch()
     const selectedDepartmentSelector = useSelector(
