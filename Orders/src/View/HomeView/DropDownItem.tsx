@@ -5,7 +5,7 @@ import {
   Text,
   Image,
   Dimensions,
-  Animated,
+  TouchableOpacity
 } from 'react-native';
 import {HomeListView} from './HomeListView';
 import {SearchContainer} from './SearchContainer';
@@ -18,20 +18,27 @@ import {COLORS} from '../../constants/colors';
 import { OrderStatus } from '../Components/OrderStatus';
 import { statusToType } from '../../helpers/StatusToType';
 
-export const DropDownItem = ({item}) => {
+export const DropDownItem = ({item, changeStatus, activeStatus}) => {
+    const isActive = activeStatus === item
+    const handlePress = () => {
+        changeStatus(item)
+    }
     return (
-        <View key={item.id} style={styles.container}>
-        <View style={styles.wrapCircle}>
-            <View
-            style={[styles.circle, {borderColor: COLORS.HEADER_BLUE}]}>
-            <View style={styles.circleActive} />
+        <TouchableOpacity
+         style={styles.container}
+         onPress={changeStatus}
+        >
+            <View style={styles.wrapCircle}>
+                <View
+                style={[styles.circle, {borderColor: isActive ? COLORS.STATUS_BLUE : COLORS.STATUS_GRAY}]}>
+                    <View style={isActive ? styles.circleActive : styles.circleDisable} />
+                </View>
             </View>
-        </View>
-        <View style={styles.wrapText}>
-            <Text style={styles.text}>Тільки статус</Text>
-        </View>
+            <View style={styles.wrapText}>
+                <Text style={styles.text}>Тільки статус</Text>
+            </View>
             <OrderStatus type={statusToType(item.id)}/>
-        </View>
+        </TouchableOpacity>
     );
 };
 

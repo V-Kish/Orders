@@ -23,7 +23,12 @@ export const DropDownSelector = ({dropdown}) => {
   const ordersStatus = useSelector(
     (state: reduxTypes) => state.dictionaries.ordersStatus,
   );
-  console.log('ordersStatus',ordersStatus)
+  const [currentStatus, setCurrentStatus] = useState(ordersStatus ? ordersStatus[0] : null)
+
+  const handleItemChange = (item:any) => {
+    setCurrentStatus(item)
+    console.log('ordersStatus', ordersStatus)
+  }
   return (
     <Animated.View
       style={
@@ -34,7 +39,12 @@ export const DropDownSelector = ({dropdown}) => {
       <View style={styles.containerList}>
         {ordersStatus &&
           ordersStatus.map((item) => {
-            return (<DropDownItem key={item.id} item={item}/>);
+            return (<DropDownItem 
+                key={item.id} 
+                item={item} 
+                changeStatus={handleItemChange} 
+                activeStatus={currentStatus}
+            />);
           })}
       </View>
     </Animated.View>
