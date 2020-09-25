@@ -10,7 +10,7 @@ import {reduxTypes} from '../../../Types';
 import {OrderSystemInfo} from './OrderSystemInfo';
 import {GetOrderInfo} from '../../../functions/GetOrderInfo';
 import {OrderMainInfo} from './OrderMainInfo';
-import {statusToType} from '../../../helpers/StatusToType';
+import {recalculateSumResult, statusToType} from '../../../helpers/StatusToType';
 
 export const OrderItem = ({item}) => {
   const dispatch = useDispatch();
@@ -24,6 +24,8 @@ export const OrderItem = ({item}) => {
     (currency) => currency.id === item.detail.currencyToId,
   ).code;
   item.system.type = statusToType(item.system.status);
+  item.detail.sumTo = recalculateSumResult(item);
+  console.log('itemrecalculateSumResult',item)
   const handleItemPress = () => {
     GetOrderInfo.getOrder(dispatch, item);
   };

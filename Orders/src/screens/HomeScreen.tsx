@@ -6,7 +6,6 @@ import {HeaderView} from '../View/HeaderView/HeaderView';
 import {ICONS} from '../constants/icons';
 import { HomeView } from '../View/HomeView/HomeView';
 export const HomeScreen = () => {
-  const orders = useSelector((state: reduxTypes) => state.dictionaries.orders);
   const orderDataCount = useSelector(
     (state: reduxTypes) => state.dictionaries.orderDataCount,
   );
