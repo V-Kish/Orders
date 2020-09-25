@@ -2,35 +2,27 @@ import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
-  Text,
-  Image,
   ActivityIndicator,
-  Dimensions,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {OrderItem} from './OrderItem/OrderItem';
 import {
   mockupHeightToDP as hp,
-  mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
 import {reduxTypes} from '../../Types';
 import {GetOrderInfo} from '../../functions/GetOrderInfo';
-import {Paginate} from '../../functions/Pagination';
 import {COLORS} from '../../constants/colors';
-import {convertToUTCString, dateParse} from "../../helpers/DateParse";
+import {paginationMainList} from '../../store/actions/EditUserInfo';
 export const HomeListView = () => {
   const dispatch = useDispatch();
-  const [pagination, setPagination] = useState({
-    pageIndex: 1,
-    pageSize: 20,
-    operationType: 'all',
-    departmentId: -1,
-  });
   const [statePreloader, setStatePreloader] = useState(true);
   const orders = useSelector((state: reduxTypes) => state.dictionaries.orders);
   const searchParam = useSelector(
     (state: reduxTypes) => state.ditUser.searchParam,
+  );
+  const paginationBody = useSelector(
+    (state: reduxTypes) => state.ditUser.paginationBody,
   );
   const loadDataMore = ({layoutMeasurement, contentOffset, contentSize}) => {
     const paddingToBottom = 500;
@@ -40,33 +32,33 @@ export const HomeListView = () => {
     );
   };
   async function loadMorePagination() {
-    console.log('orders',orders)
-    console.log('orders orders.PageIndex',orders.PageIndex)
-    console.log('orders orders.PageSize',orders.PageSize)
-    console.log('orders orders.TotalItems',orders.TotalItems)
-    console.log('orders orders. result',orders.PageIndex * orders.PageSize < orders.TotalItems)
-    if (!(orders.PageIndex * orders.PageSize < orders.TotalItems)){
-      console.log('loadMorePagination 0')
-      return
+    if (!(orders.PageIndex * orders.PageSize < orders.TotalItems)) {
+      return;
     }
-    console.log('loadMorePagination 1')
     setStatePreloader(false);
-    setPagination((prevState) => ({
-      ...prevState,
-      pageSize: prevState.pageSize + 10,
-    }));
-    if (pagination.pageSize >= 100) {
-      setPagination((prevState) => ({
-        ...prevState,
-        pageIndex: prevState.pageIndex + 1,
-        pageSize: 10,
-      }));
+    dispatch(
+      paginationMainList({
+        pageIndex: 1,
+        pageSize: paginationBody.pageSize + 10,
+        operationType: 'all',
+        departmentId: -1,
+      }),
+    );
+    if (paginationBody.pageSize >= 100) {
+      dispatch(
+        paginationMainList({
+          pageIndex: paginationBody.pageIndex + 1,
+          pageSize: 10,
+          operationType: 'all',
+          departmentId: -1,
+        }),
+      );
     }
     let body = {};
-    body.pageIndex = pagination.pageIndex;
-    body.pageSize = pagination.pageSize;
-    body.operationType = pagination.operationType;
-    body.departmentId = pagination.departmentId;
+    body.pageIndex = paginationBody.pageIndex;
+    body.pageSize = paginationBody.pageSize;
+    body.operationType = paginationBody.operationType;
+    body.departmentId = paginationBody.departmentId;
     body.status = searchParam.status.id;
     body.sQuery = searchParam.searchText;
     await GetOrderInfo.getOrders(
@@ -79,7 +71,6 @@ export const HomeListView = () => {
       setStatePreloader(true);
     }, 200);
   }
-  console.log('orders',orders)
   return (
     <ScrollView
       onScroll={async ({nativeEvent}) => {
@@ -89,8 +80,7 @@ export const HomeListView = () => {
       }}>
       <View style={styles.container}>
         {orders.Items &&
-          orders.Items.map((item: any,index) => {
-            // return <Text style={{marginBottom:200}}>{index}</Text>
+          orders.Items.map((item: any) => {
             return <OrderItem key={item.system.orderNum} item={item} />;
           })}
         {!statePreloader && (
@@ -112,7 +102,6 @@ const styles = StyleSheet.create({
     height: hp(100),
     backgroundColor: 'rgba(255,255,255,0.5)',
     justifyContent: 'center',
-    alignItems: 'center',
     alignItems: 'center',
     zIndex: 999,
   },

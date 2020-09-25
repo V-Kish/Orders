@@ -1,4 +1,4 @@
-import {EDIT_USER_INFO, SELECTED_DEPARTMENT, SEARCH_PARAM} from '../types';
+import {EDIT_USER_INFO, SELECTED_DEPARTMENT, SEARCH_PARAM,PAGINATION} from '../types';
 
 export const editUserInfo = (value) => {
   return {
@@ -15,6 +15,12 @@ export const searchParam = (value) => {
 export const selectedDepartment = (value) => {
   return {
     type: SELECTED_DEPARTMENT,
+    payload: value,
+  };
+};
+export const paginationMainList = (value) => {
+  return {
+    type: PAGINATION,
     payload: value,
   };
 };
