@@ -41,9 +41,12 @@ const styles = StyleSheet.create({
   },
   modalHeaderView: {
     width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start'
   },
   modalHeaderText: {
-      fontSize: wp(32),
+      fontSize: wp(20),
       lineHeight: 28,
       paddingBottom: hp(5),
       fontWeight: 'bold'
@@ -52,7 +55,7 @@ const styles = StyleSheet.create({
 
   },
   modalContentText: {
-      fontSize: wp(24),
+      fontSize: wp(18),
       lineHeight: 20,
       color: COLORS.STATUS_GRAY_DARK
   },
