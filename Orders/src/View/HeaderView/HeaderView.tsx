@@ -12,16 +12,26 @@ export const HeaderView = ({
   desc,
   color = COLORS.HEADER_BLUE,
   counter = 0,
+  ordersSettings = false,
+  onPress = false,
 }) => {
   return (
     <View style={{...styles.container, backgroundColor: color}}>
       <View style={styles.imageView}>
-        <Image source={icon} style={styles.image} />
+        <TouchableOpacity onPress={() => onPress()}>
+          <Image source={icon} style={styles.image} />
+        </TouchableOpacity>
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={ordersSettings ? styles.titleOrder : styles.title}>
+          {title}
+        </Text>
         <View style={styles.wrap}>
-          {desc !== undefined && <Text style={styles.desc}>{desc}</Text>}
+          {desc !== undefined && (
+            <Text style={ordersSettings ? styles.descOrder : styles.desc}>
+              {desc}
+            </Text>
+          )}
           {counter !== 0 && <Text style={styles.count}>{counter}</Text>}
         </View>
       </View>
@@ -57,6 +67,16 @@ const styles = StyleSheet.create({
     fontSize: wp(20),
     color: 'white',
     fontWeight: 'bold',
+  },
+  titleOrder: {
+    fontSize: wp(18),
+    color: 'white',
+    marginLeft: wp(15),
+  },
+  descOrder: {
+    fontSize: hp(20),
+    color: 'white',
+    marginLeft: wp(15),
   },
   wrap: {
     flexDirection: 'row',
