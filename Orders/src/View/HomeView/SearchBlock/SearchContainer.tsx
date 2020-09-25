@@ -15,7 +15,7 @@ import {useDispatch} from 'react-redux';
 import {ICONS} from "../../../constants/icons";
 
 export const SearchContainer = ({
-  changeDropDownVisible, 
+  changeDropDownVisible,
   dropdown,
   changeCurrentText,
 }) => {
@@ -53,12 +53,14 @@ export const SearchContainer = ({
 
 const styles = StyleSheet.create({
   container: {
-    // position: 'relative'
+     position: 'absolute',
     height:hp(60),
+    zIndex:999,
+    width:'100%',
     justifyContent:'center',
-    paddingHorizontal:wp(5),
-    marginHorizontal: hp(10),
-    marginVertical: hp(5),
+     paddingHorizontal:wp(5),
+    marginLeft: hp(10),
+    marginTop: hp(5),
     shadowColor: 'rgba(0,0,0,0)',
     shadowOffset: {
       width: 0,

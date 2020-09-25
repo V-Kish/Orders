@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: hp(20),
     marginBottom: hp(30),
+      zIndex:99999,
   },
   containerList: {
     //backgroundColor: 'red',

@@ -19,9 +19,9 @@ import { DropDownItem } from './DropDownItem';
 import { GetOrderInfo } from '../../../functions/GetOrderInfo';
 
 export const DropDownSelector = ({
-  dropdown, 
-  changeDropDownVisible, 
-  changeItemStatus, 
+  dropdown,
+  changeDropDownVisible,
+  changeItemStatus,
   currentStatus,
   defaultStatus,
 }) => {
@@ -37,18 +37,18 @@ export const DropDownSelector = ({
           : styles.dropDown
       }>
       <View style={styles.containerList}>
-        <DropDownItem 
-            item={defaultStatus} 
-            changeStatus={changeItemStatus} 
+        <DropDownItem
+            item={defaultStatus}
+            changeStatus={changeItemStatus}
             activeStatus={currentStatus}
             text="Заявки всіх статусів"
         />
         {ordersStatus &&
           ordersStatus.map((item) => {
-            return (<DropDownItem 
-                key={item.id} 
-                item={item} 
-                changeStatus={changeItemStatus} 
+            return (<DropDownItem
+                key={item.id}
+                item={item}
+                changeStatus={changeItemStatus}
                 activeStatus={currentStatus}
             />);
           })}
@@ -64,8 +64,7 @@ const styles = StyleSheet.create({
     marginBottom: hp(30),
   },
   containerList: {
-    //backgroundColor: 'red',
-    backgroundColor: 'rgba(255,255,255,1)',
+     backgroundColor: 'rgba(255,255,255,1)',
     paddingTop:hp(20),
   },
   wrapCircle: {
@@ -76,13 +75,13 @@ const styles = StyleSheet.create({
   },
   dropDown: {
     position: 'absolute',
-    top: hp(70),
+    top: hp(60),
     right: 0,
     left: 0,
     backgroundColor: 'rgba(255,255,255,0.5)',
     overflow: 'hidden',
     height: 0,
-    zIndex: 999999,
+    zIndex: 9999999,
   },
   dropDownShowed: {
     height: Dimensions.get('screen').height,

@@ -94,7 +94,6 @@ export const HomeView = () => {
   }
   return (
     <>
-      <SearchView />
       <ScrollView
         contentContainerStyle={styles.scrollView}
         refreshControl={
@@ -124,6 +123,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,1)',
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex:1
   },
   preloader: {
     width: '100%',

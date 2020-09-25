@@ -46,7 +46,8 @@ export const OrderItem = ({item}) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    padding: wp(5),
+    paddingVertical: wp(5),
+    paddingRight:wp(10),
     backgroundColor: 'white',
     shadowColor: '#000',
     shadowOffset: {

@@ -13,6 +13,7 @@ import {
 import {MethodsRequest} from './MethodsRequest';
 import {GetOrderInfo} from '../functions/GetOrderInfo';
 import {navigator} from '../Core/Navigator';
+import {PreloaderMain} from "../store/actions/AppStart";
 
 class Dictionaries {
   private _onDictionariesLoad: () => void;
@@ -122,6 +123,7 @@ class Dictionaries {
       console.log('_loadDepartments', response);
       if (response.statusCode !== 200) {
         await currentUser().logout();
+        dispatch(PreloaderMain(false));
         return;
       }
       dispatch(ListDepartments(response.data));
@@ -130,6 +132,7 @@ class Dictionaries {
     } catch (ex) {
       AppLog.error('_loadDepartments', ex);
       await currentUser().logout();
+      dispatch(PreloaderMain(false));
     }
   }
   // Заповнили список валют
@@ -140,6 +143,7 @@ class Dictionaries {
       console.log('_loadCurrencies', response);
       if (response.statusCode !== 200) {
         await currentUser().logout();
+        dispatch(PreloaderMain(false));
         return;
       }
       dispatch(listCurrencies(response.data));
@@ -148,6 +152,7 @@ class Dictionaries {
     } catch (ex) {
       AppLog.error('_loadCurrencies', ex);
       await currentUser().logout();
+      dispatch(PreloaderMain(false));
     }
   }
   // групи відділень
@@ -158,6 +163,7 @@ class Dictionaries {
       console.log('_loadDepartmentsGroups', response);
       if (response.statusCode !== 200) {
         await currentUser().logout();
+        dispatch(PreloaderMain(false));
         return;
       }
       dispatch(loadDepartmentsGroups(response.data));
@@ -166,6 +172,7 @@ class Dictionaries {
     } catch (ex) {
       AppLog.error('_loadDepartmentsGroups', ex);
       await currentUser().logout();
+      dispatch(PreloaderMain(false));
     }
   }
   // Типи операцій
@@ -176,6 +183,7 @@ class Dictionaries {
       console.log('_loadTypesOperation', response);
       if (response.statusCode !== 200) {
         await currentUser().logout();
+        dispatch(PreloaderMain(false));
         return;
       }
       dispatch(loadOperationTypes(response.data));
@@ -184,6 +192,7 @@ class Dictionaries {
     } catch (ex) {
       AppLog.error('_loadTypesOperation', ex);
       await currentUser().logout();
+      dispatch(PreloaderMain(false));
     }
   }
   // Статуси заявок
@@ -194,6 +203,7 @@ class Dictionaries {
       console.log('_LoadOrdersStatus', response);
       if (response.statusCode !== 200) {
         await currentUser().logout();
+        dispatch(PreloaderMain(false));
         return;
       }
       dispatch(loadOrdersStatus(response.result));
@@ -202,6 +212,7 @@ class Dictionaries {
     } catch (ex) {
       AppLog.error('_LoadOrdersStatus', ex);
       await currentUser().logout();
+      dispatch(PreloaderMain(false));
     }
   } // Загрузити замовлення
   static async _getOrders(dispatch) {
@@ -221,6 +232,7 @@ class Dictionaries {
       }
       if (response.statusCode !== 200) {
         await currentUser().logout();
+        dispatch(PreloaderMain(false));
         return;
       }
     } catch (ex) {

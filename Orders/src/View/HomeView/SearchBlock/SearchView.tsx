@@ -8,7 +8,8 @@ import {
   paginationMainList,
   searchParam,
 } from '../../../store/actions/EditUserInfo';
-import { reduxTypes } from '../../../Types';
+import {reduxTypes} from '../../../Types';
+import {mockupHeightToDP as hp} from '../../../constants/Dimensions';
 
 export const SearchView = () => {
   const dispatch = useDispatch();
@@ -60,5 +61,9 @@ export const SearchView = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    height: hp(60),
+    marginBottom: hp(5),
+    paddingHorizontal: hp(10),
+  },
 });

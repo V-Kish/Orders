@@ -5,6 +5,7 @@ import {reduxTypes} from '../Types';
 import {HeaderView} from '../View/HeaderView/HeaderView';
 import {ICONS} from '../constants/icons';
 import {HomeView} from '../View/HomeView/HomeView';
+import {SearchView} from '../View/HomeView/SearchBlock/SearchView';
 export const HomeScreen = () => {
   const orderDataCount = useSelector(
     (state: reduxTypes) => state.dictionaries.orderDataCount,
@@ -19,6 +20,7 @@ export const HomeScreen = () => {
         counter={`${orderDataCount}`}
       />
       <View style={styles.container}>
+        <SearchView />
         <HomeView />
       </View>
     </SafeAreaView>
