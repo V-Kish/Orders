@@ -9,7 +9,8 @@ const types = ["ALERT", "CONFIRM", "FORM", "LIST" ]
 export const CustomModal = ({
   type = types[0], 
   modalVisible = false, 
-  changeModalVisible =() => {}, 
+  changeModalVisible,
+  confirmAction = ()=>{},
   title = "Alert", 
   content = "",
   inputs = [],
@@ -27,7 +28,7 @@ export const CustomModal = ({
       case types[1]://CONFIRM
         CurrentModal = () => <ConfirmModal 
             closeModal={changeModalVisible}
-            confirmAction={changeModalVisible}
+            confirmAction={confirmAction}
             title={title}
             content={content}
         />;
@@ -35,15 +36,15 @@ export const CustomModal = ({
       case types[2]://FORM
         CurrentModal = () => <FormModal 
             closeModal={changeModalVisible}
-            confirmAction={changeModalVisible}
+            confirmAction={confirmAction}
             title={title}
             inputs={inputs}
         />;
         break
-      case types[3]://FORM
+      case types[3]://LIST
         CurrentModal = () => <ListModal 
             closeModal={changeModalVisible}
-            confirmAction={changeModalVisible}
+            confirmAction={confirmAction}
             title={title}
             list={list}
         />;

@@ -72,7 +72,7 @@ export const Dictionaries = (
     case ORDER_DATA:
       let orderData = action.payload;
       console.log('orderData', orderData);
-      const selectedDepartments = state.listDepartments.filter(
+      const selectedDepartments = state.listDepartments.find(
         (item) => item.id === orderData.detail.departmentId,
       );
       console.log('orderDataZZZZ', orderData);
