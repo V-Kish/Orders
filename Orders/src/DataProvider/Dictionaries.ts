@@ -190,7 +190,7 @@ class Dictionaries {
   static async _LoadOrdersStatus(dispatch) {
     this._ordersStatusesStatus = false;
     try {
-      const response = await Dictionaries.operationTypes();
+      const response = await Dictionaries.ordersStatus();
       console.log('_LoadOrdersStatus', response);
       if (response.statusCode !== 200) {
         await currentUser().logout();
