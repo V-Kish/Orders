@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image} from 'react-native';
+import {StyleSheet, Text, View, Animated, ScrollView, Image} from 'react-native';
 import { CustomModalButtons } from './CustomModalButtons';
 import {
     mockupHeightToDP as hp,
@@ -17,10 +17,11 @@ export const ListModal = ({
     list = []
 }) => {
     let scrollListReftop = React.createRef();
-    //  scrollListReftop.getNode().scrollTo({y: 0, animated: true});
+
     const [selectedItem, setSelectedItem] = useState()
     const confirmFunc = () => {
-        confirmAction(selectedItem)
+        scrollListReftop.getNode().scrollTo({ x: 500, animated: true });
+        // confirmAction(selectedItem)
     }
     return <View style={styles.container}>
             <View style={styles.content}>
@@ -33,11 +34,11 @@ export const ListModal = ({
                     </View>
                     <Text style={styles.modalHeaderText}>{title}</Text>
                 </View>
-                <ScrollView  ref={ref => {
+                <Animated.ScrollView  ref={ref => {
                     scrollListReftop = ref;
                 }}>
                     <ListViewScroll list={list} setSelectedItem={setSelectedItem}/>
-                </ScrollView>
+                </Animated.ScrollView>
             </View>
             <View style={styles.buttonsView}>
                 <CustomModalButtons
