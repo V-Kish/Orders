@@ -1,18 +1,18 @@
 import {UserDataProvider} from '../DataProvider/UserDataProvider';
-import {Alert} from 'react-native';
 import {navigator} from '../Core/Navigator';
 import {Dispatch} from 'redux';
-import {AppLog} from '../Common/AppLog';
 import {PhoneInfo} from '../Core/PhoneInfo';
 import {AuthBody} from '../Types';
 import {currentUser} from '../Core/CurrentUser';
 import {Dictionaries} from '../DataProvider/Dictionaries';
 import {MethodsRequest} from '../DataProvider/MethodsRequest';
-import {getOrders, getOrdersCount} from '../store/actions/Dictionaries';
+import {getOrdersCount} from '../store/actions/Dictionaries';
+import {PreloaderMain} from '../store/actions/AppStart';
 
 class Authorization {
   // Список регіонів
   static async authorizationUser(dispatch: Dispatch<any>, userData: AuthBody) {
+    dispatch(PreloaderMain(true));
     // get userToken
     const body: AuthBody = userData;
     // @ts-ignore
@@ -28,16 +28,19 @@ class Authorization {
       ) {
         // @ts-ignore
         navigator().navigate('ErrorScreen');
+        dispatch(PreloaderMain(false));
         return;
       }
       if (authorization.statusCode === 403) {
         alert(authorization.data.message);
         navigator().navigate('ErrorScreen');
+        dispatch(PreloaderMain(false));
         return;
       }
       if (authorization.statusCode !== 200) {
         // @ts-ignore
         alert(authorization.data.message);
+        dispatch(PreloaderMain(false));
         return false;
       }
       // save user token
@@ -45,9 +48,8 @@ class Authorization {
       currentUser().userId = authorization.data.userId;
       console.log('authorization body', body);
     } catch (ex) {
-      alert('ERROR 3');
+      dispatch(PreloaderMain(false));
       return;
-      AppLog.error('Authorization authorizationUser', ex);
     }
     // send firebase token to server
     try {
@@ -58,24 +60,31 @@ class Authorization {
         );
       });
     } catch (ex) {
+      dispatch(PreloaderMain(false));
       console.warn('Auth getTokenFireBase', ex);
     }
     currentUser().saveUser();
     try {
       const response = await MethodsRequest.getOrdersNumber();
-      if (response.statusCode === 200){
-        dispatch(getOrdersCount(response.result))
+      if (response.statusCode === 200) {
+        dispatch(getOrdersCount(response.result));
       }
-    }catch (ex) {
-      console.warn('MethodsRequest.getOrdersNumber',ex)
+    } catch (ex) {
+      dispatch(PreloaderMain(false));
+      console.warn('MethodsRequest.getOrdersNumber', ex);
     }
     // load Dictionaries
     try {
       await Dictionaries.InitDictionaries(function () {
         navigator().changeNavigationStateAuth(false, dispatch);
-        navigator().state.prevScreen.push({name: "HomeScreen", params: {data: {},key: undefined, screen: null}});
+        navigator().state.prevScreen.push({
+          name: 'HomeScreen',
+          params: {data: {}, key: undefined, screen: null},
+        });
+        dispatch(PreloaderMain(false));
       }, dispatch);
     } catch (ex) {
+      dispatch(PreloaderMain(false));
       console.warn('Auth getTokenFireBase', ex);
     }
   }

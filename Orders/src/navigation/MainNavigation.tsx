@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {MainStack} from './MainStack';
 import {AuthStack} from './AuthStack';
-import {useDispatch, useSelector} from 'react-redux';
+import {Provider, useDispatch, useSelector} from 'react-redux';
 import {reduxTypes} from '../Types';
 import {NavigationContainer} from '@react-navigation/native';
 import messaging from '@react-native-firebase/messaging';
@@ -10,6 +10,8 @@ import {currentUser} from '../Core/CurrentUser';
 import {Dictionaries} from '../DataProvider/Dictionaries';
 import {MethodsRequest} from '../DataProvider/MethodsRequest';
 import {getOrdersCount} from '../store/actions/Dictionaries';
+import { PreloaderMain } from '../store/actions/AppStart';
+import {MainPreloaderView} from "../View/MainPreloaderView";
 export const MainNavigation = () => {
   const dispatch = useDispatch();
   async function getUserData() {
@@ -24,6 +26,7 @@ export const MainNavigation = () => {
             name: 'RegistrationScreen',
             params: {data: {}, key: undefined, screen: null},
           });
+          dispatch(PreloaderMain(false));
         } else {
           currentUser().restoreUserData = response;
           try {
@@ -33,6 +36,9 @@ export const MainNavigation = () => {
                 name: 'HomeScreen',
                 params: {data: {}, key: undefined, screen: null},
               });
+              setTimeout(()=>{
+                dispatch(PreloaderMain(false));
+              },200)
             }, dispatch);
           } catch (ex) {
             console.warn('Auth getTokenFireBase', ex);
@@ -48,6 +54,7 @@ export const MainNavigation = () => {
         }
       })
       .catch((error) => {
+        dispatch(PreloaderMain(false));
         console.warn('MethodsRequest.error', error);
       });
   }
@@ -87,6 +94,7 @@ export const MainNavigation = () => {
 
   return (
     <NavigationContainer ref={navigator().setNavigation.bind(navigator())}>
+      <MainPreloaderView />
       {isAuthStack ? <AuthStack /> : <MainStack />}
     </NavigationContainer>
   );
