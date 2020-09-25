@@ -1,10 +1,21 @@
-import {EDIT_USER_INFO, SEARCH_PARAM, SELECTED_DEPARTMENT} from '../types';
+import {
+  EDIT_USER_INFO,
+  PAGINATION,
+  SEARCH_PARAM,
+  SELECTED_DEPARTMENT,
+} from '../types';
 
 const initialState = {
   editUser: [],
   orderData: [],
   searchParam: {status: {id: -1}, searchText: ''},
   selectedDepartment: {id: 0, text: ''},
+  paginationBody: {
+    pageIndex: 1,
+    pageSize: 10,
+    operationType: 'all',
+    departmentId: -1,
+  },
 };
 export const EditUser = (
   state = initialState,
@@ -23,6 +34,11 @@ export const EditUser = (
           ...state.searchParam,
           ...action.payload,
         },
+      };
+    case PAGINATION:
+      return {
+        ...state,
+        paginationBody: action.payload,
       };
     case SELECTED_DEPARTMENT:
       return {

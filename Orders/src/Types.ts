@@ -18,7 +18,13 @@ export type reduxTypes = {
     editUser: userDataTypes;
     orderData: Array<any>;
     searchParam: {statusId: number; searchText: string};
-    selectedDepartment: {id: number; text: string;},
+    selectedDepartment: {id: number; text: string};
+    paginationBody: {
+      pageIndex: number;
+      pageSize: number;
+      operationType: string;
+      departmentId: number;
+    };
   };
 };
 export type AuthBody =
