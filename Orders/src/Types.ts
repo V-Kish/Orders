@@ -16,6 +16,8 @@ export type reduxTypes = {
   };
   ditUser: {
     editUser: userDataTypes;
+    orderData: Array<any>;
+    searchParam: {statusId: number; searchText: string};
   };
 };
 export type AuthBody =
