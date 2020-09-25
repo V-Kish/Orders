@@ -10,8 +10,20 @@ import {
 export const HomeListView = () => {
   const orders = useSelector((state: reduxTypes) => state.dictionaries.orders);
   console.log('orders', orders);
+  const loadDataMore = ({layoutMeasurement, contentOffset, contentSize}) => {
+    const paddingToBottom = 500;
+    return (
+      layoutMeasurement.height + contentOffset.y >=
+      contentSize.height - paddingToBottom
+    );
+  };
   return (
-    <ScrollView>
+    <ScrollView
+      onScroll={({nativeEvent}) => {
+        if (loadDataMore(nativeEvent)) {
+       //load more
+        }
+      }}>
       <View style={styles.container}>
         {orders.Items &&
           orders.Items.map((item: any) => {
