@@ -99,7 +99,8 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     circleImg: {
-        width: wp(50),
-        height: wp(50)
+        resizeMode:'contain',
+        width: wp(25),
+        height: wp(25)
     }
 })
