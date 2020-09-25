@@ -29,6 +29,7 @@ import {navigator} from '../../Core/Navigator';
 import {GetOrderInfo} from '../../functions/GetOrderInfo';
 export const OrderUserView = () => {
   const dispatch = useDispatch();
+  const [disabledBtn, setDisabled] = useState(false);
   const userData: userDataTypes = useSelector(
     (state: reduxTypes) => state.ditUser.editUser,
   );
@@ -120,6 +121,8 @@ export const OrderUserView = () => {
   };
 
   const getInWorkButtonPress = async () => {
+    console.log('clicked');
+    setDisabled(true);
     const response = await MethodsRequest.changeStatusOrder(
       orderData.system.orderId,
       {orderStatusId: 2, comment: ''},
@@ -137,7 +140,7 @@ export const OrderUserView = () => {
       }
       navigator().navigate('HomeScreen');
     }
-    console.log('getInWorkButtonPress', response);
+    setDisabled(false);
   };
 
   return (
@@ -218,19 +221,29 @@ export const OrderUserView = () => {
       </View>
       <View style={styles.lastBlock}>
         <View style={styles.containers}>
-          {orderData.system.status === 1 ||
-            (orderData.system.status === 3 && (
-              <>
-                <Text style={styles.textDefaultSecond}>Відділення: </Text>
-                <Text style={styles.department}>
-                  {selectedDepartments.name}
-                </Text>
-              </>
-            ))}
+          {console.log(
+            'as',
+            orderData.system.status === 1 || orderData.system.status === 3,
+          )}
+          {orderData.system.status === 1 && (
+            <>
+              <Text style={styles.textDefaultSecond}>Відділення: </Text>
+              <Text style={styles.department}>{selectedDepartments.name}</Text>
+            </>
+          )}
+          {orderData.system.status === 3 && (
+            <>
+              <Text style={styles.textDefaultSecond}>Відділення: </Text>
+              <Text style={styles.department}>{selectedDepartments.name}</Text>
+            </>
+          )}
           {orderData.system.status === 2 && (
-            <SelectDepartmentInput
-              switchDepartmentModal={switchDepartmentModal}
-            />
+            <View style={{width:'100%'}}>
+              <Text style={styles.textDep}>Відділення отримання</Text>
+              <SelectDepartmentInput
+                switchDepartmentModal={switchDepartmentModal}
+              />
+            </View>
           )}
         </View>
       </View>
@@ -250,6 +263,7 @@ export const OrderUserView = () => {
             color={COLORS.BUTTON_LIGHT_GREEN}
             textColor={'white'}
             onPress={getInWorkButtonPress}
+            disabled={disabledBtn}
           />
         )}
         {orderData.system.status === 2 && (
@@ -321,5 +335,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: hp(75),
+  },
+  textDep: {
+    fontSize: hp(12),
+    color: 'gray',
   },
 });

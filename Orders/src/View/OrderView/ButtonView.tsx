@@ -4,9 +4,10 @@ import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
-export const ButtonView = ({color, textColor, title, onPress=()=>{}}) => {
+export const ButtonView = ({color,disabled, textColor, title, onPress=()=>{}}) => {
   return (
     <TouchableOpacity
+        disabled={disabled}
       style={{...styles.container, backgroundColor: color}}
       onPress={onPress}>
       <Text style={{...styles.text, color: textColor}}>{title}</Text>
