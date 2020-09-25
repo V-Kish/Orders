@@ -18,7 +18,7 @@ export const ModalButton = ({title = "", style='submitButton', onPress=()=>{}}) 
 const styles = StyleSheet.create({
     container: {},
     title: {
-        fontSize: wp(20),
+        fontSize: wp(18),
         textTransform: 'uppercase',
         paddingHorizontal: wp(5),
     },

@@ -21,12 +21,18 @@ export const OrderItem = ({item}) => {
   const listCurrencies = useSelector(
     (state: reduxTypes) => state.dictionaries.listCurrencies,
   );
+  const listDepartments = useSelector(
+    (state: reduxTypes) => state.dictionaries.listDepartments,
+  );
   item.detail.currencyCode = listCurrencies.find(
     (currency) => currency.id === item.detail.currencyId,
   ).code;
   item.detail.currencyToCode = listCurrencies.find(
     (currency) => currency.id === item.detail.currencyToId,
   ).code;
+  item.detail.departmentName = listDepartments.find(
+    (department) => department.id === item.detail.departmentId,
+  ).name;
   item.system.type = statusToType(item.system.status);
   item.detail.sumTo = recalculateSumResult(item);
   const handleItemPress = () => {

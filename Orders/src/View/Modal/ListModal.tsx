@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image} from 'react-native';
 import { CustomModalButtons } from './CustomModalButtons';
 import {
     mockupHeightToDP as hp,
@@ -7,6 +7,7 @@ import {
   } from '../../constants/Dimensions';
 import { COLORS } from '../../constants/colors';
 import {ListViewScroll} from './ListViewScroll'
+import { ICONS } from '../../constants/icons';
 
 export const ListModal = ({
     title = "", 
@@ -22,9 +23,12 @@ export const ListModal = ({
     return <View style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.modalHeaderView}>
-                    <TouchableOpacity style={styles.modalHeaderImageView} onPress={closeModal}>
-                        <Text>X</Text>
-                    </TouchableOpacity>
+                    <View style={styles.modalHeaderImageView}>
+                        <Image 
+                          source={ICONS.mapPoint}
+                          style={styles.modalHeaderImage}
+                        />
+                    </View>
                     <Text style={styles.modalHeaderText}>{title}</Text>
                 </View>
                 <ScrollView>
@@ -46,12 +50,7 @@ export const ListModal = ({
 const styles = StyleSheet.create({
   container: {
     width: '90%',
-    // height: '50%',
-    // justifyContent: 'space-between',
-    // flex: 1,
     height: '100%',
-    // backgroundColor: 'red',
-    // alignItems: 'center'
   },
   content: {
       minHeight: '80%',
@@ -67,14 +66,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   modalHeaderView: {
-    width: '100%',
     backgroundColor: COLORS.STATUS_BLUE,
-    padding: hp(20),
+    width: '100%',
+    padding: wp(15),
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'flex-start'
   },
   modalHeaderText: {
-      fontSize: hp(32),
+      fontSize: wp(20),
       lineHeight: 28,
       paddingBottom: hp(5),
       fontWeight: 'bold',
@@ -83,7 +83,10 @@ const styles = StyleSheet.create({
   modalHeaderImageView: {
       paddingRight: wp(5),
   },
-
+  modalHeaderImage: {
+    width: wp(20),
+    height: wp(20)
+  },
   listView: {
       flex: 1
     // height: '60%'

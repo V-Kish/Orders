@@ -71,7 +71,7 @@ export const OrderMainInfo = ({item}) => {
       {showDepartmentPoint && (
         <View style={styles.placeView}>
           <Text style={styles.placeTitle}>точка видачі:</Text>
-          <Text style={styles.placeContent}>{item.detail.departmentId}</Text>
+          <Text style={styles.placeContent}>{item.detail.departmentName}</Text>
         </View>
       )}
       {showTime && (

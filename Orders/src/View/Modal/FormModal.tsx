@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import { CustomModalButtons } from './CustomModalButtons';
 import {
     mockupHeightToDP as hp,
@@ -8,6 +8,7 @@ import {
 import { COLORS } from '../../constants/colors';
 import { color } from 'react-native-reanimated';
 import { CustomFormInputs } from './CustomFormInputs';
+import { ICONS } from '../../constants/icons';
 
 export const FormModal = ({
     title = "", 
@@ -38,7 +39,10 @@ export const FormModal = ({
             <View style={styles.content}>
                 <View style={styles.modalHeaderView}>
                     <TouchableOpacity style={styles.modalHeaderImageView} onPress={closeModal}>
-                        <Text>X</Text>
+                      <Image
+                          source={ICONS.close}
+                          style={styles.modalHeaderImage}
+                        />
                     </TouchableOpacity>
                     <Text style={styles.modalHeaderText}>{title}</Text>
                 </View>
@@ -69,16 +73,23 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.STATUS_RED,
     padding: hp(20),
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'flex-start'
   },
   modalHeaderText: {
-      fontSize: hp(32),
-      lineHeight: 28,
-      paddingBottom: hp(5),
-      fontWeight: 'bold',
-      color: 'white',
+    fontSize: wp(20),
+    lineHeight: 28,
+    paddingBottom: hp(5),
+    fontWeight: 'bold',
+    color: 'white',
   },
   modalHeaderImageView: {
       paddingRight: wp(5),
-  }
+      justifyContent: 'center',
+      alignItems: 'center'
+  },
+  modalHeaderImage: {
+    width: wp(25),
+    height: wp(25)
+  },
 });

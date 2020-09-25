@@ -8,4 +8,6 @@ export const ICONS = {
   phoneIcon: require('../assets/img/PhoneIcon/phone.png'),
   gambrDisabled: require('../assets/img/gamburgerIcon/disabled/Search.png'),
   gambrActive: require('../assets/img/gamburgerIcon/active/Search.png'),
+  mapPoint: require('../assets/img/MapPoint/mapPoint.png'),
+  close: require('../assets/img/Close/close.png'),
 };
