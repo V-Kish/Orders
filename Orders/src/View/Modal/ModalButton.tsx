@@ -6,7 +6,7 @@ import {
     mockupWidthToDP as wp,
   } from '../../constants/Dimensions';
 
-export const ModalButton = ({title="", style = 'submitButton', onPress=()=>{}}) => {
+export const ModalButton = ({title = "", style='submitButton', onPress=()=>{}}) => {
     return <TouchableOpacity 
             style={{...styles.container, ...styles[`${style}`]}}
             onPress={onPress}
@@ -28,5 +28,11 @@ const styles = StyleSheet.create({
         color: COLORS.STATUS_BLUE
     },
     cancelButton: {},
-    cancelButton_title: {},
+    cancelButton_title: {
+        color: COLORS.STATUS_GRAY_DARK
+    },
+    redButton: {},
+    redButton_title: {
+        color: COLORS.STATUS_RED,
+    }
 });

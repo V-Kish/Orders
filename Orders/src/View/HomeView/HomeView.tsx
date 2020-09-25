@@ -18,11 +18,27 @@ export const HomeView = () => {
     <View style={styles.container}>
       <Button title="on" onPress={switchModalVisible}/>
       <CustomModal 
-        type="ALERT"
+        type="LIST"
         modalVisible={modalVisible}
         changeModalVisible={switchModalVisible}
-        title="CustomAlert"
-        content="My content"
+        title="Зміна відділення видачі"
+        list={[{
+                id:1, 
+                text: 'asdasd'
+            },{
+                id:2, 
+                text: 'asdasdwqeweasd'
+            },{
+                id:3, 
+                text: 'asdasdasdasdasd'
+            },{
+                id:4, 
+                text: 'asdasdasdasd'
+            },{
+                id:5, 
+                text: 'asdasasdasdd'
+            },
+        ]}
       />
       <SearchView/>
       <HomeListView />

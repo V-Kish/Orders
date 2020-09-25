@@ -5,13 +5,14 @@ import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,
   } from '../../constants/Dimensions';
+import { COLORS } from '../../constants/colors';
 
 export const CustomModalButtons = ({
     changeModalVisible = () => {},
     buttonOk = false,
     cancelButton = false,
     cancelButtonPress = ()=>{},
-    customButton = false, 
+    customButton = {visible: false, title: '', style: "submitButton"}, 
     customButtonPress = ()=>{}
 }) => {
   
@@ -21,10 +22,10 @@ export const CustomModalButtons = ({
                 style="cancelButton"
                 title="Скасувати"
             />}
-            {customButton && <ModalButton
+            {customButton.visible && <ModalButton
                 onPress={customButtonPress}
-                style="submitButton"
-                title={customButton?.title}
+                style={customButton.style}
+                title={customButton.title}
             />}
             {buttonOk && <ModalButton
                 onPress={changeModalVisible}
@@ -42,5 +43,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: hp(20),
         flexDirection: 'row',
         justifyContent: 'flex-end',
+        width: '100%'
     }
 });

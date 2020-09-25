@@ -6,28 +6,29 @@ import {
 import {SearchContainer} from './SearchContainer';
 import {DropDownSelector} from './DropDownSelector';
 import { GetOrderInfo } from '../../../functions/GetOrderInfo';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchParam } from '../../../store/actions/EditUserInfo';
 
 export const SearchView = () => {
   const dispatch = useDispatch()
   const [dropdown, setDropdown] = useState(false);
-  const [searchText, setSearchText] = useState('');
   const defaultStatus = {id: -1, name: 'Всі', status: true}
-  const [currentStatus, setCurrentStatus] = useState(defaultStatus)
 
+  const searchParamSelector = useSelector((state: reduxTypes) => state.ditUser.searchParam);
   const switchDropDown = () => {
     setDropdown(!dropdown);
   };
 
   const handleStatusChange = (item:any) => {
-    setCurrentStatus(item)
+    // setCurrentStatus(item)
+    dispatch(searchParam({status: item}))
     switchDropDown()
-    GetOrderInfo.getOrders(dispatch, searchText, item.id);
+    GetOrderInfo.getOrders(dispatch,searchParamSelector.searchText, item.id);
   }
 
   const handleTextChange = (text: string) => {
-      setSearchText(text)
-      GetOrderInfo.getOrders(dispatch, text, currentStatus.id);
+      dispatch(searchParam({searchText: text}))
+      GetOrderInfo.getOrders(dispatch, text, searchParamSelector.status.id);
   }
   return (
     <View style={styles.container}>
@@ -39,7 +40,7 @@ export const SearchView = () => {
         <DropDownSelector 
             changeDropDownVisible={switchDropDown} 
             dropdown={dropdown} 
-            currentStatus={currentStatus}
+            currentStatus={searchParamSelector.status}
             changeItemStatus={handleStatusChange}
             defaultStatus={defaultStatus}
         />

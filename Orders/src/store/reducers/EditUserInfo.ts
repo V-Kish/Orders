@@ -3,7 +3,7 @@ import {EDIT_USER_INFO, SEARCH_PARAM} from '../types';
 const initialState = {
   editUser: [],
   orderData: [],
-  searchParam: {statusId: -1, searchText: ''},
+  searchParam: {status: {id: -1}, searchText: ''},
 };
 export const EditUser = (
   state = initialState,
@@ -18,7 +18,10 @@ export const EditUser = (
     case SEARCH_PARAM:
       return {
         ...state,
-        searchParam: action.payload,
+        searchParam: {
+          ...state.searchParam,
+          ...action.payload
+        },
       };
     default:
       return state;
