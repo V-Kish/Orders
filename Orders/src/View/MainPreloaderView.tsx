@@ -33,7 +33,7 @@ export const MainPreloaderView = () => {
 const styles = StyleSheet.create({
   containerModal: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 1)',
+    backgroundColor: 'rgba(255,255,255,1)',
   },
   wrapper: {
     marginTop: hp(25),
