@@ -33,7 +33,7 @@ export const OrderItem = ({item}) => {
     GetOrderInfo.getOrder(dispatch, item);
   };
   return (
-    <TouchableOpacity onPress={handleItemPress} activeOpacity={0.9}>
+    <TouchableOpacity onPress={handleItemPress} activeOpacity={0.9} style={{paddingHorizontal:hp(10)}}>
       <View style={{...styles.container, ...styles[`${item.system.type}`]}}>
         <OperationType item={item} />
         <OrderMainInfo item={item} />
