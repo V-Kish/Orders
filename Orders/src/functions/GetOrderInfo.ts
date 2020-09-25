@@ -42,6 +42,7 @@ class GetOrderInfo {
       if (response.statusCode === 200) {
         dispatch(getOrders(response.data));
       }
+      console.log('responseMethodsRequest',response)
     } catch (ex) {
       console.warn('GetOrderInfo getOrder', ex);
     }
