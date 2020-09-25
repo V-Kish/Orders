@@ -36,8 +36,6 @@ export const ListModal = ({
   const [scrollView, setScrollView] = useState();
   const [layoutHeight, setLayoutHeight] = useState(0);
   const confirmFunc = () => {
-    
-    // scrollToIndex(findIndex(selectedItem));
      confirmAction(selectedItem)
   };
   const findIndex = (sel) => {
@@ -53,14 +51,13 @@ export const ListModal = ({
     return layoutHeight/listDepartments.length*index
   }
   const scrollToIndex = (index) => {
-    console.log('selectedDepartments index', index);
     scrollView.scrollTo({y: indexToOffset(index), animated: true});
   };
 
   const firstScroll = (height,sel) => {
     scrollView.scrollTo({y: height/listDepartments.length*findIndex(sel), animated: true});
   }
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>

@@ -7,6 +7,7 @@ import {
 import {COLORS} from '../constants/colors';
 import {useSelector} from 'react-redux';
 import {reduxTypes} from '../Types';
+import {ICONS} from "../constants/icons";
 
 export const MainPreloaderView = () => {
   const mainPreloader = useSelector(
@@ -21,7 +22,7 @@ export const MainPreloaderView = () => {
         <View style={styles.wrapperIcon}>
           <Animated.Image
             style={styles.logoLoader}
-            source={require('../assets/img/logoLoad/logo_bonus_small1.png')}
+            source={ICONS.logo}
           />
           <View style={styles.wrapAvtivity} />
         </View>

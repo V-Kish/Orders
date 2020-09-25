@@ -10,5 +10,6 @@ export const ICONS = {
   gambrActive: require('../assets/img/gamburgerIcon/active/Search.png'),
   mapPoint: require('../assets/img/MapPoint/mapPoint.png'),
   close: require('../assets/img/Close/close.png'),
-  done: require('../assets/img/Done/Shape.png')
+  done: require('../assets/img/Done/Shape.png'),
+  logo: require('../assets/img/logoLoad/logo_bonus_small1.jpg'),
 };
