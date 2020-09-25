@@ -24,7 +24,7 @@ export const SearchContainer = ({changeDropDownVisible,dropdown}) => {
     setMyTimeout(
       setTimeout(() => {
         GetOrderInfo.getOrders(dispatch, text);
-      }, 400),
+      }, 200),
     );
   };
   return (
