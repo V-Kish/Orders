@@ -19,8 +19,8 @@ export const ListModal = ({
     const [selectedItem, setSelectedItem] = useState()
     const [scrollView, setScrollView] = useState()
     const confirmFunc = () => {
-      scrollToIndex(selectedItem.id)
-        // confirmAction(selectedItem)
+      // scrollToIndex(selectedItem.id)
+        confirmAction(selectedItem)
     }
     const scrollToIndex = (index) => {
       scrollView.scrollTo({y: index*10, animated: true});
