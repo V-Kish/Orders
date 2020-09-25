@@ -8,6 +8,7 @@ import {
 import { COLORS } from '../../constants/colors';
 import {ListViewScroll} from './ListViewScroll'
 import { ICONS } from '../../constants/icons';
+import {ListItem} from "./ListItem";
 
 export const ListModal = ({
     title = "",
@@ -17,11 +18,17 @@ export const ListModal = ({
     list = []
 }) => {
     let scrollListReftop = React.createRef();
+    let _ssnodes = React.createRef();
 
     const [selectedItem, setSelectedItem] = useState()
     const confirmFunc = () => {
         scrollListReftop.getNode().scrollTo({ x: 500, animated: true });
         // confirmAction(selectedItem)
+    }
+   function scrollToElement (indexOf){
+        const node = _ssnodes.get(indexOf);
+        const position = findNodeHandle(node);
+       scrollListReftop.scrollTo({ x: 0, y: position, animated: true });
     }
     return <View style={styles.container}>
             <View style={styles.content}>
@@ -34,11 +41,14 @@ export const ListModal = ({
                     </View>
                     <Text style={styles.modalHeaderText}>{title}</Text>
                 </View>
-                <Animated.ScrollView  ref={ref => {
+                <ScrollView  ref={ref => {
                     scrollListReftop = ref;
                 }}>
-                    <ListViewScroll list={list} setSelectedItem={setSelectedItem}/>
-                </Animated.ScrollView>
+                    {list && list.map((item, i)=>{
+                        return <ListItem key={i} ref={ref => _ssnodes.set(idx, ref)} item={item} setItem={setSelectedItem}/>
+                    })}
+                    {/*<ListViewScroll list={list} setSelectedItem={setSelectedItem}/>*/}
+                </ScrollView>
             </View>
             <View style={styles.buttonsView}>
                 <CustomModalButtons
