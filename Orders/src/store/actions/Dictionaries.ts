@@ -45,12 +45,6 @@ export const getOrders = (value) => {
     payload: value,
   };
 };
-export const getOrdersMore = (value) => {
-  return {
-    type: GET_ORDERS_MORE,
-    payload: value,
-  };
-};
 export const orderData = (value) => {
   return {
     type: ORDER_DATA,
