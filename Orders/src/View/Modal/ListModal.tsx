@@ -16,6 +16,8 @@ export const ListModal = ({
     confirmAction = (item) => {},
     list = []
 }) => {
+    let scrollListReftop = React.createRef();
+    //  scrollListReftop.getNode().scrollTo({y: 0, animated: true});
     const [selectedItem, setSelectedItem] = useState()
     const confirmFunc = () => {
         confirmAction(selectedItem)
@@ -31,7 +33,9 @@ export const ListModal = ({
                     </View>
                     <Text style={styles.modalHeaderText}>{title}</Text>
                 </View>
-                <ScrollView>
+                <ScrollView  ref={ref => {
+                    scrollListReftop = ref;
+                }}>
                     <ListViewScroll list={list} setSelectedItem={setSelectedItem}/>
                 </ScrollView>
             </View>
