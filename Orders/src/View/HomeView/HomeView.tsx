@@ -8,12 +8,12 @@ import {
   Animated,
 } from 'react-native';
 import {HomeListView} from './HomeListView';
-import {SearchContainer} from './SearchContainer';
+import {SearchContainer} from './SearchBlock/SearchContainer';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
-import {DropDownSelector} from './DropDownSelector';
+import { SearchView } from './SearchBlock/SearchView';
 
 export const HomeView = () => {
   const [dropdown, setDropdown] = useState(false);
@@ -23,9 +23,8 @@ export const HomeView = () => {
   };
   return (
     <View style={styles.container}>
-      <SearchContainer changeDropDownVisible={switchDropDown} dropdown={dropdown}/>
-      <DropDownSelector dropdown={dropdown} />
-        <HomeListView />
+      <SearchView/>
+      <HomeListView />
     </View>
   );
 };

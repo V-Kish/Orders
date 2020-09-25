@@ -7,26 +7,24 @@ import {
   Dimensions,
   TouchableOpacity
 } from 'react-native';
-import {HomeListView} from './HomeListView';
-import {SearchContainer} from './SearchContainer';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
-} from '../../constants/Dimensions';
-import {useSelector} from 'react-redux';
-import {COLORS} from '../../constants/colors';
-import { OrderStatus } from '../Components/OrderStatus';
-import { statusToType } from '../../helpers/StatusToType';
+} from '../../../constants/Dimensions';
+import {COLORS} from '../../../constants/colors';
+import { OrderStatus } from '../../Components/OrderStatus';
+import { statusToType } from '../../../helpers/StatusToType';
 
-export const DropDownItem = ({item, changeStatus, activeStatus}) => {
-    const isActive = activeStatus === item
+export const DropDownItem = ({item, changeStatus, activeStatus, text = 'Тільки статус'}) => {
+    const isActive = activeStatus.id === item.id
     const handlePress = () => {
         changeStatus(item)
     }
     return (
         <TouchableOpacity
          style={styles.container}
-         onPress={changeStatus}
+         activeOpacity={0.9}
+         onPress={handlePress}
         >
             <View style={styles.wrapCircle}>
                 <View
@@ -35,7 +33,7 @@ export const DropDownItem = ({item, changeStatus, activeStatus}) => {
                 </View>
             </View>
             <View style={styles.wrapText}>
-                <Text style={styles.text}>Тільки статус</Text>
+                <Text style={styles.text}>{text}</Text>
             </View>
             <OrderStatus type={statusToType(item.id)}/>
         </TouchableOpacity>

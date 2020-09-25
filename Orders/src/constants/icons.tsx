@@ -7,5 +7,5 @@ export const ICONS = {
   arrowBackWhite: require('../assets/img/ArrowBack/ArrowBackWhite/arrow.png'),
   phoneIcon: require('../assets/img/PhoneIcon/phone.png'),
   gambrDisabled: require('../assets/img/gamburgerIcon/disabled/Search.png'),
-    gambrActive: require('../assets/img/gamburgerIcon/active/Search.png'),
+  gambrActive: require('../assets/img/gamburgerIcon/active/Search.png'),
 };

@@ -2,28 +2,30 @@ import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
-  Text,
   Image,
   TextInput,
   TouchableOpacity,
-  Dimensions,
 } from 'react-native';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
-} from '../../constants/Dimensions';
-import {GetOrderInfo} from '../../functions/GetOrderInfo';
+} from '../../../constants/Dimensions';
+import {GetOrderInfo} from '../../../functions/GetOrderInfo';
 import {useDispatch} from 'react-redux';
-import {ICONS} from "../../constants/icons";
+import {ICONS} from "../../../constants/icons";
 
-export const SearchContainer = ({changeDropDownVisible,dropdown}) => {
+export const SearchContainer = ({
+  changeDropDownVisible, 
+  dropdown,
+  changeCurrentText,
+}) => {
   const [myTimeout, setMyTimeout] = useState();
   const dispatch = useDispatch();
   const onChangeText = (text: string) => {
     clearTimeout(myTimeout);
     setMyTimeout(
       setTimeout(() => {
-        GetOrderInfo.getOrders(dispatch, text);
+        changeCurrentText(text)
       }, 200),
     );
   };
