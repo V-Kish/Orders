@@ -11,6 +11,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {reduxTypes, userDataTypes, orderDataTypes} from '../../Types';
 import { CustomModal } from '../Modal/CustomModal';
 import { SelectDepartmentInput } from './SelectDepartmentInput'
+import { selectedItemDep } from '../../store/actions/Dictionaries';
+import { selectedDepartment } from '../../store/actions/EditUserInfo';
 export const OrderUserView = () => {
   const dispatch = useDispatch()
   const userData: userDataTypes = useSelector(
@@ -35,7 +37,6 @@ export const OrderUserView = () => {
   const preparedList = departmentList.map(d=>{
       return {id: d.id, text: d.name}
   })
-
   // switch visible modals
   const switchRejectModal = () => {
     setModalRejectVisible(!modalRejectVisible)
@@ -44,10 +45,8 @@ export const OrderUserView = () => {
     setModalSendOnWorkVisible(!modalSendOnWorkVisible)
   }
   const switchDepartmentModal = () => {
+    dispatch(selectedDepartment({id: selectedDepartments.id, text: selectedDepartments.name}))
     setModalDepartmentVisible(!modalDepartmentVisible)
-  }
-  const getInWorkButtonPress = () => {
-    console.log('getOnWork press')
   }
 
   // confirm modals actions
@@ -61,11 +60,14 @@ export const OrderUserView = () => {
     console.log('send on work confirm')
   }
 
-
   const onDepartmentConfirm = (item) =>{
     setModalDepartmentVisible(!modalDepartmentVisible)
-    // dispatch(se)
-    console.log('choose department confirm')
+    console.log('selected', item)
+    dispatch(selectedItemDep(item.id))
+  }
+  
+  const getInWorkButtonPress = () => {
+    console.log('getOnWork press')
   }
   
   return (
@@ -143,6 +145,11 @@ export const OrderUserView = () => {
               <Text style={styles.textDefaultSecond}>Відділення: </Text>
               <Text style={styles.department}>{selectedDepartments.name}</Text>
             </>
+          )}
+          {orderData.system.status === 2 && (
+            <SelectDepartmentInput
+              switchDepartmentModal={switchDepartmentModal}
+            />
           )}
           {orderData.system.status === 3 && (
             <SelectDepartmentInput

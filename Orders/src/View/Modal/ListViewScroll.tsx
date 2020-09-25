@@ -12,10 +12,11 @@ import { ListItem } from './ListItem';
 
 export const ListViewScroll = ({
     list = [],
+    setSelectedItem
 }) => {
     return <View style={styles.listView}>
                 {list && list.map((item, i)=>{
-                    return <ListItem key={i} item={item}/>
+                    return <ListItem key={i} item={item} setItem={setSelectedItem}/>
                 })}
         </View>
   

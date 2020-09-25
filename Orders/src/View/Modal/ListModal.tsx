@@ -12,9 +12,13 @@ export const ListModal = ({
     title = "", 
     content = "", 
     closeModal = ()=>{}, 
-    confirmAction = () => {},
+    confirmAction = (item) => {},
     list = []
 }) => {
+    const [selectedItem, setSelectedItem] = useState()
+    const confirmFunc = () => {
+        confirmAction(selectedItem)
+    }
     return <View style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.modalHeaderView}>
@@ -24,13 +28,13 @@ export const ListModal = ({
                     <Text style={styles.modalHeaderText}>{title}</Text>
                 </View>
                 <ScrollView>
-                    <ListViewScroll list={list}/>
+                    <ListViewScroll list={list} setSelectedItem={setSelectedItem}/>
                 </ScrollView>
             </View>
             <View style={styles.buttonsView}>
                 <CustomModalButtons
                     customButton={{visible: true, title: 'Змінити'}}
-                    customButtonPress={confirmAction}
+                    customButtonPress={confirmFunc}
                     cancelButton={true}
                     cancelButtonPress={closeModal}
                 />
