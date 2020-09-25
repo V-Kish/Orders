@@ -39,6 +39,7 @@ export const HomeListView = () => {
     );
   };
   async function loadMorePagination() {
+    console.log('start 1', orders);
     setStatePreloader(false);
     setPagination((prevState) => ({
       ...prevState,
@@ -60,14 +61,15 @@ export const HomeListView = () => {
     body.sQuery = searchParam.searchText;
     console.log('responseMethodsRequest body', body);
     console.log('loadMorePagination pagination', pagination);
-    const response = await GetOrderInfo.getOrders(
+    await GetOrderInfo.getOrders(
       dispatch,
       searchParam.searchText,
       searchParam.statusId,
       body,
     );
-    setStatePreloader(true);
-    console.log('responseloadDataMore', response);
+    setTimeout(() => {
+      setStatePreloader(true);
+    }, 200);
   }
   return (
     <ScrollView
@@ -78,7 +80,8 @@ export const HomeListView = () => {
       }}>
       <View style={styles.container}>
         {orders.Items &&
-          orders.Items.map((item: any) => {
+          orders.Items.map((item: any,index) => {
+            // return <Text style={{marginBottom:200}}>{index}</Text>
             return <OrderItem key={item.system.orderNum} item={item} />;
           })}
         {!statePreloader && (

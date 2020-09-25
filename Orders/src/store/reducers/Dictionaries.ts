@@ -6,7 +6,7 @@ import {
   LOAD_STATUS,
   GET_ORDERS,
   ORDER_DATA,
-  ORDER_DATA_COUNT,
+  ORDER_DATA_COUNT, GET_ORDERS_MORE,
 } from '../types';
 
 const initialState = {

@@ -16,8 +16,8 @@ export const HomeView = () => {
     }
   return (
     <View style={styles.container}>
-      <Button title="on" onPress={switchModalVisible}/>
-      <CustomModal 
+      {/*<Button title="on" onPress={switchModalVisible}/>*/}
+      <CustomModal
         type="ALERT"
         modalVisible={modalVisible}
         changeModalVisible={switchModalVisible}
