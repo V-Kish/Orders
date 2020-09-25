@@ -3,17 +3,19 @@ import {
   StyleSheet,
   View,
   ActivityIndicator,
+  SafeAreaView,
+  Text,
+  RefreshControl,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
-import {OrderItem} from './OrderItem/OrderItem';
-import {
-  mockupHeightToDP as hp,
-} from '../../constants/Dimensions';
+import {mockupHeightToDP as hp} from '../../constants/Dimensions';
 import {reduxTypes} from '../../Types';
 import {GetOrderInfo} from '../../functions/GetOrderInfo';
-import {COLORS} from '../../constants/colors';
 import {paginationMainList} from '../../store/actions/EditUserInfo';
+import {OrderItem} from './OrderItem/OrderItem';
+import { COLORS } from '../../constants/colors';
+
 export const HomeListView = () => {
   const dispatch = useDispatch();
   const [statePreloader, setStatePreloader] = useState(true);
@@ -24,6 +26,7 @@ export const HomeListView = () => {
   const paginationBody = useSelector(
     (state: reduxTypes) => state.ditUser.paginationBody,
   );
+
   const loadDataMore = ({layoutMeasurement, contentOffset, contentSize}) => {
     const paddingToBottom = 500;
     return (
@@ -72,30 +75,32 @@ export const HomeListView = () => {
     }, 200);
   }
   return (
-    <ScrollView
-      onScroll={async ({nativeEvent}) => {
-        if (loadDataMore(nativeEvent) && statePreloader) {
-          await loadMorePagination();
-        }
-      }}>
-      <View style={styles.container}>
-        {orders.Items &&
-          orders.Items.map((item: any) => {
-            return <OrderItem key={item.system.orderNum} item={item} />;
-          })}
-        {!statePreloader && (
-          <View style={styles.preloader}>
-            <ActivityIndicator size="large" color={COLORS.FONT_YELLOW} />
-          </View>
-        )}
-      </View>
-    </ScrollView>
+    <SafeAreaView style={{flex: 1}}>
+      <ScrollView
+        onScroll={async ({nativeEvent}) => {
+          if (loadDataMore(nativeEvent) && statePreloader) {
+            await loadMorePagination();
+          }
+        }}>
+        <View style={styles.container}>
+          {orders.Items &&
+            orders.Items.map((item: any) => {
+              return <OrderItem key={item.system.orderNum} item={item} />;
+            })}
+          {!statePreloader && (
+            <View style={styles.preloader}>
+              <ActivityIndicator size="large" color={COLORS.FONT_YELLOW} />
+            </View>
+          )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: hp(80),
+    //paddingBottom: hp(80),
   },
   preloader: {
     width: '100%',

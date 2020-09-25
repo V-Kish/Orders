@@ -36,16 +36,18 @@ export const OperationType = ({item}) => {
             style = 'done'
             break;
     }
-    return <View style={styles.operationTypeView}>
-        <View style={{...styles.operationTypeCircle, ...styles[`operationTypeCircle_${style}`]}}>
-            <Text style={styles.operationTypeCircleText}>
-                {circleText}
+    return (
+        <View style={styles.operationTypeView}>
+            <View style={{...styles.operationTypeCircle, ...styles[`operationTypeCircle_${style}`]}}>
+                <Text style={styles.operationTypeCircleText}>
+                    {circleText}
+                </Text>
+            </View>
+            <Text style={styles.operationTypeText}>
+                {operationText}
             </Text>
         </View>
-        <Text style={styles.operationTypeText}>
-            {operationText}
-        </Text>
-    </View>
+    )
 }
 
 const styles = StyleSheet.create({

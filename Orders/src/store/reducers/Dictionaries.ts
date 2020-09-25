@@ -8,6 +8,7 @@ import {
   ORDER_DATA,
   ORDER_DATA_COUNT,
   GET_ORDERS_MORE,
+  SELECTED_ITEM_DEP,
 } from '../types';
 import {dateParse, convertToUTCString} from '../../helpers/DateParse';
 
@@ -51,6 +52,14 @@ export const Dictionaries = (
       return {
         ...state,
         ordersStatus: action.payload,
+      };
+    case SELECTED_ITEM_DEP:
+      let selectedDep = state.listDepartments.filter(
+        (item) => item.id === action.payload,
+      );
+      return {
+        ...state,
+        selectedDepartments: selectedDep,
       };
     case GET_ORDERS:
       let orders = action.payload;
