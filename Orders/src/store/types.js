@@ -9,3 +9,4 @@ export const GET_ORDERS = 'GET_ORDERS';
 export const EDIT_USER_INFO = 'EDIT_USER_INFO';
 export const ORDER_DATA = 'ORDER_DATA';
 export const ORDER_DATA_COUNT = 'ORDER_DATA_COUNT';
+export const SEARCH_PARAM = 'SEARCH_PARAM';
