@@ -37,8 +37,8 @@ export const ListModal = ({
   const [layoutHeight, setLayoutHeight] = useState(0);
   const confirmFunc = () => {
     
-    scrollToIndex(findIndex(selectedItem));
-    //  confirmAction(selectedItem)
+    // scrollToIndex(findIndex(selectedItem));
+     confirmAction(selectedItem)
   };
   const findIndex = (sel) => {
     let ind = -1
