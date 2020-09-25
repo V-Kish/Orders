@@ -22,16 +22,12 @@ export const SearchView = () => {
   const handleStatusChange = (item:any) => {
     setCurrentStatus(item)
     switchDropDown()
-    console.log('currentItem Text', searchText)
-    console.log('currentItem Item', item.id)
     GetOrderInfo.getOrders(dispatch, searchText, item.id);
   }
 
   const handleTextChange = (text: string) => {
       setSearchText(text)
-      console.log('currentItem Text', text)
-      console.log('currentItem Item', currentStatus)
-      GetOrderInfo.getOrders(dispatch, text, currentStatus);
+      GetOrderInfo.getOrders(dispatch, text, currentStatus.id);
   }
   return (
     <View style={styles.container}>
