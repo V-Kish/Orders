@@ -1,9 +1,10 @@
-import {EDIT_USER_INFO, SEARCH_PARAM} from '../types';
+import {EDIT_USER_INFO, SEARCH_PARAM, SELECTED_DEPARTMENT} from '../types';
 
 const initialState = {
   editUser: [],
   orderData: [],
   searchParam: {status: {id: -1}, searchText: ''},
+  selectedDepartment: {id: 0, text: ''},
 };
 export const EditUser = (
   state = initialState,
@@ -20,8 +21,13 @@ export const EditUser = (
         ...state,
         searchParam: {
           ...state.searchParam,
-          ...action.payload
+          ...action.payload,
         },
+      };
+    case SELECTED_DEPARTMENT:
+      return {
+        ...state,
+        selectedDepartment: action.payload,
       };
     default:
       return state;

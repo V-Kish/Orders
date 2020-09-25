@@ -1,4 +1,4 @@
-import {EDIT_USER_INFO, SEARCH_PARAM} from '../types';
+import {EDIT_USER_INFO, SELECTED_DEPARTMENT, SEARCH_PARAM} from '../types';
 
 export const editUserInfo = (value) => {
   return {
@@ -9,6 +9,12 @@ export const editUserInfo = (value) => {
 export const searchParam = (value) => {
   return {
     type: SEARCH_PARAM,
+    payload: value,
+  };
+};
+export const selectedDepartment = (value) => {
+  return {
+    type: SELECTED_DEPARTMENT,
     payload: value,
   };
 };

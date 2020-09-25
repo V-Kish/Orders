@@ -39,8 +39,17 @@ export const HomeListView = () => {
       contentSize.height - paddingToBottom
     );
   };
-  console.log('start 1', orders);
   async function loadMorePagination() {
+    console.log('orders',orders)
+    console.log('orders orders.PageIndex',orders.PageIndex)
+    console.log('orders orders.PageSize',orders.PageSize)
+    console.log('orders orders.TotalItems',orders.TotalItems)
+    console.log('orders orders. result',orders.PageIndex * orders.PageSize < orders.TotalItems)
+    if (!(orders.PageIndex * orders.PageSize < orders.TotalItems)){
+      console.log('loadMorePagination 0')
+      return
+    }
+    console.log('loadMorePagination 1')
     setStatePreloader(false);
     setPagination((prevState) => ({
       ...prevState,
@@ -58,20 +67,19 @@ export const HomeListView = () => {
     body.pageSize = pagination.pageSize;
     body.operationType = pagination.operationType;
     body.departmentId = pagination.departmentId;
-    body.status = searchParam.statusId;
+    body.status = searchParam.status.id;
     body.sQuery = searchParam.searchText;
-    console.log('responseMethodsRequest body', body);
-    console.log('loadMorePagination pagination', pagination);
     await GetOrderInfo.getOrders(
       dispatch,
       searchParam.searchText,
-      searchParam.statusId,
+      searchParam.status.id,
       body,
     );
     setTimeout(() => {
       setStatePreloader(true);
     }, 200);
   }
+  console.log('orders',orders)
   return (
     <ScrollView
       onScroll={async ({nativeEvent}) => {
