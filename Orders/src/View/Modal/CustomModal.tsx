@@ -7,11 +7,11 @@ import { ListModal } from './ListModal';
 const types = ["ALERT", "CONFIRM", "FORM", "LIST" ]
 
 export const CustomModal = ({
-  type = types[0], 
-  modalVisible = false, 
+  type = types[0],
+  modalVisible = false,
   changeModalVisible,
   confirmAction = ()=>{},
-  title = "Alert", 
+  title = "Alert",
   content = "",
   inputs = [],
   list = []
@@ -19,14 +19,14 @@ export const CustomModal = ({
   let CurrentModal = () => <></>
   switch(type){
       case types[0]://ALERT
-        CurrentModal = () => <AlertModal 
+        CurrentModal = () => <AlertModal
             closeModal={changeModalVisible}
             title={title}
             content={content}
         />;
         break
       case types[1]://CONFIRM
-        CurrentModal = () => <ConfirmModal 
+        CurrentModal = () => <ConfirmModal
             closeModal={changeModalVisible}
             confirmAction={confirmAction}
             title={title}
@@ -34,7 +34,7 @@ export const CustomModal = ({
         />;
         break
       case types[2]://FORM
-        CurrentModal = () => <FormModal 
+        CurrentModal = () => <FormModal
             closeModal={changeModalVisible}
             confirmAction={confirmAction}
             title={title}
@@ -42,7 +42,7 @@ export const CustomModal = ({
         />;
         break
       case types[3]://LIST
-        CurrentModal = () => <ListModal 
+        CurrentModal = () => <ListModal
             closeModal={changeModalVisible}
             confirmAction={confirmAction}
             title={title}
@@ -58,7 +58,7 @@ export const CustomModal = ({
           </View>
         </View>
     </Modal>
-  
+
 };
 
 const styles = StyleSheet.create({
@@ -70,8 +70,6 @@ const styles = StyleSheet.create({
   },
   content: {
     backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
