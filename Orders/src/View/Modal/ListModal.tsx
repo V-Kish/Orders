@@ -17,6 +17,7 @@ import {ListViewScroll} from './ListViewScroll';
 import {ICONS} from '../../constants/icons';
 import {useSelector} from 'react-redux';
 import {reduxTypes} from '../../Types';
+import { selectedDepartment } from '../../store/actions/EditUserInfo';
 
 export const ListModal = ({
   title = '',
@@ -25,19 +26,41 @@ export const ListModal = ({
   confirmAction = (item) => {},
   list = [],
 }) => {
-  const [selectedItem, setSelectedItem] = useState();
+  const listDepartments = useSelector(
+    (state: reduxTypes) => state.dictionaries.listDepartments,
+  );
   const selectedDepartments: Array<any> = useSelector(
     (state: reduxTypes) => state.dictionaries.selectedDepartments,
   );
+  const [selectedItem, setSelectedItem] = useState(selectedDepartments);
   const [scrollView, setScrollView] = useState();
+  const [layoutHeight, setLayoutHeight] = useState(0);
   const confirmFunc = () => {
-    scrollToIndex(selectedDepartments.id);
-       //confirmAction(selectedItem)
+    
+    scrollToIndex(findIndex(selectedItem));
+    //  confirmAction(selectedItem)
   };
+  const findIndex = (sel) => {
+    let ind = -1
+    listDepartments.forEach((e,i)=>{
+      if(e.id===sel.id){
+        ind = i
+      }
+    })
+    return ind
+  }
+  const indexToOffset = (index) => {
+    return layoutHeight/listDepartments.length*index
+  }
   const scrollToIndex = (index) => {
     console.log('selectedDepartments index', index);
-    scrollView.scrollTo({y: index * index , animated: true});
+    scrollView.scrollTo({y: indexToOffset(index), animated: true});
   };
+
+  const firstScroll = (height,sel) => {
+    scrollView.scrollTo({y: height/listDepartments.length*findIndex(sel), animated: true});
+  }
+  
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -50,8 +73,19 @@ export const ListModal = ({
         <ScrollView
           ref={(ref) => {
             setScrollView(ref);
-          }}>
-          <ListViewScroll list={list} setSelectedItem={setSelectedItem} />
+          }}
+          >
+            <View
+              onLayout={(e)=>{
+                console.log('layout 2', e.nativeEvent)
+                setLayoutHeight(e.nativeEvent.layout.height)
+                // setTimeout(()=>{
+                firstScroll(e.nativeEvent.layout.height, selectedDepartments)
+                // },1000)
+              }}
+            >
+              <ListViewScroll list={list} setSelectedItem={setSelectedItem} />
+          </View>
         </ScrollView>
       </View>
       <View style={styles.buttonsView}>
