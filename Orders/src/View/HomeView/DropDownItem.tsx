@@ -17,28 +17,22 @@ import {useSelector} from 'react-redux';
 import {COLORS} from '../../constants/colors';
 import { OrderStatus } from '../Components/OrderStatus';
 import { statusToType } from '../../helpers/StatusToType';
-import { DropDownItem } from './DropDownItem';
 
-export const DropDownSelector = ({dropdown}) => {
-  const ordersStatus = useSelector(
-    (state: reduxTypes) => state.dictionaries.ordersStatus,
-  );
-  console.log('ordersStatus',ordersStatus)
-  return (
-    <Animated.View
-      style={
-        dropdown
-          ? {...styles.dropDown, ...styles.dropDownShowed}
-          : styles.dropDown
-      }>
-      <View style={styles.containerList}>
-        {ordersStatus &&
-          ordersStatus.map((item) => {
-            return (<DropDownItem key={item.id} item={item}/>);
-          })}
-      </View>
-    </Animated.View>
-  );
+export const DropDownItem = ({item}) => {
+    return (
+        <View key={item.id} style={styles.container}>
+        <View style={styles.wrapCircle}>
+            <View
+            style={[styles.circle, {borderColor: COLORS.HEADER_BLUE}]}>
+            <View style={styles.circleActive} />
+            </View>
+        </View>
+        <View style={styles.wrapText}>
+            <Text style={styles.text}>Тільки статус</Text>
+        </View>
+            <OrderStatus type={statusToType(item.id)}/>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
