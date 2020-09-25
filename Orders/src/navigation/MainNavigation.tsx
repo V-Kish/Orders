@@ -3,7 +3,8 @@ import {MainStack} from './MainStack';
 import {AuthStack} from './AuthStack';
 import {useDispatch, useSelector} from 'react-redux';
 import {reduxTypes} from '../Types';
-import {CommonActions, NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
+import messaging from '@react-native-firebase/messaging';
 import {navigator} from '../Core/Navigator';
 import {currentUser} from '../Core/CurrentUser';
 import {Dictionaries} from '../DataProvider/Dictionaries';
@@ -12,20 +13,26 @@ import {getOrdersCount} from '../store/actions/Dictionaries';
 export const MainNavigation = () => {
   const dispatch = useDispatch();
   async function getUserData() {
- await currentUser()
+    await currentUser()
       .secureUserDataGet()
       .then(async (response) => {
         const date = JSON.parse(response);
-        console.log('date',date)
+        console.log('date', date);
         if (date === null || date.userToken === null) {
           navigator().changeNavigationStateAuth(true, dispatch);
-            navigator().state.prevScreen.push({name: "RegistrationScreen", params: {data: {},key: undefined, screen: null}});
+          navigator().state.prevScreen.push({
+            name: 'RegistrationScreen',
+            params: {data: {}, key: undefined, screen: null},
+          });
         } else {
           currentUser().restoreUserData = response;
           try {
             await Dictionaries.InitDictionaries(function () {
               navigator().changeNavigationStateAuth(false, dispatch);
-              navigator().state.prevScreen.push({name: "HomeScreen", params: {data: {},key: undefined, screen: null}});
+              navigator().state.prevScreen.push({
+                name: 'HomeScreen',
+                params: {data: {}, key: undefined, screen: null},
+              });
             }, dispatch);
           } catch (ex) {
             console.warn('Auth getTokenFireBase', ex);
@@ -45,8 +52,34 @@ export const MainNavigation = () => {
       });
   }
   useEffect(() => {
-    console.log('useEffect');
     getUserData().then();
+  }, []);
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+      if (currentUser().userToken !== null) {
+        global.pushMessagesHandler.setBackground(false);
+        global.pushMessagesHandler.checkMessageType(remoteMessage);
+      }
+    });
+    return unsubscribe;
+  }, []);
+  useEffect(() => {
+    const unsubscribe = messaging().setBackgroundMessageHandler(
+      async (remoteMessage) => {
+        if (currentUser().userToken !== null) {
+          global.pushMessagesHandler.setBackground(true);
+          global.pushMessagesHandler.checkMessageType(remoteMessage);
+        }
+      },
+    );
+    return unsubscribe;
+  }, []);
+  useEffect(() => {
+    // Assume a message-notification contains a "type" property in the data payload of the screen to open
+    messaging().onNotificationOpenedApp((remoteMessage) => {
+      global.pushMessagesHandler.setIsOpenBackground(true);
+      global.pushMessagesHandler.checkMessageType(remoteMessage);
+    });
   }, []);
   const isAuthStack = useSelector(
     (state: reduxTypes) => state.start.isAuthStack,

@@ -6,8 +6,8 @@ import {HeaderView} from '../View/HeaderView/HeaderView';
 import {OrderUserView} from '../View/OrderView/OrderUserView';
 import {
   mockupHeightToDP as hp,
-  mockupWidthToDP as wp,
 } from '../constants/Dimensions';
+import {navigator} from '../Core/Navigator';
 export const OrderScreen = () => {
   return (
     <View style={styles.container}>

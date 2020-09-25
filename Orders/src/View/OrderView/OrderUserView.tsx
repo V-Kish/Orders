@@ -61,7 +61,7 @@ export const OrderUserView = () => {
       </View>
       <View style={styles.lastBlock}>
         <View style={styles.containers}>
-          {orderData.system.status === 3 && (
+          {orderData.system.status === 1 && (
             <>
               <Text style={styles.textDefaultSecond}>Відділення: </Text>
               <Text style={styles.department}>{selectedDepartments[0].name}</Text>
@@ -80,7 +80,7 @@ export const OrderUserView = () => {
           textColor={'white'}
         />
         <View style={{width: wp(20)}} />
-        {orderData.system.status === 3 && (
+        {orderData.system.status === 1 && (
           <ButtonView
             title={'Взяти в роботу'}
             color={COLORS.BUTTON_LIGHT_GREEN}
