@@ -196,7 +196,7 @@ class Dictionaries {
         await currentUser().logout();
         return;
       }
-      dispatch(loadOrdersStatus(response.data));
+      dispatch(loadOrdersStatus(response.result));
       this._ordersStatusesStatus = true;
       this.onComplete();
     } catch (ex) {

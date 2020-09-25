@@ -10,8 +10,6 @@ export const HomeScreen = () => {
   const orderDataCount = useSelector(
     (state: reduxTypes) => state.dictionaries.orderDataCount,
   );
-  console.log('orders', orders);
-
   return (
     <>
       <HeaderView
