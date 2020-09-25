@@ -1,14 +1,16 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import { COLORS } from '../../../constants/colors'
 import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,
   } from '../../../constants/Dimensions';
+import { ICONS } from '../../../constants/icons';
 
 export const OperationType = ({item}) => {
     const type = item.detail.operationType
     let circleText = ''
+    let circleImg = false
     let operationText = ''
     let style = type
     switch(type){
@@ -32,15 +34,20 @@ export const OperationType = ({item}) => {
             style = 'reject'
             break;
         case 'done':
-            circleText = 'В'
+            circleImg = true
+            circleText = ''
             style = 'done'
             break;
     }
     return <View style={styles.operationTypeView}>
         <View style={{...styles.operationTypeCircle, ...styles[`operationTypeCircle_${style}`]}}>
-            <Text style={styles.operationTypeCircleText}>
+            {circleText!=='' && <Text style={styles.operationTypeCircleText}>
                 {circleText}
-            </Text>
+            </Text>}
+            {circleImg && <Image
+                    source={ICONS.done}
+                    style={styles.circleImg}
+            />}
         </View>
         <Text style={styles.operationTypeText}>
             {operationText}
@@ -91,4 +98,8 @@ const styles = StyleSheet.create({
         color: COLORS.STATUS_GRAY_DARK,
         textAlign: 'center'
     },
+    circleImg: {
+        width: wp(50),
+        height: wp(50)
+    }
 })
