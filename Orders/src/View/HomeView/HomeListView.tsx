@@ -13,7 +13,8 @@ import {mockupHeightToDP as hp} from '../../constants/Dimensions';
 import {reduxTypes} from '../../Types';
 import {GetOrderInfo} from '../../functions/GetOrderInfo';
 import {paginationMainList} from '../../store/actions/EditUserInfo';
-import {OrderItem} from "./OrderItem/OrderItem";
+import {OrderItem} from './OrderItem/OrderItem';
+import { COLORS } from '../../constants/colors';
 
 export const HomeListView = () => {
   const dispatch = useDispatch();
@@ -84,8 +85,13 @@ export const HomeListView = () => {
         <View style={styles.container}>
           {orders.Items &&
             orders.Items.map((item: any) => {
-               return <OrderItem key={item.system.orderNum} item={item} />;
+              return <OrderItem key={item.system.orderNum} item={item} />;
             })}
+          {!statePreloader && (
+            <View style={styles.preloader}>
+              <ActivityIndicator size="large" color={COLORS.FONT_YELLOW} />
+            </View>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
