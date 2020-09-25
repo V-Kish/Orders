@@ -18,6 +18,7 @@ import {reduxTypes} from '../../Types';
 import {GetOrderInfo} from '../../functions/GetOrderInfo';
 import {Paginate} from '../../functions/Pagination';
 import {COLORS} from '../../constants/colors';
+import {convertToUTCString, dateParse} from "../../helpers/DateParse";
 export const HomeListView = () => {
   const dispatch = useDispatch();
   const [pagination, setPagination] = useState({
@@ -38,8 +39,8 @@ export const HomeListView = () => {
       contentSize.height - paddingToBottom
     );
   };
+  console.log('start 1', orders);
   async function loadMorePagination() {
-    console.log('start 1', orders);
     setStatePreloader(false);
     setPagination((prevState) => ({
       ...prevState,

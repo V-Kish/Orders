@@ -6,8 +6,10 @@ import {
   LOAD_STATUS,
   GET_ORDERS,
   ORDER_DATA,
-  ORDER_DATA_COUNT, GET_ORDERS_MORE,
+  ORDER_DATA_COUNT,
+  GET_ORDERS_MORE,
 } from '../types';
+import {dateParse, convertToUTCString} from '../../helpers/DateParse';
 
 const initialState = {
   listDepartments: [],
@@ -51,9 +53,16 @@ export const Dictionaries = (
         ordersStatus: action.payload,
       };
     case GET_ORDERS:
+      let orders = action.payload;
+      function sortHistoryArray(a, b) {
+        let dateA = dateParse(convertToUTCString(a.system.statusDate));
+        let dateB = dateParse(convertToUTCString(b.system.statusDate));
+        return dateB.getTime() - dateA.getTime();
+      }
+      orders.Items.sort(sortHistoryArray);
       return {
         ...state,
-        orders: action.payload,
+        orders: orders,
       };
     case ORDER_DATA_COUNT:
       return {
@@ -61,8 +70,8 @@ export const Dictionaries = (
         orderDataCount: action.payload[0].count,
       };
     case ORDER_DATA:
-      let orderData = action.payload
-      console.log('orderData',orderData)
+      let orderData = action.payload;
+      console.log('orderData', orderData);
       const selectedDepartments = state.listDepartments.filter(
         (item) => item.id === orderData.detail.departmentId,
       );
