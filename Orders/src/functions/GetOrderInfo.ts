@@ -43,6 +43,7 @@ class GetOrderInfo {
         dispatch(getOrders(response.data));
       }
       console.log('responseMethodsRequest',response)
+     return  response
     } catch (ex) {
       console.warn('GetOrderInfo getOrder', ex);
     }

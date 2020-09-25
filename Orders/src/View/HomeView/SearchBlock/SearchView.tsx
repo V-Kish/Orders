@@ -8,6 +8,7 @@ import {
   paginationMainList,
   searchParam,
 } from '../../../store/actions/EditUserInfo';
+import { reduxTypes } from '../../../Types';
 
 export const SearchView = () => {
   const dispatch = useDispatch();

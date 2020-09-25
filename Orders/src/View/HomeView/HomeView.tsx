@@ -2,39 +2,35 @@ import React, {useRef, useState} from 'react';
 import {
   StyleSheet,
   View,
-   Button
+  Button,
+  SafeAreaView,
+  ScrollView,
+  RefreshControl,
 } from 'react-native';
 import {HomeListView} from './HomeListView';
-import { SearchView } from './SearchBlock/SearchView';
-import { CustomModal } from '../Modal/CustomModal';
-import { useSelector } from 'react-redux';
+import {SearchView} from './SearchBlock/SearchView';
+import {CustomModal} from '../Modal/CustomModal';
+import {useSelector} from 'react-redux';
+import {GetOrderInfo} from '../../functions/GetOrderInfo';
+import {paginationMainList} from '../../store/actions/EditUserInfo';
 
 export const HomeView = () => {
-    const [modalVisible, setModalVisible] = useState(false)
-    const departmentList = useSelector(
-        (state: reduxTypes) => state.dictionaries.listDepartments,
-    );
-    const preparedList = departmentList.map(d=>{
-        return {id: d.id, text: d.name}
-    })
-    const [selectedDepartment, setSelectedDepartment] = useState(preparedList[0])
-    
-    const switchModalVisible = () => {
-        setModalVisible(!modalVisible)
-    }
+  const [modalVisible, setModalVisible] = useState(false);
+  const departmentList = useSelector(
+    (state: reduxTypes) => state.dictionaries.listDepartments,
+  );
+  const preparedList = departmentList.map((d) => {
+    return {id: d.id, text: d.name};
+  });
+  const [selectedDepartment, setSelectedDepartment] = useState(preparedList[0]);
+
+  const switchModalVisible = () => {
+    setModalVisible(!modalVisible);
+  };
   return (
+
     <View style={styles.container}>
-      <Button title="on" onPress={switchModalVisible}/>
-      <CustomModal 
-        type="LIST"
-        modalVisible={modalVisible}
-        changeModalVisible={switchModalVisible}
-        title="Зміна відділення видачі"
-        list={preparedList}
-        listSelectedItem={selectedDepartment}
-        setListSelectedItem={setSelectedDepartment}
-      />
-      <SearchView/>
+      <SearchView />
       <HomeListView />
     </View>
   );
@@ -42,7 +38,7 @@ export const HomeView = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    backgroundColor: 'rgba(255,255,255,1)',
+      flex:1,
+     backgroundColor: 'rgba(255,255,255,1)',
   },
 });
