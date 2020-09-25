@@ -57,18 +57,19 @@ export const HomeView = () => {
       return;
     }
     setStatePreloader(false);
+    console.log('zzzzzz paginationBody',paginationBody)
     dispatch(
       paginationMainList({
-        pageIndex: 1,
+        pageIndex: paginationBody.pageIndex,
         pageSize: paginationBody.pageSize + 10,
         operationType: 'all',
         departmentId: -1,
       }),
     );
-    if (paginationBody.pageSize >= 100) {
+    if (paginationBody.pageSize > 100) {
       dispatch(
         paginationMainList({
-          pageIndex: paginationBody.pageIndex + 1,
+          pageIndex: ++paginationBody.pageIndex,
           pageSize: 10,
           operationType: 'all',
           departmentId: -1,
@@ -97,7 +98,7 @@ export const HomeView = () => {
       <ScrollView
         contentContainerStyle={styles.scrollView}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[COLORS.HEADER_BLUE]}/>
         }
         onScroll={async ({nativeEvent}) => {
           if (loadDataMore(nativeEvent) && statePreloader) {

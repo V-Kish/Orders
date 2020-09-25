@@ -10,9 +10,9 @@ import {ListViewScroll} from './ListViewScroll'
 import { ICONS } from '../../constants/icons';
 
 export const ListModal = ({
-    title = "", 
-    content = "", 
-    closeModal = ()=>{}, 
+    title = "",
+    content = "",
+    closeModal = ()=>{},
     confirmAction = (item) => {},
     list = []
 }) => {
@@ -24,7 +24,7 @@ export const ListModal = ({
             <View style={styles.content}>
                 <View style={styles.modalHeaderView}>
                     <View style={styles.modalHeaderImageView}>
-                        <Image 
+                        <Image
                           source={ICONS.mapPoint}
                           style={styles.modalHeaderImage}
                         />
@@ -44,26 +44,20 @@ export const ListModal = ({
                 />
             </View>
         </View>
-  
+
 };
 
 const styles = StyleSheet.create({
   container: {
     width: '90%',
-    height: '100%',
+    height: '80%',
   },
   content: {
-      minHeight: '80%',
+      minHeight: '90%',
       flex: 1,
-    // padding: hp(30),
-    // flex: 1,
-    // justifyContent: 'space-between',
-    // backgroundColor: 'red',
-    // height: '100%'
   },
   buttonsView: {
-    height: '20%',
-    flex: 1,
+    height: '10%',
   },
   modalHeaderView: {
     backgroundColor: COLORS.STATUS_BLUE,
