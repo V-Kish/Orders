@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import { CustomModalButtons } from './CustomModalButtons';
 import { ModalButton } from './ModalButton';
 
-export const AlertModal = ({title, content, closeModal}) => {
+export const AlertModal = ({title = "", content = "", closeModal = ()=>{}}) => {
   
     return <View style={styles.container}>
             <View style={styles.modalHeaderView}>
@@ -11,18 +12,19 @@ export const AlertModal = ({title, content, closeModal}) => {
             <View style={styles.modalContentView}>
                 <Text style={styles.modalContentText}>{content}</Text>
             </View>
-            <View style={styles.buttonsView}>
-                <ModalButton
-                    onPress={closeModal}
-                    title="Ок"
-                />
-            </View>
+            <CustomModalButtons
+                buttonOk={true}
+                changeModalVisible={closeModal}
+            />
         </View>
   
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+      flex: 1,
+      justifyContent: 'space-between'
+  },
   modalHeaderView: {},
   modalHeaderText: {},
   modalContentView: {},
