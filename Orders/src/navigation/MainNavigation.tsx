@@ -58,7 +58,7 @@ export const MainNavigation = () => {
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
       if (currentUser().userToken !== null) {
         global.pushMessagesHandler.setBackground(false);
-        global.pushMessagesHandler.checkMessageType(remoteMessage);
+        global.pushMessagesHandler.checkMessageType(remoteMessage,dispatch);
       }
     });
     return unsubscribe;
@@ -68,7 +68,7 @@ export const MainNavigation = () => {
       async (remoteMessage) => {
         if (currentUser().userToken !== null) {
           global.pushMessagesHandler.setBackground(true);
-          global.pushMessagesHandler.checkMessageType(remoteMessage);
+          global.pushMessagesHandler.checkMessageType(remoteMessage,dispatch);
         }
       },
     );
@@ -78,7 +78,7 @@ export const MainNavigation = () => {
     // Assume a message-notification contains a "type" property in the data payload of the screen to open
     messaging().onNotificationOpenedApp((remoteMessage) => {
       global.pushMessagesHandler.setIsOpenBackground(true);
-      global.pushMessagesHandler.checkMessageType(remoteMessage);
+      global.pushMessagesHandler.checkMessageType(remoteMessage,dispatch);
     });
   }, []);
   const isAuthStack = useSelector(

@@ -1,4 +1,6 @@
-import {navigator} from './Navigator';
+import {GetOrderInfo} from '../functions/GetOrderInfo';
+import {MethodsRequest} from '../DataProvider/MethodsRequest';
+import {getOrdersCount} from '../store/actions/Dictionaries';
 
 export const pushMessagesHandler = {
   userToken: null,
@@ -20,20 +22,31 @@ export const pushMessagesHandler = {
     this.isOpenBackground = bool;
   },
 
-  checkMessageType: function (remoteMessage) {
+  checkMessageType: function (remoteMessage, dispatch) {
     console.log('remoteMessage', remoteMessage);
     if (remoteMessage.data.hasOwnProperty('events')) {
       const parseMessageData = JSON.parse(remoteMessage.data.events);
       const messageEvent = parseMessageData[0];
       switch (messageEvent.eventType) {
-        case 'event_loyaltyProg_rateChange':
-          if (navigator().getCurrentScreen() === 'Chat') {
-            this._updateListOfMessage('rate').then();
-          }
+        case 'event_loyaltyProg_orderCreate':
+          this._getOrders(messageEvent.evendData, dispatch).then();
+          this._getOrdersCount(messageEvent.evendData, dispatch).then();
+          break;
+        case 'event_loyaltyProg_orderStatusChange':
+          this._getOrders(messageEvent.evendData, dispatch).then();
+          this._getOrdersCount(messageEvent.evendData, dispatch).then();
           break;
       }
     }
   },
 
-  _updateListOfMessage: async function (type: string) {},
+  _getOrders: async function (evendData, dispatch) {
+    await GetOrderInfo.getOrders(dispatch);
+  },
+  _getOrdersCount: async function (evendData, dispatch) {
+    const response = await MethodsRequest.getOrdersNumber();
+    if (response.statusCode === 200) {
+      dispatch(getOrdersCount(response.result));
+    }
+  },
 };
