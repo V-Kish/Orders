@@ -26,7 +26,9 @@ export const MainNavigation = () => {
             name: 'RegistrationScreen',
             params: {data: {}, key: undefined, screen: null},
           });
-          dispatch(PreloaderMain(false));
+          setTimeout(()=>{
+            dispatch(PreloaderMain(false));
+          },400)
         } else {
           currentUser().restoreUserData = response;
           try {

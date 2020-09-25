@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  Linking,
 } from 'react-native';
 import {
   mockupHeightToDP as hp,
@@ -185,11 +186,11 @@ export const OrderUserView = () => {
           <Text style={styles.textDefault}>Номер карти: </Text>
           <Text style={styles.userCard}>{userData.cards[0]?.number}</Text>
         </View>
-        <View style={styles.containers}>
+        <TouchableOpacity style={styles.containers} onPress={() => Linking.openURL(`tel:${userData.user.phone}`)}>
           <Text style={styles.textDefault}>Номер телефону: </Text>
           <Image source={ICONS.phoneIcon} style={styles.imgPhone} />
           <Text style={styles.userPhone}>{userData.user.phone}</Text>
-        </View>
+        </TouchableOpacity>
         <View style={styles.containers}>
           <Text style={styles.textDefault}>Операція обміну: </Text>
           <Text style={styles.operationType}>
