@@ -36,18 +36,16 @@ export const OperationType = ({item}) => {
             style = 'done'
             break;
     }
-    return (
-        <View style={styles.operationTypeView}>
-            <View style={{...styles.operationTypeCircle, ...styles[`operationTypeCircle_${style}`]}}>
-                <Text style={styles.operationTypeCircleText}>
-                    {circleText}
-                </Text>
-            </View>
-            <Text style={styles.operationTypeText}>
-                {operationText}
+    return <View style={styles.operationTypeView}>
+        <View style={{...styles.operationTypeCircle, ...styles[`operationTypeCircle_${style}`]}}>
+            <Text style={styles.operationTypeCircleText}>
+                {circleText}
             </Text>
         </View>
-    )
+        <Text style={styles.operationTypeText}>
+            {operationText}
+        </Text>
+    </View>
 }
 
 const styles = StyleSheet.create({
@@ -58,13 +56,6 @@ const styles = StyleSheet.create({
         width: '20%',
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    operationTypeCircle: {
-        width: wp(60),
-        height: wp(60),
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 100,
     },
     operationTypeCircle_buy: {
         backgroundColor: COLORS.STATUS_RED
@@ -82,10 +73,17 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.STATUS_GREEN_WHITE
     },
     operationTypeCircleText: {
-        color: 'white',
-        fontSize: wp(30),
+         color: 'white',
+         fontSize: wp(30),
         fontWeight: '100',
         textAlign: 'center'
+    },
+    operationTypeCircle: {
+         width: wp(60),
+         height: wp(60),
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 100,
     },
     operationTypeText: {
         fontSize: wp(12),

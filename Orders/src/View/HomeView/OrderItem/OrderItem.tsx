@@ -10,7 +10,11 @@ import {reduxTypes} from '../../../Types';
 import {OrderSystemInfo} from './OrderSystemInfo';
 import {GetOrderInfo} from '../../../functions/GetOrderInfo';
 import {OrderMainInfo} from './OrderMainInfo';
-import {recalculateSumResult, statusToType} from '../../../helpers/StatusToType';
+import {
+  recalculateSumResult,
+  statusToType,
+} from '../../../helpers/StatusToType';
+import {COLORS} from '../../../constants/colors';
 
 export const OrderItem = ({item}) => {
   const dispatch = useDispatch();
@@ -52,6 +56,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
     elevation: 1,
+    borderBottomWidth: 2,
+    borderColor: COLORS.TEXT_REJECT,
   },
   new: {
     backgroundColor: '#F5FFF9',
