@@ -6,35 +6,17 @@ import {
     mockupWidthToDP as wp,
   } from '../../constants/Dimensions';
 import { COLORS } from '../../constants/colors';
-import {ListViewScroll} from './ListViewScroll'
+import { color } from 'react-native-reanimated';
+import { CustomFormInputs } from './CustomFormInputs';
+import { ListItem } from './ListItem';
 
-export const ListModal = ({
-    title = "", 
-    content = "", 
-    closeModal = ()=>{}, 
-    confirmAction = () => {},
-    list = []
+export const ListViewScroll = ({
+    list = [],
 }) => {
-    return <View style={styles.container}>
-            <View style={styles.content}>
-                <View style={styles.modalHeaderView}>
-                    <TouchableOpacity style={styles.modalHeaderImageView} onPress={closeModal}>
-                        <Text>X</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.modalHeaderText}>{title}</Text>
-                </View>
-                <ScrollView>
-                    <ListViewScroll list={list}/>
-                </ScrollView>
-            </View>
-            <View style={styles.buttonsView}>
-                <CustomModalButtons
-                    customButton={{visible: true, title: 'Змінити'}}
-                    customButtonPress={confirmAction}
-                    cancelButton={true}
-                    cancelButtonPress={closeModal}
-                />
-            </View>
+    return <View style={styles.listView}>
+                {list && list.map((item, i)=>{
+                    return <ListItem key={i} item={item}/>
+                })}
         </View>
   
 };

@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import React, { useState } from 'react';
+import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
@@ -7,9 +7,12 @@ import {
 import {ICONS} from '../../constants/icons';
 import {COLORS} from '../../constants/colors';
 import {ButtonView} from './ButtonView';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {reduxTypes, userDataTypes, orderDataTypes} from '../../Types';
+import { CustomModal } from '../Modal/CustomModal';
+import { SelectDepartmentInput } from './SelectDepartmentInput'
 export const OrderUserView = () => {
+  const dispatch = useDispatch()
   const userData: userDataTypes = useSelector(
     (state: reduxTypes) => state.ditUser.editUser,
   );
@@ -19,11 +22,85 @@ export const OrderUserView = () => {
   const selectedDepartments: Array<any> = useSelector(
       (state: reduxTypes) => state.dictionaries.selectedDepartments,
   );
-  console.log('userKISH', userData);
-  console.log('userKISH orderData', orderData);
-  console.log('userKISH selectedDepartments', selectedDepartments);
+  
+  // modals visible
+  const [modalRejectVisible, setModalRejectVisible] = useState(false)
+  const [modalSendOnWorkVisible, setModalSendOnWorkVisible] = useState(false)
+  const [modalDepartmentVisible, setModalDepartmentVisible] = useState(false)
+
+  // departments list 
+  const departmentList = useSelector(
+    (state: reduxTypes) => state.dictionaries.listDepartments,
+  );
+  const preparedList = departmentList.map(d=>{
+      return {id: d.id, text: d.name}
+  })
+
+  // switch visible modals
+  const switchRejectModal = () => {
+    setModalRejectVisible(!modalRejectVisible)
+  }
+  const switchSendOnWorkModal = () => {
+    setModalSendOnWorkVisible(!modalSendOnWorkVisible)
+  }
+  const switchDepartmentModal = () => {
+    setModalDepartmentVisible(!modalDepartmentVisible)
+  }
+  const getInWorkButtonPress = () => {
+    console.log('getOnWork press')
+  }
+
+  // confirm modals actions
+  const onModalRejectConfirm = (text) =>{
+    setModalRejectVisible(!modalRejectVisible)
+    console.log('reject confirm', text)
+  }
+
+  const onModalSendOnWorkConfirm = () =>{
+    setModalSendOnWorkVisible(!modalSendOnWorkVisible)
+    console.log('send on work confirm')
+  }
+
+
+  const onDepartmentConfirm = (item) =>{
+    setModalDepartmentVisible(!modalDepartmentVisible)
+    // dispatch(se)
+    console.log('choose department confirm')
+  }
+  
   return (
     <View>
+      <CustomModal
+        type="FORM"
+        modalVisible={modalRejectVisible}
+        changeModalVisible={switchRejectModal}
+        confirmAction={onModalRejectConfirm}
+        title="Скасування заявки"
+        inputs={[
+          {
+              text: "Вкажіть причину скасування",
+              placeholder: "Введіть причину",
+          }
+        ]}
+      />
+      <CustomModal 
+        type="CONFIRM"
+        modalVisible={modalSendOnWorkVisible}
+        changeModalVisible={switchSendOnWorkModal}
+        confirmAction={onModalSendOnWorkConfirm}
+        title="Відправити заявку на видачу"
+        content={`При відправці заявки на видачу - клієнту буде надіслано сповіщення з інформацією де, 
+        як і коли він зможе здійснити операцію. \r\n
+        Ви впевнені що заявку потрібно перевести в статус “Видача”?`}
+      />
+      <CustomModal 
+        type="LIST"
+        modalVisible={modalDepartmentVisible}
+        changeModalVisible={switchDepartmentModal}
+        confirmAction={onDepartmentConfirm}
+        title="Зміна відділення видачі"
+        list={preparedList}
+      />
       <View style={styles.blockContainer}>
         <View style={styles.containers}>
           <Text style={styles.textDefault}>Клієнт: </Text>
@@ -64,12 +141,13 @@ export const OrderUserView = () => {
           {orderData.system.status === 1 && (
             <>
               <Text style={styles.textDefaultSecond}>Відділення: </Text>
-              <Text style={styles.department}>{selectedDepartments[0].name}</Text>
+              <Text style={styles.department}>{selectedDepartments.name}</Text>
             </>
           )}
           {orderData.system.status === 3 && (
-            //Жека в'єби тернар
-            <></>
+            <SelectDepartmentInput
+              switchDepartmentModal={switchDepartmentModal}
+            />
           )}
         </View>
       </View>
@@ -78,6 +156,7 @@ export const OrderUserView = () => {
           title={'Відхилити'}
           color={COLORS.HEADER_RED}
           textColor={'white'}
+          onPress={switchRejectModal}
         />
         <View style={{width: wp(20)}} />
         {orderData.system.status === 1 && (
@@ -85,6 +164,7 @@ export const OrderUserView = () => {
             title={'Взяти в роботу'}
             color={COLORS.BUTTON_LIGHT_GREEN}
             textColor={'white'}
+            onPress={getInWorkButtonPress}
           />
         )}
         {orderData.system.status === 2 && (
@@ -92,6 +172,7 @@ export const OrderUserView = () => {
             title={'Відправити на видачу'}
             color={COLORS.BUTTON_BUY_SALE_YELLOW}
             textColor={'black'}
+            onPress={switchSendOnWorkModal}
           />
         )}
       </View>

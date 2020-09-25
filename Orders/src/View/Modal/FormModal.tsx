@@ -13,7 +13,7 @@ export const FormModal = ({
     title = "", 
     content = "", 
     closeModal = ()=>{}, 
-    confirmAction = () => {}, 
+    confirmAction = (text) => {}, 
     inputs = []
     // input example
     // {
@@ -24,7 +24,16 @@ export const FormModal = ({
     //     }
     // }
 }) => {
-  
+    const [inputText,setInputText] = useState('')
+    inputs[0].onChangeText = setInputText
+    const sendConfirmAction = () =>{
+      if(inputText===''){
+        inputs[0].error = true
+        return
+      }
+      console.log('inputText', inputText)
+      confirmAction(inputText)
+    }
     return <View style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.modalHeaderView}>
@@ -37,7 +46,7 @@ export const FormModal = ({
             </View>
             <CustomModalButtons
                 customButton={{visible: true, title: 'Скасувати', style: 'redButton'}}
-                customButtonPress={confirmAction}
+                customButtonPress={sendConfirmAction}
                 cancelButton={true}
                 cancelButtonPress={closeModal}
             />

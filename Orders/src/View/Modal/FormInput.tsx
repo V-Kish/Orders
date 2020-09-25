@@ -9,7 +9,7 @@ import { COLORS } from '../../constants/colors';
 import { TextInput } from 'react-native-gesture-handler';
 
 export const FormInput = ({
-    input = {text: '', placeholder: '', onChangeText: ()=>{}}
+    input = {text: '', placeholder: '', onChangeText: ()=>{}, error: false}
 }) => {
   
     return <View style={styles.formInputView}>
@@ -17,7 +17,7 @@ export const FormInput = ({
             <TextInput
                 placeholder={input.placeholder}
                 onChangeText={input.onChangeText}
-                style={styles.formInput}
+                style={!input.error ? styles.formInput : {...styles.formInput,...styles.error}}
             />
         </View>
   
@@ -35,4 +35,7 @@ const styles = StyleSheet.create({
     borderBottomColor: COLORS.BACKGROUND_GRAY,
     borderBottomWidth: 2
   },
+  error: {
+    borderBottomColor: COLORS.BACKGROUND_GRAY,
+  }
 });
