@@ -36,8 +36,9 @@ export const ListModal = ({
   const [scrollView, setScrollView] = useState();
   const [layoutHeight, setLayoutHeight] = useState(0);
   const confirmFunc = () => {
-    scrollToIndex(findIndex(selectedItem));
-    //  confirmAction(selectedItem)
+    
+    // scrollToIndex(findIndex(selectedItem));
+     confirmAction(selectedItem)
   };
   const findIndex = (sel) => {
     let ind = -1
@@ -59,7 +60,7 @@ export const ListModal = ({
   const firstScroll = (height,sel) => {
     scrollView.scrollTo({y: height/listDepartments.length*findIndex(sel), animated: true});
   }
-
+  
   return (
     <View style={styles.container}>
       <View style={styles.content}>
