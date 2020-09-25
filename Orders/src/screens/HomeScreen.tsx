@@ -5,7 +5,6 @@ import {reduxTypes} from '../Types';
 import {HeaderView} from '../View/HeaderView/HeaderView';
 import {ICONS} from '../constants/icons';
 import {HomeView} from '../View/HomeView/HomeView';
-import {PreloaderMain} from "../store/actions/AppStart";
 export const HomeScreen = () => {
   const orderDataCount = useSelector(
     (state: reduxTypes) => state.dictionaries.orderDataCount,
