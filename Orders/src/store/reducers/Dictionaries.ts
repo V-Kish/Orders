@@ -54,7 +54,7 @@ export const Dictionaries = (
         ordersStatus: action.payload,
       };
     case SELECTED_ITEM_DEP:
-      let selectedDep = state.listDepartments.filter(
+      let selectedDep = state.listDepartments.find(
         (item) => item.id === action.payload,
       );
       return {
