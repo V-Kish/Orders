@@ -54,9 +54,7 @@ export const OrderMainInfo = ({item}) => {
             styles.operationValueText
           }>{`${item.detail.sum} ${item.detail.currencyCode}`}</Text>
         <Text style={styles.operationArrow}>{'>'}</Text>
-        <Text style={styles.operationValueText}>{`${(
-          item.detail.sum * item.detail.rate
-        ).toFixed(2)} ${item.detail.currencyToCode}`}</Text>
+        <Text style={styles.operationValueText}>{`${item.detail.sumTo} ${item.detail.currencyToCode}`}</Text>
       </View>
       {/* course and city  */}
       {showCourceAndCity && (

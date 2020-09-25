@@ -24,6 +24,7 @@ class GetOrderInfo {
   static async getOrders(
     dispatch: Dispatch<any>,
     searchText = '',
+    status:number = -1,
     body: Orders = {
       pageIndex: 1,
       pageSize: 10,
@@ -35,6 +36,7 @@ class GetOrderInfo {
   ) {
     let bodyRequest = body;
     bodyRequest.sQuery = searchText;
+    bodyRequest.status = status;
     try {
       const response = await MethodsRequest.getOrders(bodyRequest);
       if (response.statusCode === 200) {
