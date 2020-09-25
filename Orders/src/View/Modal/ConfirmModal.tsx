@@ -36,14 +36,14 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   content: {
-    padding: hp(30),
+    padding: wp(30),
     // flex: 1,
   },
   modalHeaderView: {
     width: '100%',
   },
   modalHeaderText: {
-      fontSize: hp(32),
+      fontSize: wp(32),
       lineHeight: 28,
       paddingBottom: hp(5),
       fontWeight: 'bold'
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 
   },
   modalContentText: {
-      fontSize: hp(24),
+      fontSize: wp(24),
       lineHeight: 20,
       color: COLORS.STATUS_GRAY_DARK
   },

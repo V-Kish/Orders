@@ -13,12 +13,12 @@ export const OperationType = ({item}) => {
     let style = type
     switch(type){
         case 'buy':
-            circleText = 'К'
-            operationText = 'купівля'
-            break;
-        case 'sale':
             circleText = 'П'
             operationText = 'продаж'
+            break;
+        case 'sale':
+            circleText = 'К'
+            operationText = 'купівля'
             break;
         case 'cross':
             circleText = 'Кк'
@@ -58,10 +58,10 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     operationTypeCircle_buy: {
-        backgroundColor: COLORS.STATUS_RED
+        backgroundColor: COLORS.STATUS_GREEN
     },
     operationTypeCircle_sale: {
-        backgroundColor: COLORS.STATUS_GREEN
+        backgroundColor: COLORS.STATUS_RED
     },
     operationTypeCircle_cross: {
         backgroundColor: COLORS.STATUS_YELLOW
