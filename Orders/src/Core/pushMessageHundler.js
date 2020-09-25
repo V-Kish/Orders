@@ -32,10 +32,6 @@ export const pushMessagesHandler = {
           this._getOrders(messageEvent.evendData, dispatch).then();
           this._getOrdersCount(messageEvent.evendData, dispatch).then();
           break;
-        case 'event_loyaltyProg_orderStatusChange':
-          this._getOrders(messageEvent.evendData, dispatch).then();
-          this._getOrdersCount(messageEvent.evendData, dispatch).then();
-          break;
       }
     }
   },
