@@ -243,17 +243,6 @@ export const OrderUserView = () => {
             onPress={switchRejectModal}
           />
         )}
-        {orderData.system.status === 3 && (
-            <>
-            <View style={{width: wp(20)}} />
-          <ButtonView
-            title={'Виконати'}
-            color={COLORS.HEADER_BLUE}
-            textColor={'white'}
-            onPress={switchRejectModal}
-          />
-          </>
-        )}
         <View style={{width: wp(20)}} />
         {orderData.system.status === 1 && (
           <ButtonView
