@@ -18,7 +18,7 @@ export const HeaderView = ({
   return (
     <View style={{...styles.container, backgroundColor: color}}>
       <View style={styles.imageView}>
-        <TouchableOpacity onPress={() => onPress()}>
+        <TouchableOpacity onPress={onPress !== false ? () => onPress():null}>
           <Image source={icon} style={styles.image} />
         </TouchableOpacity>
       </View>
