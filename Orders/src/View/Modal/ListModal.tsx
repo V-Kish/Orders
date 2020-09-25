@@ -15,7 +15,9 @@ export const ListModal = ({
     content = "", 
     closeModal = ()=>{}, 
     confirmAction = () => {},
-    list = []
+    list = [],
+    selectedItem,
+    setSelectedItem = (item)=>{}
 }) => {
   
     return <View style={styles.container}>
@@ -29,7 +31,7 @@ export const ListModal = ({
                 <View style={styles.listView}>
                     <ScrollView style={{}}>
                         {list && list.map((item, i)=>{
-                            return <ListItem key={i} item={item}/>
+                            return <ListItem key={i} item={item} activeItem={selectedItem} changeActiveItem={setSelectedItem}/>
                         })}
                     </ScrollView>
                 </View>
@@ -88,7 +90,7 @@ const styles = StyleSheet.create({
   },
 
   listView: {
-    //   flex: 1
+      flex: 1
     // height: '60%'
   }
 });

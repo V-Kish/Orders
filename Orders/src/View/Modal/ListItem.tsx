@@ -46,6 +46,7 @@ export const ListItem = ({
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: hp(20),
     marginBottom: hp(30),
   },

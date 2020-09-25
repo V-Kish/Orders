@@ -7,10 +7,18 @@ import {
 import {HomeListView} from './HomeListView';
 import { SearchView } from './SearchBlock/SearchView';
 import { CustomModal } from '../Modal/CustomModal';
+import { useSelector } from 'react-redux';
 
 export const HomeView = () => {
     const [modalVisible, setModalVisible] = useState(false)
-
+    const departmentList = useSelector(
+        (state: reduxTypes) => state.dictionaries.listDepartments,
+    );
+    const preparedList = departmentList.map(d=>{
+        return {id: d.id, text: d.name}
+    })
+    const [selectedDepartment, setSelectedDepartment] = useState(preparedList[0])
+    
     const switchModalVisible = () => {
         setModalVisible(!modalVisible)
     }
@@ -22,23 +30,9 @@ export const HomeView = () => {
         modalVisible={modalVisible}
         changeModalVisible={switchModalVisible}
         title="Зміна відділення видачі"
-        list={[{
-                id:1, 
-                text: 'asdasd'
-            },{
-                id:2, 
-                text: 'asdasdwqeweasd'
-            },{
-                id:3, 
-                text: 'asdasdasdasdasd'
-            },{
-                id:4, 
-                text: 'asdasdasdasd'
-            },{
-                id:5, 
-                text: 'asdasasdasdd'
-            },
-        ]}
+        list={preparedList}
+        listSelectedItem={selectedDepartment}
+        setListSelectedItem={setSelectedDepartment}
       />
       <SearchView/>
       <HomeListView />

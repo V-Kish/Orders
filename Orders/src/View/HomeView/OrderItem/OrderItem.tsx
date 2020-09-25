@@ -25,7 +25,6 @@ export const OrderItem = ({item}) => {
   ).code;
   item.system.type = statusToType(item.system.status);
   item.detail.sumTo = recalculateSumResult(item);
-  console.log('itemrecalculateSumResult',item)
   const handleItemPress = () => {
     GetOrderInfo.getOrder(dispatch, item);
   };
