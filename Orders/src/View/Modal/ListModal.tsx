@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image} from 'react-native';
 import { CustomModalButtons } from './CustomModalButtons';
 import {
@@ -17,8 +17,13 @@ export const ListModal = ({
     list = []
 }) => {
     const [selectedItem, setSelectedItem] = useState()
+    const [scrollView, setScrollView] = useState()
     const confirmFunc = () => {
+      scrollToIndex(selectedItem.id)
         // confirmAction(selectedItem)
+    }
+    const scrollToIndex = (index) => {
+      scrollView.scrollTo({y: index*10, animated: true});
     }
     return <View style={styles.container}>
             <View style={styles.content}>
@@ -31,9 +36,9 @@ export const ListModal = ({
                     </View>
                     <Text style={styles.modalHeaderText}>{title}</Text>
                 </View>
-                <ScrollView
-                  ref={scrollRef}
-                >
+                <ScrollView  ref={ref => {
+                    setScrollView(ref);
+                }}>
                     <ListViewScroll list={list} setSelectedItem={setSelectedItem}/>
                 </ScrollView>
             </View>
