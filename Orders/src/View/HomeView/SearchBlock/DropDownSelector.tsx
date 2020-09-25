@@ -7,28 +7,28 @@ import {
   Dimensions,
   Animated,
 } from 'react-native';
-import {HomeListView} from './HomeListView';
+import {HomeListView} from '../HomeListView';
 import {SearchContainer} from './SearchContainer';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
-} from '../../constants/Dimensions';
-import {useSelector} from 'react-redux';
-import {COLORS} from '../../constants/colors';
-import { OrderStatus } from '../Components/OrderStatus';
-import { statusToType } from '../../helpers/StatusToType';
+} from '../../../constants/Dimensions';
+import {useDispatch, useSelector} from 'react-redux';
+import {COLORS} from '../../../constants/colors';
 import { DropDownItem } from './DropDownItem';
+import { GetOrderInfo } from '../../../functions/GetOrderInfo';
 
-export const DropDownSelector = ({dropdown}) => {
+export const DropDownSelector = ({
+  dropdown, 
+  changeDropDownVisible, 
+  changeItemStatus, 
+  currentStatus,
+  defaultStatus,
+}) => {
   const ordersStatus = useSelector(
     (state: reduxTypes) => state.dictionaries.ordersStatus,
   );
-  const [currentStatus, setCurrentStatus] = useState(ordersStatus ? ordersStatus[0] : null)
 
-  const handleItemChange = (item:any) => {
-    setCurrentStatus(item)
-    console.log('ordersStatus', ordersStatus)
-  }
   return (
     <Animated.View
       style={
@@ -37,12 +37,18 @@ export const DropDownSelector = ({dropdown}) => {
           : styles.dropDown
       }>
       <View style={styles.containerList}>
+        <DropDownItem 
+            item={defaultStatus} 
+            changeStatus={changeItemStatus} 
+            activeStatus={currentStatus}
+            text="Заявки всіх статусів"
+        />
         {ordersStatus &&
           ordersStatus.map((item) => {
             return (<DropDownItem 
                 key={item.id} 
                 item={item} 
-                changeStatus={handleItemChange} 
+                changeStatus={changeItemStatus} 
                 activeStatus={currentStatus}
             />);
           })}
