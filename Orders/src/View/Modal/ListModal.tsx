@@ -32,11 +32,11 @@ export const ListModal = ({
   const [scrollView, setScrollView] = useState();
   const confirmFunc = () => {
     scrollToIndex(selectedDepartments.id);
-    //  confirmAction(selectedItem)
+       //confirmAction(selectedItem)
   };
   const scrollToIndex = (index) => {
     console.log('selectedDepartments index', index);
-    scrollView.scrollTo({y: index * 20, animated: true});
+    scrollView.scrollTo({y: index * index , animated: true});
   };
   return (
     <View style={styles.container}>
