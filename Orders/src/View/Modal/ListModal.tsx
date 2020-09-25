@@ -16,9 +16,12 @@ export const ListModal = ({
     confirmAction = (item) => {},
     list = []
 }) => {
-    const [selectedItem, setSelectedItem] = useState()
+    const [selectedItem, setSelectedItem] = useState(null)
     const [scrollView, setScrollView] = useState()
     const confirmFunc = () => {
+      if(selectedItem===null){
+        closeModal()
+      }
       // scrollToIndex(selectedItem.id)
         confirmAction(selectedItem)
     }
