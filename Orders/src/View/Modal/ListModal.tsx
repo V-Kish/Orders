@@ -1,57 +1,69 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, ScrollView, Image} from 'react-native';
-import { CustomModalButtons } from './CustomModalButtons';
 import {
-    mockupHeightToDP as hp,
-    mockupWidthToDP as wp,
-  } from '../../constants/Dimensions';
-import { COLORS } from '../../constants/colors';
-import {ListViewScroll} from './ListViewScroll'
-import { ICONS } from '../../constants/icons';
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+} from 'react-native';
+import {CustomModalButtons} from './CustomModalButtons';
+import {
+  mockupHeightToDP as hp,
+  mockupWidthToDP as wp,
+} from '../../constants/Dimensions';
+import {COLORS} from '../../constants/colors';
+import {ListViewScroll} from './ListViewScroll';
+import {ICONS} from '../../constants/icons';
+import {useSelector} from 'react-redux';
+import {reduxTypes} from '../../Types';
 
 export const ListModal = ({
-    title = "",
-    content = "",
-    closeModal = ()=>{},
-    confirmAction = (item) => {},
-    list = []
+  title = '',
+  content = '',
+  closeModal = () => {},
+  confirmAction = (item) => {},
+  list = [],
 }) => {
-    const [selectedItem, setSelectedItem] = useState()
-    const [scrollView, setScrollView] = useState()
-    const confirmFunc = () => {
-       scrollToIndex(selectedItem.id)
-      //  confirmAction(selectedItem)
-    }
-    const scrollToIndex = (index) => {
-      scrollView.scrollTo({y: index*10, animated: true});
-    }
-    return <View style={styles.container}>
-            <View style={styles.content}>
-                <View style={styles.modalHeaderView}>
-                    <View style={styles.modalHeaderImageView}>
-                        <Image
-                          source={ICONS.mapPoint}
-                          style={styles.modalHeaderImage}
-                        />
-                    </View>
-                    <Text style={styles.modalHeaderText}>{title}</Text>
-                </View>
-                <ScrollView  ref={ref => {
-                    setScrollView(ref);
-                }}>
-                    <ListViewScroll list={list} setSelectedItem={setSelectedItem}/>
-                </ScrollView>
-            </View>
-            <View style={styles.buttonsView}>
-                <CustomModalButtons
-                    customButton={{visible: true, title: 'Змінити'}}
-                    customButtonPress={confirmFunc}
-                    cancelButton={true}
-                    cancelButtonPress={closeModal}
-                />
-            </View>
+  const [selectedItem, setSelectedItem] = useState();
+  const selectedDepartments: Array<any> = useSelector(
+    (state: reduxTypes) => state.dictionaries.selectedDepartments,
+  );
+  const [scrollView, setScrollView] = useState();
+  const confirmFunc = () => {
+    scrollToIndex(selectedDepartments.id);
+    //  confirmAction(selectedItem)
+  };
+  const scrollToIndex = (index) => {
+    console.log('selectedDepartments index', index);
+    scrollView.scrollTo({y: index * 20, animated: true});
+  };
+  return (
+    <View style={styles.container}>
+      <View style={styles.content}>
+        <View style={styles.modalHeaderView}>
+          <View style={styles.modalHeaderImageView}>
+            <Image source={ICONS.mapPoint} style={styles.modalHeaderImage} />
+          </View>
+          <Text style={styles.modalHeaderText}>{title}</Text>
         </View>
-
+        <ScrollView
+          ref={(ref) => {
+            setScrollView(ref);
+          }}>
+          <ListViewScroll list={list} setSelectedItem={setSelectedItem} />
+        </ScrollView>
+      </View>
+      <View style={styles.buttonsView}>
+        <CustomModalButtons
+          customButton={{visible: true, title: 'Змінити'}}
+          customButtonPress={confirmFunc}
+          cancelButton={true}
+          cancelButtonPress={closeModal}
+        />
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -60,8 +72,8 @@ const styles = StyleSheet.create({
     height: '80%',
   },
   content: {
-      minHeight: '90%',
-      flex: 1,
+    minHeight: '90%',
+    flex: 1,
   },
   buttonsView: {
     height: '10%',
@@ -72,24 +84,24 @@ const styles = StyleSheet.create({
     padding: wp(15),
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   },
   modalHeaderText: {
-      fontSize: wp(20),
-      lineHeight: 28,
-      paddingBottom: hp(5),
-      fontWeight: 'bold',
-      color: 'white',
+    fontSize: wp(20),
+    lineHeight: 28,
+    paddingBottom: hp(5),
+    fontWeight: 'bold',
+    color: 'white',
   },
   modalHeaderImageView: {
-      paddingRight: wp(5),
+    paddingRight: wp(5),
   },
   modalHeaderImage: {
     width: wp(20),
-    height: wp(20)
+    height: wp(20),
   },
   listView: {
-      flex: 1
+    flex: 1,
     // height: '60%'
-  }
+  },
 });
