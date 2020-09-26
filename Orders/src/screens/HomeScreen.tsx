@@ -10,7 +10,6 @@ export const HomeScreen = () => {
   const orderDataCount = useSelector(
     (state: reduxTypes) => state.dictionaries.orderDataCount,
   );
-
   return (
     <SafeAreaView style={styles.containerArea}>
       <HeaderView

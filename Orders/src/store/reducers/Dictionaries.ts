@@ -9,6 +9,7 @@ import {
   ORDER_DATA_COUNT,
   GET_ORDERS_MORE,
   SELECTED_ITEM_DEP,
+  ORDER_DATA_PAGINATION,
 } from '../types';
 import {dateParse, convertToUTCString} from '../../helpers/DateParse';
 
@@ -22,6 +23,7 @@ const initialState = {
   orderData: {},
   orderDataCount: 0,
   selectedDepartments: [],
+  ordersArray:[]
 };
 export const Dictionaries = (
   state = initialState,
@@ -61,6 +63,19 @@ export const Dictionaries = (
         ...state,
         selectedDepartments: selectedDep,
       };
+    case ORDER_DATA_PAGINATION:
+      let ordersPagination = action.payload.Items;
+      function sortPaginationArray(a, b) {
+        let dateA = dateParse(convertToUTCString(a.system.statusDate));
+        let dateB = dateParse(convertToUTCString(b.system.statusDate));
+        return dateB.getTime() - dateA.getTime();
+      }
+      ordersPagination.sort(sortPaginationArray);
+      return {
+        ...state,
+        ordersArray: state.ordersArray.concat(ordersPagination),
+        orders: action.payload
+      };
     case GET_ORDERS:
       let orders = action.payload;
       function sortHistoryArray(a, b) {
@@ -72,6 +87,7 @@ export const Dictionaries = (
       return {
         ...state,
         orders: orders,
+        ordersArray:orders.Items
       };
     case ORDER_DATA_COUNT:
       return {
