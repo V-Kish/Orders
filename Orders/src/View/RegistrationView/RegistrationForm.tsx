@@ -25,7 +25,6 @@ export const RegistrationForm = () => {
         return
     }
     const responceAuth = await Authorization.authorizationUser(dispatch, {login, password,deviceInfo:''});
-    console.log('responceAuth', responceAuth)
     if(!responceAuth){
       setButtonTitle('Увійти')
       return

@@ -85,16 +85,11 @@ export const HomeView = () => {
           />
         }
         onScroll={async ({nativeEvent}) => {
-          console.log(
-            'proverkaAAA if ',
-            loadDataMore(nativeEvent) && statePreloader,
-          );
-          console.log('proverkaAAA state ', statePreloader);
           if (loadDataMore(nativeEvent) && statePreloader) {
             await loadMorePagination();
           }
         }}>
-        <HomeListView />
+        <HomeListView  />
         {!statePreloader && (
           <View style={styles.preloader}>
             <ActivityIndicator size="large" color={COLORS.HEADER_BLUE} />
@@ -119,8 +114,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     bottom: 0,
-    height: hp(157),
-    backgroundColor: 'rgba(255,255,255,1)',
+    height: hp(150),
+    backgroundColor: 'rgba(255,255,255,0.5)',
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 999,

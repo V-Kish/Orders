@@ -23,7 +23,6 @@ export const pushMessagesHandler = {
   },
 
   checkMessageType: function (remoteMessage, dispatch) {
-    console.log('remoteMessage', remoteMessage);
     if (remoteMessage.data.hasOwnProperty('events')) {
       const parseMessageData = JSON.parse(remoteMessage.data.events);
       const messageEvent = parseMessageData[0];

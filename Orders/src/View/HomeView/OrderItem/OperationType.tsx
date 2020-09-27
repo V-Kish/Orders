@@ -2,7 +2,6 @@ import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { COLORS } from '../../../constants/colors'
 import {
-    mockupHeightToDP as hp,
     mockupWidthToDP as wp,
   } from '../../../constants/Dimensions';
 import { ICONS } from '../../../constants/icons';

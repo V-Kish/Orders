@@ -18,10 +18,8 @@ class Authorization {
     // @ts-ignore
     body.deviceInfo = await this.createFetchBody();
     body.appCode = 'OrdersApp';
-    console.log('authorization body', body);
     try {
       const authorization = await UserDataProvider.AuthorizationFetch(body);
-      console.log('authorization', authorization);
       if (
         authorization.statusCode === 403 &&
         authorization.statusMessage === 'forbidden'
@@ -46,7 +44,6 @@ class Authorization {
       // save user token
       currentUser().userToken = authorization.data.accessToken;
       currentUser().userId = authorization.data.userId;
-      console.log('authorization body', body);
     } catch (ex) {
       dispatch(PreloaderMain(false));
       return;
@@ -61,7 +58,6 @@ class Authorization {
       });
     } catch (ex) {
       dispatch(PreloaderMain(false));
-      console.warn('Auth getTokenFireBase', ex);
     }
     currentUser().saveUser();
     try {
@@ -71,7 +67,6 @@ class Authorization {
       }
     } catch (ex) {
       dispatch(PreloaderMain(false));
-      console.warn('MethodsRequest.getOrdersNumber', ex);
     }
     // load Dictionaries
     try {
@@ -85,7 +80,6 @@ class Authorization {
       }, dispatch);
     } catch (ex) {
       dispatch(PreloaderMain(false));
-      console.warn('Auth getTokenFireBase', ex);
     }
   }
 
@@ -95,7 +89,6 @@ class Authorization {
       const deviceInfo = await PhoneInfo.getDeviceInfo();
       return JSON.stringify(deviceInfo);
     } catch (error) {
-      console.log('deviceInfo error', error);
     }
   }
 }

@@ -19,27 +19,17 @@ export const ListViewScroll = ({
                     return <ListItem key={i} item={item} setItem={setSelectedItem}/>
                 })}
         </View>
-  
+
 };
 
 const styles = StyleSheet.create({
   container: {
     width: '90%',
-    // height: '50%',
-    // justifyContent: 'space-between',
-    // flex: 1,
     height: '100%',
-    // backgroundColor: 'red',
-    // alignItems: 'center'
   },
   content: {
       minHeight: '80%',
       flex: 1,
-    // padding: hp(30),
-    // flex: 1,
-    // justifyContent: 'space-between',
-    // backgroundColor: 'red',
-    // height: '100%'
   },
   buttonsView: {
     height: '20%',

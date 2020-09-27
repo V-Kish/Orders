@@ -120,7 +120,6 @@ class Dictionaries {
     this._listDepartmentsStatus = false;
     try {
       const response = await Dictionaries.loadDepartments();
-      console.log('_loadDepartments', response);
       if (response.statusCode !== 200) {
         await currentUser().logout();
         dispatch(PreloaderMain(false));
@@ -140,7 +139,6 @@ class Dictionaries {
     this._listCurrenciesStatus = false;
     try {
       const response = await Dictionaries.listCurrencies();
-      console.log('_loadCurrencies', response);
       if (response.statusCode !== 200) {
         await currentUser().logout();
         dispatch(PreloaderMain(false));
@@ -160,7 +158,6 @@ class Dictionaries {
     this._departmentsStatus = false;
     try {
       const response = await Dictionaries.departmentsGroups();
-      console.log('_loadDepartmentsGroups', response);
       if (response.statusCode !== 200) {
         await currentUser().logout();
         dispatch(PreloaderMain(false));
@@ -180,7 +177,6 @@ class Dictionaries {
     this._typesOperationStatus = false;
     try {
       const response = await Dictionaries.operationTypes();
-      console.log('_loadTypesOperation', response);
       if (response.statusCode !== 200) {
         await currentUser().logout();
         dispatch(PreloaderMain(false));
@@ -200,7 +196,6 @@ class Dictionaries {
     this._ordersStatusesStatus = false;
     try {
       const response = await Dictionaries.ordersStatus();
-      console.log('_LoadOrdersStatus', response);
       if (response.statusCode !== 200) {
         await currentUser().logout();
         dispatch(PreloaderMain(false));
@@ -236,7 +231,6 @@ class Dictionaries {
         return;
       }
     } catch (ex) {
-      console.warn('MethodsRequest getOrders', ex);
     }
   }
 }

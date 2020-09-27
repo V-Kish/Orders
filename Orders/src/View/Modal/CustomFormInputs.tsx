@@ -11,14 +11,13 @@ import { FormInput } from './FormInput';
 export const CustomFormInputs = ({
     inputs = []
 }) => {
-  
+
     return <View style={styles.modalContentView}>
             {inputs && inputs.map((input,i)=>{
-                console.log('input', input)
                 return <FormInput key={i} input={input}/>
             })}
         </View>
-  
+
 };
 
 const styles = StyleSheet.create({

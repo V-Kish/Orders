@@ -12,12 +12,10 @@ import {Orders} from '../Types';
 class GetOrderInfo {
   static async getOrder(dispatch: Dispatch<any>, selectedIdItem) {
     try {
-      console.log('selectedIdItem', selectedIdItem);
       dispatch(orderData(selectedIdItem));
       const response = await MethodsRequest.getUserInfo(
         selectedIdItem.detail.clientId,
       );
-      console.log('response kish', response);
       if (response.statusCode === 200) {
         dispatch(editUserInfo(response.data));
         navigator().navigate('OrderScreen');
@@ -44,7 +42,6 @@ class GetOrderInfo {
     bodyRequest.status = status;
     try {
       const response = await MethodsRequest.getOrders(bodyRequest);
-      console.log('response',response)
       if (response.statusCode === 200 && !pagination) {
         dispatch(getOrders(response.data));
       }
@@ -54,7 +51,6 @@ class GetOrderInfo {
       }
       return response;
     } catch (ex) {
-      console.warn('GetOrderInfo getOrder', ex);
     }
   }
 }

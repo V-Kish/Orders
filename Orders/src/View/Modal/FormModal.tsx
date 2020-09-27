@@ -11,10 +11,10 @@ import { CustomFormInputs } from './CustomFormInputs';
 import { ICONS } from '../../constants/icons';
 
 export const FormModal = ({
-    title = "", 
-    content = "", 
-    closeModal = ()=>{}, 
-    confirmAction = (text) => {}, 
+    title = "",
+    content = "",
+    closeModal = ()=>{},
+    confirmAction = (text) => {},
     inputs = []
     // input example
     // {
@@ -32,7 +32,6 @@ export const FormModal = ({
         inputs[0].error = true
         return
       }
-      console.log('inputText', inputText)
       confirmAction(inputText)
     }
     return <View style={styles.container}>
@@ -55,7 +54,7 @@ export const FormModal = ({
                 cancelButtonPress={closeModal}
             />
         </View>
-  
+
 };
 
 const styles = StyleSheet.create({

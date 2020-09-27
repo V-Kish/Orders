@@ -1,14 +1,11 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet,  View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {reduxTypes} from '../../Types';
 import {OrderItem} from './OrderItem/OrderItem';
-import {COLORS} from "../../constants/colors";
-import {mockupHeightToDP as hp} from "../../constants/Dimensions";
 
 export const HomeListView = () => {
   const ordersArray = useSelector((state: reduxTypes) => state.dictionaries.ordersArray);
-console.log('ordersArray',ordersArray)
   return (
     <View style={styles.container}>
       {ordersArray &&

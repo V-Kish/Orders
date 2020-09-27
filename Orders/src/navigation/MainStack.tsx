@@ -7,7 +7,6 @@ import {navigator} from '../Core/Navigator';
 const Stack = createStackNavigator();
 export const MainStack = () => {
   useEffect(() => {
-    console.log('useEffect MainStack');
     const backAction = () => {
       navigator().toGoBack();
       return true;

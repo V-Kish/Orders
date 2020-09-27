@@ -104,10 +104,8 @@ class NavigatorImpl {
       }
       this.navigation.dispatch(CommonActions.navigate(route));
       this.state.prevScreen.push({name, params});
-      console.log('this.state.prevScreen',this.state.prevScreen)
       return true;
     } catch (ex) {
-      AppLog.log('NavigatorImpl navigate ex => ', ex);
     }
     return false;
   }

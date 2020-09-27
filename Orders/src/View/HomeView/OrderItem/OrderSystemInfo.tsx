@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import {StyleSheet, View, Text, Image} from 'react-native';
+import React  from 'react';
+import {StyleSheet, View, Text} from 'react-native';
 import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,
   } from '../../../constants/Dimensions';
-import { reduxTypes } from '../../../Types';
 import { OrderStatus } from '../../Components/OrderStatus'
 import { convertToUTCString, dateParse, dateTimeToDateString, dateTimeToTimeString } from '../../../helpers/DateParse';
 

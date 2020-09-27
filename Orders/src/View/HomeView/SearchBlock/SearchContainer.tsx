@@ -10,9 +10,8 @@ import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
-import {GetOrderInfo} from '../../../functions/GetOrderInfo';
 import {useDispatch} from 'react-redux';
-import {ICONS} from "../../../constants/icons";
+import {ICONS} from '../../../constants/icons';
 
 export const SearchContainer = ({
   changeDropDownVisible,

@@ -74,11 +74,8 @@ export const ListModal = ({
           >
             <View
               onLayout={(e)=>{
-                console.log('layout 2', e.nativeEvent)
                 setLayoutHeight(e.nativeEvent.layout.height)
-                // setTimeout(()=>{
                 firstScroll(e.nativeEvent.layout.height, selectedDepartments)
-                // },1000)
               }}
             >
               <ListViewScroll list={list} setSelectedItem={setSelectedItem} />

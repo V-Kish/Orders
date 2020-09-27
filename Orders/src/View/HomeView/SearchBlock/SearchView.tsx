@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, { useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {SearchContainer} from './SearchContainer';
 import {DropDownSelector} from './DropDownSelector';
@@ -50,7 +50,6 @@ export const SearchView = () => {
         changeCurrentText={handleTextChange}
       />
       <DropDownSelector
-        changeDropDownVisible={switchDropDown}
         dropdown={dropdown}
         currentStatus={searchParamSelector.status}
         changeItemStatus={handleStatusChange}
