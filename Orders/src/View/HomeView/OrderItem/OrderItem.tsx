@@ -38,6 +38,7 @@ export const OrderItem = ({item}) => {
   const handleItemPress = () => {
     GetOrderInfo.getOrder(dispatch, item);
   };
+  console.log('item',item)
   return (
     <TouchableOpacity onPress={handleItemPress} activeOpacity={0.9} style={{paddingHorizontal:hp(10)}}>
       <View style={{...styles.container, ...styles[`${item.system.type}`]}}>
