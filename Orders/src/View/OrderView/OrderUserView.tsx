@@ -55,6 +55,18 @@ export const OrderUserView = () => {
   const preparedList = departmentList.map((d) => {
     return {id: d.id, text: d.name};
   });
+  let operation = '';
+  switch(orderData.detail.operationType){
+    case 'buy':
+      operation = 'Продаж (Клієнт купує валюту)'
+      break;
+    case 'sale':
+      operation = 'Купівля (Клієнт продає валюту)'
+      break;
+    case 'cross':
+      operation = `Конвертація (${orderData.detail.currencyCode} => ${orderData.detail.currencyToCode})`
+      break;
+  }
   // switch visible modals
   const switchRejectModal = () => {
     setModalRejectVisible(!modalRejectVisible);
@@ -79,7 +91,6 @@ export const OrderUserView = () => {
       orderData.system.orderId,
       {orderStatusId: 4, comment: text},
     );
-    console.log('reject', response);
     if (response.statusCode === 200) {
       await GetOrderInfo.getOrders(
         dispatch,
@@ -118,11 +129,9 @@ export const OrderUserView = () => {
     if (response.statusCode === 200) {
       dispatch(selectedItemDep(item.id));
     }
-    console.log('onDepartmentConfirm', response);
   };
 
   const getInWorkButtonPress = async () => {
-    console.log('clicked');
     setDisabled(true);
     const response = await MethodsRequest.changeStatusOrder(
       orderData.system.orderId,
@@ -135,7 +144,6 @@ export const OrderUserView = () => {
         searchParamSelector.status.id,
       );
       const responseNumbers = await MethodsRequest.getOrdersNumber();
-      console.log('responseNumbers', responseNumbers);
       if (responseNumbers.statusCode === 200) {
         dispatch(getOrdersCount(responseNumbers.result));
       }
@@ -143,7 +151,6 @@ export const OrderUserView = () => {
     }
     setDisabled(false);
   };
-
   return (
     <View>
       <CustomModal
@@ -192,11 +199,7 @@ export const OrderUserView = () => {
         </TouchableOpacity>
         <View style={styles.containers}>
           <Text style={styles.textDefault}>Операція обміну: </Text>
-          <Text style={styles.operationType}>
-            {orderData.detail.operationType === 'buy'
-              ? 'Продаж (Клієнт купує валюту)'
-              : 'Купівля (Клієнт продає валюту)'}
-          </Text>
+          <Text style={styles.operationType}>{operation}</Text>
         </View>
       </View>
       <View style={styles.blockContainer}>
@@ -221,10 +224,6 @@ export const OrderUserView = () => {
       </View>
       <View style={styles.lastBlock}>
         <View style={styles.containers}>
-          {console.log(
-            'as',
-            orderData.system.status === 1 || orderData.system.status === 3,
-          )}
           {orderData.system.status === 1 && (
             <>
               <Text style={styles.textDefaultSecond}>Відділення: </Text>
@@ -319,7 +318,7 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   operationType: {
-    fontSize: hp(18),
+    fontSize: hp(16),
     fontWeight: 'bold',
   },
   money: {

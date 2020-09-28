@@ -6,7 +6,8 @@ import {
   LOAD_STATUS,
   GET_ORDERS, ORDER_DATA,
   ORDER_DATA_COUNT,
-  SELECTED_ITEM_DEP
+  SELECTED_ITEM_DEP,
+  ORDER_DATA_PAGINATION
 } from '../types';
 
 export const ListDepartments = (value) => {
@@ -48,6 +49,12 @@ export const getOrders = (value) => {
 export const orderData = (value) => {
   return {
     type: ORDER_DATA,
+    payload: value,
+  };
+};
+export const getOrdersPagination = (value) => {
+  return {
+    type: ORDER_DATA_PAGINATION,
     payload: value,
   };
 };

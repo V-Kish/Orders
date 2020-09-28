@@ -10,7 +10,6 @@ import {
   dateTimeToDateString,
   dateTimeToTimeString,
 } from '../../../helpers/DateParse';
-import {statusToType} from '../../../helpers/StatusToType';
 
 export const OrderMainInfo = ({item}) => {
   const type = item.system.type;

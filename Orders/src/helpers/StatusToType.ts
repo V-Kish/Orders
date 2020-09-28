@@ -13,6 +13,5 @@ export function recalculateSumResult(item) {
       return (item.detail.sum * item.detail.rate).toFixed(2);
     }
   } catch (ex) {
-    console.warn('recalculateSumResult', ex);
   }
 }

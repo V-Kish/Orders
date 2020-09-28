@@ -1,15 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
   Text,
-  Image,
   Dimensions,
   TouchableOpacity
 } from 'react-native';
 import {
   mockupHeightToDP as hp,
-  mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
 import {COLORS} from '../../../constants/colors';
 import { OrderStatus } from '../../Components/OrderStatus';

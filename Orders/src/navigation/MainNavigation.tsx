@@ -19,7 +19,6 @@ export const MainNavigation = () => {
       .secureUserDataGet()
       .then(async (response) => {
         const date = JSON.parse(response);
-        console.log('date', date);
         if (date === null || date.userToken === null) {
           navigator().changeNavigationStateAuth(true, dispatch);
           navigator().state.prevScreen.push({
@@ -43,7 +42,6 @@ export const MainNavigation = () => {
               },200)
             }, dispatch);
           } catch (ex) {
-            console.warn('Auth getTokenFireBase', ex);
           }
           try {
             const response = await MethodsRequest.getOrdersNumber();
@@ -51,13 +49,11 @@ export const MainNavigation = () => {
               dispatch(getOrdersCount(response.result));
             }
           } catch (ex) {
-            console.warn('MethodsRequest.getOrdersNumber', ex);
           }
         }
       })
       .catch((error) => {
         dispatch(PreloaderMain(false));
-        console.warn('MethodsRequest.error', error);
       });
   }
   useEffect(() => {

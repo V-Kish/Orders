@@ -1,17 +1,16 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet,  View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {reduxTypes} from '../../Types';
 import {OrderItem} from './OrderItem/OrderItem';
 
 export const HomeListView = () => {
-  const orders = useSelector((state: reduxTypes) => state.dictionaries.orders);
-
+  const ordersArray = useSelector((state: reduxTypes) => state.dictionaries.ordersArray);
   return (
     <View style={styles.container}>
-      {orders.Items &&
-        orders.Items.map((item: any) => {
-          return <OrderItem key={item.system.orderNum} item={item} />;
+      {ordersArray &&
+      ordersArray.map((item: any) => {
+          return <OrderItem key={item.system.orderNum} item={item} />
         })}
     </View>
   );
@@ -23,5 +22,5 @@ const styles = StyleSheet.create({
   scrollView: {
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });

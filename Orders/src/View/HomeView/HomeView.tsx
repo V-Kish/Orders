@@ -7,7 +7,6 @@ import {
   View,
 } from 'react-native';
 import {HomeListView} from './HomeListView';
-import {SearchView} from './SearchBlock/SearchView';
 import {COLORS} from '../../constants/colors';
 import {mockupHeightToDP as hp} from '../../constants/Dimensions';
 import {useDispatch, useSelector} from 'react-redux';
@@ -19,9 +18,9 @@ export const HomeView = () => {
   const dispatch = useDispatch();
   const [statePreloader, setStatePreloader] = useState(true);
   const [refreshing, setRefreshing] = React.useState(false);
-    const searchParam = useSelector(
-        (state: reduxTypes) => state.ditUser.searchParam,
-    );
+  const searchParam = useSelector(
+    (state: reduxTypes) => state.ditUser.searchParam,
+  );
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     await GetOrderInfo.getOrders(
@@ -32,19 +31,18 @@ export const HomeView = () => {
     dispatch(
       paginationMainList({
         pageIndex: 1,
-        pageSize: paginationBody.pageSize + 10,
+        pageSize: 10,
         operationType: 'all',
         departmentId: -1,
       }),
     );
     setRefreshing(false);
-  }, []);
+  }, [searchParam]);
   const orders = useSelector((state: reduxTypes) => state.dictionaries.orders);
 
   const paginationBody = useSelector(
     (state: reduxTypes) => state.ditUser.paginationBody,
   );
-
   const loadDataMore = ({layoutMeasurement, contentOffset, contentSize}) => {
     const paddingToBottom = 500;
     return (
@@ -57,55 +55,41 @@ export const HomeView = () => {
       return;
     }
     setStatePreloader(false);
-    console.log('zzzzzz paginationBody',paginationBody)
-    dispatch(
-      paginationMainList({
-        pageIndex: paginationBody.pageIndex,
-        pageSize: paginationBody.pageSize + 10,
-        operationType: 'all',
-        departmentId: -1,
-      }),
-    );
-    if (paginationBody.pageSize > 100) {
-      dispatch(
-        paginationMainList({
-          pageIndex: ++paginationBody.pageIndex,
-          pageSize: 10,
-          operationType: 'all',
-          departmentId: -1,
-        }),
-      );
-    }
     let body = {};
-    body.pageIndex = paginationBody.pageIndex;
+    body.pageIndex = ++paginationBody.pageIndex;
     body.pageSize = paginationBody.pageSize;
     body.operationType = paginationBody.operationType;
     body.departmentId = paginationBody.departmentId;
-    body.status = searchParam.status.id;
-    body.sQuery = searchParam.searchText;
-    await GetOrderInfo.getOrders(
-      dispatch,
-      searchParam.searchText,
-      searchParam.status.id,
-      body,
-    );
-    setTimeout(() => {
+    try {
+      await GetOrderInfo.getOrders(
+        dispatch,
+        searchParam.searchText,
+        searchParam.status.id,
+        body,
+        true,
+      );
       setStatePreloader(true);
-    }, 200);
+    } catch (ex) {
+      setStatePreloader(true);
+    }
   }
   return (
     <>
       <ScrollView
         contentContainerStyle={styles.scrollView}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[COLORS.HEADER_BLUE]}/>
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={[COLORS.HEADER_BLUE]}
+          />
         }
         onScroll={async ({nativeEvent}) => {
           if (loadDataMore(nativeEvent) && statePreloader) {
             await loadMorePagination();
           }
         }}>
-        <HomeListView />
+        <HomeListView  />
         {!statePreloader && (
           <View style={styles.preloader}>
             <ActivityIndicator size="large" color={COLORS.HEADER_BLUE} />
@@ -124,11 +108,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,1)',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex:1
+    zIndex: 1,
   },
   preloader: {
+    position: 'absolute',
     width: '100%',
-    height: hp(100),
+    bottom: 0,
+    height: hp(150),
     backgroundColor: 'rgba(255,255,255,0.5)',
     justifyContent: 'center',
     alignItems: 'center',

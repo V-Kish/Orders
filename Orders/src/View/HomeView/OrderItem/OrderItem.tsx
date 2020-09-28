@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {StyleSheet, View,  TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {OperationType} from './OperationType';
 import {

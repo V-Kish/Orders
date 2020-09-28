@@ -38,9 +38,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,1)',
     },
     statusText: {
-        fontSize: hp(12),
+        fontSize: hp(11),
         paddingHorizontal: hp(10),
-        paddingVertical: hp(5),
+        paddingVertical: hp(4),
         borderRadius: 50,
     },
     text_new: {

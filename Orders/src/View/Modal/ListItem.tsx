@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
   },
   wrapText: {
     marginRight: hp(15),
+      width:'85%'
   },
   circle: {
     justifyContent: 'center',

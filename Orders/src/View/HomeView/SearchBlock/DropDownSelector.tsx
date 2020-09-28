@@ -1,26 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
-  Text,
-  Image,
   Dimensions,
   Animated,
 } from 'react-native';
-import {HomeListView} from '../HomeListView';
-import {SearchContainer} from './SearchContainer';
 import {
   mockupHeightToDP as hp,
-  mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {COLORS} from '../../../constants/colors';
 import { DropDownItem } from './DropDownItem';
-import { GetOrderInfo } from '../../../functions/GetOrderInfo';
+import {reduxTypes} from '../../../Types';
 
 export const DropDownSelector = ({
   dropdown,
-  changeDropDownVisible,
   changeItemStatus,
   currentStatus,
   defaultStatus,
