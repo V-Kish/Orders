@@ -63,7 +63,7 @@ export const OrderMainInfo = ({item}) => {
             <Text style={styles.courseContent}>{item.detail.rate}</Text>
           </View>
           <View style={styles.cityView}>
-            <Text style={styles.cityText}>Міжгір'я</Text>
+            <Text style={styles.cityText}>{item.detail.regionName}</Text>
           </View>
         </View>
       )}

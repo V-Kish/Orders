@@ -15,6 +15,7 @@ import {
   statusToType,
 } from '../../../helpers/StatusToType';
 import {COLORS} from '../../../constants/colors';
+import { currentUser } from '../../../Core/CurrentUser';
 
 export const OrderItem = ({item}) => {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ export const OrderItem = ({item}) => {
   );
   const listDepartments = useSelector(
     (state: reduxTypes) => state.dictionaries.listDepartments,
+  );
+  const listDepartmentGroup = useSelector(
+    (state: reduxTypes) => state.dictionaries.listDepartmentGroup,
   );
   item.detail.currencyCode = listCurrencies.find(
     (currency) => currency.id === item.detail.currencyId,
@@ -35,10 +39,13 @@ export const OrderItem = ({item}) => {
   ).name;
   item.system.type = statusToType(item.system.status);
   item.detail.sumTo = recalculateSumResult(item);
+  const region = listDepartmentGroup.find(
+    (region) => region.id === item.detail.cardGroupId
+  )
+  item.detail.regionName = region.name
   const handleItemPress = () => {
     GetOrderInfo.getOrder(dispatch, item);
   };
-  console.log('item',item)
   return (
     <TouchableOpacity onPress={handleItemPress} activeOpacity={0.9} style={{paddingHorizontal:hp(10)}}>
       <View style={{...styles.container, ...styles[`${item.system.type}`]}}>

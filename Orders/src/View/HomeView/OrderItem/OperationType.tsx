@@ -29,7 +29,7 @@ export const OperationType = ({item}) => {
     switch(item.system.type){
         case 'reject':
             circleText = 'В'
-            operationText = 'продаж відхилено'
+            operationText = `${operationText} відхилено`
             style = 'reject'
             break;
         case 'done':

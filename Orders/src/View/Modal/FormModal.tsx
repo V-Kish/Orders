@@ -19,6 +19,7 @@ export const FormModal = ({
     // input example
     // {
     //     text: "Вкажіть причину скасування",
+    //     name: "login"
     //     placeholder: "Введіть причину",
     //     onChangeText: (text)=>{
     //         console.log('text',text)
@@ -29,7 +30,6 @@ export const FormModal = ({
     inputs[0].onChangeText = setInputText
     const sendConfirmAction = () =>{
       if(inputText===''){
-        inputs[0].error = true
         return
       }
       confirmAction(inputText)
