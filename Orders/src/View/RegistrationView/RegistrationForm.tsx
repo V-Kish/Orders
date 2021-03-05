@@ -9,25 +9,32 @@ export const RegistrationForm = () => {
   const dispatch = useDispatch();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState({loginEmty: false, passwordEmpty: false})
+  const [errors, setErrors] = useState({
+    loginEmty: false,
+    passwordEmpty: false,
+  });
 
   const authorize = async (setButtonTitle) => {
-    if(login==='' || password===''){
-        setErrors({
-            loginEmty: login === '',
-            passwordEmpty: password === ''
-        })
-        setTimeout(()=>{
-          setErrors({loginEmty: false, passwordEmpty: false})
-          setButtonTitle('Увійти')
-        },1000)
-        // error
-        return
+    if (login === '' || password === '') {
+      setErrors({
+        loginEmty: login === '',
+        passwordEmpty: password === '',
+      });
+      setTimeout(() => {
+        setErrors({loginEmty: false, passwordEmpty: false});
+        setButtonTitle('Увійти');
+      }, 1000);
+      // error
+      return;
     }
-    const responceAuth = await Authorization.authorizationUser(dispatch, {login, password,deviceInfo:''});
-    if(!responceAuth){
-      setButtonTitle('Увійти')
-      return
+    const responceAuth = await Authorization.authorizationUser(dispatch, {
+      login,
+      password,
+      deviceInfo: '',
+    });
+    if (!responceAuth) {
+      setButtonTitle('Увійти');
+      return;
     }
   };
   return (
