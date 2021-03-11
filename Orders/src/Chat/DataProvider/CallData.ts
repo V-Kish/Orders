@@ -1,5 +1,7 @@
-import { fetchData } from "../functions/fetchData";
-import {currentUser} from "../controllers/CurrentUser";
+import { fetchData } from "../../Common/fetchData";
+import { currentUser } from "../../Core/CurrentUser";
+
+i
 class CallData {
     //Создать звонок
     static async createCall(body: { userToId: number, roomUrl:string }) {

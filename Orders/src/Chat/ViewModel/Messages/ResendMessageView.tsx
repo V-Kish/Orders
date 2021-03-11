@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(10),
         flexDirection: 'row',
         //bottom: 0,
-        backgroundColor: COLORS.WHITE.bg,
+        backgroundColor: 'red',
         zIndex: 9999,
         // flex: 1,
         // width: '100%',
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         fontSize: hp(13),
     },
     text: {
-        color: COLORS.BLACK.bg,
+        color: 'red',
         fontFamily: 'Roboto-Regular',
         fontSize: hp(10),
     }

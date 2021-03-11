@@ -19,7 +19,7 @@ import {KeyboardFilePreview} from "../provider/Messages/KeyboardFilePreview";
 import {IconButtonView} from "../ViewModel/IconButtonView";
 import {MessageHelper} from  "../provider/Messages/MessageHelper"
 import {store} from "../provider/Store";
-import {CHAT_ICONS, ICONS} from "../../constants/icons";
+import {ICONS} from "../../constants/icons";
 
 let height;
 if (Platform.OS === 'android') {
@@ -60,7 +60,7 @@ class KeyboardFilePreviewView extends TypedBaseComponent<KeyboardFilePreview>{
                                          <Image
                                            style={styles.checkedImg}
                                            // source={require('../assets/img/Icons/checked/Shape.png')}
-                                           source={CHAT_ICONS.checked}
+                                           source={ICONS.close}
                                          />
                                      </View>
                                      <Image
@@ -81,13 +81,13 @@ class KeyboardFilePreviewView extends TypedBaseComponent<KeyboardFilePreview>{
                                       <Image
                                         style={styles.checkedImg}
                                         // source={require('../assets/img/Icons/checked/Shape.png')}
-                                        source={CHAT_ICONS.checked}
+                                        source={ICONS.close}
                                       />
                                   </View>
                                   <Image
                                     style={styles.iconPreview}
                                     // source={require('../assets/img/FilesIcons/Files/files.png')}
-                                    source={CHAT_ICONS.files}
+                                    source={ICONS.close}
                                   />
                                   <Text style={styles.filesExtension} >
                                       {'.' + MessageHelper.getFileExtension(item.name)}
@@ -101,7 +101,7 @@ class KeyboardFilePreviewView extends TypedBaseComponent<KeyboardFilePreview>{
                               <Image
                                 style={styles.addImg}
                                 // source={require('../assets/img/plus/Add.png')}
-                                source={CHAT_ICONS.plus}
+                                source={ICONS.close}
                               />
                           </TouchableOpacity>
                         )}

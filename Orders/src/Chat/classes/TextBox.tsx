@@ -105,14 +105,14 @@ const styles = StyleSheet.create({
         borderRadius: hp(5),
         marginBottom: hp(10),
         paddingHorizontal: hp(5),
-        borderColor:  COLORS.GREEN.bg,
+        borderColor:  COLORS.FONT_BLACK,
         borderWidth: 1,
     },
     unCorrectForm: {
         borderRadius: hp(5),
         marginBottom: hp(10),
         paddingHorizontal: hp(5),
-        borderColor: COLORS.RED.bg,
+        borderColor: COLORS.FONT_BLACK,
         borderWidth: 1,
     },
     keyboardInput: {

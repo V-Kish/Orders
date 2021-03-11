@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     fontSize: hp(10),
     fontFamily: 'Roboto-Bold',
     //opacity: 0.5,
-    color: COLORS.WHITE.bg,
+    color: COLORS.FONT_WHITE,
   },
   nameTextLarge: {
     padding: hp(0),

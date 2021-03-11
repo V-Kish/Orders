@@ -3,7 +3,7 @@ import {
     PanResponder,
 } from 'react-native';
 import React from 'react';
-import Animation from "../../classes/Drawer/SideAnimations";
+import Animation from "react-native-reanimated/lib/typescript/animations/Animation";
 
 enum BaseMenuPosition {
     right = 1,

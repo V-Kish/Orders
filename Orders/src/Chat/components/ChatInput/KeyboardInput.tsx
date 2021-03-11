@@ -4,7 +4,6 @@ import { mockupHeightToDP as hp } from '../../../constants/Dimensions';
 import { TypedBaseComponent } from '../../../Common/BaseComponent';
 import { ChatKeyboard } from '../../provider/Messages/ChatKeyboard';
 import { EmojiChatView } from '../../ViewModel/ChatEmojiView/EmojiChatView';
-import { navigator } from '../../../Core/Navigator';
 
 const hightChatInput = hp(50);
 

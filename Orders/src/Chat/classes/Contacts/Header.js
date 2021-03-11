@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
@@ -9,7 +9,7 @@ import { ArrowBackButton } from './ArrowBackButton';
 import { CloseButton } from './CloseButton';
 import { TextBoxHeader } from './TextBoxHeader';
 import { BaseComponent } from '../../../Common/BaseComponent';
-import {CHAT_ICONS, ICONS} from "../../../constants/icons";
+import {ICONS} from '../../../constants/icons';
 
 class HeaderContacts extends BaseComponent {
   constructor(props) {
@@ -30,7 +30,7 @@ class HeaderContacts extends BaseComponent {
             <Image
               style={styles.searchImg}
               // source={require('../../assets/img/Icons/seadrch-grey/search.png')}
-              source={CHAT_ICONS.search}
+              source={ICONS.close}
             />
             <TextBoxHeader
               model={this.props.model.textBoxHeader}
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     height: hp(72),
     paddingRight: wp(20),
     paddingLeft: wp(10),
-    backgroundColor: COLORS.BLUE.bg,
+    backgroundColor: 'red'
   }, //
   contactSearch: {
     flexDirection: 'row',
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
 
   search: {
-    backgroundColor: COLORS.WHITE.bg,
+    backgroundColor: 'red'
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

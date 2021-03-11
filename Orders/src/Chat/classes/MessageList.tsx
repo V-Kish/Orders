@@ -32,16 +32,7 @@ class MessageList extends TypedBaseComponent<Chat> {
                 <MessagePreloaderView model={this.model.items.preloader} key={this.model.items.preloader.id}/>
                 <MessagePreloaderView model={this.model.items.firstPreloader} key={this.model.items.firstPreloader.id}/>
                 <View style={styles.mainContainer}>
-                    {/*<RecyclerView*/}
-                    {/*     style={styles.listContainer}*/}
-                    {/*     dataSource={store().chats.current.items.dataSource}*/}
-                    {/*     onScrolledToEnd={store().chats.current.items.loadOldMessages}*/}
-                    {/*     onScrolledTop={store().chats.current.items.showNewMessageIndicator}*/}
-                    {/*     defaultInverted={store().recyclerViewInverted}*/}
-                    {/*     renderItem={({item,index}) => (*/}
-                    {/*            <MessageView model={item} key={`Message_${item.id}`} index={index}/>*/}
-                    {/*      )}*/}
-                    {/*/>*/}
+
                     <ScrollView
                          ref={ref => { (this.model.ref = ref); (this.model.refOnScrollList=ref);}}
                         onContentSizeChange={this.model.items.onContentSizeChange}
@@ -49,12 +40,7 @@ class MessageList extends TypedBaseComponent<Chat> {
                          maintainVisibleContentPosition={{
                              minIndexForVisible: 0,
                          }}
-                        // refreshControl={
-                        //     <RefreshControl
-                        //         refreshing={this.model.items.refreshing}
-                        //         onRefresh={this.model.items.loadOldMessages}
-                        //     />
-                        // }
+
                     >
                         <MessageListItemsView model={this.model.items} key={this.model.items.id} />
                     </ScrollView>
@@ -62,10 +48,7 @@ class MessageList extends TypedBaseComponent<Chat> {
                         model={this.model.items.newMessageIndicator}
                         key={this.model.items.newMessageIndicator.id}
                     />
-                        {/*<GoBottom*/}
-                        {/*    model={this.model.items.goBottom}*/}
-                        {/*    key={this.model.items.goBottom.id}*/}
-                        {/*/>*/}
+
                 </View>
             </View>
         );
@@ -118,6 +101,6 @@ const styles = StyleSheet.create({
     messageListPreloaderText: {
         textAlign: 'center',
         marginTop: hp(15),
-        color: COLORS.WHITE.bg,
+        color: COLORS.FONT_BLACK,
     },
 });

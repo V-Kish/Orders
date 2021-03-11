@@ -11,7 +11,8 @@ import ChatTime from './ChatTime';
 import ChatName from './ChatName';
 import { ContactIconViewModel } from './ContactIconViewModel';
 import { BaseComponent } from '../../Common/BaseComponent';
-import {CHAT_ICONS} from "../../constants/icons";
+import {ICONS} from '../../constants/icons';
+
 
 class ChatItem extends BaseComponent {
     constructor(props) {
@@ -82,10 +83,10 @@ class ChatItem extends BaseComponent {
                         <Image
                             style={styles.groupIcon}
                             // source={require('../assets/img/Icons/people-red/Group.png')}
-                            source={CHAT_ICONS.groupRed}
+                            source={ICONS.close}
                         />
                         {this.props.leader && <View style={styles.leaderStarBox}>
-                            <Image source={CHAT_ICONS.starBlue} style={styles.leaderStar}/>
+                            <Image source={ICONS.close} style={styles.leaderStar}/>
                         </View>}
                     </View>
                 </View>
@@ -149,7 +150,7 @@ class ChatItem extends BaseComponent {
                     key={`chats_${this.props.model.id}_chatTime`}
                     />
                     {this.props.leader && <View style={styles.leaderStarBox}>
-                        <Image source={CHAT_ICONS.starBlue} style={styles.leaderStar}/>
+                        <Image source={ICONS.close} style={styles.leaderStar}/>
                     </View>}
                 </View>
             </View>
@@ -218,7 +219,7 @@ const styles = StyleSheet.create({
         zIndex: 22,
         borderStyle: 'solid',
         borderWidth: 2,
-        borderColor: COLORS.WHITE.bg,
+        borderColor: 'red',
         bottom: hp(2),
         right: hp(3),
         backgroundColor: '#4CB684',

@@ -1,9 +1,9 @@
 import {NavigationController} from './NavigationController';
 import {AuthController} from './AuthController';
-import {DrawerSwitchModel} from '../Navigation/DrawerSwitchModel';
 import {ChatController} from './ChatController';
 import {CounterModel} from '../Model/CounterModel';
 import { AppStateControllerModel } from '../Model/AppStateControllerModel/AppStateControllerModel';
+import { DrawerSwitchModel } from '../navigation/DrawerSwitchModel';
 
 class ControllersImpl {
   private readonly _navigationController: NavigationController;

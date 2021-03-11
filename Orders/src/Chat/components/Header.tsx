@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
     Image,
     StyleSheet,
-    Text,
     TouchableOpacity,
     View,
 } from 'react-native';
@@ -14,10 +13,7 @@ import { COLORS } from '../../constants/colors';
 import { navigator } from '../../Core/Navigator';
 import {TypedBaseComponent, IBaseProps} from "../../Common/BaseComponent";
 import { ChatsHeader } from '../provider/Headers/ChatsHeader';
-import {CHAT_ICONS, ICONS} from "../../constants/icons";
-import {STYLES} from "../../constants/styles";
-import {ButtonView} from "../../View/Components/ButtonView";
-import {AdminModalHeader} from "../../View/OsbbAdminStack/Modals/AdminModalHeader";
+import { ICONS } from '../../constants/icons';
 
 class HeaderView extends TypedBaseComponent<ChatsHeader> {
     constructor(props: IBaseProps<ChatsHeader>) {
@@ -33,16 +29,7 @@ class HeaderView extends TypedBaseComponent<ChatsHeader> {
         return (
             <View style={styles.container}>
                 <View style={styles.topBox}>
-                    <AdminModalHeader onPress={this.model.backBtnPress} title='Повідомлення'/>
-                 {/*<View style={{flexDirection:'row',alignItems:'center'}}>*/}
-                 {/*    <ButtonView*/}
-                 {/*        model={this.model.backBtn}*/}
-                 {/*        key={this.model.backBtn.id}*/}
-                 {/*    />*/}
-                 {/*    <Text style={[STYLES.robotoMidleTitle]} numberOfLines={1}>*/}
-                 {/*        Повідомлення*/}
-                 {/*    </Text>*/}
-                 {/*</View>*/}
+
                     <View style={styles.chatNavigation}>
                         <View style={styles.chatNavigationContainer}>
                             <TouchableOpacity
@@ -53,7 +40,7 @@ class HeaderView extends TypedBaseComponent<ChatsHeader> {
                             >
                                 <Image
                                     style={styles.chatButtonImage}
-                                    source={CHAT_ICONS.addChat}
+                                    source={ICONS.close}
                                 />
                             </TouchableOpacity>
                             <TouchableOpacity
@@ -64,7 +51,7 @@ class HeaderView extends TypedBaseComponent<ChatsHeader> {
                             >
                                 <Image
                                     style={[styles.chatButtonImage, {width: wp(20), height: wp(20)}]}
-                                    source={CHAT_ICONS.newChannel}
+                                    source={ICONS.close}
                                 />
                             </TouchableOpacity>
                         </View>
@@ -194,7 +181,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: COLORS.BLUE.bg,
+        backgroundColor: COLORS.FONT_BLACK,
         width: '100%',
         paddingHorizontal: wp(15),
         paddingVertical: hp(10),

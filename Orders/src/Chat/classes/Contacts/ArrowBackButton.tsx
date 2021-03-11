@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, TextInput, TouchableOpacity, Image} from 'react-native';
+import { StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
 import {BaseComponent} from "../../../Common/BaseComponent";
-import {CHAT_ICONS, ICONS} from "../../../constants/icons";
+import {ICONS} from "../../../constants/icons";
 
 class ArrowBackButton extends BaseComponent {
     constructor(props) {
@@ -18,7 +18,7 @@ class ArrowBackButton extends BaseComponent {
                 <Image
                     style={styles.passwordIcon}
                     // source={require('../../assets/img/Icons/arrow-left-white/arrow-left-white.png')}/>
-                    source={CHAT_ICONS.arrowLeft}/>
+                    source={ICONS.close}/>
             </TouchableOpacity>
         );
     }

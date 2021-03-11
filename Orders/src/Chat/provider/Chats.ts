@@ -37,18 +37,18 @@ class Chats extends Base {
         // this._mainDrawer = new MainDrawer();
         this.scrollViewRef = null;
     }
-    get mainDrawer() {
-        return this._mainDrawer;
-    }
-    get drawer() {
-        return this._drawer;
-    }
-    get drawerContainer() {
-        return this._drawerContainer;
-    }
-    get drawerContainerChats() {
-        return this._drawerContainerChats;
-    }
+    // get mainDrawer() {
+    //     return this._mainDrawer;
+    // }
+    // get drawer() {
+    //     return this._drawer;
+    // }
+    // get drawerContainer() {
+    //     return this._drawerContainer;
+    // }
+    // get drawerContainerChats() {
+    //     return this._drawerContainerChats;
+    // }
     get keyboard() {
         return this._keyboard;
     }

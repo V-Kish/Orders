@@ -26,7 +26,7 @@ class MessagePreloaderView extends TypedBaseComponent<MessagePreloader> {
                 <>
                     <View style={styles.overlay}>
                         {!this.model.messages.length &&(
-                            <ActivityIndicator size="large" color={COLORS.BLUE.bg} />
+                            <ActivityIndicator size="large" color={'red'} />
                         )}
                         {this.model.messages.map(message => <MessageView model={message} key={message.id} />)}
                     </View>

@@ -1,13 +1,13 @@
 import {Base} from "../Base";
 import {IconButton} from "../IconButton";
 import {MessageHelper} from "../Messages/MessageHelper"
-// import {AppLog} from "../../Common/AppLog";
+
 import { EmojiChat } from "../ChatEmoji/EmojiChat";
 import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
-import {CHAT_ICONS, ICONS} from "../../../constants/icons";
+import {CHAT_ICONS} from "../../../constants/icons";
 type keyboardFilePreview = {
     id: string,
     hidden: boolean,

@@ -10,7 +10,6 @@ import {MessageHelper} from "../Messages/MessageHelper";
 import { resendMessageType} from "./ResendMessage";
 import {Message} from "../Message";
 // import { console } from '../../Common/console';
-import Geolocation from "@react-native-community/geolocation";
 import { EmojiChat } from '../ChatEmoji/EmojiChat';
 
 class ChatKeyboard extends Base {
@@ -263,7 +262,7 @@ class ChatKeyboard extends Base {
     }
 
     send() {
-        this.getGeolocation().then();
+        // this.getGeolocation().then();
         if (this.keyboardFilePreview.files.length !== 0) {
             this.sendFiles().then()
         } else {
@@ -464,18 +463,18 @@ class ChatKeyboard extends Base {
         this.customKeyboard.initialProps.onClick = this.customKeyboard.initialProps.onClick.bind(this);
     }
 
-    async getGeolocation() {
-        await Geolocation.getCurrentPosition(
-            ({ coords }) => {
-                this.lastCoords = {
-                    latitude: coords.latitude,
-                    longitude: coords.longitude,
-                };
-            },
-            error => {},
-            { enableHighAccuracy: false },
-        );
-    }
+    // async getGeolocation() {
+    //     await Geolocation.getCurrentPosition(
+    //         ({ coords }) => {
+    //             this.lastCoords = {
+    //                 latitude: coords.latitude,
+    //                 longitude: coords.longitude,
+    //             };
+    //         },
+    //         error => {},
+    //         { enableHighAccuracy: false },
+    //     );
+    // }
 
     async sendCallSystemMessage(message, type){
 

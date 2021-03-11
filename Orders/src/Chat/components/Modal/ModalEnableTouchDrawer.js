@@ -6,19 +6,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { DeleteChat } from '../../store/actions/Chat';
 import React from 'react';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
-} from '../../constants/Dimensions';
-import { currentUser } from '../../controllers/CurrentUser';
-import {
-  showAlertTouchIdPermission,
-  showAlertTouchIdPermissionDrawer,
-} from '../../store/actions/AppSettings';
+} from '../../../constants/Dimensions';
+
 import { useDispatch } from 'react-redux';
-import { COLORS } from '../../constants/colors';
+import {currentUser} from '../../../Core/CurrentUser';
+import {COLORS} from '../../../constants/colors';
 
 export const ModalEnableTouchDrawer = ({ show, changeStateTouch }) => {
   const dispatch = useDispatch();
@@ -47,17 +43,17 @@ export const ModalEnableTouchDrawer = ({ show, changeStateTouch }) => {
               <TouchableOpacity
                 style={styles.btnYes}
                 onPress={() => {
-                  currentUser().toggleFingerprint(true);
-                  dispatch(showAlertTouchIdPermissionDrawer(false));
-                  changeStateTouch();
+                  // currentUser().toggleFingerprint(true);
+                  // dispatch(showAlertTouchIdPermissionDrawer(false));
+                  // changeStateTouch();
                 }}>
                 <Text style={styles.btnTextYesOrNo}>Так</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  currentUser().toggleFingerprint(false);
-                  dispatch(showAlertTouchIdPermissionDrawer(false));
-                  changeStateTouch()
+                  // currentUser().toggleFingerprint(false);
+                  // dispatch(showAlertTouchIdPermissionDrawer(false));
+                  // changeStateTouch()
                 }}
                 style={styles.btnNo}>
                 <Text style={styles.btnTextYesOrNo}>Ні</Text>
@@ -128,7 +124,7 @@ const styles = StyleSheet.create({
   btnYes: {
     width: wp(50),
     height: hp(50),
-    backgroundColor: COLORS.GREEN.bg,
+    backgroundColor: COLORS.FONT_BLACK,
     borderRadius: wp(5),
     justifyContent: 'center',
     alignItems: 'center',

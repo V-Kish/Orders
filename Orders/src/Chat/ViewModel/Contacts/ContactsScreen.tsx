@@ -61,11 +61,11 @@ export { ContactsScreen };
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:COLORS.WHITE.bg,
+        backgroundColor:'red',
     },
     wrapper: {
         flex: 1,
         paddingTop:hp(10),
-        backgroundColor:COLORS.WHITE.bg
+        backgroundColor:'red',
     }
 });

@@ -76,20 +76,20 @@ export { ContactsItemsViewModel };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.WHITE.bg,
+    backgroundColor: 'red',
     paddingVertical: hp(20),
   },
   contactContainer: {
     flexDirection: 'row',
     paddingHorizontal: wp(17),
-    backgroundColor: COLORS.WHITE.bg,
+    backgroundColor: 'red',
     paddingBottom: hp(15),
     alignItems: 'center',
   },
     contactEmpty:{
         flexDirection: 'row',
         paddingHorizontal: wp(17),
-        backgroundColor: COLORS.WHITE.bg,
+        backgroundColor: 'red',
         paddingBottom: hp(15),
         alignItems: 'center',
         justifyContent:'center'
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     fontSize: hp(20),
-    color: COLORS.BLACK.bg,
+    color: 'red',
     fontFamily: 'Roboto-Thin',
     fontWeight: '500',
   },

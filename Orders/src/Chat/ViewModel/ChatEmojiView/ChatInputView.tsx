@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: Dimensions.get('screen').width,
         zIndex: 999,
-        backgroundColor: COLORS.BLUE.bg,
+        backgroundColor: 'red',
         paddingHorizontal: wp(2),
          paddingVertical: hp(5),
         // maxHeight: hp(120),

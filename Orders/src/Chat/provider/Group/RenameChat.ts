@@ -1,7 +1,7 @@
 import { Base } from "../Base";
 import {TextBox} from "../TextBox";
-import {Button} from "../../../Models/Components/Button";
 import {store} from "../Store";
+import { Button } from "../../../Model/Components/Button";
 class RenameChat extends Base {
     private readonly _renameChatName: TextBox;
     private _step: boolean;

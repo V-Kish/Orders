@@ -23,7 +23,7 @@ import { MessageHelper } from '../provider/Messages/MessageHelper';
 import { Message as MessageProvider } from '../provider/Message';
 import {store} from '../provider/Store'
 import {AppSettings} from "../../Common/AppSettings";
-import {CHAT_ICONS, ICONS} from '../../constants/icons'
+import { ICONS} from '../../constants/icons'
 var i = 0
 class MessageView extends TypedBaseComponent<MessageProvider> {
     constructor(props) {
@@ -55,7 +55,7 @@ class MessageView extends TypedBaseComponent<MessageProvider> {
                 <Image
                     style={styles.iconStatus}
                     // source={require('../assets/img/messagesStatusIcon/success/success.png')}
-                    source={CHAT_ICONS.messageSuccess}
+                    source={ICONS.close}
                 />
             );
         } else if (item.uFromStatus === null) {
@@ -63,7 +63,7 @@ class MessageView extends TypedBaseComponent<MessageProvider> {
                 <Image
                     style={styles.iconStatus}
                     // source={require('../assets/img/messagesStatusIcon/wait/wait.png')}
-                    source={CHAT_ICONS.messageWait}
+                    source={ICONS.close}
                 // source={require('../../assets/img/messagesStatusIcon/error/error.png')} DEFAULT error
                 />
             );
@@ -72,7 +72,7 @@ class MessageView extends TypedBaseComponent<MessageProvider> {
                 <Image
                     style={styles.iconStatus}
                     // source={require('../assets/img/messagesStatusIcon/error/error.png')}
-                    source={CHAT_ICONS.messageError}
+                    source={ICONS.close}
                 //source={require('../../assets/img/messagesStatusIcon/wait/wait.png')} DEFAULT wait
                 />
             );
@@ -309,7 +309,7 @@ class MessageView extends TypedBaseComponent<MessageProvider> {
                                         // this.model.isLoading ? { opacity: 0 } : null,
                                     ]}
                                     // source={require('../assets/img/FilesIcons/Files/files.png')}
-                                    source={CHAT_ICONS.files}
+                                    source={ICONS.close}
                                 />
                                 {!this.model.isLoading && (
                                     <Text style={styles.filesExtension}>
@@ -391,7 +391,7 @@ class MessageView extends TypedBaseComponent<MessageProvider> {
                                             // this.model.isLoading ? { opacity: 0 } : null,
                                         ]}
                                         // source={require('../assets/img/FilesIcons/Files/files.png')}
-                                        source={CHAT_ICONS.files}
+                                        source={ICONS.close}
                                     />
                                     {!this.model.isLoading && (
                                         <Text style={styles.filesExtension}>
@@ -701,14 +701,14 @@ class MessageView extends TypedBaseComponent<MessageProvider> {
                 if(messageFrom){
                     message = 'Вихідний дзвінок'
                     // icon = require('../assets/img/CallIcon/Notiffication/outCall.png')
-                    icon = ICONS.like
+                    icon = ICONS.close
                 } else {
                     message = 'Вхідний дзвінок'
                     // icon = require('../assets/img/CallIcon/Notiffication/inCall.png')
-                    icon = ICONS.like
+                    icon = ICONS.close
                 }
                 // timeIcon = require('../assets/img/CallIcon/Notiffication/timeSuccess.png')
-                timeIcon = ICONS.like
+                timeIcon = ICONS.close
                 break;
             case 11://missedСall Пропущений дзвінок
                 if(messageFrom){
@@ -718,8 +718,8 @@ class MessageView extends TypedBaseComponent<MessageProvider> {
                 }
                 // timeIcon = require('../assets/img/CallIcon/Notiffication/timeMissed.png')
                 // icon = require('../assets/img/CallIcon/Notiffication/missed.png')
-                icon = ICONS.like
-                timeIcon = ICONS.like
+                icon = ICONS.close
+                timeIcon = ICONS.close
                 break;
             case 12://failedСall Відхилений дзвінок
                 if(messageFrom){
@@ -730,8 +730,8 @@ class MessageView extends TypedBaseComponent<MessageProvider> {
                 style = 'fail'
                 // icon = require('../assets/img/CallIcon/Notiffication/failed.png')
                 // timeIcon = require('../assets/img/CallIcon/Notiffication/timeFailed.png')
-                icon = ICONS.like
-                timeIcon = ICONS.like
+                icon = ICONS.close
+                timeIcon = ICONS.close
                 break;
         }
             return  <View style={{...styles.callView,...styles[`callView_${messageFrom ? 'in' : 'out'}`]}}>
@@ -797,7 +797,7 @@ class MessageView extends TypedBaseComponent<MessageProvider> {
                         )}
                     <View style={styles.mediaView}>
                         <View style={styles.mediaIconView}>
-                            <Image source={CHAT_ICONS.play} style={styles.mediaIcon}/>
+                            <Image source={ICONS.close} style={styles.mediaIcon}/>
                         </View>
                         <View style={styles.mediaNameView} >
                             <Text style={styles.mediaNameText}>{this.formatter(this.model.message.fileNmae)}</Text>
@@ -975,7 +975,7 @@ const styles = StyleSheet.create({
     },
     outgoingMessageContainer: {
         justifyContent: 'flex-end',
-        backgroundColor: COLORS.WHITE.bg,
+        backgroundColor: COLORS.FONT_BLACK,
     },
     incomingMessage: {
         alignItems: 'flex-start',
@@ -994,7 +994,7 @@ const styles = StyleSheet.create({
     serviceText: {
         fontSize: hp(14),
         textAlign: 'center',
-        color: COLORS.BLUE.bg,
+        color: COLORS.FONT_BLACK,
         fontFamily: 'Roboto',
     },
     contactText: {
@@ -1175,7 +1175,7 @@ const styles = StyleSheet.create({
     commentFile: {
         fontSize: hp(10.5),
         fontFamily: 'Roboto-Regular',
-        color: COLORS.BLACK.bg,
+        color: COLORS.FONT_BLACK,
         paddingLeft: hp(5),
     },
     date: {
@@ -1251,7 +1251,7 @@ const styles = StyleSheet.create({
 
   },
   callContainer_out: {
-    backgroundColor: COLORS.GRAY.bg
+    backgroundColor: COLORS.FONT_BLACK
   },
   callContainer_fail: {
     backgroundColor: 'rgba(255,212,213,.85)'
@@ -1292,7 +1292,7 @@ const styles = StyleSheet.create({
 
   },
   messageRemovedContainer: {
-      backgroundColor: COLORS.GRAY.bg,
+      backgroundColor: COLORS.FONT_BLACK,
       marginRight: wp(14),
       marginBottom: hp(4),
       padding: wp(5),
@@ -1340,7 +1340,7 @@ const styles = StyleSheet.create({
   mediaIconView: {
       padding: hp(5),
       borderRadius: 100,
-      backgroundColor: COLORS.RED.bg,
+      backgroundColor: COLORS.FONT_BLACK,
       marginHorizontal: hp(5)
   }
 });

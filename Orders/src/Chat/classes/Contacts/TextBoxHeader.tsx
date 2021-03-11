@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         // width: '75%',
         height: hp(50),
         alignSelf: 'center',
-        backgroundColor: COLORS.WHITE.bg,
+        backgroundColor: 'red',
         fontSize:hp(14),
         fontFamily:'Roboto-Regular',
         justifyContent:'center',

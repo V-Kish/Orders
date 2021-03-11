@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     height: hp(72),
     paddingRight: wp(20),
     paddingLeft: wp(10),
-    backgroundColor: COLORS.BLUE.bg,
+    backgroundColor: 'red',
   },
 
   contactSearch: {
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
 
   search: {
-    backgroundColor: COLORS.WHITE.bg,
+    backgroundColor: 'red',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

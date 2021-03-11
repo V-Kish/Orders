@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   unreadCount: {
     // backgroundColor: '#4CB684',
    // backgroundColor: COLORS.COLOR_GRAY_HEADER,
-    backgroundColor: COLORS.RED.bg,
+    backgroundColor: 'red',
     borderRadius: 50,
     width: hp(23),
     height: hp(23),
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     fontSize: hp(11),
     fontFamily: 'Roboto',
     fontWeight: '400',
-    color: COLORS.WHITE.bg
+    color: COLORS.FONT_BLACK
     //color: COLORS.DARK_BLUE.bg
     //opacity: 0.5,
     // color: COLORS.FONT_WHITE,

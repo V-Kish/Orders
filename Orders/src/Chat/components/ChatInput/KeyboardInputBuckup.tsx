@@ -5,7 +5,6 @@ import { TypedBaseComponent } from '../../../Common/BaseComponent';
 import { ChatKeyboard } from '../../provider/Messages/ChatKeyboard';
 import { EmojiChatView } from '../../ViewModel/ChatEmojiView/EmojiChatView';
 
-const hightChatInput = hp(50);
 
 class KeyboardInputBuckup extends TypedBaseComponent<ChatKeyboard> {
 

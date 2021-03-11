@@ -1,9 +1,7 @@
 import { dateParse } from '../../Common/dateParse';
 import { convertToUTCString } from '../../Common/dateParse';
 import { MessageListIOS } from './MessageListIOS';
-import { Message } from './Message';
 import { Base } from './Base';
-// import { Users } from './Users';
 import { UnreadCount } from './UnreadCount';
 import { LastMessage } from './LastMessage';
 import { ChatTime } from './ChatTime';
@@ -16,15 +14,8 @@ import { fetchData } from '../../Common/fetchData';
 import { currentUser } from '../../Core/CurrentUser';
 import {ContactItem} from "./Contacts/ContactItem";
 import {ChatMembersList} from "./ChatMembersList";
-import {Platform} from "react-native";
-import {MessageList} from "./MessageList";
 import {ModalDeleteGroup} from "./Drawer/ModalDeleteGroup";
-// import { GroupMembers } from './Group/GroupMembers';
-// import {ContactsList} from "./Contacts/SelectedContacts";
-// import {NewMessageIndicator} from "./Messages/NewMessageIndicator";
-// import { ContactIsOnline } from './ContactIsOnline';
-// import { AppLog } from '../Common/AppLog';
-// import { ContactsItems } from './Contacts/ContactsItems';
+
 
 type ownerUser = {
     hash: string,

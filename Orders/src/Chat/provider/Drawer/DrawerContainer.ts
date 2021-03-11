@@ -1,13 +1,9 @@
 import { Base } from "../Base";
-import { navigator } from '../../controllers/Navigator';
 import { store } from "../Store";
 import { ChatDataProvider } from "../../DataProvider/ChatDataProvider";
-import { AppLog } from "../../Common/AppLog";
 import { Alert} from "react-native";
-import {currentUser} from "../../controllers/CurrentUser";
 import {RenameChat} from "../Group/RenameChat";
-import {ContactsHeader} from "../Contacts/ContactsHeader";
-import {CallIconModel} from "../../classes/Calls/CallIconModel";
+import { navigator } from "../../../Core/Navigator";
 
 type drawerContainerProps = {
     id: string;
@@ -16,7 +12,7 @@ type drawerContainerProps = {
 class DrawerContainer extends Base {
     private _model: drawerContainerProps;
     private _renameChatName: RenameChat;
-    private _callIcon: CallIconModel;
+    // private _callIcon: CallIconModel;
 
     constructor(model) {
         super(model.id);
@@ -66,15 +62,15 @@ class DrawerContainer extends Base {
         try {
             store().chats.current.name.update({name:response.result.newName});
         }catch (error) {
-            AppLog.log('error save name group',error)
+            // AppLog.log('error save name group',error)
         }
 
           this.renameChat.modified = true;
           this.renameChat.step = true;
         store().chatHeader.update(chat);
         store().chats.drawerContainer.update();
-        store().drawerControlsChat.update();
-        store().drawerControlsChat.component.closeDrawer();
+        // store().drawerControlsChat.update();
+        // store().drawerControlsChat.component.closeDrawer();
         store().chats.current.onPress(true);
     }
 
@@ -82,18 +78,18 @@ class DrawerContainer extends Base {
         await store().preloader.showWithCallback(() => {
             navigator().navigate('AddMembersScreen');
         });
-        store().drawerControlsChat.component.closeDrawer()
+        // store().drawerControlsChat.component.closeDrawer()
     }
 
     async onDeleteMembersPress() {
         await store().preloader.showWithCallback(() => {
             navigator().navigate('DeleteMembersScreen');
         });
-        store().drawerControlsChat.component.closeDrawer()
+        // store().drawerControlsChat.component.closeDrawer()
     }
 
     async onLeaveGroupPress() {
-        store().drawerControlsChat.component.closeDrawer();
+        // store().drawerControlsChat.component.closeDrawer();
         const chat = store().chats.current;
         if (chat === null) {
             return;
@@ -113,8 +109,8 @@ class DrawerContainer extends Base {
                     onPress: async () => {
                         try {
                             const response = await ChatDataProvider.deleteUserFromChat(store().chats.selectedChatId, currentUser().userId);
-                            AppLog.log('Покинути групу response ->', response);
-                            store().drawerControlsChat.component.closeDrawer();
+                            // AppLog.log('Покинути групу response ->', response);
+                            // store().drawerControlsChat.component.closeDrawer();
                             store().chats.remove(chat.id);
                             await store().preloader.showWithCallback(() => {
                                 store().chats.selectedChatId = null;
@@ -123,7 +119,7 @@ class DrawerContainer extends Base {
                             });
                         }
                         catch (ex) {
-                            AppLog.error('DrawerContainer.onLeaveGroupPress error ->', ex);
+                            // AppLog.error('DrawerContainer.onLeaveGroupPress error ->', ex);
                         }
                     }
                 }
@@ -133,7 +129,7 @@ class DrawerContainer extends Base {
     }
 
     async onDeleteGroupPress() {
-        store().drawerControlsChat.component.closeDrawer();
+        // store().drawerControlsChat.component.closeDrawer();
         const chat = store().chats.current;
         if (chat === null) {
             return;
@@ -157,14 +153,14 @@ class DrawerContainer extends Base {
                             store().chats.remove(chat.id);
                             await store().preloader.showWithCallback(() => {
                                 store().chats.selectedChatId = null;
-                                store().drawerControlsChat.component.closeDrawer();
+                                // store().drawerControlsChat.component.closeDrawer();
                                 navigator().navigate('Contacts');
                                 store().preloader.visible = false;
                             });
                         }
                         catch (ex) {
                             store().preloader.visible = false;
-                            AppLog.error('DrawerContainer.onDeleteGroupPress error ->', ex);
+                            // AppLog.error('DrawerContainer.onDeleteGroupPress error ->', ex);
                         }
                     }
                 }

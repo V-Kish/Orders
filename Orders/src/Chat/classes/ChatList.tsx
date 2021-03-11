@@ -1,15 +1,12 @@
 import * as React from 'react';
-import {StyleSheet, View, Text, ScrollView} from 'react-native';
+import {StyleSheet, View, ScrollView} from 'react-native';
 import { mockupHeightToDP as hp } from '../../constants/Dimensions';
-import { COLORS } from '../../constants/colors';
 import { ChatItem } from './ChatItem';
 import { TypedBaseComponent } from '../../Common/BaseComponent';
 import { Chats } from '../provider/Chats';
-import {currentUser} from "../../Core/CurrentUser";
 import {controllers} from "../../Controllers/Controllers";
 import {Loader} from "../../View/Components/Loader/Loader";
 import {STYLES} from "../../constants/styles";
-import {LastItemBottomPadding} from "../../View/PagedList/LastItemBottomPadding";
 
 class ChatListView extends TypedBaseComponent<Chats> {
     constructor(props) {
@@ -44,11 +41,11 @@ class ChatListView extends TypedBaseComponent<Chats> {
                     }
                 )}
                 {/*// Padding for bottom navigation // */}
-                <LastItemBottomPadding
-                    model={controllers().lastItemPaddingBottom}
-                    key={this.childId(controllers().lastItemPaddingBottom)}
-                    id={this.childId(controllers().lastItemPaddingBottom)}
-                />
+                {/*<LastItemBottomPadding*/}
+                {/*    model={controllers().lastItemPaddingBottom}*/}
+                {/*    key={this.childId(controllers().lastItemPaddingBottom)}*/}
+                {/*    id={this.childId(controllers().lastItemPaddingBottom)}*/}
+                {/*/>*/}
             </ScrollView>
             );
     }

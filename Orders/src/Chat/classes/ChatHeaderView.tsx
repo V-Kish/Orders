@@ -8,15 +8,11 @@ import {
 } from '../../constants/Dimensions';
 import { COLORS } from '../../constants/colors';
 import {ChatHeader} from "../provider/Headers/ChatHeader";
-import {IconButtonView} from "../../View/Components/IconButtonView";
 import {ContactIconViewModel} from './ContactIconViewModel'
 import { store} from '../provider/Store';
 import { ContactIsOnlineView } from './ContactIsOnlineView';
-import {BOTTOM_NAV, BOTTOM_NAVIGATION_ACTIVE_ICON, CHAT_ICONS, ICONS} from "../../constants/icons";
 import {controllers} from "../../Controllers/Controllers";
-// import {CallIcon} from "../components/Calls/CallIcon";
-// import { TypingIndicatorView } from '../components/Indicator/TypingIndicatorView';
-// import { controllers } from '../controllers/Controllers';
+import {ICONS} from "../../constants/icons";
 
 class ChatHeaderView extends TypedBaseComponent<ChatHeader> {
     private textArr: string[];
@@ -68,7 +64,7 @@ class ChatHeaderView extends TypedBaseComponent<ChatHeader> {
                             style={styles.backBtn}>
                             <Image
                                 // source={require('../assets/img/Icons/arrow-left-white/arrow-left-white.png')}
-                                source={CHAT_ICONS.arrowLeft}
+                                source={ICONS.close}
                             />
                             <Text style={styles.backBtnText}>Назад</Text>
                         </TouchableOpacity>
@@ -140,7 +136,7 @@ class ChatHeaderView extends TypedBaseComponent<ChatHeader> {
                             style={styles.chatSettings}
                         >
                             <Image
-                                source={BOTTOM_NAVIGATION_ACTIVE_ICON.settings}
+                                source={ICONS.close}
                                 style={styles.chatSettingImage}
                             />
                         </TouchableOpacity>
@@ -168,9 +164,9 @@ const styles = StyleSheet.create({
     // height: hp(102),
     // maxHeight: hp(102),
     // paddingHorizontal: wp(20),
-    backgroundColor: COLORS.BLUE.bg,
+    backgroundColor: 'red',
     borderBottomWidth:2,
-    borderColor:COLORS.GRAY_WHITE.bg,
+    borderColor:'red',
     borderStyle:'solid',
     // marginTop: hp(-40),
     // paddingTop: hp(32),
@@ -208,16 +204,16 @@ const styles = StyleSheet.create({
   },
   contactIconText: {
     fontSize: hp(24),
-    color: COLORS.WHITE.bg,
+    color: 'red',
   },
   contactHeaderName: {
     fontSize: hp(16),
-    color: COLORS.WHITE.bg,
+    color: 'red',
       // backgroundColor: 'red'
   },
   contactHeaderStatus: {
     fontSize: hp(20),
-    color: COLORS.WHITE.bg,
+    color: 'red',
     marginTop: hp(2),
     textAlign: 'center',
     maxWidth: '80%'

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  View,
+    Text,
 } from 'react-native';
 import {
   mockupHeightToDP as hp,
@@ -14,9 +14,7 @@ import {listChatsProvider} from './components/ChatListProvider';
 import {currentUser} from '../Core/CurrentUser';
 import {store} from './provider/Store';
 import {BaseScreen} from '../Common/BaseScreen';
-import {HeaderView} from './components/Header';
-import {navigator} from '../Core/Navigator';
-import {UserScreenView} from '../Screens/UserScreenView';
+
 import {controllers} from '../Controllers/Controllers';
 
 class ChatListScreen extends BaseScreen {
@@ -33,8 +31,8 @@ class ChatListScreen extends BaseScreen {
     try {
         await super.onFocus();
         // controllers().bottomNavigation.btn4.counterModel.counter += 1
-        controllers().bottomNavigation.selectedIndex = 4;
-        controllers().bottomNavigation.forceUpdate();
+        // controllers().bottomNavigation.selectedIndex = 4;
+        // controllers().bottomNavigation.forceUpdate();
           await listChatsProvider().Init(
             currentUser().userToken,
             async (result) => {
@@ -105,15 +103,16 @@ class ChatListScreen extends BaseScreen {
         //   }
         // }}
       >
-        <UserScreenView withBackground={false} padding={false} id={'ChatListScreen'}>
-          <View style={styles.chatListContainer}>
-                <HeaderView
-                  model={store().chatsHeader}
-                  key={store().chatsHeader.id}
-                />
-                <ChatListView model={store().chats} key={store().chats.id} />
-          </View>
-        </UserScreenView>
+          <Text>LIST CHAT</Text>
+        {/*<UserScreenView withBackground={false} padding={false} id={'ChatListScreen'}>*/}
+        {/*  <View style={styles.chatListContainer}>*/}
+        {/*        <HeaderView*/}
+        {/*          model={store().chatsHeader}*/}
+        {/*          key={store().chatsHeader.id}*/}
+        {/*        />*/}
+        {/*        <ChatListView model={store().chats} key={store().chats.id} />*/}
+        {/*  </View>*/}
+        {/*</UserScreenView>*/}
       </SafeAreaView>
     );
   }
@@ -147,12 +146,12 @@ const styles = StyleSheet.create({
     elevation: 18,
   },
   contactContainer: {
-    backgroundColor: COLORS.WHITE.bg,
+    backgroundColor: 'red',
     paddingVertical: hp(20),
   },
   containerList: {
     flex: 1,
-    backgroundColor: COLORS.WHITE.bg,
+    backgroundColor: 'red',
   },
   chatListContainer: {
     flex: 1,

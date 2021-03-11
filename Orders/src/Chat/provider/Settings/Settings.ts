@@ -1,8 +1,5 @@
 import {Base} from "../Base";
-import {currentUser} from "../../../Core/CurrentUser";
-import messaging from "@react-native-firebase/messaging";
-import { fetchData } from "../../../Common/fetchData";
-// import { BiometricsSettings } from './BiometricsSettings';
+
 
 type settings = {
     id: string;
@@ -46,67 +43,67 @@ class Settings extends Base{
     }
 
     onSwitchChange() {
-        currentUser().DNDStatus ? this.removeDND() : this.openDateTimePicker();
+        // currentUser().DNDStatus ? this.removeDND() : this.openDateTimePicker();
     };
 
     removeDND() {
-        messaging()
-            .getToken()
-            .then(deviceToken => {
-                fetchData(
-                    `api-v1/${currentUser().userToken}/do-not-disturb/remove`,
-                    'post',
-                    {
-                        token: deviceToken,
-                    },
-                )
-                    .then(
-                        response => {
-                            if(response.statusCode === 200){
-                                currentUser().removeDND();
-                                this.modified = true;
-                                this.forceUpdate();
-                            }
-                        },
-                        error => {}, //AppLog.log('onTimeChange', error),
-                    );
-            });
+        // messaging()
+        //     .getToken()
+        //     .then(deviceToken => {
+        //         fetchData(
+        //             `api-v1/${currentUser().userToken}/do-not-disturb/remove`,
+        //             'post',
+        //             {
+        //                 token: deviceToken,
+        //             },
+        //         )
+        //             .then(
+        //                 response => {
+        //                     if(response.statusCode === 200){
+        //                         currentUser().removeDND();
+        //                         this.modified = true;
+        //                         this.forceUpdate();
+        //                     }
+        //                 },
+        //                 error => {}, //AppLog.log('onTimeChange', error),
+        //             );
+        //     });
     }
 
     setDND(event, selectedDate) {
-        if (selectedDate !== undefined) {
-            messaging()
-                .getToken()
-                .then(deviceToken => {
-                    const body = {
-                        token: deviceToken,
-                        dateFrom: new Date().toUTCString(),
-                        dateTo: selectedDate.toUTCString(),
-                    };
-                    // AppLog.log('onTimeChange', body);
-                    fetchData(
-                        `api-v1/${currentUser().userToken}/do-not-disturb/add`,
-                        'post',
-                        body,
-                    )
-                        .then(
-                            response => {
-                                console.log('responseo-not-disturb',response)
-                                if (response.result) {
-                                   currentUser().setDND(response.result);
-                                    this.openDateTimePicker();
-                                    this.modified = true;
-                                    this.forceUpdate();
-                                }
-                            },
-                            error => {
-                                // AppLog.log('onTimeChange', error);
-                            },
-                        );
-                });
-        } else {
-           this.openDateTimePicker();
-        }
+        // if (selectedDate !== undefined) {
+        //     messaging()
+        //         .getToken()
+        //         .then(deviceToken => {
+        //             const body = {
+        //                 token: deviceToken,
+        //                 dateFrom: new Date().toUTCString(),
+        //                 dateTo: selectedDate.toUTCString(),
+        //             };
+        //             // AppLog.log('onTimeChange', body);
+        //             fetchData(
+        //                 `api-v1/${currentUser().userToken}/do-not-disturb/add`,
+        //                 'post',
+        //                 body,
+        //             )
+        //                 .then(
+        //                     response => {
+        //                         console.log('responseo-not-disturb',response)
+        //                         if (response.result) {
+        //                            currentUser().setDND(response.result);
+        //                             this.openDateTimePicker();
+        //                             this.modified = true;
+        //                             this.forceUpdate();
+        //                         }
+        //                     },
+        //                     error => {
+        //                         // AppLog.log('onTimeChange', error);
+        //                     },
+        //                 );
+        //         });
+        // } else {
+        //    this.openDateTimePicker();
+        // }
     }
 
     setMaximumDate() {

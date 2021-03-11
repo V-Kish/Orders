@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     // paddingLeft: wp(15),
     fontFamily: 'Roboto-Regular',
     fontSize: hp(10),
-    color: COLORS.WHITE.bg,
+    color: COLORS.FONT_BLACK,
   },
   imageBackCircle: {
     borderRadius: 50,

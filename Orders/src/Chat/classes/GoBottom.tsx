@@ -7,7 +7,8 @@ import {
 import {TypedBaseComponent} from "../../Common/BaseComponent";
 import { GoBottomModel } from '../provider/Messages/GoBottom';
 import {store} from "../provider/Store";
-import {CHAT_ICONS} from "../../constants/icons";
+import { ICONS } from '../../constants/icons';
+
 
 export class GoBottom extends TypedBaseComponent<GoBottomModel> {
     constructor(props) {
@@ -29,7 +30,7 @@ export class GoBottom extends TypedBaseComponent<GoBottomModel> {
                     onPress={this.model.onPress}>
                     <Image
                         // source={require('../assets/img/Gobottom/more.png')} style={styles.img}
-                        source={CHAT_ICONS.goBottom} style={styles.img}
+                        source={ICONS.close} style={styles.img}
                     />
                 </TouchableOpacity>
             </View>

@@ -5,9 +5,9 @@ import {
   mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
 import {currentUser} from '../../../Core/CurrentUser';
-import {Button} from '../../../Models/Components/Button';
 import {ICONS} from '../../../constants/icons';
 import {navigator} from '../../../Core/Navigator';
+import { Button } from '../../../Model/Components/Button';
 
 class ChatsHeader extends Base {
   private _contactIcon: ContactIcon;
@@ -19,7 +19,7 @@ class ChatsHeader extends Base {
     this._backBtn = new Button({
       id: '_backBtn',
       title: 'Назад',
-      icon: ICONS.arrowLeftBlue,
+      icon: ICONS.close,
       style: 'chatBtnBackStyles',
       onPress: this.backBtnPress,
     });

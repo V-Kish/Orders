@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         fontSize: hp(22),
         lineHeight:hp(30),
         fontWeight: '800',
-        color: COLORS.WHITE.bg,
+        color: 'red',
         textAlign: 'center'
     },
     membersText: {

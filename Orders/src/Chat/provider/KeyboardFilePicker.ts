@@ -1,8 +1,7 @@
 import {Base} from "./Base";
-import DocumentPicker from 'react-native-document-picker';
-import {Button} from "../../Models/Components/Button";
-import {IconButton} from "../../Models/Components/IconButton";
 import {CHAT_ICONS, ICONS} from "../../constants/icons";
+import { IconButton } from "../../Model/Components/IconButton";
+import { Button } from "../../Model/Components/Button";
 
 type keyboardPickerProps = {
     id: string;
@@ -59,18 +58,18 @@ class KeyboardFilePicker extends Base{
     }
 
     async pick(type: string) {
-        try {
-            const res = await DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types[this.pickerTypes[type]]],
-            });
-            return res;
-        } catch (err) {
-            if (DocumentPicker.isCancel(err)) {
-                return false;
-            } else {
-                throw err;
-            }
-        }
+        // try {
+        //     const res = await DocumentPicker.pickMultiple({
+        //         type: [DocumentPicker.types[this.pickerTypes[type]]],
+        //     });
+        //     return res;
+        // } catch (err) {
+        //     if (DocumentPicker.isCancel(err)) {
+        //         return false;
+        //     } else {
+        //         throw err;
+        //     }
+        // }
     }
     onCloseBack() {
         this._model.onCloseBack();

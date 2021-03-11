@@ -1,8 +1,5 @@
 import {Base} from "../../provider/Base";
-import {store} from "../../provider/Store";
-import ReactNative, 
-{UIManager} 
-from 'react-native'
+
 
 class RecyclerItemModel extends Base{
     private _itemIndex: any

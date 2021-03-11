@@ -12,7 +12,6 @@ import {ContactItem} from './Contacts/ContactItem';
 import {NewMessageIndicator} from "./Messages/NewMessageIndicator";
 import DataSource from "../ViewModel/DataSource";
 import {GoBottomModel} from "./Messages/GoBottom";
-import { exists } from 'react-native-fs';
 
 
 class MessageList extends Base {

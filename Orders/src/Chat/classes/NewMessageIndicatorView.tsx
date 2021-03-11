@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: hp(18),
-        color: COLORS.WHITE.bg,
+        color: COLORS.FONT_BLACK,
         fontFamily: 'Roboto-Medium',
     },
     img:{

@@ -22,7 +22,6 @@ import {KeyboardInput} from './components/ChatInput/KeyboardInput';
 import {navigator} from '../Core/Navigator';
 import {ChatHeaderView} from './classes/ChatHeaderView';
 import {CHAT_ICONS} from '../constants/icons';
-import {HeaderWithDrawerAndSearchView} from '../View/OsbbAdminStack/Components/HeaderWithDrawerAndSearchView';
 import {controllers} from '../Controllers/Controllers';
 
 
@@ -77,18 +76,18 @@ class ChatScreen extends BaseScreen {
             setTimeout(() => {
               // store().preloader.visible = false;
               chat.items.firstPreloader.hide();
-              controllers().preloader.hide();
+              // controllers().preloader.hide();
             }, 200);
             setTimeout(() => {
               chat.items.firstPreloader.hide();
-              controllers().preloader.hide();
+              // controllers().preloader.hide();
               // store().preloader.visible = false;
               // store().chats.current?.items.scrollToEnd()
             }, 300);
           });
         },
         (error) => {
-          controllers().preloader.hide();
+          // controllers().preloader.hide();
           // AppLog.error('ChatScreen focus error => ', error);
           store().preloader.visible = false;
         },
@@ -158,12 +157,7 @@ class ChatScreen extends BaseScreen {
         {/*<View style={styles.chatContainer}>*/}
         <View style={styles.container}>
             {/*<FakeView model={fakeHeightCC} id={'asdas'} key={'12'}/>*/}
-          <View style={{zIndex: 99999, height: hp(80), overflow: 'hidden'}}>
-            <HeaderWithDrawerAndSearchView
-              model={controllers().userController.headerWithDrawerAndSearch}
-              key={controllers().userController.headerWithDrawerAndSearch.id}
-            />
-          </View>
+
             <View style={styles.header}>
                 <ChatHeaderView
                     model={store().chatHeader}
@@ -257,7 +251,7 @@ const styles = StyleSheet.create({
   messageListPreloaderText: {
     textAlign: 'center',
     marginTop: hp(15),
-    color: COLORS.WHITE.bg,
+    color: 'red'
 
   },
   components: {

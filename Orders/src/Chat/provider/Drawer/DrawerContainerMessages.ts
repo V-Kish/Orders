@@ -1,6 +1,5 @@
 import { Base } from "../Base";
 import {Chat} from "../Chat";
-import {AppLog} from "../../Common/AppLog";
 
 type drawerContainerMessagesProps = {
     id: string;
@@ -18,7 +17,7 @@ class DrawerContainerMessages extends Base {
     }
 
     onEditGroupNamePress() {
-        AppLog.log('onEditGroupNamePress')
+        console.log('onEditGroupNamePress')
     }
 }
 

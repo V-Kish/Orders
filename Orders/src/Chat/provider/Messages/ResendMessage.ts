@@ -1,5 +1,4 @@
 import { Base } from "../Base";
-import { IconButton } from "../../../Models/Components/IconButton";
 import { Message } from '../Message';
 // import { store } from '../../provider/Store';
 import {
@@ -7,6 +6,7 @@ import {
     mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
 import {CHAT_ICONS, ICONS} from "../../../constants/icons";
+import { IconButton } from "../../../Model/Components/IconButton";
 enum resendMessageType {
     none = 0,
     resend = 1,

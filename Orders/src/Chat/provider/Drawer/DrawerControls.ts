@@ -1,4 +1,4 @@
-import {Base} from "../Base";
+import {Base} from '../Base';
 
 class DrawerControls extends Base {
     private _showMask: boolean;

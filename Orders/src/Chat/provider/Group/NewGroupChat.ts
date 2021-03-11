@@ -2,7 +2,6 @@ import { Base } from "../Base";
 // import { console } from "../../Common/console";
 import { ContactsChoice } from "../Contacts/SelectedContacts";
 import { ContactsHeader } from "../Contacts/ContactsHeader";
-import { TextBox } from "../../../Models/Components/TextBox";
 import { NextButton } from "../Contacts/NextButton";
 import { store } from "../Store";
 import { currentUser } from "../../../Core/CurrentUser";
@@ -12,6 +11,7 @@ import { ChatDataProvider } from "../../DataProvider/ChatDataProvider";
 import {ChatMembersList} from "../ChatMembersList";
 import {Alert} from 'react-native';
 import {navigator} from "../../../Core/Navigator";
+import { TextBox } from "../../classes/TextBox";
 
 class NewGroupChat extends Base {
     private _header: ContactsHeader;

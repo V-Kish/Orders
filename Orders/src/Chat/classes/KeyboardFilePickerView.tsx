@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     },
     textWhatNeedToDo: {
         fontFamily: 'Roboto-Light',
-        color: COLORS.PIKER_NEED_TO_DO,
+        color: COLORS.FONT_BLACK,
         marginTop: hp(15),
     },
     closeButton: {

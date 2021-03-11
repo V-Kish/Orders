@@ -4,7 +4,7 @@ import { currentUser } from '../../../Core/CurrentUser';
 import { listChatsProvider } from '../../components/ChatListProvider';
 import { store } from '../Store';
 import {navigator} from "../../../Core/Navigator";
-import {Button} from "../../../Models/Components/Button";
+import {Button} from "../../../Model/Components/Button";
 // import {console} from "../../Common/console";
 type modalDeleteGroupProps ={
     id:string;
@@ -33,9 +33,9 @@ class ModalDeleteGroup extends Base {
     get cancelButton() {
         return this._cancelButton;
     }
-    get isModalShow() {
-        return this._model.isModalShow;
-    }
+    // get isModalShow() {
+    //     return this._model.isModalShow;
+    // }
     get groupName() {
         return this._model.groupName;
     }

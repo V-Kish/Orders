@@ -2,7 +2,6 @@ import moment from 'moment';
 import 'moment/locale/uk';
 import { dateParse } from './dateParse';
 import { convertToUTCString } from './convertToUTCString';
-import { Text } from 'react-native';
 import React from 'react';
 export function getTime(
   dateString,

@@ -116,31 +116,31 @@ class Message extends Base {
       if (this.isLoaded) {
         return MessageHelper.openFile(this.path);
       }
-      if (!currentUser().permissions.writeExternalStorage) {
-        const request = await currentUser().permissions.requestStoragePermission(
-            currentUser().permissions.permissionTypes.externalStorage,
-        );
-        if(!request){
-          return ;
-        }
-      }
+      // if (!currentUser().permissions.writeExternalStorage) {
+      //   const request = await currentUser().permissions.requestStoragePermission(
+      //       currentUser().permissions.permissionTypes.externalStorage,
+      //   );
+      //   if(!request){
+      //     return ;
+      //   }
+      // }
       this.isLoading = true;
       this.modified = true;
       this.forceUpdate();
       const directory = RNFS.DownloadDirectoryPath + '/osbb/';
-      if (currentUser().permissions.writeExternalStorage) {
-        await RNFS.mkdir(directory);
-        const uri = `${AppSettings.chatEndpoint}/${currentUser().userToken}/${this.message.fileHash}/as-image-thumb`;
-        path = await MessageHelper.downloadFile(uri, this.message.fileNmae);
-        if (path !== '') {
-          this.path = path;
-          this.isLoading = false;
-          this.isLoaded = true;
-          MessageHelper.openFile(this.path);
-          this.modified = true;
-          this.forceUpdate();
-        }
-      }
+      // if (currentUser().permissions.writeExternalStorage) {
+      //   await RNFS.mkdir(directory);
+      //   const uri = `${AppSettings.chatEndpoint}/${currentUser().userToken}/${this.message.fileHash}/as-image-thumb`;
+      //   path = await MessageHelper.downloadFile(uri, this.message.fileNmae);
+      //   if (path !== '') {
+      //     this.path = path;
+      //     this.isLoading = false;
+      //     this.isLoaded = true;
+      //     MessageHelper.openFile(this.path);
+      //     this.modified = true;
+      //     this.forceUpdate();
+      //   }
+      // }
     }
   }
 

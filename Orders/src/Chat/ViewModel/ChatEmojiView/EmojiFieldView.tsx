@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {StyleSheet, View, ScrollView, Platform} from 'react-native';
+import {StyleSheet, View, ScrollView} from 'react-native';
 import { TypedBaseComponent } from '../../../Common/BaseComponent';
 import { EmojiField } from '../../provider/ChatEmoji/EmojiField';
 import { IconButtonView } from '../IconButtonView';
@@ -7,10 +7,7 @@ import {
     mockupHeightToDP as hp,
 } from '../../../constants/Dimensions';
 import { IconButton } from '../../provider/IconButton';
-import {COLORS} from "../../../constants/colors";
-import DevicesIPhone from "../../../Core/DevicesIPhone/DevicesIPhone";
 
-let row = [];
 class EmojiFieldView extends TypedBaseComponent<EmojiField>{
 
     private rows: Array<Array<IconButton>>;
@@ -30,9 +27,6 @@ class EmojiFieldView extends TypedBaseComponent<EmojiField>{
         super.render();
         return (
             <View style={styles.container} ref={(ref) => { this.model.refOnEmojiField = ref }}>
-                {Platform.OS === 'ios' && DevicesIPhone.devicesIOSHeight === -1 && (
-                    <View style={styles.fixedEmojiPadding}/>
-                )}
                 <ScrollView style={styles.scrollView}>
                     {this.rows.map((icons, index) =>
                         <View style={styles.row} key={`SmileRow_${index}`}>
@@ -61,7 +55,7 @@ const styles = StyleSheet.create({
     },
     fixedEmojiPadding:{
         height:hp(35),
-        backgroundColor:COLORS.BLUE.bg,
+        backgroundColor:'red',
     }
 });
 

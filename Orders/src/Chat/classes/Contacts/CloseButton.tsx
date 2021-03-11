@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, StyleSheet, TextInput, TouchableOpacity, Image} from 'react-native';
+import { StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
 import {BaseComponent} from "../../../Common/BaseComponent";
-import {CHAT_ICONS, ICONS} from "../../../constants/icons";
+import {ICONS} from "../../../constants/icons";
+i
 
 class CloseButton extends BaseComponent {
     constructor(props) {
@@ -18,7 +19,7 @@ class CloseButton extends BaseComponent {
                 <Image
                     style={styles.passwordIcon}
                     // source={require('../../assets/img/Icons/close/Close.png')}/>
-                    source={CHAT_ICONS.close}/>
+                    source={ICONS.close}/>
             </TouchableOpacity>
         );
     }

@@ -1,9 +1,8 @@
-import { Alert } from 'react-native';
-import FileViewer from 'react-native-file-viewer';
-import { FileSystem } from 'react-native-unimodules';
+// import FileViewer from 'react-native-file-viewer';
+// import { FileSystem } from 'react-native-unimodules';
 // import { console } from '../../Common/console';
 
-const RNFS = require('react-native-fs');
+// const RNFS = require('react-native-fs');
 
 class MessageHelper {
   static bytesToSize(bytes, decimals = 1) {
@@ -20,8 +19,8 @@ class MessageHelper {
   }
 
   static async fileToBase64(uri) {
-    const fileBase64 = await RNFS.readFile(uri, 'base64');
-    return fileBase64;
+    // const fileBase64 = await RNFS.readFile(uri, 'base64');
+    // return fileBase64;
   }
 
   static getFileExtension(filename) {
@@ -52,44 +51,44 @@ class MessageHelper {
 
   static saveFile(path, fileName, extension, base64, i = 0) {
     let newFileName = null;
-    RNFS.exists(
-        path + fileName + (i !== 0 ? `(${i})` : '') + '.' + extension,
-    ).then(exists => {
-      if (exists) {
-        i++;
-        this.saveFile(path, fileName, extension, base64, i);
-      } else {
-        if (i >= 20) {
-          newFileName = MessageHelper.uuidv4();
-        } else {
-          newFileName = fileName;
-        }
-        RNFS.writeFile(
-            path +
-            newFileName +
-            (i !== 0 && i < 20 ? `(${i})` : '') +
-            '.' +
-            extension,
-            MessageHelper.base64Split(base64),
-            'base64',
-        )
-            .then(success => {
-              //setDisabledBtn(false);
-              FileViewer.open(path + newFileName + '.' + extension)
-                  .then(() => {
-                    // success
-                  })
-                  .catch(error => {
-                    // error
-                  });
-              console.log('FILE WRITTEN!');
-            })
-            .catch(err => {
-              //setDisabledBtn(false);
-              console.log(err.message);
-            });
-      }
-    });
+    // RNFS.exists(
+    //     path + fileName + (i !== 0 ? `(${i})` : '') + '.' + extension,
+    // ).then(exists => {
+    //   if (exists) {
+    //     i++;
+    //     this.saveFile(path, fileName, extension, base64, i);
+    //   } else {
+    //     if (i >= 20) {
+    //       newFileName = MessageHelper.uuidv4();
+    //     } else {
+    //       newFileName = fileName;
+    //     }
+    //     RNFS.writeFile(
+    //         path +
+    //         newFileName +
+    //         (i !== 0 && i < 20 ? `(${i})` : '') +
+    //         '.' +
+    //         extension,
+    //         MessageHelper.base64Split(base64),
+    //         'base64',
+    //     )
+    //         .then(success => {
+    //           //setDisabledBtn(false);
+    //           FileViewer.open(path + newFileName + '.' + extension)
+    //               .then(() => {
+    //                 // success
+    //               })
+    //               .catch(error => {
+    //                 // error
+    //               });
+    //           console.log('FILE WRITTEN!');
+    //         })
+    //         .catch(err => {
+    //           //setDisabledBtn(false);
+    //           console.log(err.message);
+    //         });
+    //   }
+    // });
   }
 
   static uuidv4() {
@@ -104,25 +103,25 @@ class MessageHelper {
   static async openFile(path) {
     console.log('path', path);
     const filePath = path.replace('file://', '');
-    await FileViewer.open(filePath);
+    // await FileViewer.open(filePath);
     return true;
   }
 
   static async downloadFile(uri: string, fileName = null) {
-    const path = FileSystem.documentDirectory + fileName;
-    const info = await FileSystem.getInfoAsync(path);
-    if (!info.exists) {
-      const img = await FileSystem.downloadAsync(uri, path, {
-        headers: {
-          'access-token': '1F31C7D6-8E2C-4917-8FAD-36AA4F4690F0',
-          'role-token': '2FCB66F5-D533-4648-BB7A-BABBA23D6F03',
-        },
-      });
-      if (img.status !== 200) {
-        return '';
-      }
-    }
-    return path;
+    // const path = FileSystem.documentDirectory + fileName;
+    // const info = await FileSystem.getInfoAsync(path);
+    // if (!info.exists) {
+    //   const img = await FileSystem.downloadAsync(uri, path, {
+    //     headers: {
+    //       'access-token': '1F31C7D6-8E2C-4917-8FAD-36AA4F4690F0',
+    //       'role-token': '2FCB66F5-D533-4648-BB7A-BABBA23D6F03',
+    //     },
+    //   });
+    //   if (img.status !== 200) {
+    //     return '';
+    //   }
+    // }
+    // return path;
   }
 
   static getMessageType(filename) {

@@ -60,7 +60,7 @@ export { NewChatScreen };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.WHITE.bg,
+    backgroundColor: 'red',
   },
   buttonContainer: {
     position: 'absolute',

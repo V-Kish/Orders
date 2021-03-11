@@ -8,10 +8,7 @@ import {
 } from '../../constants/Dimensions';
 import { getTimeAndText } from '../functions/getTime';
 import { COLORS } from '../../constants/colors';
-// import { AppLog } from '../Common/AppLog';
-// import {store} from "../provider/Store";
-// import { TypingIndicatorView } from '../components/Indicator/TypingIndicatorView';
-// import { controllers } from '../controllers/Controllers';
+
 
 class ContactIsOnlineView extends MultiTypedBaseComponent<ContactIsOnline>{
     constructor(props) {
@@ -72,7 +69,7 @@ const styles = StyleSheet.create({
         height: hp(13),
         borderStyle: 'solid',
         borderWidth: 2,
-        borderColor: COLORS.WHITE.bg,
+        borderColor: COLORS.FONT_BLACK,
         justifyContent: 'center',
         alignItems: 'center',
     },

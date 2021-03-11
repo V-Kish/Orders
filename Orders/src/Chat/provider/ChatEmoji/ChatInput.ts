@@ -6,7 +6,7 @@ import {
     mockupWidthToDP as wp,
     mockupHeightToDP as hp,
 } from '../../../constants/Dimensions';
-import {CHAT_ICONS, DETAIL_ICONS, ICONS} from "../../../constants/icons";
+import {CHAT_ICONS, ICONS} from "../../../constants/icons";
 // import { console } from "../../Common/console";
 
 type chatInputProps = {
@@ -62,7 +62,7 @@ class ChatInput extends Base {
             style: 'keyboardButton',
             // icon: require('../../assets/img/Icons/smile/Group.png'),
             // icon: CHAT_ICONS.buttonSmile,
-            icon: DETAIL_ICONS.emojiBtn,
+            icon: ICONS.close,
             hidden: false
         })
         this._buttonKeyboard = new IconButton({
@@ -87,7 +87,7 @@ class ChatInput extends Base {
             style: 'keyboardButton',
             // icon: require('../../assets/img/Icons/send-arrow/Group.png'),
             // icon: CHAT_ICONS.sendArrow,
-            icon: DETAIL_ICONS.sendMessage,
+            icon: ICONS.close,
             hidden: true
         });
         this._textBox = new TextBox({

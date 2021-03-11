@@ -38,21 +38,21 @@ class MainNavigationView extends TypedBaseComponent<MainNavigation> {
                 swipeEnabled: false,
               }}
             />
-            <StackDrawer.Screen
-              name="MainStack"
-              component={MainStack}
-              options={{
-                swipeEnabled: true,
-              }}
-            />
-            {/* Про програму */}
-            <StackDrawer.Screen
-              name="AboutProgramOSBB"
-              component={AboutProgramOSBB}
-              options={{
-                swipeEnabled: true,
-              }}
-            />
+            {/*<StackDrawer.Screen*/}
+            {/*  name="MainStack"*/}
+            {/*  component={MainStack}*/}
+            {/*  options={{*/}
+            {/*    swipeEnabled: true,*/}
+            {/*  }}*/}
+            {/*/>*/}
+            {/*/!* Про програму *!/*/}
+            {/*<StackDrawer.Screen*/}
+            {/*  name="AboutProgramOSBB"*/}
+            {/*  component={AboutProgramOSBB}*/}
+            {/*  options={{*/}
+            {/*    swipeEnabled: true,*/}
+            {/*  }}*/}
+            {/*/>*/}
           </DrawerStack>
         </NavigationContainer>
         <AppStateController

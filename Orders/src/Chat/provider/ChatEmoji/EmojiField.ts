@@ -1,6 +1,5 @@
 ﻿import { Base } from "../Base";
 import { IconButton } from "../IconButton";
-// import {console} from "../../Common/console";
 
 type emojiFieldProps = {
     id: string;

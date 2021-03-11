@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {View, StyleSheet, TextInput, Modal, ActivityIndicator} from 'react-native';
+import {View, StyleSheet, ActivityIndicator} from 'react-native';
 import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
-import {BaseComponent, TypedBaseComponent} from "../../Common/BaseComponent";
+import { TypedBaseComponent} from "../../Common/BaseComponent";
 import {COLORS} from "../../constants/colors";
 import { Preloader } from '../provider/Preloader/Preloader';
 
@@ -22,7 +22,7 @@ class PreloaderView extends TypedBaseComponent<Preloader> {
                         <ActivityIndicator
                             style={styles.loading}
                             size="large"
-                            color={COLORS.RED.bg}
+                            color={'red'}
                         />
                     </View>
                 </View>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     containerModal: {
         position: 'absolute',
         flex: 1,
-        backgroundColor: COLORS.BLACK_70.bg,
+        backgroundColor: 'red',
         left: hp(0),
         right: hp(0),
         bottom: hp(0),

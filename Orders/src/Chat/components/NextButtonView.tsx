@@ -4,7 +4,7 @@ import { mockupWidthToDP as wp } from '../../constants/Dimensions';
 import { COLORS } from '../../constants/colors';
 import { TypedBaseComponent} from '../../Common/BaseComponent';
 import { NextButton } from '../provider/Contacts/NextButton';
-import {CHAT_ICONS} from "../../constants/icons";
+import {ICONS} from "../../constants/icons";
 
 class NextButtonView extends TypedBaseComponent<NextButton> {
     constructor(props) {
@@ -21,7 +21,7 @@ class NextButtonView extends TypedBaseComponent<NextButton> {
                     >
                         <Image
                             // source={require('../assets/img/Icons/arrow-right-white/arrow-right-white.png')}
-                            source={CHAT_ICONS.arrowRight}
+                            source={ICONS.close}
                             style={styles.buttonImg}
                         />
                     </TouchableOpacity>
@@ -36,7 +36,7 @@ class NextButtonView extends TypedBaseComponent<NextButton> {
                     >
                         <Image
                             // source={require('../assets/img/Icons/checked/Shape.png')}
-                            source={CHAT_ICONS.checked}
+                            source={ICONS.close}
                             style={styles.buttonImg}
                         />
                     </TouchableOpacity>
@@ -50,7 +50,7 @@ class NextButtonView extends TypedBaseComponent<NextButton> {
                         onPress={this.model.onPress.bind(this.props.model)}>
                         <Image
                             // source={require('../assets/img/Icons/checked/Shape.png')}
-                            source={CHAT_ICONS.checked}
+                            source={ICONS.close}
                             style={styles.buttonImg}
                         />
                     </TouchableOpacity>
@@ -64,7 +64,7 @@ class NextButtonView extends TypedBaseComponent<NextButton> {
                         onPress={this.model.onPress.bind(this.props.model)}>
                         <Image
                             // source={require('../assets/img/Icons/close/closeWhite/Shape.png')}
-                            source={CHAT_ICONS.closeWhite}
+                            source={ICONS.close}
                             style={styles.buttonImg}
                         />
                     </TouchableOpacity>
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   button: {
     width: wp(60),
     height: wp(60),
-    backgroundColor: COLORS.GREEN.bg,
+    backgroundColor: COLORS.FONT_BLACK,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   buttonOrange: {
     width: wp(60),
     height: wp(60),
-    backgroundColor: COLORS.RED.bg,
+    backgroundColor: COLORS.FONT_BLACK,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',

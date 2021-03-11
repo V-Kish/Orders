@@ -6,9 +6,10 @@ import {
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
 import { COLORS } from '../../constants/colors';
-import { BaseComponent, TypedBaseComponent } from '../../Common/BaseComponent';
+import {  TypedBaseComponent } from '../../Common/BaseComponent';
 import { ContactItem } from '../provider/Contacts/ContactItem';
-import {CHAT_ICONS} from "../../constants/icons";
+import {ICONS} from "../../constants/icons";
+i
 // import {AppLog} from "../Common/AppLog";
 
 class ContactItemView extends TypedBaseComponent<ContactItem> {
@@ -52,10 +53,10 @@ class ContactItemView extends TypedBaseComponent<ContactItem> {
                             {this.model.name}
                         </Text>
                         {this.props.owner && <Image style={styles.ownerImg}
-                                                    source={CHAT_ICONS.star}
+                                                    source={ICONS.close}
                         />}
                         {this.model.isOsbbLeader && <Image style={styles.ownerImg}
-                                                           source={CHAT_ICONS.starBlue}
+                                                           source={ICONS.close}
                         />}
                     </View>
                 </TouchableOpacity>
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.WHITE.bg,
+    backgroundColor: 'red',
     marginRight: wp(15),
     marginBottom: hp(10),
     // borderColor: 'hsl(0,0%,95%)',
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     fontSize: hp(18),
     fontFamily: 'Roboto',
     // letterSpacing: .4,
-    color: COLORS.BLACK.bg,
+    color: 'red',
     marginLeft: wp(8),
       // backgroundColor: 'red',
       // width: '100%'
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
   contactTextAddGroup: {
     fontSize: hp(14),
     fontFamily: 'Roboto-Regular',
-    color: COLORS.GRAY.bg,
+    color:'red',
     marginLeft: wp(8),
     width: '60%',
       // backgroundColor: 'red'

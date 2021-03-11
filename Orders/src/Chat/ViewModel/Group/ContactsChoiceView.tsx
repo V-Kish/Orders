@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     container: {
         position: 'relative',
         flex: 1,
-        backgroundColor: COLORS.WHITE.bg,
+        backgroundColor: 'red',
     },
     borderTop: {
         marginHorizontal: hp(15),
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     },
     containerSecond: {
         flex: 1,
-        backgroundColor: COLORS.WHITE.bg,
+        backgroundColor: 'red',
         paddingHorizontal: wp(16),
         paddingTop: hp(15),
     },

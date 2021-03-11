@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     },
     containerSecond: {
         flex: 1,
-        backgroundColor: COLORS.WHITE.bg,
+        backgroundColor: 'red',
         paddingHorizontal: wp(16),
         paddingTop: hp(15),
     },

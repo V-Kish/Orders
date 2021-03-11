@@ -7,15 +7,13 @@ import {
     View,
 } from 'react-native';
 import { mockupHeightToDP as hp } from '../../constants/Dimensions';
-// import { NewMessageIndicator } from '../components/ChatStackComponents/NewMessageIndicator';
+
 import { COLORS } from '../../constants/colors';
 import { MessagePreloaderView } from '../ViewModel/Messages/MessagePreloaderView';
 import { Chat } from '../provider/Chat';
 import { MessageListItemsView } from './MessageListItems';
 import {NewMessageIndicatorView} from "./NewMessageIndicatorView";
-// import { ResendMessageView } from '../ViewModel/Messages/ResendMessageView';
-// import { KeyboardFilePreviewView } from './KeyboardFilePreviewView';
-// import { KeyboardFilePickerView } from './KeyboardFilePickerView';
+
 import { store } from '../provider/Store';
 
 class MessageListIOS extends TypedBaseComponent<Chat> {
