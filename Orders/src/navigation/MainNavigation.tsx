@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {MainStack} from './MainStack';
 import {AuthStack} from './AuthStack';
-import {Provider, useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import {reduxTypes} from '../Types';
 import {NavigationContainer} from '@react-navigation/native';
 import messaging from '@react-native-firebase/messaging';
