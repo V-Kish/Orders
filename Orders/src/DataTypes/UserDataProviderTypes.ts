@@ -1,7 +1,7 @@
 // Type body Post authorization
 import {requestBodyType, IItemType} from './BaseTypes';
-import { pagedItemProps } from '../Models/navigation/PagedList/PagedItem';
-import DeviceInfo from "react-native-device-info";
+import {pagedItemProps} from '../Models/navigation/PagedList/PagedItem';
+import DeviceInfo from 'react-native-device-info';
 
 export type AuthBody = {
   phone: string;
@@ -110,11 +110,7 @@ export type fileVerify = {
   comment: string;
   osbbHash: string;
 };
-export type formVerification = {
-  osbbHash: string;
-  name?: string;
-  address?: string;
-};
+
 //
 export type genarateCodeType = {
   smsIsSended: boolean | null;
@@ -124,47 +120,7 @@ export type genarateCodeType = {
   canGenNewCodeSecondsLeft: number | null;
   canGenNewCode: boolean | null;
 };
-//
-export type initOsbbListType = [
-  {
-    hash: string;
-    edrpou: string;
-    address: string;
-    name: string;
-    ownerUserId: number;
-    status: boolean;
-    slug: string;
-    verifyStatusId: number;
-    verifyUserId: number;
-    verifyStatusMessage: string;
-    verifyDate: string;
-    verifyComment: string;
-    date: string;
-    edrpouHash: string;
-  },
-];
-//
-export type findCodeOsbbEdrpou = {
-  edrpou: string;
-};
-//Тіло відповіді
-export type findCodeOsbbEdrpouAnswer = {
-  statusCode: number;
-  statusMessage: string;
-  data?: {
-    hash?: string;
-    edrpou?: string;
-    address?: string;
-    name?: string;
-    ownerUserId?: number;
-    status?: boolean;
-    slug?: string;
-    verifyStatusId?: number;
-    osbbVerifyDate?: string;
-    verifyComment?: string;
-    field?: string;
-  };
-};
+
 //Створити ОСББ (На перевірку)
 export type createOSBBForCheck = {
   edrpou: string;
@@ -194,47 +150,7 @@ export type createOSBBForCheckAnswer = {
     verifyStatusId?: number;
   };
 };
-//
-export type userInfoTypes = {
-  id: number;
-  hash: string;
-  name: string;
-  login: string;
-  password: string;
-  hashsum: number;
-  ipn: string;
-  email: string;
-  emailVerify: boolean;
-  ugroup: number;
-  status: boolean;
-  date: string;
-  bDate: string;
-  bDateIsDefault: boolean;
-  ugroupName: string;
-} | null;
-//
-export type attachTmpUser = {
-  name: string;
-  email: string;
-  personalAccount: string;
-  memberTypeId: string;
-  ipn: string;
-  bDate: string;
-} | null;
-export type attachTmpUserAnswer = {
-  statusCode: number;
-  statusMessage: string;
-  data?: [
-    {
-      osbbHash: string;
-      personalAccount: string;
-      membersVerifyStatusId: number;
-      dateCreate: string;
-      dateUpdate: string;
-      field?: string;
-    },
-  ];
-};
+
 export type headerTypes = [
   {
     id: number;
@@ -246,24 +162,4 @@ export type headerSelectedTypes = {
   id: number;
   headerTitle: string;
   onPress: () => void;
-};
-export type FireBaseTypes = {
-  token: string;
-  deviceInfo: string;
-};
-
-
-export type osbbDocumentListItemType = IItemType & pagedItemProps & {
-    id: number;
-    BLOBData: string;
-    comment: string;
-    date: string; //date
-    extension: string;
-    filesTypeId: number;
-    hash: string; //guid
-    mimeType: string;
-    originalName: string;
-    ownerId: number;
-    size: number;
-    status: boolean;
 };

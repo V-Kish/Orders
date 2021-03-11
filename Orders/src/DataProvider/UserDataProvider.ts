@@ -4,9 +4,13 @@ import messaging from '@react-native-firebase/messaging';
 import {PhoneInfo} from '../Core/PhoneInfo';
 import {AuthBodyToken} from '../Types';
 import {AppLog} from '../Common/AppLog';
-import { baseResponse, IItemType, requestBodyType } from '../DataTypes/BaseTypes';
-import {paramsCreateFetchBody, deviceInfoType, getDeviceId} from '../DataTypes/UserDataProviderTypes';
-import { readData } from '../Core/readData';
+import {baseResponse, IItemType, requestBodyType} from '../DataTypes/BaseTypes';
+import {
+  paramsCreateFetchBody,
+  deviceInfoType,
+  getDeviceId,
+} from '../DataTypes/UserDataProviderTypes';
+import {readData} from '../Core/readData';
 class UserDataProvider {
   // Авторизація користувача
   static async AuthorizationFetch(body) {
@@ -70,9 +74,9 @@ class UserDataProvider {
     });
   }
   static async createFetchBody(
-      params: paramsCreateFetchBody,
-      device: boolean,
-  ): Promise<requestBodyType> {
+    params: paramsCreateFetchBody,
+    device: boolean,
+  ): requestBodyType {
     try {
       let deviceInfo: deviceInfoType = null;
       const readPhoneInfo = await readData('PhoneInfo');
@@ -105,43 +109,43 @@ class UserDataProvider {
       };
     }
   }
-  async function loadData<T extends baseResponse<IItemType>>(
-      func: (bodyF: requestBodyType) => Promise<T>,
-      params: object,
-      retryCount: number = 0,
-      deviceInfo: boolean = false,
-  ) {
-    if (retryCount >= 3) {
-      return emptyResponse(600, 'retryLimit');
-    }
-    try {
-      const body = await UserDataProvider.createFetchBody(params, deviceInfo);
-      return await func(body);
-    } catch (ex) {
-      console.log('exception', ex);
-      // if (controllers().noConnection.hasInternet){
-      //   controllers().information.makeServerErrorModal(async () => {
-      //     // await loadData(func, params, retryCount++);
-      //   });
-      // }
-      return emptyResponse(600, 'retryLimit');
-    }
+}
+async function loadData<T extends baseResponse<IItemType>>(
+  func: (bodyF: requestBodyType) => Promise<T>,
+  params: object,
+  retryCount: number = 0,
+  deviceInfo: boolean = false,
+) {
+  if (retryCount >= 3) {
+    return emptyResponse(600, 'retryLimit');
   }
-  async function emptyResponse(
-      statusCode: number,
-      statusMessage: string,
-  ): Promise<baseResponse<IItemType>> {
-    return {
-      statusCode,
-      statusMessage,
-      data: {
-        Items: [],
-        PageIndex: 0,
-        PageSize: 0,
-        TotalItems: 0,
-        TotalPages: 0,
-      },
-    };
+  try {
+    const body = await UserDataProvider.createFetchBody(params, deviceInfo);
+    return await func(body);
+  } catch (ex) {
+    console.log('exception', ex);
+    // if (controllers().noConnection.hasInternet){
+    //   controllers().information.makeServerErrorModal(async () => {
+    //     // await loadData(func, params, retryCount++);
+    //   });
+    // }
+    return emptyResponse(600, 'retryLimit');
   }
 }
-export {UserDataProvider , loadData};
+async function emptyResponse(
+  statusCode: number,
+  statusMessage: string,
+): Promise<baseResponse<IItemType>> {
+  return {
+    statusCode,
+    statusMessage,
+    data: {
+      Items: [],
+      PageIndex: 0,
+      PageSize: 0,
+      TotalItems: 0,
+      TotalPages: 0,
+    },
+  };
+}
+export {UserDataProvider, loadData};

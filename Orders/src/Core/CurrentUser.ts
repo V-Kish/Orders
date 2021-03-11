@@ -3,16 +3,32 @@ import {readData} from './readData';
 import {AppLog} from '../Common/AppLog';
 import AsyncStorage from '@react-native-community/async-storage';
 import { UserDataProvider } from '../DataProvider/UserDataProvider';
+import {store} from '../Chat/provider/Store';
 type user = {
   userToken: string | null;
   userId: string | null;
 };
 class CurrentUserImpl {
   private _user: user;
+  private _mistakeHeight: number | null;
+  private _saveAreaInset: {
+    top:number;
+    bottom:number;
+    height:number;
+  };
   constructor() {
     this._user = {
       userToken: null,
       userId: null,
+    };
+    this._mistakeHeight = null;
+    this._saveAreaInset = {
+      // top:RNStaticSafeAreaInsets.safeAreaInsetsTop,
+      // bottom:RNStaticSafeAreaInsets.safeAreaInsetsBottom,
+      // height:RNStaticSafeAreaInsets.safeAreaHeight
+        top:0,
+        bottom:0,
+        height:0
     };
   }
 
@@ -26,7 +42,26 @@ class CurrentUserImpl {
   set userId(userId) {
     this.user.userId = userId;
   }
+  get mistakeHeight() {
+    return this._mistakeHeight;
+  }
+  get saveAreaInset() {
+    return this._saveAreaInset;
+  }
+  set mistakeHeight(value) {
+    if (this._mistakeHeight === null) {
+      this._mistakeHeight = value;
+    }
+  }
+  get contact() {
+    const contact = store().contactsItems.getOrAdd(this._user.userId);
+    return contact;
+  }
 
+  get contactIcon() {
+    const contact = store().contactsItems.getOrAdd(this._user.userId);
+    return contact.icon;
+  }
   get userId() {
     return this.user.userId;
   }
