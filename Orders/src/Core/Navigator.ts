@@ -1,10 +1,10 @@
-import {CommonActions} from '@react-navigation/native';
-import {AppLog} from '../Common/AppLog';
+import {CommonActions , DrawerActions} from '@react-navigation/native';
 import {currentUser} from './CurrentUser';
 import {readData} from './readData';
 import {saveData} from './saveData';
 import {ChangeStackNavigation} from '../store/actions/AppStart';
 import {Dispatch} from 'redux';
+import {Platform} from "react-native";
 
 type state = {
   prevScreen: Array<any>;
@@ -30,6 +30,11 @@ class NavigatorImpl {
   private _navigation: navigation | null;
   private _state: {appState: {isBackground: boolean}; prevScreen: any[]};
   private _currentScreen: string;
+  private _swipeEnabled: boolean;
+  private _deviceHeight: number;
+  private _deviceWidth: number;
+  private _keyboardHeight: number;
+  private _startAppWithBackground: boolean;
 
   constructor() {
     this._navigation = null;
@@ -44,6 +49,13 @@ class NavigatorImpl {
     this.restoreNavigatorState = this.restoreNavigatorState.bind(this);
     this.handleBackground = this.handleBackground.bind(this);
     this.changeNavigationStateAuth = this.changeNavigationStateAuth.bind(this);
+    this.pushScreenToHistory = this.pushScreenToHistory.bind(this);
+    this._swipeEnabled = true;
+    //this._deviceHeight = RNStaticSafeAreaInsets.safeAreaHeight;
+    this._deviceHeight = 120;
+    this._deviceWidth = 0;
+    this._keyboardHeight = 0;
+    this._startAppWithBackground = false;
   }
 
   get navigation(): navigation | null {
@@ -159,6 +171,9 @@ class NavigatorImpl {
 
   handleBackground(state: string) {
     switch (state) {
+      case 'start':
+
+        break;
       case 'active':
         this.background = false;
         this.restoreNavigatorState();
@@ -170,10 +185,70 @@ class NavigatorImpl {
         break;
     }
   }
-
+  pushScreenToHistory(screen: {name: any; params: any}) {
+    this.state.prevScreen.push(screen);
+  }
   changeNavigationStateAuth(value: boolean, dispatch: Dispatch<any>) {
     dispatch(ChangeStackNavigation(value));
   }
+  // Drawer Actions
+  openDrawer() {
+    if (this.navigation === null) {
+      return false;
+    }
+    this.navigation.dispatch(DrawerActions.openDrawer());
+  }
+
+  closeDrawer() {
+    if (this.navigation === null) {
+      return false;
+    }
+    this.navigation.dispatch(DrawerActions.closeDrawer());
+  }
+
+  toggleDrawer() {
+    if (this.navigation === null) {
+      return false;
+    }
+    this.navigation.dispatch(DrawerActions.toggleDrawer());
+  }
+
+  get deviceHeight() {
+    return this._deviceHeight;
+  }
+
+  set deviceHeight(value) {
+    if (Platform.OS === 'ios') {
+      this._deviceHeight = value;
+    }
+  }
+
+  get deviceWidth() {
+    return this._deviceWidth;
+  }
+
+  set deviceWidth(value) {
+    this._deviceWidth = value;
+  }
+
+  get keyboardHeight() {
+    return this._keyboardHeight;
+  }
+
+  set keyboardHeight(value) {
+    this._keyboardHeight = value;
+  }
+  // navigation for example
+  // toOsbbContactsScreen() {
+  //   navigator().navigate('MainStack', {
+  //     screen: 'ContactsOsbbScreen',
+  //     // key: new Date().getTime(),
+  //     swipeEnabled: true,
+  //     data: {},
+  //   });
+  //   controllers().drawerSwitch.modified = true;
+  //   controllers().drawerSwitch.forceUpdate();
+  // }
 }
 
 // @ts-ignore
