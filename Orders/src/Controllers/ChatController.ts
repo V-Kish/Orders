@@ -1,14 +1,14 @@
-import {UserDetailModel} from "../Models/ChatStack/UserDetailModel";
+import {UserDetailModel} from '../Model/ChatStack/UserDetailModel';
 
 class ChatController {
-    private _userDetailModel:UserDetailModel
-    constructor() {
-        this._userDetailModel = new UserDetailModel({id: 'userDetailModel'})
-    }
+  private _userDetailModel: UserDetailModel;
+  constructor() {
+    this._userDetailModel = new UserDetailModel({id: 'userDetailModel'});
+  }
 
-    get userDetailModel(){
-        return this._userDetailModel
-    }
+  get userDetailModel() {
+    return this._userDetailModel;
+  }
 }
 
 export {ChatController};

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {controllers} from "../Controllers/Controllers";
+import {Component} from 'react';
+
 
 class BaseModel {
   private readonly _id: string;

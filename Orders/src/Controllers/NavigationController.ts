@@ -1,4 +1,5 @@
-import {MainNavigation} from '../Models/navigation/MainNavigation';
+import {MainNavigation} from "../Model/navigation/MainNavigation";
+
 
 class NavigationController {
   private readonly _mainNavigation: MainNavigation;

@@ -1,4 +1,4 @@
-import {Dimensions, Platform, StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
@@ -12,9 +12,9 @@ export const STYLES = StyleSheet.create({
   },
   safeArea:{
     flex: 1,
-    backgroundColor: COLORS.HEADER_GRAY.bg,
-     marginBottom: Platform.OS === 'ios' ? currentUser().saveAreaInset.bottom : 0,
-    marginTop:Platform.OS === 'ios' ?currentUser().saveAreaInset.top : 0
+    // backgroundColor: COLORS.HEADER_GRAY.bg,
+    //  marginBottom: Platform.OS === 'ios' ? currentUser().saveAreaInset.bottom : 0,
+    // marginTop:Platform.OS === 'ios' ?currentUser().saveAreaInset.top : 0
   },
   hidden: {
     height: 0,
@@ -37,7 +37,7 @@ export const STYLES = StyleSheet.create({
     alignItems: 'center',
   },
   scrollBorderBottom: {
-    borderColor: COLORS.BLUE.bg,
+    borderColor: 'red',
     borderStyle: 'solid',
     borderBottomWidth: 3,
     marginHorizontal: wp(15),
@@ -84,7 +84,7 @@ export const STYLES = StyleSheet.create({
   },
   input: {
     // padding: wp(10),
-    backgroundColor: COLORS.GRAY_WHITE.bg,
+    backgroundColor: 'red',
     borderRadius: 10,
   },
   bigMarginVertical: {
@@ -157,7 +157,7 @@ export const STYLES = StyleSheet.create({
     top: 0,
     right: 0,
     zIndex: 99,
-    backgroundColor: COLORS.ERROR.circle,
+    backgroundColor: 'red',
     position: 'absolute',
     width: hp(26),
     height: hp(26),
@@ -178,29 +178,29 @@ export const STYLES = StyleSheet.create({
     width: 65 / 2,
     height: 65 / 2,
     borderRadius: 50,
-    backgroundColor: COLORS.BLUE.bg,
+    backgroundColor: 'red',
     borderWidth: 2,
     borderStyle: 'solid',
-    borderColor: COLORS.BORDER_COLOR_GRAY_DARK,
+    borderColor: 'red',
     marginHorizontal: hp(5),
   },
   disabledCircle: {
     width: 63 / 2,
     height: 63 / 2,
     borderRadius: 50,
-    backgroundColor: COLORS.GRAY_WHITE.bg,
+    backgroundColor: 'red',
     borderWidth: 2,
     borderStyle: 'solid',
     marginHorizontal: hp(5),
-    borderColor: COLORS.BORDER_COLOR_GRAY_DARK,
+    borderColor: 'red',
   },
   inputContainer: {
-    backgroundColor: COLORS.GRAY_WHITE.bg,
+    backgroundColor: 'red',
     borderRadius: 10,
     padding: wp(10),
   },
   inputContainerTitle: {
-    color: COLORS.GRAY_WHITE.text,
+    color: 'red',
     fontFamily: 'Roboto-Regular',
   },
   bottomScreenImage: {
@@ -297,8 +297,8 @@ export const PAYMENT_STYLE = StyleSheet.create({
     alignItems: 'center',
   },
   userBalanceBlock: {
-    backgroundColor: COLORS.GRAY_WHITE.bg,
-    borderColor: COLORS.BORDER_COLOR_GRAY,
+    backgroundColor: 'red',
+    borderColor: 'red',
     borderWidth: 1,
     borderStyle: 'solid',
     borderRadius: 5,
@@ -315,20 +315,8 @@ export const PAYMENT_STYLE = StyleSheet.create({
     fontFamily: 'Roboto',
     fontSize: wp(12),
     fontWeight: '400',
-    color: COLORS.FONT_DETAIL_GRAY,
+    color: 'red',
     letterSpacing: 0.6,
-    // fontFamily: 'Roboto',
-    // fontStyle: 'normal',
-    // fontWeight: 'normal',
-    // fontSize: hp(17),
-    // lineHeight: hp(15),
-    // /* identical to box height, or 19px */
-    //
-    // letterSpacing: 0.06,
-    //
-    // /* Gray 2 */
-    //
-    // color: COLORS.FONT_DETAIL_GRAY,
   },
   paymentTitleMin: {
     fontFamily: 'Roboto',
@@ -357,7 +345,7 @@ export const PAYMENT_STYLE = StyleSheet.create({
     fontWeight: 'normal',
     fontSize: hp(16),
     lineHeight: hp(18),
-    color: COLORS.FONT_DETAIL_GRAY,
+    color:'red',
   },
   paymentDateImageBox: {
     paddingHorizontal: wp(5),
@@ -399,29 +387,29 @@ export const PAYMENT_STYLE = StyleSheet.create({
     fontWeight: '500',
     fontSize: wp(17),
     lineHeight: wp(22),
-    color: COLORS.FONT_DETAIL_GRAY,
+    color: 'red',
   },
   paymentInfo: {
-    backgroundColor: COLORS.GRAY_WHITE.bg,
-    borderColor: COLORS.BORDER_COLOR_GRAY,
+    backgroundColor: 'red',
+    borderColor:'red',
     borderWidth: 1,
     borderStyle: 'solid',
     borderRadius: 5,
     padding: wp(8),
   },
   successStatus: {
-    color: COLORS.SUCCESS.text,
+    color:'red',
   },
   errorStatus: {
-    color: COLORS.ERROR.text,
+    color: 'red',
   },
   successPayment: {
-    backgroundColor: COLORS.SUCCESS_EVENT.bg,
-    borderColor: COLORS.SUCCESS_EVENT.borderColor,
+    backgroundColor: 'red',
+    borderColor: 'red',
   },
   errorPayment: {
-    backgroundColor: COLORS.DANGER_EVENT.bg,
-    borderColor: COLORS.DANGER_EVENT.borderColor,
+    backgroundColor: 'red',
+    borderColor: 'red',
   },
   statusMess: {
     fontSize: wp(16),
@@ -451,14 +439,14 @@ export const PAYMENT_STYLE = StyleSheet.create({
     fontFamily: 'Roboto',
     fontSize: wp(12),
     fontWeight: '400',
-    color: COLORS.FONT_DETAIL_GRAY,
+    color: 'red',
     letterSpacing: 0.6,
   },
   oneTatiffInfoValue: {
     fontFamily: 'Roboto-Bold',
     fontSize: wp(14),
     fontWeight: '700',
-    color: COLORS.FONT_DETAIL_GRAY,
+    color: 'red',
     letterSpacing: 0.6,
     textAlign: 'right',
   },
@@ -528,7 +516,7 @@ export const STYLES_LIST = StyleSheet.create({
   listItemDateText: {
     textAlign: 'right',
     fontSize: hp(12),
-    color: COLORS.FONT_GRAY_TITLE.text,
+    color: 'red',
   },
   listItemTitle: {
     width: '85%',
@@ -546,12 +534,12 @@ export const STYLES_LIST = StyleSheet.create({
   },
   listItemCommentText: {
     fontSize: hp(14),
-    color: COLORS.FONT_GRAY_TITLE.text,
+    color:'red',
   },
   listItemBorderButton: {
     borderStyle: 'solid',
     borderBottomWidth: 1,
-    borderColor: COLORS.BORDER_BOTTOM_LINE,
+    borderColor: 'red',
   },
   // list Group
   listGroup: {},
