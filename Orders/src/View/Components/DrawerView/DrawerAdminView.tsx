@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet,Text,View} from 'react-native';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
@@ -14,7 +14,13 @@ class DrawerAdminView extends TypedBaseComponent<DrawerAdminModel> {
 
   render() {
     super.render();
-    return <SafeAreaView style={styles.wrapper} />;
+    return (
+        <SafeAreaView style={styles.wrapper}>
+          <View style={{flex:1,backgroundColor:'blue'}}>
+            <Text>Drawer Admin</Text>
+          </View>
+        </SafeAreaView>
+    );
   }
 }
 

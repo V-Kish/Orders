@@ -26,7 +26,7 @@ export const STYLES = StyleSheet.create({
   },
   smallDescription: {
     fontSize: wp(12),
-    color: COLORS.FONT_GRAY_TITLE.text,
+    color: COLORS.FONT_BLACK,
   },
   centered: {
     justifyContent: 'center',

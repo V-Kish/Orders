@@ -35,7 +35,7 @@ class MainNavigationView extends TypedBaseComponent<MainNavigation> {
               name="AuthStack"
               component={AuthStack}
               options={{
-                swipeEnabled: false,
+                swipeEnabled: true,
               }}
             />
             {/*<StackDrawer.Screen*/}

@@ -22,7 +22,7 @@ class ChooseDrawerModel extends BaseModel {
     this.selectDrawerUser = this.selectDrawerUser.bind(this);
     this.onDrawerBtnPress = this.onDrawerBtnPress.bind(this);
     this._isDrawerAdmin = false;
-    this._isShowContent = false;
+    this._isShowContent = true;
     this._drawerAdmin = new DrawerAdminModel({
       id: 'DrawerAdminModel',
       onDrawerBtnPress: this.onDrawerBtnPress,

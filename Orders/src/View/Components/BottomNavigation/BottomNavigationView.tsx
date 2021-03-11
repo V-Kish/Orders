@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
     height: hp(56),
   },
   activeButton: {
-    backgroundColor: COLORS.GREEN.bg,
+    backgroundColor: COLORS.FONT_WHITE,
     justifyContent: 'center',
     alignItems: 'center',
     width: hp(56),
@@ -115,7 +115,7 @@ export const styles = StyleSheet.create({
     top: 0,
     right: 0,
     zIndex: 2,
-    backgroundColor: COLORS.RED.bg,
+    backgroundColor: COLORS.FONT_WHITE,
     width: hp(28),
     height: hp(28),
     borderRadius: hp(28 / 2),

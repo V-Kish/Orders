@@ -7,7 +7,7 @@ import { MessageList } from './MessageList';
 import {AppSettings} from "../../Common/AppSettings";
 // import {AppLog} from "../Common/AppLog";
 
-const RNFS = require('react-native-fs');
+// const RNFS = require('react-native-fs');
 
 type messageProps = {
   isLoading?: boolean;
@@ -127,7 +127,7 @@ class Message extends Base {
       this.isLoading = true;
       this.modified = true;
       this.forceUpdate();
-      const directory = RNFS.DownloadDirectoryPath + '/osbb/';
+      // const directory = RNFS.DownloadDirectoryPath + '/osbb/';
       // if (currentUser().permissions.writeExternalStorage) {
       //   await RNFS.mkdir(directory);
       //   const uri = `${AppSettings.chatEndpoint}/${currentUser().userToken}/${this.message.fileHash}/as-image-thumb`;

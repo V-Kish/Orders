@@ -80,7 +80,7 @@ class Button extends BaseModel {
     this._isVisible = isVisible ? isVisible : true;
     this._titleDouble = titleDouble;
     this._showPoint = showPoint ? showPoint : false;
-    this._colorPreloader = colorPreloader!==undefined ? colorPreloader : COLORS.WHITE.bg;
+    this._colorPreloader = colorPreloader!==undefined ? colorPreloader : COLORS.FONT_WHITE;
     this._disabledAnimation = disabledAnimation ? disabledAnimation : false;
     this._isVisible = true;
     this._backgroundColor = backgroundColor;

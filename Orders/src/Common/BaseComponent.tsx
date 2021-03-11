@@ -49,7 +49,9 @@ class BaseComponent extends React.Component {
 class TypedBaseComponent<T extends BaseModel> extends React.Component<IBaseProps<T>> {
   constructor(props: IBaseProps<T>) {
     super(props);
-    this.props.model.component = this;
+    if (this.props?.model?.component) {
+      this.props.model.component = this;
+    }
   }
 
   get model(): T {

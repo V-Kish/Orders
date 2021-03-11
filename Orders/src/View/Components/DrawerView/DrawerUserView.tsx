@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
+  StyleSheet, Text, View,
 } from 'react-native';
 import {
   mockupHeightToDP as hp,
@@ -19,7 +19,9 @@ class DrawerUserView extends TypedBaseComponent<DrawerUserModel> {
     super.render();
     return (
       <SafeAreaView style={styles.wrapper}>
-
+        <View style={{flex:1}}>
+          <Text>Drawer User</Text>
+        </View>
       </SafeAreaView>
     );
   }
@@ -32,5 +34,6 @@ const styles = StyleSheet.create({
     marginHorizontal: hp(15),
     paddingVertical: hp(20),
     overflow: 'hidden',
+    flex:1
   }
 });

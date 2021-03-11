@@ -883,7 +883,7 @@ const styles = StyleSheet.create({
         maxWidth: wp(240),
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        backgroundColor: COLORS.WHITE.bg,
+        backgroundColor: COLORS.FONT_WHITE,
     },
     fileMessageImage: {
         width: wp(220),
