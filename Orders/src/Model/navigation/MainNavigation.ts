@@ -1,7 +1,5 @@
 import {BaseModel} from '../../Common/BaseModel';
-import {saveData} from '../../Core/saveData';
-import {readData} from '../../Core/readData';
-import {controllers} from "../../Controllers/Controllers";
+
 
 type mainNavigation = {
   id: string | number;

@@ -6,7 +6,7 @@ import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../.../../constants/Dimensions';
-import {LastItemPaddingBottomModel} from '../../Models/navigation/PagedList/LastItemPaddingBottomModel';
+import { LastItemPaddingBottomModel } from '../../Model/navigation/PagedList/LastItemPaddingBottomModel';
 
 export class LastItemBottomPadding extends MultiTypedBaseComponent<
   LastItemPaddingBottomModel

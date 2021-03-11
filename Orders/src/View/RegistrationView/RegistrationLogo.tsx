@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React   from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import { ICONS } from '../../constants/icons';
 
@@ -6,8 +6,8 @@ export const RegistrationLogo = () => {
   return (
     <View style={styles.logoContainer}>
         <View style={styles.logoImgContainer}>
-          <Image 
-            style={styles.logoImg} 
+          <Image
+            style={styles.logoImg}
             source={ICONS.logoSmall}
           />
         </View>

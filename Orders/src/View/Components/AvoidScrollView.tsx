@@ -1,12 +1,12 @@
 import React from 'react';
 import {Dimensions, Keyboard, StyleSheet, View} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import {STYLES} from '../../constants/styles';
+
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
-import {navigator} from "../../Core/Navigator";
+
 import {currentUser} from "../../Core/CurrentUser";
 
 class AvoidScrollView extends React.Component {

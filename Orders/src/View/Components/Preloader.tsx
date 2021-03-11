@@ -1,14 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, Text, Image, StyleSheet, View, Modal } from 'react-native';
+import {  StyleSheet, View, Modal } from 'react-native';
 import { TypedBaseComponent } from '../../Common/BaseComponent';
-import { Button } from '../../Models/Components/Button';
-import {
-  mockupHeightToDP as hp,
-  mockupWidthToDP as wp,
-} from '../../constants/Dimensions';
-import { ICONS } from '../../constants/icons';
-import { Preloader } from '../../Models/Components/Preloader';
+
 import { Loader } from './Loader/Loader';
+import {Preloader} from "../../Model/Components/Preloader";
 
 class PreloaderView extends TypedBaseComponent<Preloader>{
   constructor(props: any) {
@@ -18,11 +13,11 @@ class PreloaderView extends TypedBaseComponent<Preloader>{
     if(!this.model.isVisible){
         return null
     }
-    return <Modal 
+    return <Modal
         style={styles.modal}
         visible={this.model.isVisible}
     >
-        <View 
+        <View
             style={styles.container}
         >
             <Loader/>

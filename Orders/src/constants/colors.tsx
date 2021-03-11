@@ -24,3 +24,7 @@ export const COLORS = {
   STATUS_GRAY_DARK: 'rgba(130,130,130,1)',
   STATUS_GRAY: 'rgba(224,224,224,1)'
 };
+export const COLOR_SCHEME = [
+  COLORS.STATUS_GREEN,
+  COLORS.STATUS_GRAY,
+];

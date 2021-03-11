@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import { CustomModalButtons } from './CustomModalButtons';
 import {
@@ -7,7 +7,7 @@ import {
   } from '../../constants/Dimensions';
 import { COLORS } from '../../constants/colors';
 export const ConfirmModal = ({title = "", content = "", closeModal = ()=>{}, confirmAction = () => {}}) => {
-  
+
     return <View style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.modalHeaderView}>
@@ -24,7 +24,7 @@ export const ConfirmModal = ({title = "", content = "", closeModal = ()=>{}, con
                 cancelButtonPress={closeModal}
             />
         </View>
-  
+
 };
 
 const styles = StyleSheet.create({

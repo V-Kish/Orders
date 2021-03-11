@@ -1,4 +1,4 @@
-import {BaseModel, MultiBase} from '../../Common/BaseModel';
+import { MultiBase} from '../../Common/BaseModel';
 import {CounterModel} from '../CounterModel';
 
 type iconButtonProps = {

@@ -1,5 +1,4 @@
 import {BaseModel} from '../../Common/BaseModel';
-import {controllers} from '../../Controllers/Controllers';
 
 type preloaderProps = {
   id: string;

@@ -3,6 +3,7 @@ import {AuthController} from './AuthController';
 import {DrawerSwitchModel} from '../Navigation/DrawerSwitchModel';
 import {ChatController} from './ChatController';
 import {CounterModel} from '../Model/CounterModel';
+import { AppStateControllerModel } from '../Model/AppStateControllerModel/AppStateControllerModel';
 
 class ControllersImpl {
   private readonly _navigationController: NavigationController;
@@ -10,6 +11,7 @@ class ControllersImpl {
   private readonly _drawerSwitch: DrawerSwitchModel;
   private readonly _chatController: ChatController;
   private readonly _chatsCounter: CounterModel;
+  private readonly _appStateControllerModel: AppStateControllerModel;
 
   constructor() {
     this._chatsCounter = new CounterModel({id: 'chatsCounter', counter: 0});
@@ -20,12 +22,17 @@ class ControllersImpl {
       counterModel: this._chatsCounter,
     });
     this._chatController = new ChatController();
+    this._appStateControllerModel = new AppStateControllerModel({
+      id: 'AppStateControllerModel',
+    });
   }
 
   get chatsCounter() {
     return this._chatsCounter;
   }
-
+  get appStateControllerModel() {
+    return this._appStateControllerModel;
+  }
   get navigationController() {
     return this._navigationController;
   }

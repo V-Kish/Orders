@@ -1,10 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
   Text,
-  Image,
-  Dimensions,
   TouchableOpacity
 } from 'react-native';
 import {
@@ -12,8 +10,6 @@ import {
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
 import {COLORS} from '../../constants/colors';
-import { OrderStatus } from '../Components/OrderStatus';
-import { statusToType } from '../../helpers/StatusToType';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectedDepartment } from '../../store/actions/EditUserInfo';
 
@@ -22,9 +18,9 @@ export const ListItem = ({
     setItem = (item) => {},
 }) => {
         const dispatch = useDispatch()
-        const selectedDepartmentSelector = useSelector(
-            (state: reduxTypes) => state.ditUser.selectedDepartment,
-        );
+        // const selectedDepartmentSelector = useSelector(
+        //     (state: reduxTypes) => state.ditUser.selectedDepartment,
+        // );
         const isActive = selectedDepartmentSelector.id === item.id
         const handlePress = () => {
             dispatch(selectedDepartment(item))

@@ -11,7 +11,8 @@ import {
 } from '../../../constants/Dimensions';
 import {ICONS} from '../../../constants/icons';
 import {STYLES} from '../../../constants/styles';
-import {RadioInput} from '../../../Models/Components/RadioForm/RadioInput';
+import {RadioInput} from "../../../Model/Components/RadioForm/RadioInput";
+
 
 class RadioInputView extends MultiTypedBaseComponent<RadioInput> {
   constructor(props: IBaseProps<RadioInput>) {
@@ -118,7 +119,7 @@ class RadioInputView extends MultiTypedBaseComponent<RadioInput> {
                   style={{
                     height: wp(20),
                     marginVertical: wp(3),
-                    backgroundColor: COLORS.DEFAULT_GRAY,
+                    backgroundColor: 'red',
                     justifyContent:'center',
                     width: this.model.disable ===null ? '90%' : '100%',
                   }}>
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
   },
   twitContainer: {
     borderWidth: 1,
-    borderColor: COLORS.FONT_GRAY_TITLE.text,
+    borderColor: 'red',
     width: wp(20),
     height: wp(20),
     // backgroundColor: 'red',
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
   },
   twitContainer_radio: {
     borderWidth: 2,
-    borderColor: COLORS.FONT_GRAY_TITLE.text,
+    borderColor:'red',
     width: wp(20),
     height: wp(20),
     alignItems: 'center',
@@ -203,7 +204,7 @@ const styles = StyleSheet.create({
   },
   title: {},
   desc: {
-    color: COLORS.HEADER_GRAY.bg,
+    color: 'red',
     paddingLeft: wp(10),
     position: 'absolute',
   },
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.165,
     textTransform: 'uppercase',
     /* Gray 2 */
-    color: COLORS.FONT_DETAIL_GRAY,
+    color: 'red',
   },
   comissionForm_twit: {
     width: '10%',

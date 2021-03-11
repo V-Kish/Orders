@@ -1,14 +1,14 @@
 import React from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 import {TypedBaseComponent, IBaseProps} from '../../Common/BaseComponent';
-import {Button} from '../../Models/Components/Button';
+
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
-import {ICONS} from '../../constants/icons';
 import {LogoView} from '../Components/Logo';
-import {WelcomeHeader} from '../../Models/Header/WelcomeHeader';
+import { WelcomeHeader } from '../../Model/Header/WelcomeHeader';
+
 
 class WelcomeHeaderView extends TypedBaseComponent<WelcomeHeader> {
     constructor(props: IBaseProps<WelcomeHeader>) {

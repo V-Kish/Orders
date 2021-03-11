@@ -1,14 +1,8 @@
 import React from 'react';
-import {Text, Image, StyleSheet, View, TextInput, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TextInput} from 'react-native';
 import {TypedBaseComponent} from '../../../Common/BaseComponent';
-import {COLORS} from '../../../constants/colors';
-import {
-  mockupHeightToDP as hp,
-  mockupWidthToDP as wp,
-} from '../../../constants/Dimensions';
-import {ICONS} from '../../../constants/icons';
-import {MultiFormInput} from '../../../Models/Components/MultiForm/MultiFormInput';
 import {MultiFormBoxView} from './MultiFormBoxView';
+import { MultiFormInput } from '../../../Model/Components/MultiForm/MultiFormInput';
 
 class MultiFormInputView extends TypedBaseComponent<MultiFormInput> {
   constructor(props: any) {

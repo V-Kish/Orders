@@ -2,8 +2,6 @@ import {BaseModel} from "../../Common/BaseModel";
 import {currentUser} from "../../Core/CurrentUser";
 import {loadData, UserDataProvider} from "../../DataProvider/UserDataProvider";
 import {baseResponse} from "../../DataTypes/BaseTypes";
-import {osbbComments} from "../../DataTypes/OsbbTimeLine/osbbComments";
-import {osbbMessagesConfiramationChose} from "../../DataTypes/OsbbTimeLine/osbbMessage";
 
 type chatInputProps = {
   id: string,
@@ -64,21 +62,21 @@ class ChatInput extends BaseModel {
     if (this._value === '') {
       return
     }
-    const body = {
-      osbbHash: currentUser().currentOsbb?.hash,
-      timelineId: this._item.id,
-      comment: this._value,
-    }
+    // const body = {
+    //   osbbHash: currentUser().currentOsbb?.hash,
+    //   timelineId: this._item.id,
+    //   comment: this._value,
+    // }
     this.clearInput()
     console.log('sendMessage body', body)
-    const response = await loadData<baseResponse<osbbComments>>(
-      UserDataProvider.addTimeLineComment,
-      body
-    );
-    if (response.statusCode === 200) {
-      this._model.onMessageSended(false);
-    }
-    console.log('sendMessage response', response)
+    // const response = await loadData<baseResponse<osbbComments>>(
+    //   UserDataProvider.addTimeLineComment,
+    //   body
+    // );
+    // if (response.statusCode === 200) {
+    //   this._model.onMessageSended(false);
+    // }
+    // console.log('sendMessage response', response)
   }
 
 

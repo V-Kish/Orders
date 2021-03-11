@@ -1,6 +1,5 @@
 import {BaseModel} from '../../../Common/BaseModel';
 import {MultiFormBox} from './MultiFormBox';
-import {controllers} from '../../../Controllers/Controllers';
 
 type multiFormInputModel = {
   id: string;

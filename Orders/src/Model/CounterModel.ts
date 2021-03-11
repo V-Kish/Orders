@@ -1,4 +1,4 @@
-import {BaseModel, MultiBase} from '../Common/BaseModel';
+import { MultiBase} from '../Common/BaseModel';
 
 type counterModelProps = {
   id: string;

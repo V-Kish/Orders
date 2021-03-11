@@ -1,13 +1,10 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, ScrollView} from 'react-native';
-import { CustomModalButtons } from './CustomModalButtons';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
 import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,
   } from '../../constants/Dimensions';
 import { COLORS } from '../../constants/colors';
-import { color } from 'react-native-reanimated';
-import { CustomFormInputs } from './CustomFormInputs';
 import { ListItem } from './ListItem';
 
 export const ListViewScroll = ({

@@ -1,12 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, Text, Image, StyleSheet, View } from 'react-native';
-import { TypedBaseComponent } from '../../Common/BaseComponent';
-import { Button } from '../../Models/Components/Button';
+import { Image, StyleSheet, View } from 'react-native';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
-import { Logo } from '../../Models/Components/Logo';
 import { ICONS } from '../../constants/icons';
 
 export enum containers {
@@ -20,7 +17,7 @@ class LogoView extends React.Component{
     super(props);
   }
   render() {
-    const logoStyle = this.props.bigLogo===undefined ? 'smallLogo' 
+    const logoStyle = this.props.bigLogo===undefined ? 'smallLogo'
     : (this.props.bigLogo ? 'bigLogo' : 'smallLogo')
     return <View style={{...styles.container, ...styles[logoStyle]}}>
         <Image source={ICONS.logo} style={{...styles.container, ...styles[logoStyle]}}/>

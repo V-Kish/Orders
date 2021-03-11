@@ -14,8 +14,8 @@ import {
   mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
 import {COLORS} from '../../../constants/colors';
-import {BottomNavigationModel} from '../../../Models/navigation/BottomNavigation/BottomNavigationModel';
 import {currentUser} from '../../../Core/CurrentUser';
+import {BottomNavigationModel} from "../../../Model/navigation/BottomNavigation/BottomNavigationModel";
 class BottomNavigationView extends MultiTypedBaseComponent<
   BottomNavigationModel
 > {
@@ -32,22 +32,7 @@ class BottomNavigationView extends MultiTypedBaseComponent<
       <SafeAreaView style={styles.containerWrapper}>
         <View style={styles.container}>
           <View style={styles.containerIcon}>
-            {/*// Admin //*/}
-            {!currentUser().isAdminOsbb && (
-              <IconButtonView
-                model={this.model.btn1}
-                key={this.childId(this.model.btn1)}
-                id={this.childId(this.model.btn1)}
-              />
-            )}
-            {/*// User //*/}
-            {currentUser().isAdminOsbb && (
-              <IconButtonView
-                model={this.model.btn1User}
-                key={this.childId(this.model.btn1User)}
-                id={this.childId(this.model.btn1User)}
-              />
-            )}
+
             <IconButtonView
               model={this.model.btn2}
               key={this.childId(this.model.btn2)}

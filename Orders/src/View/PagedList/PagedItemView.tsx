@@ -1,8 +1,6 @@
 import React from 'react';
-import {View} from 'react-native';
 import {TypedBaseComponent} from '../../Common/BaseComponent';
-import {STYLES} from '../../constants/styles';
-import { PagedItemModel } from '../../Models/navigation/PagedList/PagedItem';
+import { PagedItemModel } from '../../Model/navigation/PagedList/PagedItem';
 
 class PagedItemView extends TypedBaseComponent<PagedItemModel> {
   private _item: any;

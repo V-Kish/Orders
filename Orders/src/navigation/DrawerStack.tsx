@@ -2,9 +2,9 @@ import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {TypedBaseComponent} from '../Common/BaseComponent';
 import {controllers} from '../Controllers/Controllers';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {DrawerSwitchModel} from './DrawerSwitchModel';
-import {DrawerSwitchView} from '../View/DrawerView/DrawerSwitchView';
+import {DrawerSwitchView} from '../View/Components/DrawerView/DrawerSwitchView';
 const StackDrawer = createDrawerNavigator();
 class DrawerStack extends TypedBaseComponent<DrawerSwitchModel> {
   constructor(props) {

@@ -1,13 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {TypedBaseComponent} from '../../../Common/BaseComponent';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
-import {CalendarModel} from '../../../Models/Components/Calendar/CalendarModel';
 import Dates from './Dates';
-import moment from "moment";
+import { CalendarModel } from '../../../Model/Components/Calendar/CalendarModel';
 class CalendarView extends TypedBaseComponent<CalendarModel> {
   constructor(props: any) {
     super(props);

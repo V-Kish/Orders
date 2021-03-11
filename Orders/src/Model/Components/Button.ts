@@ -1,7 +1,6 @@
 import {BaseModel} from '../../Common/BaseModel';
 import {CounterModel} from '../CounterModel';
 import {COLORS} from '../../constants/colors';
-import Analytics from "../Analytics/Analytics";
 
 class Button extends BaseModel {
   private _title: string;
@@ -129,10 +128,6 @@ class Button extends BaseModel {
   }
   onPress() {
     this._onPress();
-    Analytics.logEvent('ButtonPressEvent',{
-      title: this.title,
-      id: this.id,
-    })
   }
   get title(): string {
     return this._title;

@@ -1,6 +1,5 @@
 import {BaseModel} from '../../Common/BaseModel';
 import {Button} from '../Components/Button';
-import {ICONS} from '../../constants/icons';
 import {navigator} from '../../Core/Navigator';
 import {Keyboard} from 'react-native';
 

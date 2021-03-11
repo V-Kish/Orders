@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import { CustomModalButtons } from './CustomModalButtons';
 import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,
@@ -11,7 +10,7 @@ import { TextInput } from 'react-native-gesture-handler';
 export const FormInput = ({
     input = {text: '', placeholder: '', onChangeText: ()=>{}, error: false}
 }) => {
-  
+
     return <View style={styles.formInputView}>
             <Text style={styles.formInputTitle}>{input.text}</Text>
             <TextInput
@@ -20,7 +19,7 @@ export const FormInput = ({
                 style={!input.error ? styles.formInput : {...styles.formInput,...styles.error}}
             />
         </View>
-  
+
 };
 
 const styles = StyleSheet.create({

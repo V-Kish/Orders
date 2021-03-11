@@ -1,13 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {
   MultiTypedBaseComponent,
   IBaseProps,
 } from '../../../Common/BaseComponent';
-import {RadioForm} from '../../../Models/Components/RadioForm/RadioForm';
 import {RadioInputView} from './RadioInputView';
-import {COLORS} from '../../../constants/colors';
-import {mockupHeightToDP as hp} from '../../../constants/Dimensions';
+import { RadioForm } from '../../../Model/Components/RadioForm/RadioForm';
 
 class RadioFormView extends MultiTypedBaseComponent<RadioForm> {
   constructor(props: IBaseProps<RadioForm>) {

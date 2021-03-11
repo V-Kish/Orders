@@ -1,13 +1,13 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {TypedBaseComponent} from '../../Common/BaseComponent';
-import { IconHelper } from '../../Models/Components/UserIconModels/HelperIcon';
 import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
-import {COLORS} from '../../constants/colors';
-import { ContactIconModel } from '../../Models/Components/UserIconModels/ContactIconModel';
+import { ContactIconModel } from '../../Model/Components/UserIconModels/ContactIconModel';
+import { IconHelper } from '../../Model/Components/UserIconModels/HelperIcon';
+
 class UserIconView extends TypedBaseComponent<ContactIconModel> {
   constructor(props) {
     super(props);

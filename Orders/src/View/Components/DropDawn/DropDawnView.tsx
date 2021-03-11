@@ -8,13 +8,13 @@ import {
   Modal,
 } from 'react-native';
 import {IBaseProps, TypedBaseComponent} from '../../../Common/BaseComponent';
-import {DropDawnModel} from '../../../Models/Components/DropDawn/DropDawnModel';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
 import {COLORS} from '../../../constants/colors';
 import {ICONS} from '../../../constants/icons';
+import { DropDawnModel } from '../../../Model/Components/DropDawn/DropDawnModel';
 
 enum containersButton {
   container,
@@ -132,7 +132,7 @@ class DropDawnView extends TypedBaseComponent<DropDawnModel> {
 export {DropDawnView};
 const styles = StyleSheet.create({
   defaultStyles_container: {
-    backgroundColor: COLORS.GRAY_ADMIN_OSS_BACKGROUND,
+    backgroundColor: 'red',
     borderRadius: 10,
     paddingHorizontal: wp(10),
     paddingVertical: wp(10),
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   defaultStyles_titleText: {
     fontFamily: 'Roboto-Medium',
     fontSize: hp(14),
-    color: COLORS.FONT_GRAY_TITLE.text,
+    color: 'red',
   },
   defaultStyles_placeholder: {
     fontFamily: 'Roboto-Bold',
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   // default styles Modal
   defaultStyles_containerModalHeader: {
     flexDirection: 'row',
-    backgroundColor: COLORS.HEADER_GRAY.bg,
+    backgroundColor: 'red',
     height: hp(75),
     paddingHorizontal: wp(15),
   },
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
   defaultStyles_titleBack: {
     fontFamily: 'Roboto-Medium',
     fontSize: hp(20),
-    color: COLORS.BLUE.bg,
+    color: 'red',
     marginLeft: wp(5),
   },
   defaultStyles_titleHeader: {

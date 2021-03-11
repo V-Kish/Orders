@@ -1,13 +1,12 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View } from 'react-native';
 import {IBaseProps, TypedBaseComponent} from '../../../Common/BaseComponent';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
-import {FilterModalModel} from '../../../Models/Components/FilterModal/FilterModalModel';
 import {ButtonView} from "../ButtonView";
-import {COLORS} from "../../../constants/colors";
+import { FilterModalModel } from '../../../Model/Components/FilterModal/FilterModalModel';
 
 class FilterModalView extends TypedBaseComponent<FilterModalModel> {
   constructor(props: IBaseProps<FilterModalModel>) {
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
   grayLine: {
     height: hp(1),
     width: '100%',
-    backgroundColor: COLORS.BORDER_BOTTOM_LINE
+    backgroundColor: 'red'
   },
   rowButtons: {
     flexDirection: 'row',

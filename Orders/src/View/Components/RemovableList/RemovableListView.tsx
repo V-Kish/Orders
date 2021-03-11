@@ -1,22 +1,11 @@
 import React from 'react';
 import {
-  Text,
-  Image,
   StyleSheet,
   View,
-  TextInput,
-  Dimensions,
 } from 'react-native';
 import {TypedBaseComponent} from '../../../Common/BaseComponent';
-import {COLORS} from '../../../constants/colors';
-import {
-  mockupHeightToDP as hp,
-  mockupWidthToDP as wp,
-} from '../../../constants/Dimensions';
-import {STYLES} from '../../../constants/styles';
-import { RemovableList } from '../../../Models/Components/RemovableList/RemovableList';
-import {FormTextBoxView} from '../FormTextBoxView';
 import { RemovableItemView } from './RemovableItemView';
+import {RemovableList} from "../../../Model/Components/RemovableList/RemovableList";
 
 class RemovableListView extends TypedBaseComponent<RemovableList> {
   constructor(props: any) {

@@ -1,7 +1,6 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {STYLES} from '../../../constants/styles';
-import {COLORS} from '../../../constants/colors';
 
 class HeaderText extends React.Component<any> {
   constructor(props: any) {
@@ -15,7 +14,7 @@ class HeaderText extends React.Component<any> {
           style={[
             STYLES.smallMarginVertical,
             STYLES.robotoMiddle,
-            {color: COLORS.FONT_GRAY_TITLE.text},
+            {color: 'red'},
           ]}>
           Для реєстрації нового ОСББ,{'\r\n'}
           будь ласка, заповніть форму нижче

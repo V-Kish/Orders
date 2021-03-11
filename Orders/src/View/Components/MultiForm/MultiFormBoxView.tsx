@@ -1,10 +1,7 @@
 import React from 'react';
 import {
   Text,
-  Image,
   StyleSheet,
-  View,
-  TextInput,
   TouchableOpacity,
 } from 'react-native';
 import {TypedBaseComponent} from '../../../Common/BaseComponent';
@@ -13,8 +10,7 @@ import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
-import {ICONS} from '../../../constants/icons';
-import {MultiFormBox} from '../../../Models/Components/MultiForm/MultiFormBox';
+import { MultiFormBox } from '../../../Model/Components/MultiForm/MultiFormBox';
 
 class MultiFormBoxView extends TypedBaseComponent<MultiFormBox> {
   constructor(props: any) {
@@ -52,16 +48,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.GRAY_WHITE.bg,
+    backgroundColor:'red',
     borderRadius: 5,
     paddingVertical: hp(5),
     marginHorizontal: wp(5),
-    borderColor: COLORS.BORDER_COLOR_GRAY,
+    borderColor: 'red',
     borderWidth: 1,
     borderStyle: 'solid',
   },
   boxText: {
-    color: COLORS.GRAY_WHITE.text,
+    color: 'red',
     fontFamily: 'Roboto-Bold',
     fontSize: wp(50),
   },
@@ -73,15 +69,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 0,
   },
   small:{
-    color: COLORS.GRAY_WHITE.text,
+    color: 'red',
     fontFamily: 'Roboto-Bold',
     fontSize: wp(28),
   },
   grayText: {
-    color: COLORS.PLACEHOLDER,
+    color: 'red',
     fontWeight: '400',
   },
   uneditable: {
-    color: COLORS.UNEDITABLE.text,
+    color: 'red',
   }
 });

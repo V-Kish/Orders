@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import { CustomModalButtons } from './CustomModalButtons';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+
 import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,

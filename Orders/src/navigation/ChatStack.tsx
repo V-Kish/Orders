@@ -1,13 +1,13 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-// import {controllers} from '../Controllers/Controllers';
+
 import {ChatListScreen} from "../Chat/ChatListScreen";
 import {ChatScreen} from "../Chat/ChatScreen";
 import {ContactsScreen} from "../Chat/ViewModel/Contacts/ContactsScreen";
 import {NewChatScreen} from "../Chat/ViewModel/Group/NewChatScreen";
 import {AddMembersScreen} from "../Chat/ViewModel/Group/AddMembersScreen";
 import {DeleteMembersScreen} from "../Chat/ViewModel/Group/DeleteMembersScreen";
-import {horizontalAnimation} from "./AuthStack";
+
 
 const Stack = createStackNavigator();
 
@@ -19,7 +19,7 @@ class ChatStack extends React.Component {
 
     render() {
         return (
-            <Stack.Navigator headerMode="none" initialRouteName="ChatListScreen" screenOptions={horizontalAnimation}>
+            <Stack.Navigator headerMode="none" initialRouteName="ChatListScreen">
                 {/*Список чатів*/}
                 <Stack.Screen name="ChatListScreen" component={ChatListScreen} />
                 {/*Скрін чату*/}

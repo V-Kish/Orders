@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {Authorization} from '../../functions/Authorization';
-import {navigator} from "../../Core/Navigator";
+
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { ICONS } from '../../constants/icons';
 import { COLORS } from '../../constants/colors';
@@ -31,7 +29,7 @@ export const RegistrationTextInput = ({title, placeholder = '', value, setValue,
             secureTextEntry={secureTextEntry===undefined ? false : secure}
         />
         {secureTextEntry!== undefined && (<View style={styles.secureEyeView}>
-            <TouchableOpacity 
+            <TouchableOpacity
                 style={styles.secureEyePress}
                 onPress={toggleSecure}
             >

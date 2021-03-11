@@ -32,7 +32,7 @@ class FilterModalModel extends BaseModel {
       id: 'filterBtnStyle',
       style: 'filterBtnStyle',
       onPress: this.toggle,
-      icon: ICONS.filterBlue,
+      icon: ICONS.done,
     });
     this._doneFilterBtn = new Button({
       id: '_doneFilterBtn',

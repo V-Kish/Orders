@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Image,
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
@@ -13,9 +12,8 @@ import {
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
 import {COLORS} from '../../constants/colors';
-import {DetailStatisticModel} from '../../Models/MainStack/DetailModel/DetailStatisticModel';
-import {ChatInput} from '../../Models/Components/ChatInput';
-import {DETAIL_ICONS} from '../../constants/icons';
+import {ChatInput} from "../../Model/Components/ChatInput";
+import {ICONS} from "../../constants/icons";
 
 class ChatInputView extends TypedBaseComponent<ChatInput> {
   constructor(props: IBaseProps<ChatInput>) {
@@ -45,7 +43,7 @@ class ChatInputView extends TypedBaseComponent<ChatInput> {
                 style={styles.sendMessageTouch}
                 onPress={this.model.onSendMessagePress}>
                 <Image
-                  source={DETAIL_ICONS.sendMessage}
+                  source={ICONS.errorScreenLogo}
                   style={styles.sendMessageBtn}
                 />
               </TouchableOpacity>
@@ -62,7 +60,7 @@ export {ChatInputView};
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: hp(5),
-    backgroundColor: COLORS.BLUE.bg,
+    backgroundColor: 'red',
     height: hp(55),
     justifyContent: 'center',
     alignItems: 'center',

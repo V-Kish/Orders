@@ -7,9 +7,7 @@ import {
   mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
 import {CounterView} from '../CounterView';
-import {controllers} from '../../../Controllers/Controllers';
 import {COLORS} from '../../../constants/colors';
-import {currentUser} from "../../../Core/CurrentUser";
 import {dateTimeToDateString} from '../../../Common/dateParse';
 
 const moment = extendMoment(Moment);
@@ -144,7 +142,7 @@ const defaultStyles = StyleSheet.create({
   containerCounter: {
     top: hp(-5),
     zIndex: 99,
-    backgroundColor: COLORS.ERROR.circle,
+    backgroundColor: 'red',
     position: 'absolute',
     width: 35 / 2,
     height: 35 / 2,
@@ -286,7 +284,7 @@ export const Week = (props: WeekType) => {
                 <CounterView
                     model={counterModel}
                     key={counterModel.id}
-                    id={`${counterModel.id}_${currentUser().currentOsbb.hash}`}
+                    id={`${counterModel.id}_${}`}
                     styleContainer={styles.containerCounter}
                 />
             )}

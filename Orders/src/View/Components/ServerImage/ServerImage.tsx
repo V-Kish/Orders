@@ -6,7 +6,7 @@ export const ServerImage = ({source, ...rest}) => {
   return (
     <Image
         source={source}
-        defaultSource={ICONS.defaultBackground}
+        defaultSource={ICONS.errorScreenLogo}
         resizeMode='contain'
         {...rest} />
   );

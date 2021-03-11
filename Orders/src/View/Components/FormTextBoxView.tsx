@@ -13,19 +13,17 @@ import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
-import {FormTextBox} from '../../Models/Components/FormTextBox';
-import RNPickerSelect from 'react-native-picker-select';
-import {ICONS, TEXT_INPUT_FIELDS} from '../../constants/icons';
+
+
+import {ICONS} from '../../constants/icons';
 import {controllers} from '../../Controllers/Controllers';
 import {
   dateTimeToDateString,
   dateTimeToTimeString,
 } from '../../Common/dateParse';
-import DateTimePicker from "@react-native-community/datetimepicker";
+import { FormTextBox } from '../../Model/Components/FormTextBox';
 
-const getDate = (date: Date) => {
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-};
+
 
 class FormTextBoxView extends TypedBaseComponent<FormTextBox> {
   constructor(props: any) {
@@ -91,102 +89,6 @@ class FormTextBoxView extends TypedBaseComponent<FormTextBox> {
             onBlur={this.model.Blur}
           />
         );
-        break;
-      case 'select':
-        input = (
-          <RNPickerSelect
-            ref={(input) => (this.model.reference = input)}
-            onValueChange={this.model.onChangeText}
-            placeholder={
-              this.model.placeholder !== '' ? this.model.placeholder : {}
-            }
-            items={this.model.selectItems}
-            style={{
-              viewContainer: [textInputStyle, shouldToFiledStyle_textInput],
-              inputIOS: {color: 'black'},
-              inputAndroid: {color: 'black'},
-            }}
-          />
-        );
-        break;
-      case 'date':
-        if(Platform.OS ==='ios'){
-          input = (<DateTimePicker
-              testID="dateTimePicker"
-              value={this.model.datePick}
-              mode={'date'}
-              is24Hour={true}
-              display="default"
-              minimumDate={this.model.minimumDate}
-              maximumDate={this.model.maximumDate}
-              onChange={(event, selectDate)=>{
-                this.model.datePick = selectDate;
-                const date = dateTimeToDateString(selectDate);
-                this.model.onChangeText(date);
-              }}
-          />)
-        } else {
-          input = (
-            <TouchableOpacity
-              activeOpacity={1}
-              onPress={() => {
-                controllers().sharedController.datePicker.selectDate(
-                  this.model.datePick,
-                  (selectDate) => {
-                    this.model.datePick = selectDate;
-                    const date = dateTimeToDateString(selectDate);
-                    this.model.onChangeText(date);
-                  },
-                  {
-                    minimumDate: this.model.minimumDate,
-                    maximumDate: this.model.maximumDate,
-                  },
-                );
-              }}>
-              <View style={[textInputStyle, {minWidth: '70%'}]}>
-                <Text style={{textAlign: 'center'}}>{this.model.value}</Text>
-              </View>
-            </TouchableOpacity>
-          );
-        }
-        break;
-      case 'time':
-        if(Platform.OS ==='ios'){
-          input = (<DateTimePicker
-              testID="dateTimePicker"
-              value={this.model.datePick}
-              mode={'time'}
-              is24Hour={true}
-              display="default"
-              minimumDate={this.model.minimumDate}
-              maximumDate={this.model.maximumDate}
-              onChange={(event, selectDate)=>{
-                this.model.datePick = selectDate;
-                const date = dateTimeToDateString(selectDate);
-                this.model.onChangeText(date);
-              }}
-          />)
-        } else {
-          input = (
-              <TouchableOpacity
-                  activeOpacity={1}
-                  onPress={() => {
-                    controllers().sharedController.datePicker.selectTime(
-                        this.model.datePick,
-                        (selectDate) => {
-                          this.model.datePick = selectDate;
-                          console.log('selectDate', selectDate);
-                          const date = dateTimeToTimeString(selectDate);
-                          this.model.onChangeText(date);
-                        },
-                    );
-                  }}>
-                <View style={[textInputStyle, {minWidth: '70%'}]}>
-                  <Text style={{textAlign: 'center'}}>{this.model.value}</Text>
-                </View>
-              </TouchableOpacity>
-          );
-        }
         break;
     }
     if (!this.model.visible){
@@ -265,7 +167,7 @@ class FormTextBoxView extends TypedBaseComponent<FormTextBox> {
             </View>
             {this.model.showFocusStyles && this.model.isShouldToFiled && (
               <View style={{position: 'absolute', right: 5}}>
-                <Image source={TEXT_INPUT_FIELDS.error} />
+                {/*<Image source={TEXT_INPUT_FIELDS.error} />*/}
               </View>
             )}
             {this.model.icon !== '' && this.model.icon !== undefined && (
@@ -286,7 +188,7 @@ class FormTextBoxView extends TypedBaseComponent<FormTextBox> {
               <View style={styles.errorCommentImageView}>
                 <Image
                   style={styles.errorCommentImage}
-                  source={ICONS.warning}
+                  source={ICONS.gambrActive}
                 />
               </View>
               <Text style={styles.errorCommentText}>
@@ -312,37 +214,37 @@ const styles = StyleSheet.create({
     padding: wp(5),
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.GRAY_WHITE.bg,
+    backgroundColor: 'red',
     borderRadius: 10,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: COLORS.BORDER_COLOR_GRAY,
+    borderColor: 'red',
   },
   title: {
-    color: COLORS.GRAY_WHITE.text,
+    color: 'red',
     fontFamily: 'Roboto-Regular',
     paddingLeft: wp(3.5),
   },
   textBoxContainer: {},
   textInput: {
     paddingVertical: wp(5),
-    color: COLORS.TEXT_INPUT_TEXT,
+    color: 'red',
     fontFamily: 'Roboto-Bold',
   },
   textInputLogin_containerBlock: {
     padding: wp(5),
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.GRAY_WHITE.bg,
+    backgroundColor: 'red',
     borderRadius: 10,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: COLORS.BORDER_COLOR_GRAY,
+    borderColor: 'red',
   },
   textInputLogin_textInput: {
     paddingLeft: 0,
     paddingVertical: wp(5),
-    color: COLORS.TEXT_INPUT_TEXT,
+    color:'red',
     fontFamily: 'Roboto-Bold',
   },
   iconView: {
@@ -380,7 +282,7 @@ const styles = StyleSheet.create({
     // backgroundColor: COLORS.ERROR.bg,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: COLORS.ERROR.border,
+    borderColor: 'red',
     // backgroundColor: 'rgba(200,0,0,.1)'
   },
   smallAdminInput_shouldToFiled: {
@@ -389,7 +291,7 @@ const styles = StyleSheet.create({
   smallAdminInput_shouldToFiled_textInput: {
     // backgroundColor: COLORS.RED_WHITE.bg
     borderWidth: 1,
-    borderColor: COLORS.ERROR.border,
+    borderColor: 'red',
   },
   adminInput_shouldToFiled: {
     borderWidth: 0,
@@ -397,7 +299,7 @@ const styles = StyleSheet.create({
   adminInput_shouldToFiled_textInput: {
     // backgroundColor: COLORS.RED_WHITE.bg
     borderWidth: 1,
-    borderColor: COLORS.ERROR.border,
+    borderColor: 'red',
   },
   errorComment: {
     flexDirection: 'row',
@@ -414,7 +316,7 @@ const styles = StyleSheet.create({
   errorCommentText: {
     width: '85%',
     textAlign: 'left',
-    color: COLORS.ERROR.text,
+    color: 'red',
     marginLeft: wp(20),
   },
   tariffsListStyles_textBox: {
@@ -441,7 +343,7 @@ const styles = StyleSheet.create({
   tariffsListStyles_containerBlock: {
     backgroundColor: COLORS.FONT_WHITE,
     borderWidth: 1,
-    borderColor: COLORS.BORDER_COLOR_GRAY,
+    borderColor:'red',
   },
   tariffsListStyles_container: {},
   tariffsListStyles_textInput: {
@@ -449,12 +351,12 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.FONT_WHITE,
     borderLeftWidth: 1,
     borderRightWidth: 1,
-    borderColor: COLORS.BORDER_COLOR_GRAY,
+    borderColor: 'red',
     borderStyle: 'solid',
   },
   tariffsStyles_title: {
     fontSize: wp(12),
-    color: COLORS.FONT_GRAY_TITLE.text,
+    color: 'red',
   },
   tariffsStyles_container: {
     width: '100%',
@@ -470,7 +372,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: hp(8),
     backgroundColor: COLORS.FONT_WHITE,
     borderRadius: 5,
-    borderColor: COLORS.BORDER_COLOR_GRAY,
+    borderColor: 'red',
     borderWidth: 1,
     borderStyle: 'solid',
   },
@@ -488,12 +390,12 @@ const styles = StyleSheet.create({
     padding: 0,
     borderStyle: 'solid',
     borderBottomWidth: 1,
-    borderColor: COLORS.BORDER_COLOR_GRAY,
+    borderColor:'red',
     justifyContent: 'space-between',
   },
   adminInput_title: {
     fontSize: wp(12),
-    color: COLORS.FONT_GRAY_TITLE.text,
+    color: 'red',
   },
   smallAdminInput_textInput: {
     width: '60%',
@@ -503,7 +405,7 @@ const styles = StyleSheet.create({
     paddingVertical: hp(8),
     borderStyle: 'solid',
     borderBottomWidth: 1,
-    borderColor: COLORS.BORDER_COLOR_GRAY,
+    borderColor: 'red',
     backgroundColor: 'white',
     // backgroundColor:'red',
   },
@@ -518,7 +420,7 @@ const styles = StyleSheet.create({
 
   smallAdminInput_title: {
     fontSize: wp(12),
-    color: COLORS.FONT_GRAY_TITLE.text,
+    color:'red',
   },
   defaultInputStyle_textInput: {
     paddingHorizontal: wp(10),
@@ -544,10 +446,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   contentAdminInput_textInput: {
-    backgroundColor: COLORS.GRAY_WHITE.bg,
+    backgroundColor: 'red',
     borderRadius: 10,
     color: 'black',
-    borderColor: COLORS.BORDER_COLOR_GRAY_DARK,
+    borderColor: 'red',
     borderWidth: 1,
     paddingLeft: wp(5),
     paddingVertical: hp(8),
@@ -564,12 +466,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp(5),
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: COLORS.BORDER_COLOR_GRAY,
+    borderColor: 'red',
     // paddingVertical: hp(10),
   },
   contentStyles_title: {
     fontSize: wp(12),
-    color: COLORS.FONT_GRAY_TITLE.text,
+    color: 'red',
   },
   contentStyles_container: {
     // paddingLeft: wp(5),
@@ -586,7 +488,7 @@ const styles = StyleSheet.create({
     // height: hp(90),
     borderStyle: 'solid',
     borderBottomWidth: 1,
-    borderColor: COLORS.BORDER_COLOR_GRAY,
+    borderColor: 'red',
     width: '100%',
     // backgroundColor: 'red'
   },
@@ -600,7 +502,7 @@ const styles = StyleSheet.create({
   },
   contentAdminInput_title: {
     fontSize: wp(12),
-    color: COLORS.FONT_GRAY_TITLE.text,
+    color:'red',
   },
   //
   stylesForSearchForm_container: {
@@ -630,6 +532,6 @@ const styles = StyleSheet.create({
   textInput_Focus: {
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: COLORS.INPUT_FOCUS,
+    borderColor: 'red',
   },
 });

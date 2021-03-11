@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   ScrollView,
   Image,
 } from 'react-native';
@@ -17,7 +16,6 @@ import {ListViewScroll} from './ListViewScroll';
 import {ICONS} from '../../constants/icons';
 import {useSelector} from 'react-redux';
 import {reduxTypes} from '../../Types';
-import { selectedDepartment } from '../../store/actions/EditUserInfo';
 
 export const ListModal = ({
   title = '',

@@ -1,14 +1,11 @@
 import React from 'react';
 import {RefreshControl, ScrollView, View} from 'react-native';
 import {TypedBaseComponent} from '../../Common/BaseComponent';
-import {PagedListDataSource} from '../../Models/navigation/PagedList/PagedListDataSource';
 import {EmptyListMessageView} from './EmptyListMessageView';
 import {Loader} from '../Components/Loader/Loader';
-import {STYLES, STYLES_LIST} from '../../constants/styles';
-import {COLORS} from '../../constants/colors';
+import {STYLES} from '../../constants/styles';
 import {BottomPreloaderView} from './BottomPreloaderView';
-import {LastItemBottomPadding} from './LastItemBottomPadding';
-import {controllers} from '../../Controllers/Controllers';
+import {PagedListDataSource} from "../../Model/navigation/PagedList/PagedListDataSource";
 
 class PagedListView extends TypedBaseComponent<PagedListDataSource> {
   private _item: any;
@@ -62,9 +59,9 @@ class PagedListView extends TypedBaseComponent<PagedListDataSource> {
           onMomentumScrollEnd={this.model.onMomentumScrollEnd}
           refreshControl={
             <RefreshControl
-              tintColor={COLORS.BLUE.bg}
-              colors={[COLORS.BLUE.bg]}
-              titleColor={COLORS.BLUE.bg}
+              tintColor={'red'}
+              colors={['red']}
+              titleColor={'red'}
               refreshing={this.model.refreshing}
               onRefresh={this.model.onRefresh}
             />
@@ -74,12 +71,6 @@ class PagedListView extends TypedBaseComponent<PagedListDataSource> {
             model={this.model.bottomPreloader}
             key={this.childId(this.model.bottomPreloader)}
             id={this.childId(this.model.bottomPreloader)}
-          />
-          {/*// Padding for bottom navigation // */}
-          <LastItemBottomPadding
-            model={controllers().lastItemPaddingBottom}
-            key={this.childId(controllers().lastItemPaddingBottom)}
-            id={this.childId(controllers().lastItemPaddingBottom)}
           />
         </ScrollView>
         // </View>

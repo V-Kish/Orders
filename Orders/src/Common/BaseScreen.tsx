@@ -1,9 +1,8 @@
 import * as React from 'react';
-import {BackHandler, Platform, SafeAreaView } from 'react-native';
+import {BackHandler, Platform, SafeAreaView} from 'react-native';
 import {navigator} from '../Core/Navigator';
 import {controllers} from '../Controllers/Controllers';
 import {STYLES} from '../constants/styles';
-
 
 class BaseScreen extends React.Component {
   private _screenName: string;
@@ -55,7 +54,6 @@ class BaseScreen extends React.Component {
   }
 
   handleBackPress = () => {
-
     // if (navigator().getCurrentScreen() === 'OssbDocumentsScreen') {
     //   controllers().userController.osbbDocuments.documents.onBackPress();
     //   return true;
@@ -83,27 +81,27 @@ class BaseScreen extends React.Component {
     }
   }
   content() {
-    return null
+    return null;
   }
   render() {
     return (
-        <SafeAreaView style={STYLES.safeArea}
-                      onLayout={(event) => {
-                        const height = event.nativeEvent.layout.height;
-                        const width = event.nativeEvent.layout.width;
-                          if(navigator().deviceHeight === 0 && Platform.OS !== 'ios'){
-                            navigator().deviceHeight = height;
-                            navigator().deviceWidth = width;
-                          }
-                          if (Platform.OS === 'ios'){
-                            navigator().deviceHeight = height;
-                            navigator().deviceWidth = width;
-                          }
-                      }}
-        >
-          {this.content()}
-        </SafeAreaView>
-    )
+      <SafeAreaView
+        style={STYLES.safeArea}
+        onLayout={(event) => {
+          const height = event.nativeEvent.layout.height;
+          const width = event.nativeEvent.layout.width;
+          if (navigator().deviceHeight === 0 && Platform.OS !== 'ios') {
+            navigator().deviceHeight = height;
+            navigator().deviceWidth = width;
+          }
+          if (Platform.OS === 'ios') {
+            navigator().deviceHeight = height;
+            navigator().deviceWidth = width;
+          }
+        }}>
+        {this.content()}
+      </SafeAreaView>
+    );
   }
 }
 

@@ -1,16 +1,16 @@
 import React from 'react';
-import {Text, StyleSheet, View, Image} from 'react-native';
+import {Text, StyleSheet, View} from 'react-native';
 import {TypedBaseComponent, IBaseProps} from '../../Common/BaseComponent';
-import {Button} from '../../Models/Components/Button';
+
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
-import {ICONS} from '../../constants/icons';
+
 import {LogoView} from '../Components/Logo';
-import {Header} from '../../Models/Header/Header';
-import {ButtonView} from '../Components/ButtonView';
+
 import {COLORS} from '../../constants/colors';
+import {Header} from "../../Model/Header/Header";
 
 class HeaderView extends TypedBaseComponent<Header> {
     constructor(props: IBaseProps<Header>) {
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     width: '100%',
     paddingHorizontal: wp(10),
-    backgroundColor: COLORS.HEADER_GRAY.bg,
+    backgroundColor: 'red',
     // backgroundColor: COLORS.RED_WHITE.bg,
     paddingVertical: hp(15),
     borderBottomLeftRadius: 30,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     fontSize: wp(25),
     textAlign: 'center',
     marginLeft: wp(12),
-    color: COLORS.HEADER_GRAY.text,
+    color: 'red',
   },
   drawerBtnView: {
     paddingRight: wp(20),

@@ -1,14 +1,9 @@
-import {BaseModel, MultiBase} from '../../../Common/BaseModel';
+import { MultiBase} from '../../../Common/BaseModel';
 import {IconButton} from '../../Components/IconButton';
-import {
-  BOTTOM_NAVIGATION_ACTIVE_ICON,
-  BOTTOM_NAVIGATION_DEFAULT_ICON,
-  ICONS,
-} from '../../../constants/icons';
 import {navigator} from '../../../Core/Navigator';
-import {controllers} from '../../../Controllers/Controllers';
 import {currentUser} from '../../../Core/CurrentUser';
 import {CounterModel} from '../../CounterModel';
+import {ICONS} from "../../../constants/icons";
 
 type bottomNavigation = {
   id: string;
@@ -42,40 +37,40 @@ class BottomNavigationModel extends MultiBase {
     this.onPressBtn4 = this.onPressBtn4.bind(this);
     this.onPressBtn5 = this.onPressBtn5.bind(this);
     this._btn1 = new IconButton({
-      icon: BOTTOM_NAVIGATION_DEFAULT_ICON.coin,
-      iconActive: BOTTOM_NAVIGATION_ACTIVE_ICON.coin,
+      icon: ICONS.done,
+      iconActive: ICONS.done,
       id: 'BottomNavigation1',
       style: 'navigationButton',
       onPress: this.onPressBtn1,
       activeOpacity: 1,
     });
     this._btn1User = new IconButton({
-      icon: BOTTOM_NAVIGATION_DEFAULT_ICON.home,
-      iconActive: BOTTOM_NAVIGATION_ACTIVE_ICON.home,
+      icon: ICONS.done,
+      iconActive: ICONS.done,
       id: 'BottomNavigation1User',
       style: 'navigationButton',
       onPress: this.onPressBtn1,
       activeOpacity: 1,
     });
     this._btn2 = new IconButton({
-      icon: BOTTOM_NAVIGATION_DEFAULT_ICON.calendar,
-      iconActive: BOTTOM_NAVIGATION_ACTIVE_ICON.calendar,
+      icon: ICONS.done,
+      iconActive: ICONS.done,
       id: 'BottomNavigation2',
       style: 'navigationButton',
       onPress: this.onPressBtn2,
       activeOpacity: 1,
     });
     this._btn3 = new IconButton({
-      icon: BOTTOM_NAVIGATION_DEFAULT_ICON.points,
-      iconActive: BOTTOM_NAVIGATION_ACTIVE_ICON.points,
+      icon: ICONS.done,
+      iconActive: ICONS.done,
       id: 'BottomNavigation3',
       style: 'navigationButtonCenterButton',
       onPress: this.onPressBtn3,
       activeOpacity: 1,
     });
     this._btn4 = new IconButton({
-      icon: BOTTOM_NAVIGATION_DEFAULT_ICON.mail,
-      iconActive: BOTTOM_NAVIGATION_ACTIVE_ICON.mail,
+      icon: ICONS.done,
+      iconActive: ICONS.done,
       id: 'BottomNavigation4',
       style: 'navigationButton',
       onPress: this.onPressBtn4,
@@ -83,8 +78,8 @@ class BottomNavigationModel extends MultiBase {
       _counterModel: model.chatsCounter,
     });
     this._btn5 = new IconButton({
-      icon: BOTTOM_NAVIGATION_DEFAULT_ICON.settings,
-      iconActive: BOTTOM_NAVIGATION_ACTIVE_ICON.settings,
+      icon: ICONS.done,
+      iconActive: ICONS.done,
       id: 'BottomNavigation5',
       style: 'navigationButton',
       onPress: this.onPressBtn5,
@@ -190,68 +185,27 @@ class BottomNavigationModel extends MultiBase {
   async onPressBtn1() {
     this.selectedIndex = 1;
     this.modified = true;
-    if (currentUser().isAdminOsbb) {
-      // await navigator().toMainStack()
-      navigator().navigate('OsbbControllScreen');
-    } else {
-      // await navigator().toMainStack()
-      navigator().navigate('UserBalanceScreen');
-    }
-    // await navigator().toMainStack();
-    // await controllers().userController.userHome.loadClearLineList()
-    // navigator().navigate('HomeScreen')
+
   }
   async onPressBtn2() {
     this.selectedIndex = 2;
     this.modified = true;
-    if (currentUser().isAdminOsbb) {
-      // await navigator().toOsbbAdminStack();
-      navigator().navigate('EventsScreen');
-    } else {
-      // await navigator().toMainStack();
-      navigator().navigate('UserEventsScreen');
-    }
+
   }
   async onPressBtn3() {
     this.selectedIndex = 3;
     this.modified = true;
-    if (currentUser().isAdminOsbb) {
-      // await navigator().toOsbbAdminStack()
-      navigator().navigate('AdminScreen');
-    } else {
-      // await navigator().toMainStack()
-      navigator().navigate('HomeScreen');
-    }
+
   }
 
   onPressBtn4() {
     this.selectedIndex = 4;
     this.modified = true;
-    // navigator().navigate('ChatListScreen')
-    navigator().toChatStack();
+
   }
   onPressBtn5() {
-    // alert("PressBtn5")
-    if (currentUser().isAdminOsbb) {
-      navigator().navigate('SettingsScreen');
-    } else {
-      navigator().navigate('UserSettingsScreen');
-    }
-    // this.selectedIndex = 5;
-    // this.selectedIndex = 5;
-    // if (currentUser().isAdminOsbb) {
-    //   navigator().navigate('AdminMeterIndicatorsScreen');
-    // } else {
-    //   navigator().navigate('MeterIdicatorsScreen');
-    // }
-    // this.modified = true;
-    // navigator().navigate('StatementOfResidentsStack',{
-    //   screen:'StatementOfResidentsMainScreen',
-    //   swipeEnabled:true
-    // });
-    // controllers().drawerSwitch.modified = true;
-    // controllers().drawerSwitch.forceUpdate();
-    // return
+    this.selectedIndex = 5;
+    this.modified = true;
   }
 }
 export {BottomNavigationModel};

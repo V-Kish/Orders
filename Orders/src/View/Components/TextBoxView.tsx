@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {TextInput} from 'react-native';
 import {TypedBaseComponent} from '../../Common/BaseComponent';
-import {TextBox} from '../../Models/Components/TextBox';
+import { TextBox } from '../../Model/Components/TextBox';
 
 class TextBoxView extends TypedBaseComponent<TextBox> {
   constructor(props) {

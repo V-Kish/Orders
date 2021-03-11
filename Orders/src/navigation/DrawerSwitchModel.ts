@@ -1,8 +1,7 @@
 import {BaseModel} from '../Common/BaseModel';
 import {ChooseDrawerModel} from './ChooseDrawerModel';
-import {CounterModel} from '../Models/CounterModel';
-import {navigator} from '../Core/Navigator';
-import {controllers} from "../Controllers/Controllers";
+import { CounterModel } from '../Model/CounterModel';
+
 
 type DrawerSwitchTypes = {
   id: string;
@@ -20,20 +19,6 @@ class DrawerSwitchModel extends BaseModel {
       counterModel: model.counterModel,
     });
   }
-  // settings drawer
-  // get swipeEnabled() {
-  //   return this._swipeEnabled;
-  // }
-  // set swipeEnabled(value) {
-  //   if (this.swipeEnabled !== navigator().navigation.getCurrentOptions().swipeEnabled){
-  //     this._swipeEnabled = navigator().navigation.getCurrentOptions().swipeEnabled;
-  //     controllers().drawerSwitch.chooseDrawer.modified = true;
-  //     this.forceUpdate()
-  //   }
-  //   // this._navigationRef.setOptions({
-  //   //   swipeEnabled: navigator().navigation.getCurrentOptions().gestureEnabled,
-  //   // });
-  // }
   get navigationRef() {
     return this._navigationRef;
   }

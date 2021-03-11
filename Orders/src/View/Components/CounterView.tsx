@@ -1,8 +1,8 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import {MultiTypedBaseComponent, TypedBaseComponent, IBaseProps} from '../../Common/BaseComponent';
+import {MultiTypedBaseComponent, IBaseProps} from '../../Common/BaseComponent';
 import {STYLES} from '../../constants/styles';
-import { CounterModel } from '../../Models/CounterModel';
+import {CounterModel} from "../../Model/CounterModel";
 class CounterView extends MultiTypedBaseComponent<CounterModel> {
     constructor(props: IBaseProps<CounterModel>) {
     super(props);

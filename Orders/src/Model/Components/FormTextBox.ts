@@ -1,6 +1,4 @@
 import {BaseModel} from '../../Common/BaseModel';
-import {ICONS} from '../../constants/icons';
-import {COLORS} from '../../constants/colors';
 
 type inputType = 'default' | 'select' | 'date' | 'time' | undefined;
 type keyboardType =

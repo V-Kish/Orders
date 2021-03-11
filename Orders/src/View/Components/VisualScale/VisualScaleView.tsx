@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {IBaseProps, TypedBaseComponent} from '../../../Common/BaseComponent';
 import {mockupWidthToDP as wp} from '../../../constants/Dimensions';
-import {VisualScaleModel} from '../../../Models/Components/VisualScale/VisualScaleModel';
+import {VisualScaleModel} from "../../../Model/Components/VisualScale/VisualScaleModel";
 
 class VisualScaleView extends TypedBaseComponent<VisualScaleModel> {
   constructor(props: IBaseProps<VisualScaleView>) {

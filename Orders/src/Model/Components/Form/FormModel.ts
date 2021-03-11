@@ -1,5 +1,4 @@
 import {BaseModel} from '../../../Common/BaseModel';
-import {ICONS} from '../../../constants/icons';
 import {FormTextBox} from '../FormTextBox';
 
 type formModel = {

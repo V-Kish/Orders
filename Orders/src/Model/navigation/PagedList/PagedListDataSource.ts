@@ -3,7 +3,6 @@ import {BaseModel} from '../../../Common/BaseModel';
 import {EmptyListMessageModel} from './EmptyListMessageModel';
 import {PagedItemModel, pagedItemProps} from './PagedItem';
 import {BottomPreloader} from "./BottomPreloader";
-import {LastItemPaddingBottomModel} from "./LastItemPaddingBottomModel";
 
 class PagedListDataSource extends BaseModel {
   private _pageIndex: number;

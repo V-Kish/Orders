@@ -1,7 +1,8 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {TypedBaseComponent} from '../../../Common/BaseComponent';
-import {ScreenStep} from '../../../Models/Components/Step/ScreenStep';
+import {ScreenStep} from "../../../Model/Components/Step/ScreenStep";
+
 
 class ScreenStepView extends TypedBaseComponent<ScreenStep> {
   constructor(props: any) {

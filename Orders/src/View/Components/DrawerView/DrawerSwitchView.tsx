@@ -1,9 +1,10 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {TypedBaseComponent, IBaseProps} from '../../Common/BaseComponent';
 import {DrawerAdminView} from './DrawerAdminView';
 import {DrawerUserView} from './DrawerUserView';
-import {ChooseDrawerModel} from '../../Navigation/ChooseDrawerModel';
+import { TypedBaseComponent, IBaseProps } from '../../../Common/BaseComponent';
+import { ChooseDrawerModel } from '../../../Navigation/ChooseDrawerModel';
+
 
 class DrawerSwitchView extends TypedBaseComponent<ChooseDrawerModel> {
   constructor(props: IBaseProps<ChooseDrawerModel>) {

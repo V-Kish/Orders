@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {KeyboardAvoidingView, StyleSheet, View} from 'react-native';
+import {KeyboardAvoidingView, StyleSheet} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {Authorization} from '../../functions/Authorization';
 import {RegistrationTextInput} from './RegistrationTextInput';

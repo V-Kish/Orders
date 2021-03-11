@@ -1,18 +1,16 @@
 import * as React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {
-  TypedBaseComponent,
   IBaseProps,
   MultiTypedBaseComponent,
 } from '../../Common/BaseComponent';
-import {IconButton} from '../../Models/Components/IconButton';
-import {COLORS} from '../../constants/colors';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
 import {containers} from './ButtonView';
 import {CounterView} from './CounterView';
+import { IconButton } from '../../Model/Components/IconButton';
 
 class IconButtonView extends MultiTypedBaseComponent<IconButton> {
   constructor(props: IBaseProps<IconButton>) {
@@ -89,7 +87,7 @@ const styles = StyleSheet.create({
   },
   navigationButton_active: {
     top: hp(10),
-    backgroundColor: COLORS.BOTTOM_NAVIGATION_ACTIVE_COLOR,
+    backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
     width: hp(56),
@@ -104,7 +102,7 @@ const styles = StyleSheet.create({
   },
   navigationButtonCenterButton: {
     top: hp(-20),
-    backgroundColor: COLORS.BLUE.bg,
+    backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
     width: hp(76),

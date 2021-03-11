@@ -1,5 +1,4 @@
 import {BaseModel} from "../../../Common/BaseModel";
-import {TextBox} from "../TextBox";
 import {ChatTextBox} from "./ChatTextBox";
 import {Dimensions, Keyboard} from "react-native";
 

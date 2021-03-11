@@ -4,8 +4,7 @@ import {
   Image,
   StyleSheet,
   View,
-  TextInput,
-  Dimensions,
+
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {TypedBaseComponent} from '../../../Common/BaseComponent';
@@ -15,9 +14,8 @@ import {
   mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
 import { ICONS } from '../../../constants/icons';
-import {STYLES} from '../../../constants/styles';
-import { RemovableItem } from '../../../Models/Components/RemovableList/RemovableItem';
 import {FormTextBoxView} from '../FormTextBoxView';
+import {RemovableItem} from "../../../Model/Components/RemovableList/RemovableItem";
 
 class RemovableItemView extends TypedBaseComponent<RemovableItem> {
   constructor(props: any) {
@@ -65,7 +63,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: COLORS.BORDER_COLOR_GRAY
+    borderColor: 'red'
   },
   containerBlock: {
     flexDirection: 'row',
@@ -102,7 +100,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: COLORS.BORDER_COLOR_GRAY,
+    borderColor: 'red',
     width: '100%',
     justifyContent: 'center'
   },

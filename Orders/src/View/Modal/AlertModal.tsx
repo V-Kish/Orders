@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import { CustomModalButtons } from './CustomModalButtons';
 import {
@@ -7,7 +7,7 @@ import {
   } from '../../constants/Dimensions';
 import { COLORS } from '../../constants/colors';
 export const AlertModal = ({title = "", content = "", closeModal = ()=>{}}) => {
-  
+
     return <View style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.modalHeaderView}>
@@ -22,7 +22,7 @@ export const AlertModal = ({title = "", content = "", closeModal = ()=>{}}) => {
                 changeModalVisible={closeModal}
             />
         </View>
-  
+
 };
 
 const styles = StyleSheet.create({
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
           fontWeight: 'bold'
       },
       modalContentView: {
-    
+
       },
       modalContentText: {
           fontSize: hp(24),

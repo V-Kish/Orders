@@ -1,12 +1,10 @@
 import React from 'react';
-import {StyleSheet, View, ActivityIndicator, Text} from 'react-native';
+import {StyleSheet, View, ActivityIndicator} from 'react-native';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
-import {ICONS} from '../../../constants/icons';
 import {COLORS} from '../../../constants/colors';
-import { CurrentScreen } from '../../../Common/BaseScreen';
 
 export enum containers {
   container,
@@ -22,7 +20,7 @@ class Loader extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.containerBlock}>
-          <ActivityIndicator size="large" color={COLORS.BLUE.bg} />
+          <ActivityIndicator size="large" color={'red'} />
         </View>
       </View>
     );

@@ -1,6 +1,5 @@
 import React from 'react';
 import {IBaseProps, MultiTypedBaseComponent} from "../../Common/BaseComponent";
-import {BottomPreloader} from "../../Models/navigation/PagedList/BottomPreloader";
 import {StyleSheet, View} from "react-native";
 import {Loader} from "../Components/Loader/Loader";
 import {STYLES} from "../../constants/styles";
@@ -8,6 +7,7 @@ import {
     mockupHeightToDP as hp,
     mockupWidthToDP as wp,
 } from '../../.../../constants/Dimensions';
+import {BottomPreloader} from "../../Model/navigation/PagedList/BottomPreloader";
 
 export class BottomPreloaderView extends MultiTypedBaseComponent<BottomPreloader>{
     constructor(props: IBaseProps<BottomPreloader>) {
