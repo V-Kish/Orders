@@ -31,7 +31,7 @@ export const ChatView = () => {
     }, 500);
   }, []);
   const loadDataMore = ({layoutMeasurement, contentOffset, contentSize}) => {
-    if (contentOffset.y == 0) {
+    if (contentOffset.y === 0) {
       return true;
     }
   };
@@ -68,13 +68,14 @@ export const ChatView = () => {
   return (
     <View style={styles.containers}>
       <ScrollView
-          key={`${selectedItemChat.rootId}`}
+        key={`${selectedItemChat.rootId}_chat`}
         forwardedRef={(refSc) => {
           // console.log('render ScrollView refSc', refSc);
           ref = refSc;
           global.scrollViewRef = refSc;
         }}
         onScroll={async ({nativeEvent}) => {
+          console.log('nativeEvent',nativeEvent)
           if (loadDataMore(nativeEvent) && statePreloader) {
             await loadMorePagination();
           }
