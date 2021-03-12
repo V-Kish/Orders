@@ -11,13 +11,13 @@ export const OptionsScreen = () => {
   }
   return (
     <View style={styles.container}>
-     <TouchableOpacity onPress={() => navigator().navigate('OrderScreen')}>
+     <TouchableOpacity onPress={() => navigator().navigate('HomeScreen')}>
        <Text>Замовлення на обмін</Text>
      </TouchableOpacity>
       <TouchableOpacity onPress={() => navigator().navigate('ChatListScreen')}>
         <Text>Переписка з клієнтами</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigator().navigate('OrderScreen')}>
+      <TouchableOpacity onPress={() => navigator().navigate('HomeScreen')}>
         <Text>Клієнти системи</Text>
       </TouchableOpacity>
     </View>

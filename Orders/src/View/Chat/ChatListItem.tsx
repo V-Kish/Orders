@@ -8,50 +8,57 @@ import {UserIcon} from './UserIcon';
 import {ChatTime} from './ChatTime';
 import {CHAT_COLORS, COLORS} from '../../constants/colors';
 import {currentUser} from '../../Core/CurrentUser';
+import {navigator} from '../../Core/Navigator';
+import {useDispatch} from 'react-redux';
+import {selectedItemChatAction} from '../../store/actions/Chat';
 
 export const ChatListItem = ({item}) => {
+  const dispatch = useDispatch();
   return (
-   <View>
-     <TouchableOpacity style={styles.containers} onPress={() => alert('sa')}>
-       {/*// container //*/}
-       <View style={styles.wrap}>
-         {/*// Left //*/}
-         <View style={styles.leftContainer}>
-           {/*// user Icon //*/}
-           <UserIcon item={item} diameter={60} />
-         </View>
-         {/*// Right // */}
-         <View style={styles.rightContainer}>
-           {/*// theme // */}
-           <View style={styles.themeWrap}>
-             <View style={styles.themeLeft}>
-               <Text style={styles.themeText} numberOfLines={1}>
-                 {item.theme}
-               </Text>
-             </View>
-             <View style={styles.themeRight}>
-               <ChatTime date={item.date} />
-             </View>
-           </View>
-           {/*// content // */}
-           <View style={styles.wrapLastMessage}>
-             <Text numberOfLines={2} style={styles.lastMessageText}>
-               {item.fromUserIsClient && (
-                   <Text style={styles.userName}>{currentUser().userName} </Text>
-               )}
-               {!item.fromUserIsClient && (
-                   <Text style={styles.userName}>{item.clientName} </Text>
-               )}
-               — {item.message}
-               sad sadas das dsd 1232132 asnd asnd mdasd ,masnd j,ash d asdk
-               daskd jaskd jasl S
-             </Text>
-           </View>
-         </View>
-       </View>
-     </TouchableOpacity>
-     <View style={styles.lineBottom}/>
-   </View>
+    <View>
+      <TouchableOpacity
+        style={styles.containers}
+        onPress={() => {
+          dispatch(selectedItemChatAction(item));
+          navigator().navigate('ChatScreen');
+        }}>
+        {/*// container //*/}
+        <View style={styles.wrap}>
+          {/*// Left //*/}
+          <View style={styles.leftContainer}>
+            {/*// user Icon //*/}
+            <UserIcon item={item} diameter={60} />
+          </View>
+          {/*// Right // */}
+          <View style={styles.rightContainer}>
+            {/*// theme // */}
+            <View style={styles.themeWrap}>
+              <View style={styles.themeLeft}>
+                <Text style={styles.themeText} numberOfLines={1}>
+                  {item.theme}
+                </Text>
+              </View>
+              <View style={styles.themeRight}>
+                <ChatTime date={item.date} />
+              </View>
+            </View>
+            {/*// content // */}
+            <View style={styles.wrapLastMessage}>
+              <Text numberOfLines={2} style={styles.lastMessageText}>
+                {item.fromUserIsClient && (
+                  <Text style={styles.userName}>{currentUser().userName} </Text>
+                )}
+                {!item.fromUserIsClient && (
+                  <Text style={styles.userName}>{item.clientName} </Text>
+                )}
+                — {item.message}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+      <View style={styles.lineBottom} />
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -61,15 +68,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: wp(10),
   },
-  lineBottom:{
-    position:"absolute",
-    bottom:0,
+  lineBottom: {
+    position: 'absolute',
+    bottom: 0,
     left: '15%',
     marginLeft: wp(10),
     width: '100%',
-    borderColor:CHAT_COLORS.BORDER_COLOR,
-    borderStyle:'solid',
-    borderWidth:0.5,
+    borderColor: CHAT_COLORS.BORDER_COLOR,
+    borderStyle: 'solid',
+    borderWidth: 0.5,
   },
   wrap: {
     width: '100%',

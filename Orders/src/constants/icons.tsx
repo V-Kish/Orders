@@ -5,6 +5,7 @@ export const ICONS = {
   headerPeoples: require('../assets/img/HeaderIcons/Peoples.png'),
   errorScreenLogo: require('../assets/img/ErrorScreen/logo/logo.png'),
   arrowBackWhite: require('../assets/img/ArrowBack/ArrowBackWhite/arrow.png'),
+  callWhite: require('../assets/img/Chat/call/Shape.png'),
   phoneIcon: require('../assets/img/PhoneIcon/phone.png'),
   gambrDisabled: require('../assets/img/gamburgerIcon/disabled/Search.png'),
   gambrActive: require('../assets/img/gamburgerIcon/active/Search.png'),

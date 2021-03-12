@@ -14,27 +14,37 @@ export const HeaderView = ({
   counter = 0,
   ordersSettings = false,
   onPress = false,
+  rightIcon = null,
+  onPressRight = false,
 }) => {
   return (
     <View style={{...styles.container, backgroundColor: color}}>
-      <View style={styles.imageView}>
-        <TouchableOpacity onPress={onPress !== false ? () => onPress():null}>
-          <Image source={icon} style={styles.image} />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={ordersSettings ? styles.titleOrder : styles.title}>
-          {title}
-        </Text>
-        <View style={styles.wrap}>
-          {desc !== undefined && (
-            <Text style={ordersSettings ? styles.descOrder : styles.desc}>
-              {desc}
-            </Text>
-          )}
-          {counter !== 0 && <Text style={styles.count}>{counter}</Text>}
-        </View>
-      </View>
+     <View style={{flexDirection:'row'}}>
+       <View style={styles.imageView}>
+         <TouchableOpacity onPress={onPress !== false ? () => onPress() : null}>
+           <Image source={icon} style={styles.image} />
+         </TouchableOpacity>
+       </View>
+       <View style={styles.textContainer}>
+         <Text style={ordersSettings ? styles.titleOrder : styles.title}>
+           {title}
+         </Text>
+         <View style={styles.wrap}>
+           {desc !== undefined && (
+               <Text style={ordersSettings ? styles.descOrder : styles.desc}>
+                 {desc}
+               </Text>
+           )}
+           {counter !== 0 && <Text style={styles.count}>{counter}</Text>}
+         </View>
+       </View>
+     </View>
+      {rightIcon &&(
+          <TouchableOpacity
+              onPress={onPressRight !== false ? () => onPressRight() : null}>
+            <Image source={rightIcon} style={styles.image} />
+          </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -52,13 +62,17 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.37,
     shadowRadius: 7.49,
-
     elevation: 12,
+    justifyContent:'space-between'
   },
   imageView: {
     justifyContent: 'center',
   },
-  image: {},
+  image: {
+    resizeMode: 'contain',
+    width: hp(25),
+    height: hp(25),
+  },
   textContainer: {
     paddingHorizontal: wp(10),
     justifyContent: 'center',

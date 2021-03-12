@@ -1,7 +1,13 @@
-import {CHAT_LIST, CHAT_LIST_SEARCH_PARAM, CHAT_LIST_PAGINATION, CHAT_LIST_PAGINATION_ITEMS} from '../types';
+import {
+  CHAT_LIST,
+  CHAT_LIST_SEARCH_PARAM,
+  CHAT_LIST_PAGINATION,
+  CHAT_LIST_PAGINATION_ITEMS,
+  SELECTED_CHAT_ITEM,
+} from '../types';
 
 const initialState = {
-  chatListInfo : {
+  chatListInfo: {
     TotalItems: 0,
     TotalPages: 0,
     PageIndex: 0,
@@ -13,6 +19,22 @@ const initialState = {
     pageIndex: 1,
     pageSize: 10,
     isRead: -1,
+  },
+  selectedChat: {
+    id: -1,
+    rootId: -1,
+    clientId: -1,
+    clientName: '',
+    clientPhone: '',
+    theme: '',
+    message: '',
+    fromUserId: -1,
+    fromUserIsClient: null,
+    isUread: null,
+    isMread: null,
+    unReadCountU: 0,
+    unReadCountM: 0,
+    date: '',
   },
 };
 export const ChatReducer = (state = initialState, action) => {
@@ -28,7 +50,7 @@ export const ChatReducer = (state = initialState, action) => {
           PageSize: action.payload.PageSize,
         },
       };
-      case CHAT_LIST_PAGINATION_ITEMS:
+    case CHAT_LIST_PAGINATION_ITEMS:
       return {
         ...state,
         Items: state.Items.concat(action.payload.Items),
@@ -53,6 +75,11 @@ export const ChatReducer = (state = initialState, action) => {
       return {
         ...state,
         paginationBody: action.payload,
+      };
+    case SELECTED_CHAT_ITEM:
+      return {
+        ...state,
+        selectedChat: action.payload,
       };
     default:
       return state;

@@ -13,6 +13,22 @@ export type reduxTypes = {
     };
     Items: Array<any>;
     searchParam:any
+    selectedChat:{
+      id: number;
+      rootId: number;
+      clientId: number;
+      clientName: string;
+      clientPhone: string;
+      theme: string;
+      message: string;
+      fromUserId: number;
+      fromUserIsClient: boolean;
+      isUread: boolean;
+      isMread: boolean;
+      unReadCountU: number;
+      unReadCountM: number;
+      date: string;
+    }
   };
   start: {
     startApp: string;
