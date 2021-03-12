@@ -11,15 +11,21 @@ import {useDispatch, useSelector} from "react-redux";
 import {orderDataTypes, reduxTypes} from "../../Types";
 import {Chat} from "../../functions/Chat";
 import { ChatView } from '../../View/Chat/ChatView';
+import { chatMessagesPagination} from "../../store/actions/Chat";
 export const ChatScreen = () => {
 const dispatch = useDispatch();
   const selectedItemChat = useSelector((state: reduxTypes) => state.chat.selectedChat);
   function goBack() {
     navigator().toGoBack();
   }
-  console.warn(selectedItemChat)
   useEffect(()=>{
     Chat.getChatMessages(dispatch,{pageIndex:1,pageSize:20,rootId:selectedItemChat.rootId}).then();
+    dispatch(
+        chatMessagesPagination({
+          pageIndex: 1,
+          pageSize: 20,
+        }),
+    );
   },[])
   return (
     <View style={styles.container}>

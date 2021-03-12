@@ -3,10 +3,10 @@ import {navigator} from '../Core/Navigator';
 import {Dispatch} from 'redux';
 import {PhoneInfo} from '../Core/PhoneInfo';
 import {AuthBody, ChatList, ChatMessagesList, chatMessage} from '../Types';
-import {PreloaderMain} from '../store/actions/AppStart';
 import {
   ChatListAction,
   ChatListMessagesAction,
+  ChatListMessagesPaginationAction,
   ChatListPaginationAction,
 } from '../store/actions/Chat';
 
@@ -72,6 +72,7 @@ class Chat {
       pageSize: 10,
       rootId: -1,
     },
+    pagination = false
   ) {
     let body: ChatMessagesList = Data;
     try {
@@ -80,14 +81,14 @@ class Chat {
       console.log('rewt list ',result)
       if (result.statusCode === 200) {
         console.log('rewt list ',result)
-        // if (pagination){
-        //   // @ts-ignore
-        //   dispatch(ChatListPaginationAction(list.data));
-        // }else {
-        //   // @ts-ignore
-        //   dispatch(ChatListAction(list.data));
-        // }
-        dispatch(ChatListMessagesAction(result.data));
+        if (pagination){
+          // @ts-ignore
+          dispatch(ChatListMessagesPaginationAction(result.data));
+        }else {
+          // @ts-ignore
+          dispatch(ChatListMessagesAction(result.data));
+        }
+
         return false;
       }
       if (result.statusCode === 403 && result.statusMessage === 'forbidden') {

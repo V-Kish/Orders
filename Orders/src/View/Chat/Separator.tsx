@@ -52,13 +52,14 @@ export const Separator = ({date}) => {
                 return (result = getWeekDay(elements.day));
             }
         });
-        console.warn(result)
+
         if (result !== '') {
             return result;
         } else {
             return false;
         }
     }
+
     return (
         <View style={styles.containerReceivedMessage}>
             <Text style={styles.textTime}>{getTime(date, false, false, true, () => returnDay())}</Text>

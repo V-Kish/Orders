@@ -37,6 +37,10 @@ export type reduxTypes = {
       PageIndex: number
       PageSize: number
     };
+    paginationBodyMessage:{
+      pageIndex: number;
+      pageSize: number;
+    }
   };
   start: {
     startApp: string;

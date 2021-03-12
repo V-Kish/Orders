@@ -3,7 +3,7 @@ import {
   CHAT_LIST_SEARCH_PARAM,
   CHAT_LIST_PAGINATION,
   CHAT_LIST_PAGINATION_ITEMS,
-  SELECTED_CHAT_ITEM, CHAT_LIST_MESSAGES,
+  SELECTED_CHAT_ITEM, CHAT_LIST_MESSAGES, CHAT_LIST_PAGINATION_MESSAGES, CHAT_MESSAGE_PAGINATION
 } from '../types';
 
 const initialState = {
@@ -44,6 +44,10 @@ const initialState = {
     PageIndex: 0,
     PageSize: 0,
   },
+  paginationBodyMessage:{
+    pageIndex: 1,
+    pageSize: 20,
+  }
 };
 export const ChatReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -84,6 +88,11 @@ export const ChatReducer = (state = initialState, action) => {
         ...state,
         paginationBody: action.payload,
       };
+    case CHAT_MESSAGE_PAGINATION:
+      return {
+        ...state,
+        paginationBodyMessage: action.payload,
+      };
     case SELECTED_CHAT_ITEM:
       return {
         ...state,
@@ -95,6 +104,17 @@ export const ChatReducer = (state = initialState, action) => {
         listMessages: action.payload.Items,
         chatListMessagesInfo: {
           Theme: action.payload.Theme,
+          TotalItems: action.payload.TotalItems,
+          TotalPages: action.payload.TotalPages,
+          PageIndex: action.payload.PageIndex,
+          PageSize: action.payload.PageSize,
+        },
+      };
+    case CHAT_LIST_PAGINATION_MESSAGES:
+      return {
+        ...state,
+        listMessages: (action.payload.Items).concat(state.listMessages),
+        chatListMessagesInfo: {
           TotalItems: action.payload.TotalItems,
           TotalPages: action.payload.TotalPages,
           PageIndex: action.payload.PageIndex,

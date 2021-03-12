@@ -1,42 +1,96 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, ScrollView,Text} from 'react-native';
-import {
-  mockupHeightToDP as hp,
-  mockupWidthToDP as wp,
-} from '../../constants/Dimensions';
-
+import {View, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import { ChatListItem} from './ChatListItem';
-import {reduxTypes} from "../../Types";
-import { Message } from './Message';
-import { ChatInput } from '../Components/ChatInput';
-import {Chat} from "../../functions/Chat";
-import { Separator } from './Separator';
-
-
+import {reduxTypes} from '../../Types';
+import {Message} from './Message';
+import {ChatInput} from '../Components/ChatInput';
+import {Chat} from '../../functions/Chat';
+import {Separator} from './Separator';
+import ScrollView from '../../View/Chat/ScrollAndroid/NativeScrollView';
 
 export const ChatView = () => {
-    const dispatch = useDispatch();
-    const listMessages = useSelector((state: reduxTypes) => state.chat.listMessages);
-    const [height,setHeight] = useState({height:0});
-    const ref = React.useRef(null);
-    useEffect(()=>{
-        setTimeout(()=>{
-            Chat.goToBottom(ref,true).then()
-        },100)
-    },[])
+  const dispatch = useDispatch();
+  const [statePreloader, setStatePreloader] = useState(true);
+  const listMessages = useSelector(
+    (state: reduxTypes) => state.chat.listMessages,
+  );
+  const chatListMessagesInfo = useSelector(
+    (state: reduxTypes) => state.chat.chatListMessagesInfo,
+  );
+  const paginationBodyMessage = useSelector(
+    (state: reduxTypes) => state.chat.paginationBodyMessage,
+  );
+  const selectedItemChat = useSelector(
+    (state: reduxTypes) => state.chat.selectedChat,
+  );
+  const [height, setHeight] = useState({height: 0});
+  let ref = React.useRef(null);
+  useEffect(() => {
+    setTimeout(() => {
+      Chat.goToBottom(ref, false).then();
+    }, 500);
+  }, []);
+  const loadDataMore = ({layoutMeasurement, contentOffset, contentSize}) => {
+    if (contentOffset.y == 0) {
+      return true;
+    }
+  };
+
+  async function loadMorePagination() {
+    if (
+      !(
+        chatListMessagesInfo.PageIndex * chatListMessagesInfo.PageSize <
+        chatListMessagesInfo.TotalItems
+      )
+    ) {
+      return;
+    }
+    setStatePreloader(false);
+    let body = {};
+    body.pageIndex = ++paginationBodyMessage.pageIndex;
+    body.pageSize = paginationBodyMessage.pageSize;
+    try {
+      await Chat.getChatMessages(
+        dispatch,
+        {
+          pageSize: body.pageSize,
+          pageIndex: body.pageIndex,
+          rootId: selectedItemChat.rootId,
+        },
+        true,
+      ).then();
+      setStatePreloader(true);
+    } catch (ex) {
+      setStatePreloader(true);
+    }
+  }
+
   return (
     <View style={styles.containers}>
-      <ScrollView ref={ref}>
-        {listMessages.map((item ) => (
-            <View key={item.id}>
-                <Separator date={item.date} key={`${item.id} + ${item.date}`}/>
-                <Message item={item} key={item.id}/>
-            </View>
+      <ScrollView
+          key={`${selectedItemChat.rootId}`}
+        forwardedRef={(refSc) => {
+          // console.log('render ScrollView refSc', refSc);
+          ref = refSc;
+          global.scrollViewRef = refSc;
+        }}
+        onScroll={async ({nativeEvent}) => {
+          if (loadDataMore(nativeEvent) && statePreloader) {
+            await loadMorePagination();
+          }
+        }}
+        maintainVisibleContentPosition={{
+          minIndexForVisible: 0,
+        }}>
+        {listMessages.map((item) => (
+          <View key={item.id}>
+            <Separator date={item.date} key={`${item.id} + ${item.date}`} />
+            <Message item={item} key={item.id} />
+          </View>
         ))}
         <View style={{height: height.height}} />
       </ScrollView>
-        <ChatInput  setHeight={setHeight} refScroll={ref} />
+      <ChatInput setHeight={setHeight} refScroll={ref} />
     </View>
   );
 };

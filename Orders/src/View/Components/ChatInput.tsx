@@ -32,8 +32,8 @@ export const ChatInput = ({setHeight, refScroll}) => {
       message: value,
     }).then((r) => {
       setTimeout(() => {
-        Chat.goToBottom(refScroll, true).then();
-      }, 500);
+        Chat.goToBottom(global.scrollViewRef, true).then();
+      }, 0);
     });
     setValue('');
   };
