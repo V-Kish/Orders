@@ -19,7 +19,9 @@ class UserDataProvider {
   // get User info
   static async getUserInfo() {
     return fetchData(
-      `rest/v1/${currentUser().userId}/${currentUser().userToken}/admin-settings/users/${currentUser().userId}/get`,
+      `rest/v1/${currentUser().userId}/${
+        currentUser().userToken
+      }/admin-settings/users/${currentUser().userId}/get`,
       'GET',
     );
   }
@@ -33,7 +35,31 @@ class UserDataProvider {
       body,
     );
   }
-
+  // Get messages from chat
+  static async getChatMessages(body) {
+    console.log('getChatMessages body',body)
+    return fetchData(
+      `/rest/v1/${currentUser().userId}/${
+        currentUser().userToken
+      }/loyaltyProg/messages/loadtree/${body.rootId}`,
+      'POST',
+      {
+        pageIndex: body.pageIndex,
+        pageSize: body.pageSize,
+      },
+    );
+  }
+  // send Message
+  static async sendMessage(body) {
+    return fetchData(
+        `/rest/v1/${currentUser().userId}/${currentUser().userToken}/loyaltyProg/messages`,
+        'POST',
+        {
+          message: body.message,
+          rootId: body.rootId,
+        },
+    );
+  }
   static async getTokenFireBase() {
     return new Promise((resolve, reject) => {
       messaging()

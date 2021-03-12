@@ -12,7 +12,7 @@ export type reduxTypes = {
       isRead:  number;
     };
     Items: Array<any>;
-    searchParam:any
+    searchParam:any;
     selectedChat:{
       id: number;
       rootId: number;
@@ -28,7 +28,15 @@ export type reduxTypes = {
       unReadCountU: number;
       unReadCountM: number;
       date: string;
-    }
+    };
+    listMessages:Array<any>;
+    chatListMessagesInfo: {
+      Theme: string;
+      TotalItems: number;
+      TotalPages: number
+      PageIndex: number
+      PageSize: number
+    };
   };
   start: {
     startApp: string;
@@ -71,6 +79,15 @@ export type ChatList = {
   pageIndex: number;
   PageSize:  number;
   isRead:  number;
+}
+export type ChatMessagesList = {
+  pageIndex: number;
+  pageSize:  number;
+  rootId:  number;
+}
+export type chatMessage = {
+  message:string;
+  rootId:  number;
 }
 export type AuthBodyToken = {
   token: string;

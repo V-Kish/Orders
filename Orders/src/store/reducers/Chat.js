@@ -3,7 +3,7 @@ import {
   CHAT_LIST_SEARCH_PARAM,
   CHAT_LIST_PAGINATION,
   CHAT_LIST_PAGINATION_ITEMS,
-  SELECTED_CHAT_ITEM,
+  SELECTED_CHAT_ITEM, CHAT_LIST_MESSAGES,
 } from '../types';
 
 const initialState = {
@@ -35,6 +35,14 @@ const initialState = {
     unReadCountU: 0,
     unReadCountM: 0,
     date: '',
+  },
+  listMessages: [],
+  chatListMessagesInfo: {
+    Theme: "",
+    TotalItems: 0,
+    TotalPages: 0,
+    PageIndex: 0,
+    PageSize: 0,
   },
 };
 export const ChatReducer = (state = initialState, action) => {
@@ -80,6 +88,18 @@ export const ChatReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedChat: action.payload,
+      };
+      case CHAT_LIST_MESSAGES:
+      return {
+        ...state,
+        listMessages: action.payload.Items,
+        chatListMessagesInfo: {
+          Theme: action.payload.Theme,
+          TotalItems: action.payload.TotalItems,
+          TotalPages: action.payload.TotalPages,
+          PageIndex: action.payload.PageIndex,
+          PageSize: action.payload.PageSize,
+        },
       };
     default:
       return state;

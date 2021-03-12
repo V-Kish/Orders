@@ -22,12 +22,8 @@ import {
 import {reduxTypes} from '../../Types';
 export const ChatListScreen = () => {
   const dispatch = useDispatch();
-  // const chatListSearchParamSelector = useSelector(
-  //     (state: reduxTypes) => state.chat.searchParam,
-  // );
-  // console.log('chatListSearchParamSelector',chatListSearchParamSelector)
+
   useEffect(() => {
-    console.log('useEffect');
     Chat.getChatList(dispatch).then();
     dispatch(
       chatListPagination({

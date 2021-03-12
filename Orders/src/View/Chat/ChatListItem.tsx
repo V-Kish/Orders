@@ -45,10 +45,10 @@ export const ChatListItem = ({item}) => {
             {/*// content // */}
             <View style={styles.wrapLastMessage}>
               <Text numberOfLines={2} style={styles.lastMessageText}>
-                {item.fromUserIsClient && (
+                {!item.fromUserIsClient && (
                   <Text style={styles.userName}>{currentUser().userName} </Text>
                 )}
-                {!item.fromUserIsClient && (
+                {item.fromUserIsClient && (
                   <Text style={styles.userName}>{item.clientName} </Text>
                 )}
                 — {item.message}

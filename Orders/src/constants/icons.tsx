@@ -13,6 +13,7 @@ export const ICONS = {
   close: require('../assets/img/Close/close.png'),
   done: require('../assets/img/Done/Shape.png'),
   logo: require('../assets/img/logoLoad/logo_bonus_small1.jpg'),
+  sendMessage: require('../assets/img/Chat/sendMessage/Shape.png'),
 };
 export const DRAWER_ICONS = {
   burger: require('../assets/img/Drawer/White/Menu.png'),

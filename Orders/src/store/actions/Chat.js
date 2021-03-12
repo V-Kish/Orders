@@ -1,4 +1,4 @@
-import {CHAT_LIST, CHAT_LIST_SEARCH_PARAM, CHAT_LIST_PAGINATION,CHAT_LIST_PAGINATION_ITEMS,SELECTED_CHAT_ITEM} from '../types';
+import {CHAT_LIST, CHAT_LIST_SEARCH_PARAM, CHAT_LIST_PAGINATION,CHAT_LIST_PAGINATION_ITEMS,SELECTED_CHAT_ITEM,CHAT_LIST_MESSAGES} from '../types';
 
 export const ChatListAction = (value) => {
   return {
@@ -27,6 +27,12 @@ export const chatListPagination = (value) => {
 export const selectedItemChatAction = (value) => {
   return {
     type: SELECTED_CHAT_ITEM,
+    payload: value,
+  };
+};
+export const ChatListMessagesAction = (value) => {
+  return {
+    type: CHAT_LIST_MESSAGES,
     payload: value,
   };
 };
