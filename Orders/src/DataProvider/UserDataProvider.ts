@@ -16,6 +16,23 @@ class UserDataProvider {
       'PUT',
     );
   }
+  // get User info
+  static async getUserInfo() {
+    return fetchData(
+      `rest/v1/${currentUser().userId}/${currentUser().userToken}/admin-settings/users/${currentUser().userId}/get`,
+      'GET',
+    );
+  }
+  // Get list chats
+  static async getListChats(body) {
+    return fetchData(
+      `/rest/v1/${currentUser().userId}/${
+        currentUser().userToken
+      }/loyaltyProg/messages/load`,
+      'POST',
+      body,
+    );
+  }
 
   static async getTokenFireBase() {
     return new Promise((resolve, reject) => {

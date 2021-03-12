@@ -34,7 +34,7 @@ export const MainNavigation = () => {
             await Dictionaries.InitDictionaries(function () {
               navigator().changeNavigationStateAuth(false, dispatch);
               navigator().state.prevScreen.push({
-                name: 'HomeScreen',
+                name: 'OptionsScreen',
                 params: {data: {}, key: undefined, screen: null},
               });
               setTimeout(()=>{

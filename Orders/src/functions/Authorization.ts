@@ -60,6 +60,15 @@ class Authorization {
     } catch (ex) {
       dispatch(PreloaderMain(false));
     }
+    try {
+      const response = await UserDataProvider.getUserInfo();
+      console.log('response',response)
+      if (response.statusCode === 200){
+        currentUser().userName = response.data.userData.name;
+      }
+    }catch (ex){
+      console.log('response ex',ex)
+    }
     currentUser().saveUser();
     try {
       const response = await MethodsRequest.getOrdersNumber();
@@ -74,7 +83,7 @@ class Authorization {
       await Dictionaries.InitDictionaries(function () {
         navigator().changeNavigationStateAuth(false, dispatch);
         navigator().state.prevScreen.push({
-          name: 'HomeScreen',
+          name: 'OptionsScreen',
           params: {data: {}, key: undefined, screen: null},
         });
         dispatch(PreloaderMain(false));

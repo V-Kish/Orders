@@ -13,3 +13,9 @@ export const ICONS = {
   done: require('../assets/img/Done/Shape.png'),
   logo: require('../assets/img/logoLoad/logo_bonus_small1.jpg'),
 };
+export const DRAWER_ICONS = {
+  burger: require('../assets/img/Drawer/White/Menu.png'),
+};
+export const CHAT_ICONS = {
+  arrow: require('../assets/img/Chat/arrowDown/arrow.png'),
+};

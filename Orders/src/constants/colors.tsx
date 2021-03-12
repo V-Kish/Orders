@@ -22,5 +22,9 @@ export const COLORS = {
   STATUS_GREEN_WHITE: 'rgba(39,174,96,1)',
   STATUS_BLUE: 'rgba(47,128,237,1)',
   STATUS_GRAY_DARK: 'rgba(130,130,130,1)',
-  STATUS_GRAY: 'rgba(224,224,224,1)'
+  STATUS_GRAY: 'rgba(224,224,224,1)',
+};
+export const CHAT_COLORS = {
+  FONT_GRAY: 'rgba(0, 0, 0, 0.539261)',
+  BORDER_COLOR: 'rgba(0, 0, 0, 0.12)',
 };

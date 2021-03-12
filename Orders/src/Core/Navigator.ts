@@ -1,4 +1,4 @@
-import {CommonActions} from '@react-navigation/native';
+import {CommonActions,DrawerActions} from '@react-navigation/native';
 import {AppLog} from '../Common/AppLog';
 import {currentUser} from './CurrentUser';
 import {readData} from './readData';
@@ -173,6 +173,27 @@ class NavigatorImpl {
 
   changeNavigationStateAuth(value: boolean, dispatch: Dispatch<any>) {
     dispatch(ChangeStackNavigation(value));
+  }
+  // Drawer Actions
+  openDrawer() {
+    if (this.navigation === null) {
+      return false;
+    }
+    this.navigation.dispatch(DrawerActions.openDrawer());
+  }
+
+  closeDrawer() {
+    if (this.navigation === null) {
+      return false;
+    }
+    this.navigation.dispatch(DrawerActions.closeDrawer());
+  }
+
+  toggleDrawer() {
+    if (this.navigation === null) {
+      return false;
+    }
+    this.navigation.dispatch(DrawerActions.toggleDrawer());
   }
 }
 

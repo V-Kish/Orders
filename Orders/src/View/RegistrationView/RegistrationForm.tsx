@@ -4,6 +4,7 @@ import {useDispatch} from 'react-redux';
 import {Authorization} from '../../functions/Authorization';
 import {RegistrationTextInput} from './RegistrationTextInput';
 import {RegistrationSubmitButton} from './RegistrationSubmitButton';
+import {navigator} from "../../Core/Navigator";
 
 export const RegistrationForm = () => {
   const dispatch = useDispatch();

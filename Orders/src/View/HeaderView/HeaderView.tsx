@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: hp(100),
+    height: hp(80),
     paddingHorizontal: wp(20),
     shadowColor: '#000',
     shadowOffset: {

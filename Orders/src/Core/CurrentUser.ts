@@ -6,6 +6,7 @@ import { UserDataProvider } from '../DataProvider/UserDataProvider';
 type user = {
   userToken: string | null;
   userId: string | null;
+  userName: string | null;
 };
 class CurrentUserImpl {
   private _user: user;
@@ -13,6 +14,7 @@ class CurrentUserImpl {
     this._user = {
       userToken: null,
       userId: null,
+      userName: null,
     };
   }
 
@@ -29,6 +31,13 @@ class CurrentUserImpl {
 
   get userId() {
     return this.user.userId;
+  }
+  set userName(userName) {
+    this.user.userName = userName;
+  }
+
+  get userName() {
+    return this.user.userName;
   }
 
   // use background
@@ -47,6 +56,7 @@ class CurrentUserImpl {
       let jsonData = JSON.parse(string);
       this.user.userToken = jsonData.userToken;
       this.user.userId = jsonData.userId;
+      this.user.userName = jsonData.userName;
       AppLog.log('isUserPinCode save', this.user);
     }
   }

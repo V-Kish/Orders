@@ -4,6 +4,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {HomeScreen} from '../screens/HomeScreen';
 import {OrderScreen} from '../screens/OrderScreen';
 import {navigator} from '../Core/Navigator';
+import {OptionsScreen} from '../screens/OptionsScreen';
+import {ChatListScreen} from '../screens/Chat/ChatListScreen';
+import {ChatScreen} from '../screens/Chat/ChatScreen';
 const Stack = createStackNavigator();
 export const MainStack = () => {
   useEffect(() => {
@@ -20,7 +23,12 @@ export const MainStack = () => {
     return () => backHandler.remove();
   }, []);
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName={'OptionsScreen'}>
+      <Stack.Screen
+        name="OptionsScreen"
+        component={OptionsScreen}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
@@ -29,6 +37,16 @@ export const MainStack = () => {
       <Stack.Screen
         name="OrderScreen"
         component={OrderScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ChatListScreen"
+        component={ChatListScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ChatScreen"
+        component={ChatScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

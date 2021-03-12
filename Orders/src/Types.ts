@@ -1,4 +1,11 @@
 export type reduxTypes = {
+  chat: {
+    TotalItems: number;
+    TotalPages: number;
+    PageIndex: number;
+    PageSize: number;
+    Items: Array<any>;
+  };
   start: {
     startApp: string;
     isAuthStack: boolean;
@@ -36,6 +43,12 @@ export type AuthBody =
     }
   | undefined;
 
+export type ChatList = {
+  pageIndex: number;
+  PageSize:  number;
+  sQuery: string;
+  isRead:  number;
+}
 export type AuthBodyToken = {
   token: string;
   deviceInfo: string;
@@ -109,3 +122,19 @@ export type orderDataTypes = {
     statusDate: string;
   };
 };
+export type chatItem = {
+  clientId: number;
+  clientName: string;
+  clientPhone: string;
+  date:string;
+  fromUserId:  number;
+  fromUserIsClient: boolean;
+  id:  number;
+  isMread: boolean;
+  isUread: boolean;
+  message: string;
+  rootId:  number;
+  theme: string;
+  unReadCountM: number;
+  unReadCountU:  number;
+}
