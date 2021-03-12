@@ -1,10 +1,18 @@
 export type reduxTypes = {
   chat: {
-    TotalItems: number;
-    TotalPages: number;
-    PageIndex: number;
-    PageSize: number;
+    chatListInfo:{
+      TotalItems: number;
+      TotalPages: number;
+      PageIndex: number;
+      PageSize: number;
+    };
+    paginationBody:{
+      pageIndex: number;
+      pageSize: number;
+      isRead:  number;
+    };
     Items: Array<any>;
+    searchParam:any
   };
   start: {
     startApp: string;
@@ -46,7 +54,6 @@ export type AuthBody =
 export type ChatList = {
   pageIndex: number;
   PageSize:  number;
-  sQuery: string;
   isRead:  number;
 }
 export type AuthBodyToken = {

@@ -4,30 +4,37 @@ import {Dispatch} from 'redux';
 import {PhoneInfo} from '../Core/PhoneInfo';
 import {AuthBody, ChatList} from '../Types';
 import {PreloaderMain} from '../store/actions/AppStart';
-import {ChatListAction} from '../store/actions/Chat';
+import {ChatListAction,ChatListPaginationAction} from '../store/actions/Chat';
 
 class Chat {
   // Список регіонів
   static async getChatList(
     dispatch: Dispatch<any>,
+    searchText= '',
     Data: ChatList = {
       pageIndex: 1,
-      PageSize: 10,
-      sQuery: '',
+      pageSize: 10,
       isRead: -1,
     },
+    pagination = false
   ) {
     // dispatch(PreloaderMain(true));
     // get userToken
-    const body: AuthBody = Data;
+    let  body: AuthBody = Data;
+    body.sQuery = searchText;
     // @ts-ignore
-    body.deviceInfo = await this.createFetchBody();
+    console.log('body pad',body)
     try {
       const list = await UserDataProvider.getListChats(body);
       console.log('list',list)
       if (list.statusCode === 200) {
-        // @ts-ignore
-        dispatch(ChatListAction(list.data));
+        if (pagination){
+          // @ts-ignore
+          dispatch(ChatListPaginationAction(list.data));
+        }else {
+          // @ts-ignore
+          dispatch(ChatListAction(list.data));
+        }
         return false;
       }
       if (list.statusCode === 403 && list.statusMessage === 'forbidden') {

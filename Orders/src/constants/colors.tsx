@@ -27,4 +27,5 @@ export const COLORS = {
 export const CHAT_COLORS = {
   FONT_GRAY: 'rgba(0, 0, 0, 0.539261)',
   BORDER_COLOR: 'rgba(0, 0, 0, 0.12)',
+  FLOAT_BUTTON: '#2A56C6',
 };
