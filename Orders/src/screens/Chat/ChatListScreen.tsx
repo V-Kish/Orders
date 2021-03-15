@@ -40,7 +40,6 @@ export const ChatListScreen = () => {
   function goBack() {
     navigator().toGoBack();
   }
-  console.warn(preloader)
   return (
     <View style={styles.container}>
       <HeaderView

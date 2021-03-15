@@ -1,6 +1,8 @@
 import {GetOrderInfo} from '../functions/GetOrderInfo';
 import {MethodsRequest} from '../DataProvider/MethodsRequest';
 import {getOrdersCount} from '../store/actions/Dictionaries';
+import {navigator} from '../Core/Navigator';
+import {Chat} from '../functions/Chat';
 
 export const pushMessagesHandler = {
   userToken: null,
@@ -31,6 +33,13 @@ export const pushMessagesHandler = {
           this._getOrders(messageEvent.evendData, dispatch).then();
           this._getOrdersCount(messageEvent.evendData, dispatch).then();
           break;
+        case 'updateChat':
+          if (this.isOpenBackground) {
+            this._openChat(messageEvent.evendData, dispatch).then();
+          } else {
+            this._updateChat(messageEvent.evendData, dispatch).then();
+          }
+          break;
       }
     }
   },
@@ -43,5 +52,17 @@ export const pushMessagesHandler = {
     if (response.statusCode === 200) {
       dispatch(getOrdersCount(response.result));
     }
+  },
+  _updateChat: async function (evendData, dispatch) {
+    if (navigator().getCurrentScreen() === 'ChatScreen') {
+      Chat.getChatMessages(dispatch, {
+        pageSize: 20,
+        pageIndex: 1,
+        rootId: evendData.rootId,
+      }).then();
+    }
+  },
+  _openChat: async function (evendData, dispatch) {
+    navigator().navigate('ChatScreen');
   },
 };

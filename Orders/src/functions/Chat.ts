@@ -9,6 +9,7 @@ import {
   ChatListMessagesPaginationAction,
   ChatListPaginationAction,
 } from '../store/actions/Chat';
+import {Linking} from 'react-native';
 
 class Chat {
   // Список чатів
@@ -72,19 +73,18 @@ class Chat {
       pageSize: 10,
       rootId: -1,
     },
-    pagination = false
+    pagination = false,
   ) {
     let body: ChatMessagesList = Data;
     try {
-
       const result = await UserDataProvider.getChatMessages(body);
-      console.log('rewt list ',result)
+      console.log('rewt list ', result);
       if (result.statusCode === 200) {
-        console.log('rewt list ',result)
-        if (pagination){
+        console.log('rewt list ', result);
+        if (pagination) {
           // @ts-ignore
           dispatch(ChatListMessagesPaginationAction(result.data));
-        }else {
+        } else {
           // @ts-ignore
           dispatch(ChatListMessagesAction(result.data));
         }
@@ -123,16 +123,17 @@ class Chat {
     } catch (error) {}
   }
   // Create body for fetch
-  static async sendMessages(
-    dispatch: Dispatch<any>,
-    Data: chatMessage,
-  ) {
+  static async sendMessages(dispatch: Dispatch<any>, Data: chatMessage) {
     try {
       let body: chatMessage = Data;
       const result = await UserDataProvider.sendMessage(body);
-      if (result.statusCode === 200){
-        if (body.rootId){
-          Chat.getChatMessages(dispatch,{pageSize:20,pageIndex:1,rootId:body.rootId}).then();
+      if (result.statusCode === 200) {
+        if (body.rootId) {
+          Chat.getChatMessages(dispatch, {
+            pageSize: 20,
+            pageIndex: 1,
+            rootId: body.rootId,
+          }).then();
         }
       }
     } catch (error) {
@@ -147,6 +148,11 @@ class Chat {
       }
     } catch (ex) {
       console.log('goToBottom ex', ex);
+    }
+  }
+  static async goTell(tel: string) {
+    if (typeof tel === 'string') {
+      await Linking.openURL(`tel:${tel}`);
     }
   }
 }
