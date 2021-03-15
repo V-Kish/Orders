@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet } from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
 import {mockupHeightToDP as hp} from '../../constants/Dimensions';
 
 import {navigator} from '../../Core/Navigator';
-import { DRAWER_ICONS} from '../../constants/icons';
+import {DRAWER_ICONS} from '../../constants/icons';
 import {COLORS} from '../../constants/colors';
 import {HeaderView} from '../../View/HeaderView/HeaderView';
 import {ChatListView} from '../../View/Chat/ChatListView';
@@ -15,10 +15,13 @@ import {
   chatListPagination,
   chatListSearchParamAction,
 } from '../../store/actions/Chat';
-import {PreloaderChat} from "../../View/Chat/PreloderChat/PreloderChat";
+import {PreloaderChat} from '../../View/Chat/PreloderChat/PreloderChat';
+import {FloatButton} from '../../View/Components/FloatButon';
+import { ModalNewChat } from '../../View/Chat/ModalNewChat/ModalNewChat';
 export const ChatListScreen = () => {
   const dispatch = useDispatch();
   const [preloader, setPreloader] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     setPreloader(false);
     Chat.getChatList(dispatch).then(
@@ -40,6 +43,9 @@ export const ChatListScreen = () => {
   function goBack() {
     navigator().toGoBack();
   }
+  const openModalCreateNewChat = () => {
+    setShowModal(!showModal);
+  };
   return (
     <View style={styles.container}>
       <HeaderView
@@ -53,6 +59,10 @@ export const ChatListScreen = () => {
         <ChatSearch changeCurrentText={handleTextChange} />
       </View>
       <ChatListView />
+      {/*// Float Button // */}
+      <FloatButton clickFn={openModalCreateNewChat} />
+      {/*// Modal Create new Chat // */}
+      <ModalNewChat isShow={showModal} />
       <PreloaderChat isHide={preloader} />
     </View>
   );
