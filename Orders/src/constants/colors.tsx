@@ -23,6 +23,8 @@ export const COLORS = {
   STATUS_BLUE: 'rgba(47,128,237,1)',
   STATUS_GRAY_DARK: 'rgba(130,130,130,1)',
   STATUS_GRAY: 'rgba(224,224,224,1)',
+  BUTTON_PURPLE: '#9B51E0',
+  BUTTON_ORANGE: '#F2994A',
 };
 export const CHAT_COLORS = {
   FONT_GRAY: 'rgba(0, 0, 0, 0.539261)',
