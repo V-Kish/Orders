@@ -42,6 +42,10 @@ export type reduxTypes = {
       pageSize: number;
     }
   };
+  clients: {
+    Items: Array<any>;
+  };
+  
   start: {
     startApp: string;
     isAuthStack: boolean;
@@ -83,6 +87,11 @@ export type ChatList = {
   pageIndex: number;
   PageSize:  number;
   isRead:  number;
+}
+export type ClientsList = {
+  pageIndex: number;
+  PageSize:  number;
+  query:  string;
 }
 export type ChatMessagesList = {
   pageIndex: number;
@@ -182,4 +191,11 @@ export type chatItem = {
   theme: string;
   unReadCountM: number;
   unReadCountU:  number;
+}
+
+
+export type clientItem = {
+  id: number;
+  clientName: string;
+  clientPhone: string;
 }

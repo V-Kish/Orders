@@ -18,6 +18,7 @@ class UserDataProvider {
   }
   // get User info
   static async getUserInfo() {
+    
     return fetchData(
       `rest/v1/${currentUser().userId}/${
         currentUser().userToken
@@ -26,12 +27,13 @@ class UserDataProvider {
     );
   }
   // get Clients
-  static async getClients() {
+  static async getClients(body) {
     return fetchData(
       `rest/v1/${currentUser().userId}/${
         currentUser().userToken
-      }/admin-settings/users/`,
-      'GET',
+      }/loyaltyProg/users/load`,
+      'POST',
+      body
     );
   }
   // Get list chats

@@ -5,36 +5,45 @@ import {
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
 import { CustomerListItem } from './CustomerListItem';
+import {clientItem, reduxTypes} from "../../Types";
+import { useDispatch, useSelector } from 'react-redux';
 
 
 export const CustomersListView = () => {
+    const dispatch = useDispatch();
+    const ClientsList = useSelector((state: reduxTypes) => state.clients.Items);
+    console.log("HERE NOW", ClientsList);
 
-    const renderCustomers = (item) =>{
-        return <View>  </View>;
-    };
+    function renderClients(){
+        if(ClientsList !== undefined){
+            if(ClientsList.length > 0){
+                return ClientsList.map((item) => (
+                    <CustomerListItem item={item} key={item.id}/>
+                ))
+            } else {
+                return <Text>No users!</Text>
+            }
+        }
+    }
 
     return (
         <View style={styles.containers}>
 
             <ScrollView
                 onScroll={async ({nativeEvent}) => {
-                    if (loadDataMore(nativeEvent) && statePreloader ) {
-                    await loadMorePagination();
-                    }
+                    // if (loadDataMore(nativeEvent) && statePreloader ) {
+                    // await loadMorePagination();
+                    // }
+                    console.log("SCROOLLING CLIENTS!")
                 }}
 
                 contentContainerStyle={styles.clientsList}
             >
 
-                {/* {renderCustomers({})} */}
 
-                <CustomerListItem item={{clientName:"Таміла Валютчиця", phoneNumber: "3804424242"}} />
-                <CustomerListItem item={{clientName:"Вася Кабан", phoneNumber: "380965204163"}} />
-                <CustomerListItem item={{clientName:"Таміла Валютчиця", phoneNumber: "380965204163"}} />
-                <CustomerListItem item={{clientName:"Вася Кабан", phoneNumber: "380965204163"}} />
-                <CustomerListItem item={{clientName:"Таміла Валютчиця", phoneNumber: "380965204163"}} />
-                <CustomerListItem item={{clientName:"Вася Кабан", phoneNumber: "380965204163"}} />
-
+                {
+                    renderClients()
+                }
 
             </ScrollView>
         </View>

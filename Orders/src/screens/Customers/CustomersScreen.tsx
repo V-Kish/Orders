@@ -13,26 +13,50 @@ import { useDispatch } from 'react-redux';
 import { Clients } from '../../functions/Clients';
 import { chatListPagination } from '../../store/actions/Chat';
 import { PreloaderChat } from '../../View/Chat/PreloderChat/PreloderChat';
+import { ClientsListAction } from '../../store/actions/Clients';
 
 
 
 export const CustomersScreen = () => {
-  // const dispatch = useDispatch();
-  // const [preloader, setPreloader] = useState(false);
-  // useEffect(() => {
-  //   setPreloader(false);
-  //   Clients.getClientsList(dispatch).then(
-  //     (succes) => setPreloader(true),
-  //     (error) => setPreloader(true),
-  //   );
+  const dispatch = useDispatch();
+  const [preloader, setPreloader] = useState(false);
 
-  // }, []);
+  useEffect(() => {
+    setPreloader(false);
+    Clients.getClientsList(dispatch, false, {pageIndex: 1, PageSize: 20, query: ""})
+        .then(
+          (succes) => setPreloader(true),
+          (error) => setPreloader(true),
+        );
+    
+        dispatch(
+          ClientsListAction({
+            pageIndex: 1,
+            pageSize: 20,
+            query: ""
+          }),
+        );
+
+  }, []);
 
   
   
   function goBack() {
-    navigator().toGoBack();
-      // Clients.getClientsList();
+    // navigator().toGoBack();
+        setPreloader(false);
+    Clients.getClientsList(dispatch, false, {pageIndex: 1, PageSize: 20, query: ""})
+        .then(
+          (succes) => setPreloader(true),
+          (error) => setPreloader(true),
+        );
+    
+        dispatch(
+          ClientsListAction({
+            pageIndex: 1,
+            pageSize: 20,
+            query: ""
+          }),
+        );
   }
 
   // const handleTextChange = (text: string) => {
@@ -60,7 +84,7 @@ export const CustomersScreen = () => {
       </View>
       
       <CustomersListView />
-      {/* <PreloaderChat isHide={preloader} /> */}
+      <PreloaderChat isHide={preloader} />
     </View>
   );
 };
