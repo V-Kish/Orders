@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
   },
   image: {
     resizeMode: 'contain',
-    width: hp(25),
-    height: hp(25),
+    width: hp(35),
+    height: hp(35),
   },
   textContainer: {
     paddingHorizontal: wp(10),

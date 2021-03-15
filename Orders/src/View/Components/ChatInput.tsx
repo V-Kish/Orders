@@ -28,7 +28,7 @@ export const ChatInput = ({setHeight, refScroll}) => {
       return;
     }
     Chat.sendMessages(dispatch, {
-      rootId: selectedItemChat.rootId,
+      rootId: selectedItemChat.rootId === -1 ?selectedItemChat.id :selectedItemChat.rootId ,
       message: value,
     }).then((r) => {
       setTimeout(() => {

@@ -1,30 +1,30 @@
-import React, {useEffect} from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet } from 'react-native';
 
 import {mockupHeightToDP as hp} from '../../constants/Dimensions';
 
 import {navigator} from '../../Core/Navigator';
-import {ICONS, DRAWER_ICONS} from '../../constants/icons';
+import { DRAWER_ICONS} from '../../constants/icons';
 import {COLORS} from '../../constants/colors';
 import {HeaderView} from '../../View/HeaderView/HeaderView';
 import {ChatListView} from '../../View/Chat/ChatListView';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {Chat} from '../../functions/Chat';
 import {ChatSearch} from '../../View/Chat/ChatSearch';
-import {
-  paginationMainList,
-  searchParam,
-} from '../../store/actions/EditUserInfo';
 import {
   chatListPagination,
   chatListSearchParamAction,
 } from '../../store/actions/Chat';
-import {reduxTypes} from '../../Types';
+import {PreloaderChat} from "../../View/Chat/PreloderChat/PreloderChat";
 export const ChatListScreen = () => {
   const dispatch = useDispatch();
-
+  const [preloader, setPreloader] = useState(false);
   useEffect(() => {
-    Chat.getChatList(dispatch).then();
+    setPreloader(false);
+    Chat.getChatList(dispatch).then(
+      (succes) => setPreloader(true),
+      (error) => setPreloader(true),
+    );
     dispatch(
       chatListPagination({
         pageIndex: 1,
@@ -53,6 +53,7 @@ export const ChatListScreen = () => {
         <ChatSearch changeCurrentText={handleTextChange} />
       </View>
       <ChatListView />
+      <PreloaderChat isHide={preloader} />
     </View>
   );
 };

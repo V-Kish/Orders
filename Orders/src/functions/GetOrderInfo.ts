@@ -42,6 +42,7 @@ class GetOrderInfo {
     bodyRequest.status = status;
     try {
       const response = await MethodsRequest.getOrders(bodyRequest);
+
       if (response.statusCode === 200 && !pagination) {
         dispatch(getOrders(response.data));
       }
