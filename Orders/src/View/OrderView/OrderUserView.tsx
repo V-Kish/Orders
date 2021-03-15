@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   View,
   StyleSheet,
@@ -6,7 +7,10 @@ import {
   Image,
   TouchableOpacity,
   Alert,
-  Linking, TextInput,
+  Linking,
+  TextInput,
+  Platform,
+  Button,
 } from 'react-native';
 import {
   mockupHeightToDP as hp,
@@ -28,11 +32,18 @@ import {UserDataProvider} from '../../DataProvider/UserDataProvider';
 import {MethodsRequest} from '../../DataProvider/MethodsRequest';
 import {navigator} from '../../Core/Navigator';
 import {GetOrderInfo} from '../../functions/GetOrderInfo';
-import {AvoidScrollView} from "../Components/AvoidScrollView";
+import {AvoidScrollView} from '../Components/AvoidScrollView';
+import {dateParse, dateTimeToTimeString, dateTimeToTimeStringDatePick} from '../../helpers/DateParse';
 export const OrderUserView = () => {
   const dispatch = useDispatch();
   const [disabledBtn, setDisabled] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState('');  // date
+  // from
+  const [dateFrom, setDateFrom] = useState(new Date());
+  const [showFrom, setShowFrom] = useState(false);
+  let minutes = dateFrom.getHours() * 60 + dateFrom.getMinutes();
+  //
+
   const userData: userDataTypes = useSelector(
     (state: reduxTypes) => state.ditUser.editUser,
   );
@@ -58,15 +69,15 @@ export const OrderUserView = () => {
     return {id: d.id, text: d.name};
   });
   let operation = '';
-  switch(orderData.detail.operationType){
+  switch (orderData.detail.operationType) {
     case 'buy':
-      operation = 'Продаж (Клієнт купує валюту)'
+      operation = 'Продаж (Клієнт купує валюту)';
       break;
     case 'sale':
-      operation = 'Купівля (Клієнт продає валюту)'
+      operation = 'Купівля (Клієнт продає валюту)';
       break;
     case 'cross':
-      operation = `Конвертація (${orderData.detail.currencyCode} => ${orderData.detail.currencyToCode})`
+      operation = `Конвертація (${orderData.detail.currencyCode} => ${orderData.detail.currencyToCode})`;
       break;
   }
   // switch visible modals
@@ -109,7 +120,7 @@ export const OrderUserView = () => {
     setModalSendOnWorkVisible(!modalSendOnWorkVisible);
     const response = await MethodsRequest.changeStatusOrder(
       orderData.system.orderId,
-      {orderStatusId: 3, comment: inputValue ? inputValue : ''},
+      {orderStatusId: 3, comment: inputValue ? inputValue : '',waitTimeInMinutes:minutes},
     );
     if (response.statusCode === 200) {
       await GetOrderInfo.getOrders(
@@ -153,7 +164,21 @@ export const OrderUserView = () => {
     }
     setDisabled(false);
   };
-  console.log(orderData.system.status)
+  console.log('minutes',minutes);
+
+
+  const onChangeFrom = (event, selectedDate) => {
+    if (event.type === 'dismissed') {
+      setShowFrom(Platform.OS === 'ios');
+      return;
+    }
+    const currentDate = selectedDate || date;
+    setShowFrom(Platform.OS === 'ios');
+    setDateFrom(currentDate);
+  };
+  const showModeFrom = () => {
+    setShowFrom(true);
+  };
   return (
     <AvoidScrollView>
       <CustomModal
@@ -195,7 +220,9 @@ export const OrderUserView = () => {
           <Text style={styles.textDefault}>Номер карти: </Text>
           <Text style={styles.userCard}>{userData.cards[0]?.number}</Text>
         </View>
-        <TouchableOpacity style={styles.containers} onPress={() => Linking.openURL(`tel:${userData.user.phone}`)}>
+        <TouchableOpacity
+          style={styles.containers}
+          onPress={() => Linking.openURL(`tel:${userData.user.phone}`)}>
           <Text style={styles.textDefault}>Номер телефону: </Text>
           <Image source={ICONS.phoneIcon} style={styles.imgPhone} />
           <Text style={styles.userPhone}>{userData.user.phone}</Text>
@@ -240,7 +267,7 @@ export const OrderUserView = () => {
             </>
           )}
           {orderData.system.status === 2 && (
-            <View style={{width:'100%'}}>
+            <View style={{width: '100%'}}>
               <Text style={styles.textDep}>Відділення отримання</Text>
               <SelectDepartmentInput
                 switchDepartmentModal={switchDepartmentModal}
@@ -250,21 +277,65 @@ export const OrderUserView = () => {
         </View>
       </View>
       {orderData.system.status === 2 && (
-          <View style={styles.wrapInput}>
-            <Text style={styles.textOrderComment}>Коментар до заявки:</Text>
-            <TextInput style={styles.input}  textAlignVertical={"top"}  value={inputValue} onChangeText={(e) => setInputValue(e)} multiline={true} placeholder={'Мінімальна кількість символів - 1, максимальна 500'}/>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Text> Термій дії</Text>
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity
+              style={[styles.dateBtn, {marginLeft: wp(10)}]}
+              onPress={showModeFrom}>
+              <Text>{dateTimeToTimeString(dateFrom)}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity  style={[styles.dateBtn]}>
+              <Text>до {dateTimeToTimeStringDatePick(new Date(new Date().getTime() + dateFrom.getTime()))}</Text>
+            </TouchableOpacity>
           </View>
+          {showFrom && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={dateFrom}
+              mode={'time'}
+              is24Hour={false}
+              display="default"
+              onChange={onChangeFrom}
+            />
+          )}
+        </View>
       )}
-      {(orderData.system.status === 5 || orderData.system.status === 4 || orderData.system.status === 3) &&  orderData.detail.comment !== '' && (
+      {orderData.system.status === 2 && (
+        <View style={styles.wrapInput}>
+          <Text style={styles.textOrderComment}>Коментар до заявки:</Text>
+          <TextInput
+            style={styles.input}
+            textAlignVertical={'top'}
+            value={inputValue}
+            onChangeText={(e) => setInputValue(e)}
+            multiline={true}
+            placeholder={'Мінімальна кількість символів - 1, максимальна 500'}
+          />
+        </View>
+      )}
+      {(orderData.system.status === 5 ||
+        orderData.system.status === 4 ||
+        orderData.system.status === 3) &&
+        orderData.detail.comment !== '' && (
           <View style={styles.comments}>
-            <Text style={styles.comnts}><Text style={styles.comntsFont}>Коментар:</Text> {orderData.detail.comment}</Text>
+            <Text style={styles.comnts}>
+              <Text style={styles.comntsFont}>Коментар:</Text>{' '}
+              {orderData.detail.comment}
+            </Text>
           </View>
-      )}
-      {(orderData.system.status === 5 || orderData.system.status === 4 || orderData.system.status === 3) && orderData.detail.adminComment !== '' && (
+        )}
+      {(orderData.system.status === 5 ||
+        orderData.system.status === 4 ||
+        orderData.system.status === 3) &&
+        orderData.detail.adminComment !== '' && (
           <View style={styles.comments}>
-            <Text  style={styles.comnts}><Text style={styles.comntsFont}>Коментар від адміна:</Text> {orderData.detail.adminComment}</Text>
+            <Text style={styles.comnts}>
+              <Text style={styles.comntsFont}>Коментар від адміна:</Text>{' '}
+              {orderData.detail.adminComment}
+            </Text>
           </View>
-      )}
+        )}
       <View style={styles.containerButtons}>
         {orderData.system.status !== 5 && orderData.system.status !== 4 && (
           <ButtonView
@@ -359,36 +430,43 @@ const styles = StyleSheet.create({
     fontSize: hp(12),
     color: 'gray',
   },
-  comments:{
-    width:'100%',
+  comments: {
+    width: '100%',
     paddingHorizontal: wp(5),
   },
-  wrapInput:{
-    width:'100%',
+  wrapInput: {
+    width: '100%',
     paddingHorizontal: wp(5),
-    height:hp(100),
+    height: hp(100),
   },
-  textOrderComment:{
-    fontFamily:'Roboto-Bold',
-    color:COLORS.FONT_BLACK,
-    fontSize:hp(18),
-    marginBottom:hp(5)
+  textOrderComment: {
+    fontFamily: 'Roboto-Bold',
+    color: COLORS.FONT_BLACK,
+    fontSize: hp(18),
+    marginBottom: hp(5),
   },
-  input:{
-    fontFamily:'Roboto-Regular',
-    color:COLORS.FONT_BLACK,
-    fontSize:hp(18),
-    maxHeight:hp(100),
-    minHeight:hp(100),
-    borderRadius:5,
-    backgroundColor:COLORS.TEXT_INPUT_BACKGROUND,
+  input: {
+    fontFamily: 'Roboto-Regular',
+    color: COLORS.FONT_BLACK,
+    fontSize: hp(18),
+    maxHeight: hp(100),
+    minHeight: hp(100),
+    borderRadius: 5,
+    backgroundColor: COLORS.TEXT_INPUT_BACKGROUND,
   },
-  comnts:{
-    fontFamily:'Roboto-Regular',
-    color:COLORS.FONT_BLACK,
-    fontSize:hp(18),
+  comnts: {
+    fontFamily: 'Roboto-Regular',
+    color: COLORS.FONT_BLACK,
+    fontSize: hp(18),
   },
-  comntsFont:{
-    fontFamily:'Roboto-Bold',
-  }
+  comntsFont: {
+    fontFamily: 'Roboto-Bold',
+  },
+  dateBtn: {
+    backgroundColor: COLORS.TEXT_INPUT_BACKGROUND,
+    paddingHorizontal: hp(15),
+    paddingVertical: hp(10),
+    borderRadius: 5,
+    marginRight: hp(10),
+  },
 });

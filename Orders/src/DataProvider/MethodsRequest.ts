@@ -24,8 +24,9 @@ class MethodsRequest {
   // - Змінити статус заявки
   static async changeStatusOrder(
     orderId: number,
-    body: {orderStatusId: number; comment: string},
+    body: {orderStatusId: number; comment: string; waitTimeInMinutes: number}, //waitTimeInMinutes:120
   ) {
+    console.warn(body)
     return fetchData(
       `/rest/v1/${currentUser().userId}/${
         currentUser().userToken

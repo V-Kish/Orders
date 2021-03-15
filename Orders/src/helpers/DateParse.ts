@@ -17,7 +17,7 @@ export function convertToUTCString(date: string, timeOffset = '+03:00') {
     ///AppLog.log(utcString);
     return utcString;
   }
-  
+
   export function dateParse(dateString: string) {
     return new Date(Date.parse(dateString));
   }
@@ -26,6 +26,11 @@ export function convertToUTCString(date: string, timeOffset = '+03:00') {
     const minutes = `0${date.getMinutes()}`.slice(-2);
     return `${hours}:${minutes}`;
   }
+export function dateTimeToTimeStringDatePick(date: Date) {
+    const hours = `0${date.getHours() + 1}`.slice(-2);
+    const minutes = `0${date.getMinutes()}`.slice(-2);
+    return `${hours}:${minutes}`;
+}
   export function dateTimeToDateString(date: Date | undefined) {
     if (!date) {
       return '';
@@ -34,4 +39,3 @@ export function convertToUTCString(date: string, timeOffset = '+03:00') {
     const day = `0${date.getDate()}`.slice(-2);
     return `${day}.${month}.${date.getFullYear()}`;
   }
-  
