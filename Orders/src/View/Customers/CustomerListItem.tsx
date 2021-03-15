@@ -12,9 +12,7 @@ import {navigator} from '../../Core/Navigator';
 
 export const CustomerListItem = (props) => {
 
-    const renderCustomers = (item) =>{
-        return <View>  </View>;
-    };
+    console.log(props.item);
 
     return (
         <View
@@ -22,21 +20,21 @@ export const CustomerListItem = (props) => {
         >
             {/*// container //*/}
             <View style={styles.wrap}>
-                <TouchableOpacity View style={styles.leftWrapper} onPress={() => {navigator().navigate('ClientScreen');}}>
+                <TouchableOpacity style={styles.leftWrapper} onPress={() => {navigator().navigate('ClientScreen');}}>
                     {/*// Left //*/}
                     <View style={styles.leftContainer}>
                     {/*// user Icon //*/}
-                        <UserIcon item={props.item} diameter={60} />
+                        <UserIcon item={{clientName: props.item.name}} diameter={60} />
                     </View>
 
                     <View style={styles.centerContainer}>
-                        <Text style={styles.clientName}>{props.item.clientName}</Text>
-                        <Text style={styles.clientPhone}>{props.item.phoneNumber}</Text>
+                        <Text style={styles.clientName}>{props.item.name}</Text>
+                        <Text style={styles.clientPhone}>{props.item.phone}</Text>
                     </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={()=>{
-                    Chat.goTell(props.item.phoneNumber)
+                    Chat.goTell(props.item.phone)
                 }} style={[styles.phoneButton, IconHelper.iconDiameter(60)]}>
                     <Image source={CHAT_ICONS.phone} style={styles.img}/>
                 </TouchableOpacity>
