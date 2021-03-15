@@ -15,12 +15,14 @@ export const CustomersListView = () => {
     console.log("HERE NOW", ClientsList);
 
     function renderClients(){
-        if(ClientsList.length > 0){
-            return ClientsList.map((item) => (
-                <CustomerListItem item={item} key={item.id}/>
-            ))
-        } else {
-            return <Text>No users!</Text>
+        if(ClientsList !== undefined){
+            if(ClientsList.length > 0){
+                return ClientsList.map((item) => (
+                    <CustomerListItem item={item} key={item.id}/>
+                ))
+            } else {
+                return <Text>No users!</Text>
+            }
         }
     }
 
