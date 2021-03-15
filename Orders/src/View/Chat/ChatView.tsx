@@ -7,6 +7,7 @@ import {ChatInput} from '../Components/ChatInput';
 import {Chat} from '../../functions/Chat';
 import {Separator} from './Separator';
 import ScrollView from '../../View/Chat/ScrollAndroid/NativeScrollView';
+import { PreloaderPaginationChat } from './PreloderChat/PreloderPaginationChat';
 
 export const ChatView = () => {
   const dispatch = useDispatch();
@@ -92,6 +93,7 @@ export const ChatView = () => {
         <View style={{height: height.height}} />
       </ScrollView>
       <ChatInput setHeight={setHeight} refScroll={ref} />
+      <PreloaderPaginationChat isHide={statePreloader}/>
     </View>
   );
 };
