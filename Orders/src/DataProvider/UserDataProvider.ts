@@ -25,6 +25,15 @@ class UserDataProvider {
       'GET',
     );
   }
+  // get Clients
+  static async getClients() {
+    return fetchData(
+      `rest/v1/${currentUser().userId}/${
+        currentUser().userToken
+      }/admin-settings/users/`,
+      'GET',
+    );
+  }
   // Get list chats
   static async getListChats(body) {
     return fetchData(
