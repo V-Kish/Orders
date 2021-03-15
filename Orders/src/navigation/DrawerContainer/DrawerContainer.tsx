@@ -18,17 +18,26 @@ export const DrawerContainer = () => {
       {/*</View>*/}
       <View style={styles.wrapBtn}>
         <TouchableOpacity
-          onPress={() => navigator().navigate('HomeScreen')}
+          onPress={() => {
+            navigator().closeDrawer();
+            navigator().navigate('HomeScreen');
+          }}
           style={[styles.btns, {backgroundColor: COLORS.BUTTON_LIGHT_GREEN}]}>
           <Text style={[styles.textsBtn]}>Замовлення на обмін</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigator().navigate('ChatListScreen')}
+          onPress={() => {
+            navigator().closeDrawer();
+            navigator().navigate('ChatListScreen');
+          }}
           style={[styles.btns, {backgroundColor: COLORS.BUTTON_PURPLE}]}>
           <Text style={[styles.textsBtn]}>Переписка з клієнтами</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigator().navigate('CustomersScreen')}
+          onPress={() => {
+            navigator().closeDrawer();
+            navigator().navigate('CustomersScreen');
+          }}
           style={[styles.btns, {backgroundColor: COLORS.BUTTON_ORANGE}]}>
           <Text style={[styles.textsBtn]}>Клієнти системи</Text>
         </TouchableOpacity>
