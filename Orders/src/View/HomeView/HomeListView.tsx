@@ -6,6 +6,7 @@ import {OrderItem} from './OrderItem/OrderItem';
 
 export const HomeListView = () => {
   const ordersArray = useSelector((state: reduxTypes) => state.dictionaries.ordersArray);
+  console.log('ordersArray',ordersArray)
   return (
     <View style={styles.container}>
       {ordersArray &&

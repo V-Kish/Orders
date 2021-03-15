@@ -221,6 +221,7 @@ class Dictionaries {
         departmentId: -1,
         sQuery: '',
       });
+      console.log('response getOrders',response)
       if (response.statusCode === 200) {
         dispatch(getOrders(response.data));
         this._getOrdersStatus = true;

@@ -44,8 +44,7 @@ export const ChatListView = () => {
         }
     }
   const ListChats = useSelector((state: reduxTypes) => state.chat.Items);
-  console.log('ListChats',ListChats)
-  // console.log('chatListSearchParamSelector',chatListSearchParamSelector)
+
   return (
     <View style={styles.containers}>
       <ScrollView
@@ -64,8 +63,7 @@ export const ChatListView = () => {
               </View>
           )}
       </ScrollView>
-        {/*// Float Button // */}
-        <FloatButton />
+
     </View>
   );
 };

@@ -19,6 +19,7 @@ import { currentUser } from '../../../Core/CurrentUser';
 
 export const OrderItem = ({item}) => {
   const dispatch = useDispatch();
+  console.log('zzz item',item)
   const listCurrencies = useSelector(
     (state: reduxTypes) => state.dictionaries.listCurrencies,
   );
@@ -37,10 +38,13 @@ export const OrderItem = ({item}) => {
   item.detail.departmentName = listDepartments.find(
     (department) => department.id === item.detail.departmentId,
   ).name;
+  item.detail.loyaltyProgGroupId = listDepartments.find(
+      (department) => department.id === item.detail.departmentId,
+  ).additionalInfo.loyaltyProgGroupId;
   item.system.type = statusToType(item.system.status);
   item.detail.sumTo = recalculateSumResult(item);
   const region = listDepartmentGroup.find(
-    (region) => region.id === item.detail.cardGroupId
+    (region) => region.id === item.detail.loyaltyProgGroupId
   )
   item.detail.regionName = region.name
   const handleItemPress = () => {
