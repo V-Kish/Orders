@@ -27,7 +27,7 @@ export const CustomersScreen = () => {
         title="Клієнти системи"
         color={COLORS.HEADER_BLUE}
         ordersSettings={true}
-        onPress={() => {}}
+        onPress={goBack}
       />
 
       <View style={styles.containerClients}>
