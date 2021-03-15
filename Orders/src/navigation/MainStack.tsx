@@ -64,7 +64,7 @@ export const MainStack = () => {
       <Drawer.Screen
         name="ChatScreen"
         component={ChatScreen}
-        options={{headerShown: false}}
+        options={{headerShown: false, swipeEnabled: false}}
       />
       <Drawer.Screen
         name="CustomersScreen"

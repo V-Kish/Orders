@@ -44,7 +44,7 @@ export const ChatListView = () => {
         }
     }
   const ListChats = useSelector((state: reduxTypes) => state.chat.Items);
-
+console.log('ListChats',ListChats)
   return (
     <View style={styles.containers}>
       <ScrollView

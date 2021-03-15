@@ -20,6 +20,7 @@ export const ChatListItem = ({item}) => {
         style={styles.containers}
         onPress={() => {
           dispatch(selectedItemChatAction(item));
+          console.log('selectedItemChatAction',item)
           navigator().navigate('ChatScreen');
         }}>
         {/*// container //*/}
