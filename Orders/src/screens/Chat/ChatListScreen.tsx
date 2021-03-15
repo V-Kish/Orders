@@ -62,7 +62,7 @@ export const ChatListScreen = () => {
       {/*// Float Button // */}
       <FloatButton clickFn={openModalCreateNewChat} />
       {/*// Modal Create new Chat // */}
-      <ModalNewChat isShow={showModal} />
+      <ModalNewChat isShow={showModal} fnClose={openModalCreateNewChat}/>
       <PreloaderChat isHide={preloader} />
     </View>
   );

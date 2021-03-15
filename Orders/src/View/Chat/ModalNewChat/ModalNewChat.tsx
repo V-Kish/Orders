@@ -3,9 +3,9 @@ import React from 'react';
 import {View, StyleSheet, ActivityIndicator, Modal} from 'react-native';
 import {COLORS} from '../../../constants/colors';
 
-export const ModalNewChat = ({isShow = false}) => {
+export const ModalNewChat = ({isShow = false,fnClose}) => {
   return (
-    <Modal visible={isShow}>
+    <Modal visible={isShow} onRequestClose={() =>fnClose()} animationType={"slide"}>
       <View style={styles.container}>
         {/*// Theme // */}
         <View />
