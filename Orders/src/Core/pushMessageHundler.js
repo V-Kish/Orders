@@ -33,7 +33,7 @@ export const pushMessagesHandler = {
           this._getOrders(messageEvent.evendData, dispatch).then();
           this._getOrdersCount(messageEvent.evendData, dispatch).then();
           break;
-        case 'updateChat':
+        case 'event_loyaltyProg_messageAdd':
           if (this.isOpenBackground) {
             this._openChat(messageEvent.evendData, dispatch).then();
           } else {

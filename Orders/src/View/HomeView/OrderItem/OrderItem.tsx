@@ -47,11 +47,6 @@ export const OrderItem = ({item}) => {
     (region) => region.id === item.detail.loyaltyProgGroupId
   )
   item.detail.regionName = region.name
-  console.log('region',region)
-  console.log('ooooooo listDepartments',listDepartments)
-  console.log('ooooooo listDepartmentGroup',listDepartmentGroup)
-  console.log('ooooooo listCurrencies',listCurrencies)
-  console.log('ooooooo itemzzzzz',item)
   const handleItemPress = () => {
     GetOrderInfo.getOrder(dispatch, item);
   };
