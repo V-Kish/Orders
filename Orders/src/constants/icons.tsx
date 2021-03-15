@@ -22,4 +22,5 @@ export const CHAT_ICONS = {
   arrow: require('../assets/img/Chat/arrowDown/arrow.png'),
   search:require('../assets/img/Chat/serach/search.png'),
   plus:require('../assets/img/Chat/plus/add.png'),
+  phone:require('../assets/img/Clients/Phone/phone.png'),
 };
