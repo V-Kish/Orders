@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet,Text} from 'react-native';
 
 import {mockupHeightToDP as hp} from '../../constants/Dimensions';
@@ -12,14 +12,21 @@ import {orderDataTypes, reduxTypes} from "../../Types";
 import {Chat} from "../../functions/Chat";
 import { ChatView } from '../../View/Chat/ChatView';
 import { chatMessagesPagination} from "../../store/actions/Chat";
+import {PreloaderChat} from "../../View/Chat/PreloderChat/PreloderChat";
+
 export const ChatScreen = () => {
 const dispatch = useDispatch();
+    const [preloader, setPreloader] = useState(false);
   const selectedItemChat = useSelector((state: reduxTypes) => state.chat.selectedChat);
   function goBack() {
     navigator().toGoBack();
   }
   useEffect(()=>{
-    Chat.getChatMessages(dispatch,{pageIndex:1,pageSize:20,rootId:selectedItemChat.rootId}).then();
+      setPreloader(false);
+    Chat.getChatMessages(dispatch,{pageIndex:1,pageSize:20,rootId:selectedItemChat.rootId}).then(
+          (succes) => setPreloader(true),
+          (error) => setPreloader(true),
+      );
     dispatch(
         chatMessagesPagination({
           pageIndex: 1,
@@ -39,6 +46,7 @@ const dispatch = useDispatch();
           onPressRight={goBack}
       />
       <ChatView />
+        <PreloaderChat isHide={preloader} />
     </View>
   );
 };
