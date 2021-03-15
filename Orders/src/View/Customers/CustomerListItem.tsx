@@ -6,8 +6,9 @@ import {
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
 import { CHAT_ICONS } from '../../constants/icons';
+import { Chat } from '../../functions/Chat';
 import { UserIcon } from '../Chat/UserIcon';
-
+import {navigator} from '../../Core/Navigator';
 
 export const CustomerListItem = (props) => {
 
@@ -21,7 +22,7 @@ export const CustomerListItem = (props) => {
         >
             {/*// container //*/}
             <View style={styles.wrap}>
-                <TouchableOpacity View style={styles.leftWrapper} onPress={() => {console.log("CLICKED ON CLIENT!")}}>
+                <TouchableOpacity View style={styles.leftWrapper} onPress={() => {navigator().navigate('ClientScreen');}}>
                     {/*// Left //*/}
                     <View style={styles.leftContainer}>
                     {/*// user Icon //*/}
@@ -34,7 +35,9 @@ export const CustomerListItem = (props) => {
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={()=>{console.log("PHONE!!")}} style={[styles.phoneButton, IconHelper.iconDiameter(60)]}>
+                <TouchableOpacity onPress={()=>{
+                    Chat.goTell(props.item.phoneNumber)
+                }} style={[styles.phoneButton, IconHelper.iconDiameter(60)]}>
                     <Image source={CHAT_ICONS.phone} style={styles.img}/>
                 </TouchableOpacity>
             </View>

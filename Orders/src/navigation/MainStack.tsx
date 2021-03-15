@@ -9,6 +9,7 @@ import {ChatListScreen} from '../screens/Chat/ChatListScreen';
 import {ChatScreen} from '../screens/Chat/ChatScreen';
 import {CustomersScreen} from '../screens/Customers/CustomersScreen';
 import {CustomersDetailsScreen} from '../screens/Customers/CustomersDetailsScreen';
+import { ClientScreen } from '../screens/ClientScreen';
 const Stack = createStackNavigator();
 export const MainStack = () => {
   useEffect(() => {
@@ -59,6 +60,11 @@ export const MainStack = () => {
       <Stack.Screen
         name="CustomersDetailsScreen"
         component={CustomersDetailsScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ClientScreen"
+        component={ClientScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

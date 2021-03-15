@@ -28,7 +28,7 @@ export const CustomersListView = () => {
 
                 {/* {renderCustomers({})} */}
 
-                <CustomerListItem item={{clientName:"Таміла Валютчиця", phoneNumber: "380965204163"}} />
+                <CustomerListItem item={{clientName:"Таміла Валютчиця", phoneNumber: "3804424242"}} />
                 <CustomerListItem item={{clientName:"Вася Кабан", phoneNumber: "380965204163"}} />
                 <CustomerListItem item={{clientName:"Таміла Валютчиця", phoneNumber: "380965204163"}} />
                 <CustomerListItem item={{clientName:"Вася Кабан", phoneNumber: "380965204163"}} />
