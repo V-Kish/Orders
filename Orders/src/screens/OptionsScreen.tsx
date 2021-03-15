@@ -17,7 +17,7 @@ export const OptionsScreen = () => {
       <TouchableOpacity onPress={() => navigator().navigate('ChatListScreen')}>
         <Text>Переписка з клієнтами</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigator().navigate('HomeScreen')}>
+      <TouchableOpacity onPress={() => navigator().navigate('CustomersScreen')}>
         <Text>Клієнти системи</Text>
       </TouchableOpacity>
     </View>

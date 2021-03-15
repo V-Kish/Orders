@@ -7,6 +7,8 @@ import {navigator} from '../Core/Navigator';
 import {OptionsScreen} from '../screens/OptionsScreen';
 import {ChatListScreen} from '../screens/Chat/ChatListScreen';
 import {ChatScreen} from '../screens/Chat/ChatScreen';
+import {CustomersScreen} from '../screens/Customers/CustomersScreen';
+import {CustomersDetailsScreen} from '../screens/Customers/CustomersDetailsScreen';
 const Stack = createStackNavigator();
 export const MainStack = () => {
   useEffect(() => {
@@ -47,6 +49,16 @@ export const MainStack = () => {
       <Stack.Screen
         name="ChatScreen"
         component={ChatScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="CustomersScreen"
+        component={CustomersScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="CustomersDetailsScreen"
+        component={CustomersDetailsScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
