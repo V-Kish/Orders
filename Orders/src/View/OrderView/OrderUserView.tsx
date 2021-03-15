@@ -6,7 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
-  Linking,
+  Linking, TextInput,
 } from 'react-native';
 import {
   mockupHeightToDP as hp,
@@ -28,9 +28,11 @@ import {UserDataProvider} from '../../DataProvider/UserDataProvider';
 import {MethodsRequest} from '../../DataProvider/MethodsRequest';
 import {navigator} from '../../Core/Navigator';
 import {GetOrderInfo} from '../../functions/GetOrderInfo';
+import {AvoidScrollView} from "../Components/AvoidScrollView";
 export const OrderUserView = () => {
   const dispatch = useDispatch();
   const [disabledBtn, setDisabled] = useState(false);
+  const [inputValue, setInputValue] = useState('');
   const userData: userDataTypes = useSelector(
     (state: reduxTypes) => state.ditUser.editUser,
   );
@@ -107,7 +109,7 @@ export const OrderUserView = () => {
     setModalSendOnWorkVisible(!modalSendOnWorkVisible);
     const response = await MethodsRequest.changeStatusOrder(
       orderData.system.orderId,
-      {orderStatusId: 3, comment: ''},
+      {orderStatusId: 3, comment: inputValue ? inputValue : ''},
     );
     if (response.statusCode === 200) {
       await GetOrderInfo.getOrders(
@@ -151,8 +153,9 @@ export const OrderUserView = () => {
     }
     setDisabled(false);
   };
+  console.log(orderData.system.status)
   return (
-    <View>
+    <AvoidScrollView>
       <CustomModal
         type="FORM"
         modalVisible={modalRejectVisible}
@@ -246,6 +249,22 @@ export const OrderUserView = () => {
           )}
         </View>
       </View>
+      {orderData.system.status === 2 && (
+          <View style={styles.wrapInput}>
+            <Text style={styles.textOrderComment}>Коментар до заявки:</Text>
+            <TextInput style={styles.input}  textAlignVertical={"top"}  value={inputValue} onChangeText={(e) => setInputValue(e)} multiline={true} placeholder={'Мінімальна кількість символів - 1, максимальна 500'}/>
+          </View>
+      )}
+      {(orderData.system.status === 5 || orderData.system.status === 4 || orderData.system.status === 3) &&  orderData.detail.comment !== '' && (
+          <View style={styles.comments}>
+            <Text style={styles.comnts}><Text style={styles.comntsFont}>Коментар:</Text> {orderData.detail.comment}</Text>
+          </View>
+      )}
+      {(orderData.system.status === 5 || orderData.system.status === 4 || orderData.system.status === 3) && orderData.detail.adminComment !== '' && (
+          <View style={styles.comments}>
+            <Text  style={styles.comnts}><Text style={styles.comntsFont}>Коментар від адміна:</Text> {orderData.detail.adminComment}</Text>
+          </View>
+      )}
       <View style={styles.containerButtons}>
         {orderData.system.status !== 5 && orderData.system.status !== 4 && (
           <ButtonView
@@ -274,7 +293,7 @@ export const OrderUserView = () => {
           />
         )}
       </View>
-    </View>
+    </AvoidScrollView>
   );
 };
 const styles = StyleSheet.create({
@@ -333,10 +352,43 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: hp(75),
+    marginTop: hp(50),
+    marginBottom: hp(20),
   },
   textDep: {
     fontSize: hp(12),
     color: 'gray',
   },
+  comments:{
+    width:'100%',
+    paddingHorizontal: wp(5),
+  },
+  wrapInput:{
+    width:'100%',
+    paddingHorizontal: wp(5),
+    height:hp(100),
+  },
+  textOrderComment:{
+    fontFamily:'Roboto-Bold',
+    color:COLORS.FONT_BLACK,
+    fontSize:hp(18),
+    marginBottom:hp(5)
+  },
+  input:{
+    fontFamily:'Roboto-Regular',
+    color:COLORS.FONT_BLACK,
+    fontSize:hp(18),
+    maxHeight:hp(100),
+    minHeight:hp(100),
+    borderRadius:5,
+    backgroundColor:COLORS.TEXT_INPUT_BACKGROUND,
+  },
+  comnts:{
+    fontFamily:'Roboto-Regular',
+    color:COLORS.FONT_BLACK,
+    fontSize:hp(18),
+  },
+  comntsFont:{
+    fontFamily:'Roboto-Bold',
+  }
 });

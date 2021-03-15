@@ -141,6 +141,7 @@ export type orderDataTypes = {
     clientName: string;
     clientPhone: string;
     comment: string;
+    adminComment: string;
     currencyId: number;
     currencyIdCode:string;
     currencyToId: number;
