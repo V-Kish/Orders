@@ -30,8 +30,18 @@ export const ChatScreen = () => {
       pageSize: 20,
       rootId: selectedItemChat.rootId === -1 ?  selectedItemChat.id : selectedItemChat.rootId,
     }).then(
-      (succes) => setPreloader(true),
-      (error) => setPreloader(true),
+      (succes) => {
+        setPreloader(true);
+        setTimeout(() => {
+          Chat.goToBottom(global.scrollViewRef, false).then();
+        }, 0);
+      },
+      (error) => {
+        setPreloader(true);
+        setTimeout(() => {
+          Chat.goToBottom(global.scrollViewRef, false).then();
+        }, 0);
+      },
     );
     dispatch(
       chatMessagesPagination({
@@ -39,7 +49,7 @@ export const ChatScreen = () => {
         pageSize: 20,
       }),
     );
-  }, []);
+  }, [selectedItemChat]);
   return (
     <View style={styles.container}>
       <HeaderView

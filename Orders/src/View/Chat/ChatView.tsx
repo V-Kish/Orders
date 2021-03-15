@@ -26,11 +26,11 @@ export const ChatView = () => {
   );
   const [height, setHeight] = useState({height: 0});
   let ref = React.useRef(null);
-  useEffect(() => {
-    setTimeout(() => {
-      Chat.goToBottom(ref, false).then();
-    }, 500);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     Chat.goToBottom(ref, false).then();
+  //   }, 500);
+  // }, []);
   const loadDataMore = ({layoutMeasurement, contentOffset, contentSize}) => {
     if (contentOffset.y === 0) {
       return true;
@@ -67,7 +67,7 @@ export const ChatView = () => {
   }
 
   return (
-    <View style={styles.containers}>
+    <View style={styles.containers}  key={`${selectedItemChat.rootId}_chats`}>
       <ScrollView
         key={`${selectedItemChat.rootId}_chat`}
         forwardedRef={(refSc) => {
@@ -85,7 +85,7 @@ export const ChatView = () => {
           minIndexForVisible: 0,
         }}>
         {listMessages.map((item) => (
-          <View key={item.id}>
+          <View key={`${selectedItemChat.rootId}_chat${item.id}`}>
             <Separator date={item.date} key={`${item.id} + ${item.date}`} />
             <Message item={item} key={item.id} />
           </View>
