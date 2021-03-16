@@ -17,8 +17,9 @@ import {
 } from '../../../constants/Dimensions';
 import {HeaderView} from '../../HeaderView/HeaderView';
 import {Chat} from '../../../functions/Chat';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {UserDataProvider} from '../../../DataProvider/UserDataProvider';
+import {reduxTypes} from "../../../Types";
 
 export const ModalNewChat = ({isShow = false, fnClose}) => {
   const dispatch = useDispatch();
@@ -28,7 +29,9 @@ export const ModalNewChat = ({isShow = false, fnClose}) => {
   const [errorInputTheme, setErrorInputTheme] = useState({});
   const [errorInputMessage, setErrorInputMessage] = useState({});
   //
-  const selectedUser = {id: 2};
+
+  const selectedChatUser = useSelector((state: reduxTypes) => state.clients.selectedChatUser);
+  console.warn(selectedChatUser)
   // create new chat
   const createNewChat = async () => {
     if (inputTheme === '') {
@@ -41,23 +44,20 @@ export const ModalNewChat = ({isShow = false, fnClose}) => {
     }
 
     const body = {
-      clientId: selectedUser.id,
+      clientId: selectedChatUser.id,
       theme: inputTheme,
       message: inputMessage,
     };
     console.warn(body);
-    result
+  return
     const result = await UserDataProvider.createNewChat(body);
     if (result.statusCode === 200){
+      Chat.getChatList(dispatch).then();
       fnClose()
+      dispatch()
       setInputTheme('');
       setInputMessage('');
-      let body = {
-        pageIndex: 1,
-        pageSize: 10,
-        isRead: -1,
-      }
-      Chat.getChatList(dispatch,body).then();
+
     }
   };
 
@@ -72,7 +72,7 @@ export const ModalNewChat = ({isShow = false, fnClose}) => {
           title="Створення нового чату"
           color={COLORS.HEADER_BLUE}
           ordersSettings={true}
-          desc={'Vasya Kish'}
+          desc={selectedChatUser.userName}
           onPress={() => fnClose()}
         />
         <View style={styles.mainContainer}>

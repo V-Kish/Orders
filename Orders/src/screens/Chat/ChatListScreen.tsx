@@ -8,7 +8,7 @@ import {DRAWER_ICONS} from '../../constants/icons';
 import {COLORS} from '../../constants/colors';
 import {HeaderView} from '../../View/HeaderView/HeaderView';
 import {ChatListView} from '../../View/Chat/ChatListView';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Chat} from '../../functions/Chat';
 import {ChatSearch} from '../../View/Chat/ChatSearch';
 import {
@@ -20,9 +20,10 @@ import {FloatButton} from '../../View/Components/FloatButon';
 import {ModalNewChat} from '../../View/Chat/ModalNewChat/ModalNewChat';
 import {Clients} from '../../functions/Clients';
 import {UserDataProvider} from '../../DataProvider/UserDataProvider';
+import {reduxTypes} from "../../Types";
 export const ChatListScreen = () => {
   const dispatch = useDispatch();
-  let  selectedUser = {id: -1};
+    const selectedChatUser = useSelector((state: reduxTypes) => state.clients.selectedChatUser);
   const [preloader, setPreloader] = useState(false);
   const [showModal, setShowModal] = useState(false);
   useEffect(() => {
@@ -31,7 +32,7 @@ export const ChatListScreen = () => {
         pageIndex: 1,
         pageSize: 10,
         isRead: -1,
-        clientId: selectedUser.id,
+        clientId: selectedChatUser.id,
     }
     Chat.getChatList(dispatch,body).then(
       (succes) => setPreloader(true),
@@ -45,7 +46,7 @@ export const ChatListScreen = () => {
       }),
     );
 
-  }, []);
+  }, [selectedChatUser]);
   const handleTextChange = (text: string) => {
     Chat.getChatList(dispatch, text).then();
     dispatch(chatListSearchParamAction({searchText: text}));
