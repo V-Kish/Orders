@@ -20,10 +20,13 @@ export const CustomerListItem = (props) => {
     function selectUserChat(selectedChatUser = {
         userName: '',
         id: -1
-    }){
+    }, item){
+        console.log("HERE", item)
         dispatch(SelectClientChatAction(selectedChatUser));
         navigator().navigate('ChatListScreen');
     }
+
+
 
     return (
         <View
@@ -45,7 +48,7 @@ export const CustomerListItem = (props) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={()=>{
-                    selectUserChat({userName: props.item.name, id: props.item.id})
+                    selectUserChat({userName: props.item.name, id: props.item.id}, props.item)
                     console.log(`Open chat with user: ${props.item.name} and id: ${props.item.id}`)
                 }} style={[styles.phoneButton, IconHelper.iconDiameter(60)]}>
                     <Image source={CHAT_ICONS.chat} style={styles.img}/>
@@ -125,5 +128,6 @@ const styles = StyleSheet.create({
         resizeMode:'contain',
         width:hp(25),
         height:hp(25),
-    }
+    },
+
 });
