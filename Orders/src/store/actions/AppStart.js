@@ -1,4 +1,4 @@
-import {START_APP, CHANGE_STACK,PRELOADER_MAIN} from '../types';
+import {START_APP, CHANGE_STACK,PRELOADER_MAIN,MODAL_CREATE_NEW_CHAT} from '../types';
 
 export const StartApp = (value) => {
   return {
@@ -15,6 +15,12 @@ export const ChangeStackNavigation = (value) => {
 export const PreloaderMain = (value) => {
   return {
     type: PRELOADER_MAIN,
+    payload: value,
+  };
+};
+export const showModalCreateNewChat = (value) => {
+  return {
+    type: MODAL_CREATE_NEW_CHAT,
     payload: value,
   };
 };

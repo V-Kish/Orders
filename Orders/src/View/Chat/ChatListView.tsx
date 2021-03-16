@@ -18,6 +18,7 @@ export const ChatListView = () => {
     const [statePreloader, setStatePreloader] = useState(true);
     const chatListInfo = useSelector((state: reduxTypes) => state.chat.chatListInfo);
     const paginationBody = useSelector((state: reduxTypes) => state.chat.paginationBody);
+    const selectedChatUser = useSelector((state: reduxTypes) => state.clients.selectedChatUser);
     const chatListSearchParamSelector = useSelector(
         (state: reduxTypes) => state.chat.searchParam,
     );
@@ -36,6 +37,7 @@ export const ChatListView = () => {
         let body = {};
         body.pageIndex = ++paginationBody.pageIndex;
         body.pageSize = paginationBody.pageSize;
+        body.clientId = selectedChatUser.id;
         try {
           await  Chat.getChatList(dispatch, chatListSearchParamSelector.searchText,body,true).then();
              setStatePreloader(true);
@@ -44,7 +46,6 @@ export const ChatListView = () => {
         }
     }
   const ListChats = useSelector((state: reduxTypes) => state.chat.Items);
-console.log('ListChats',ListChats)
   return (
     <View style={styles.containers}>
       <ScrollView

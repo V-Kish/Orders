@@ -1,9 +1,10 @@
-import {START_APP, CHANGE_STACK, PRELOADER_MAIN} from '../types';
+import {START_APP, CHANGE_STACK, PRELOADER_MAIN,MODAL_CREATE_NEW_CHAT} from '../types';
 
 const initialState = {
   startApp: 'This text from Redux',
   isAuthStack: true, // true = AuthStack; false = MainStack
-  mainPreloader:true,
+  mainPreloader: true,
+  showModal: false,
 };
 export const appStartReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -21,6 +22,11 @@ export const appStartReducer = (state = initialState, action) => {
       return {
         ...state,
         mainPreloader: action.payload,
+      };
+    case MODAL_CREATE_NEW_CHAT:
+      return {
+        ...state,
+        showModal: action.payload,
       };
     default:
       return state;
