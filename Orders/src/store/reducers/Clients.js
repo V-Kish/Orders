@@ -1,7 +1,8 @@
 import {
     CLIENTS_LIST,
     CLIENTS_LIST_SEARCH_PARAM,
-    SELECT_CLIENT_CHAT
+    SELECT_CLIENT_CHAT,
+    CLEAR_SELECTED_CHAT
   } from '../types';
 
 
@@ -36,6 +37,14 @@ export const ClientsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedChatUser: action.payload
+            };
+        case CLEAR_SELECTED_CHAT:
+            return {
+                ...state,
+                selectedChatUser: {
+                    userName: '',
+                    id: -1
+                }
             };
         default:
             return state;

@@ -3,7 +3,8 @@ import {
     CLIENTS_LIST_PAGINATION,
     CLIENT_DETAILS,
     CLIENTS_LIST_SEARCH_PARAM,
-    SELECT_CLIENT_CHAT
+    SELECT_CLIENT_CHAT,
+    CLEAR_SELECTED_CHAT
   } from '../types';
 
 export const ClientsListAction = (value) => {
@@ -37,6 +38,13 @@ export const ClientsListSearchParamAction = (value) => {
 export const SelectClientChatAction = (value) => {
     return {
         type: SELECT_CLIENT_CHAT,
+        payload: value,
+    };
+};
+
+export const ClearSelectedChat = (value) => {
+    return {
+        type: CLEAR_SELECTED_CHAT,
         payload: value,
     };
 };
