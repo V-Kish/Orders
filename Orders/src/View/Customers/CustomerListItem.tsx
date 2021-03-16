@@ -12,7 +12,6 @@ import {navigator} from '../../Core/Navigator';
 
 export const CustomerListItem = (props) => {
 
-    console.log(props.item);
 
     return (
         <View

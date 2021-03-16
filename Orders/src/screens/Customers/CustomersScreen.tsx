@@ -42,21 +42,7 @@ export const CustomersScreen = () => {
   
   
   function goBack() {
-    // navigator().toGoBack();
-        setPreloader(false);
-    Clients.getClientsList(dispatch, false, {pageIndex: 1, PageSize: 20, query: ""})
-        .then(
-          (succes) => setPreloader(true),
-          (error) => setPreloader(true),
-        );
-    
-        dispatch(
-          ClientsListAction({
-            pageIndex: 1,
-            pageSize: 20,
-            query: ""
-          }),
-        );
+    navigator().toGoBack();
   }
 
   // const handleTextChange = (text: string) => {

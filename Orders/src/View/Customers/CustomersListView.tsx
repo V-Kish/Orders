@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from 'react-redux';
 export const CustomersListView = () => {
     const dispatch = useDispatch();
     const ClientsList = useSelector((state: reduxTypes) => state.clients.Items);
-    console.log("HERE NOW", ClientsList);
 
     function renderClients(){
         if(ClientsList !== undefined){
