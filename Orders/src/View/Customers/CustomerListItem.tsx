@@ -25,31 +25,31 @@ import {showModalCreateNewChat} from "../../store/actions/AppStart";
 export const CustomerListItem = (props) => {
   const dispatch = useDispatch();
 
-  function selectUserChat(
-    selectedChatUser = {
-      userName: '',
-      id: -1,
-    },
-  ) {
-    dispatch(SelectClientChatAction(selectedChatUser));
-    navigator().navigate('ChatListScreen');
-    const body ={
-      pageIndex: 1,
-      pageSize: 10,
-      isRead: -1,
-      clientId: selectedChatUser.id,
-    };
-    Chat.getChatList(dispatch,body).then(
-      (succes) => {
-        console.log('getChatList succes', succes);
-        console.log('getChatList succes body', body);
-        if (selectedChatUser.id !== -1 && succes.length === 0) {
-          dispatch(showModalCreateNewChat(true))
-        }
-      },
-      (error) => {},
-    );
-  }
+
+    function selectUserChat(
+        selectedChatUser = {
+        userName: '',
+        id: -1,
+        },
+    ) {
+        dispatch(SelectClientChatAction(selectedChatUser));
+        navigator().navigate('ChatListScreen');
+        const body ={
+        pageIndex: 1,
+        pageSize: 10,
+        isRead: -1,
+        clientId: selectedChatUser.id,
+        };
+        Chat.getChatList(dispatch,body).then(
+        (succes) => {
+            console.log('getChatList succes', succes);
+            if (selectedChatUser.id !== -1 && succes.length === 0) {
+            dispatch(showModalCreateNewChat(true))
+            }
+        },
+        (error) => {},
+        );
+    }
 
   return (
     <View style={styles.containers}>

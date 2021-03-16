@@ -24,4 +24,9 @@ export const CHAT_ICONS = {
   plus:require('../assets/img/Chat/plus/add.png'),
   phone:require('../assets/img/Clients/Phone/phone.png'),
   chat:require('../assets/img/Clients/Phone/chat.png'),
+  detailsPhone: require('../assets/img/Clients/Details/phone.png'),
+  detailsChat: require('../assets/img/Clients/Details/chat.png'),
+  detailsOperation: require('../assets/img/Clients/Details/operations.png'),
+  detailsStatistics: require('../assets/img/Clients/Details/statistics.png'),
+  detailsInfo: require('../assets/img/Clients/Details/info.png')
 };
