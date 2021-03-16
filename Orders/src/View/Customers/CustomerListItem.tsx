@@ -42,6 +42,7 @@ export const CustomerListItem = (props) => {
     Chat.getChatList(dispatch,body).then(
       (succes) => {
         console.log('getChatList succes', succes);
+        console.log('getChatList succes body', body);
         if (selectedChatUser.id !== -1 && succes.length === 0) {
           dispatch(showModalCreateNewChat(true))
         }
