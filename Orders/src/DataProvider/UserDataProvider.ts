@@ -28,6 +28,9 @@ class UserDataProvider {
   }
   // get Clients
   static async getClients(body) {
+    console.log(`rest/v1/${currentUser().userId}/${
+      currentUser().userToken
+    }/loyaltyProg/users/load`);
     return fetchData(
       `rest/v1/${currentUser().userId}/${
         currentUser().userToken

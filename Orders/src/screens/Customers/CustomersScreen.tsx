@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import { Clients } from '../../functions/Clients';
 import { chatListPagination } from '../../store/actions/Chat';
 import { PreloaderChat } from '../../View/Chat/PreloderChat/PreloderChat';
-import { ClientsListAction } from '../../store/actions/Clients';
+import { ClientsListAction, ClientsListSearchParamAction } from '../../store/actions/Clients';
 
 
 
@@ -23,7 +23,7 @@ export const CustomersScreen = () => {
 
   useEffect(() => {
     setPreloader(false);
-    Clients.getClientsList(dispatch, false, {pageIndex: 1, PageSize: 20, query: ""})
+    Clients.getClientsList(dispatch, '', false, {pageIndex: 1, PageSize: 20, query: ""})
         .then(
           (succes) => setPreloader(true),
           (error) => setPreloader(true),
@@ -45,11 +45,14 @@ export const CustomersScreen = () => {
     navigator().toGoBack();
   }
 
-  // const handleTextChange = (text: string) => {
-  //   console.log("SEARCHING!!!");
-  //   getChatList(dispatch, text).then();
-  //   dispatch(chatListSearchParamAction({searchText: text}));
-  // };
+  const handleTextChange = (text: string) => {
+    Clients.getClientsList(dispatch, text, false, {pageIndex: 1, PageSize: 20, query: text})
+      .then(
+        (succes) => setPreloader(true),
+        (error) => setPreloader(true),
+      );
+    dispatch(ClientsListSearchParamAction({searchText: text}));
+  };
 
 
   
@@ -64,9 +67,7 @@ export const CustomersScreen = () => {
       />
 
       <View style={styles.containerClients}>
-        <CustomersSearch changeCurrentText={()=>{
-          
-        }} />
+        <CustomersSearch changeCurrentText={handleTextChange} />
       </View>
       
       <CustomersListView />

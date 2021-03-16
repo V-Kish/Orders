@@ -1,10 +1,17 @@
 import {
-    CLIENTS_LIST
+    CLIENTS_LIST,
+    CLIENTS_LIST_SEARCH_PARAM,
+    SELECT_CLIENT_CHAT
   } from '../types';
 
 
 const initialState = {
-    Items: []
+    Items: [],
+    searchParam: {searchText: ''},
+    selectedChatUser: {
+        userName: '',
+        id: -1
+    }
 }
 
 
@@ -15,6 +22,20 @@ export const ClientsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 Items: action.payload.Items
+            };
+        case CLIENTS_LIST_SEARCH_PARAM:
+            return {
+                ...state,
+                searchParam: action.payload,
+                paginationBody: {
+                    pageIndex: 1,
+                    pageSize: 10,
+                },
+            };
+        case SELECT_CLIENT_CHAT:
+            return {
+                ...state,
+                selectedChatUser: action.payload
             };
         default:
             return state;

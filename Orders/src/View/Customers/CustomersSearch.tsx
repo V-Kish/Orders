@@ -10,6 +10,7 @@ export const CustomersSearch = ({changeCurrentText}) => {
   const [myTimeout, setMyTimeout] = useState();
 
   const onChangeText = (text: string) => {
+    console.log("KUSHI",text);
     clearTimeout(myTimeout);
     setMyTimeout(
       setTimeout(() => {

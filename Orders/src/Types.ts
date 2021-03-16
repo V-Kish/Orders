@@ -44,6 +44,10 @@ export type reduxTypes = {
   };
   clients: {
     Items: Array<any>;
+    selectedChatUser: {
+      userName: string,
+      id: number
+    }
   };
   
   start: {

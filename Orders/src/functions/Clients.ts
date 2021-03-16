@@ -7,7 +7,7 @@ import {AuthBody, ChatList, ChatMessagesList, chatMessage, ClientsList} from '..
 import { 
     ClientsListAction,
     ClientDetails,
-    ClientsListPaginationAction 
+    ClientsListPaginationAction
 } from  '../store/actions/Clients';
 
 import {Linking} from 'react-native';
@@ -15,6 +15,7 @@ import {Linking} from 'react-native';
 class Clients {
     static async getClientsList(
         dispatch: Dispatch<any>,
+        searchText = '',
         pagination = false,
         Data: ClientsList = {
             pageIndex: 1,
@@ -23,7 +24,9 @@ class Clients {
         }
     ) { 
         try {
-            let body = Data;
+            let body: AuthBody = Data;
+            body.sQuery = searchText;
+            console.log("KUSHI SEARCH",body)
             const list = await UserDataProvider.getClients(body);
             console.log(list.data);
             if (list.statusCode === 200) {
