@@ -10,9 +10,21 @@ import { Chat } from '../../functions/Chat';
 import { UserIcon } from '../Chat/UserIcon';
 import {navigator} from '../../Core/Navigator';
 
-export const CustomerListItem = (props) => {
+import {clientItem, reduxTypes} from "../../Types";
+import { useDispatch, useSelector } from 'react-redux';
+import { SelectClientChatAction } from '../../store/actions/Clients';
 
-    console.log(props.item);
+export const CustomerListItem = (props) => {
+    const dispatch = useDispatch();
+    const selectedUser = useSelector((state: reduxTypes) => state.clients.selectedChatUser);
+
+    function selectUserChat(selectedChatUser = {
+        userName: '',
+        id: -1
+    }){
+        dispatch(SelectClientChatAction(selectedChatUser));
+        navigator().navigate('ChatListScreen');
+    }
 
     return (
         <View
@@ -31,6 +43,13 @@ export const CustomerListItem = (props) => {
                         <Text style={styles.clientName}>{props.item.name}</Text>
                         <Text style={styles.clientPhone}>{props.item.phone}</Text>
                     </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>{
+                    selectUserChat({userName: props.item.name, id: props.item.id})
+                    console.log(`Open chat with user: ${props.item.name} and id: ${props.item.id}`)
+                }} style={[styles.phoneButton, IconHelper.iconDiameter(60)]}>
+                    <Image source={CHAT_ICONS.chat} style={styles.img}/>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={()=>{
@@ -90,7 +109,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     leftWrapper: {
-        width: '85%',
+        width: '70%',
         flexDirection: 'row'
     },
     clientName: {
