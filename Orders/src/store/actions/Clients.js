@@ -4,7 +4,9 @@ import {
     CLIENT_DETAILS,
     CLIENTS_LIST_SEARCH_PARAM,
     SELECT_CLIENT_CHAT,
-    CLEAR_SELECTED_CHAT
+    CLEAR_SELECTED_CHAT,
+    SELECTED_CLIENT_DETAILS,
+    SELECTED_CLIENT_ID
   } from '../types';
 
 export const ClientsListAction = (value) => {
@@ -45,6 +47,24 @@ export const SelectClientChatAction = (value) => {
 export const ClearSelectedChat = (value) => {
     return {
         type: CLEAR_SELECTED_CHAT,
+        payload: value,
+    };
+};
+
+
+export const SelectedClientDetails = (value, operations) => {
+    return {
+        type: SELECTED_CLIENT_DETAILS,
+        payload: {
+            value,
+            operations
+        },
+    };
+};
+
+export const SelectedClientId = (value) => {
+    return {
+        type: SELECTED_CLIENT_ID,
         payload: value,
     };
 };

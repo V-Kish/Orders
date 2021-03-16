@@ -2,12 +2,13 @@ import {UserDataProvider} from '../DataProvider/UserDataProvider';
 import {navigator} from '../Core/Navigator';
 import {Dispatch} from 'redux';
 import {PhoneInfo} from '../Core/PhoneInfo';
-import {AuthBody, ChatList, ChatMessagesList, chatMessage, ClientsList} from '../Types';
+import {AuthBody, SelectedClient, ChatList, ChatMessagesList, chatMessage, ClientsList} from '../Types';
 
 import { 
     ClientsListAction,
     ClientDetails,
-    ClientsListPaginationAction
+    ClientsListPaginationAction,
+    SelectedClientDetails
 } from  '../store/actions/Clients';
 
 import {Linking} from 'react-native';
@@ -37,6 +38,51 @@ class Clients {
                     // @ts-ignore
                     dispatch(ClientsListAction(list.data));
                 }
+                return false;
+            }
+            if (list.statusCode === 403 && list.statusMessage === 'forbidden') {
+            // @ts-ignore
+            navigator().navigate('ErrorScreen');
+            // dispatch(PreloaderMain(false));
+            return;
+            }
+            if (list.statusCode === 403) {
+            // alert(list.data.message);
+            navigator().navigate('ErrorScreen');
+            // dispatch(PreloaderMain(false));
+            return;
+            }
+            if (list.statusCode !== 200) {
+            // @ts-ignore
+            // alert(list.result.message);
+            // dispatch(PreloaderMain(false));
+            return false;
+            }
+        } catch(e){
+            console.log(e);
+            return;
+        }
+
+    }
+
+    static async getSelectedUser(
+        dispatch: Dispatch<any>,
+        Data: SelectedClient = {
+            clientId: null
+        }
+    ) { 
+        try {
+            
+            
+            let body: AuthBody = Data;
+            
+            const list = await UserDataProvider.getSelectedClient(body, Data.clientId);
+
+            const operations = await UserDataProvider.getSelectedClientOperations(body, Data.clientId);
+            console.log("GET SELECTED USER OPERATIONS",operations.data.operations);
+
+            if (list.statusCode === 200) {
+                dispatch(SelectedClientDetails(list.data, operations.data.operations))
                 return false;
             }
             if (list.statusCode === 403 && list.statusMessage === 'forbidden') {

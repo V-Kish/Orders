@@ -15,7 +15,7 @@ export const CustomersSearch = ({changeCurrentText}) => {
     setMyTimeout(
       setTimeout(() => {
         changeCurrentText(text);
-      }, 200),
+      }, 100),
     );
   };
   return (

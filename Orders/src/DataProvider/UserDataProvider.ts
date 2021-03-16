@@ -28,14 +28,31 @@ class UserDataProvider {
   }
   // get Clients
   static async getClients(body) {
-    console.log(`rest/v1/${currentUser().userId}/${
-      currentUser().userToken
-    }/loyaltyProg/users/load`);
     return fetchData(
       `rest/v1/${currentUser().userId}/${
         currentUser().userToken
       }/loyaltyProg/users/load`,
       'POST',
+      body
+    );
+  }
+  // GET SELECTED CLIENT
+  static async getSelectedClient(body, clientId) {
+    return fetchData(
+      `rest/v1/${currentUser().userId}/${
+        currentUser().userToken
+      }/loyaltyProg/users/${clientId}/info`,
+      'GET',
+      body
+    );
+  }
+  // GET SELECTED CLIENT OPERATIONS
+  static async getSelectedClientOperations(body, clientId) {
+    return fetchData(
+      `rest/v1/${currentUser().userId}/${
+        currentUser().userToken
+      }/loyaltyProg/user/${clientId}/full-stat`,
+      'GET',
       body
     );
   }

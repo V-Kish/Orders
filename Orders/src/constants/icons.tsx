@@ -28,5 +28,7 @@ export const CHAT_ICONS = {
   detailsChat: require('../assets/img/Clients/Details/chat.png'),
   detailsOperation: require('../assets/img/Clients/Details/operations.png'),
   detailsStatistics: require('../assets/img/Clients/Details/statistics.png'),
-  detailsInfo: require('../assets/img/Clients/Details/info.png')
+  detailsInfo: require('../assets/img/Clients/Details/info.png'),
+  detailsSale: require('../assets/img/Clients/Details/saleArrow.png'),
+  detailsBuy: require('../assets/img/Clients/Details/buyArrow.png')
 };

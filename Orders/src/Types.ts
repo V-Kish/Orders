@@ -47,7 +47,12 @@ export type reduxTypes = {
     selectedChatUser: {
       userName: string,
       id: number
-    }
+    },
+    selectedClientId: {
+      selectedUserId: number
+    },
+    selectedUser: {any},
+    selectedUserOperations: any
   };
   
   start: {
@@ -96,6 +101,9 @@ export type ClientsList = {
   pageIndex: number;
   PageSize:  number;
   query:  string;
+}
+export type SelectedClient = {
+  clientId: number;
 }
 export type ChatMessagesList = {
   pageIndex: number;

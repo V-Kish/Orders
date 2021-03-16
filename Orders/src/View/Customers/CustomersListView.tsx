@@ -14,7 +14,7 @@ export const CustomersListView = () => {
     const ClientsList = useSelector((state: reduxTypes) => state.clients.Items);
 
     function renderClients(){
-        if(ClientsList !== undefined){
+        if(ClientsList !== undefined){ 
             if(ClientsList.length > 0){
                 return ClientsList.map((item) => (
                     <CustomerListItem item={item} key={item.id}/>

@@ -19,12 +19,13 @@ import {navigator} from '../../Core/Navigator';
 
 import {clientItem, reduxTypes} from '../../Types';
 import {useDispatch, useSelector} from 'react-redux';
-import {SelectClientChatAction} from '../../store/actions/Clients';
+import {SelectClientChatAction, SelectedClientId} from '../../store/actions/Clients';
 import {showModalCreateNewChat} from "../../store/actions/AppStart";
 
 export const CustomerListItem = (props) => {
   const dispatch = useDispatch();
 
+  // const selectedClient = useSelector((state: reduxTypes) => state.clients.selectedClientId);
 
     function selectUserChat(
         selectedChatUser = {
@@ -51,6 +52,11 @@ export const CustomerListItem = (props) => {
         );
     }
 
+    function selectClient(){
+        dispatch(SelectedClientId({selectedClientId: props.item.id}));
+        navigator().navigate('ClientScreen');
+    }
+
   return (
     <View style={styles.containers}>
       {/*// container //*/}
@@ -58,7 +64,7 @@ export const CustomerListItem = (props) => {
         <TouchableOpacity
           style={styles.leftWrapper}
           onPress={() => {
-            navigator().navigate('ClientScreen');
+            selectClient()
           }}>
           {/*// Left //*/}
           <View style={styles.leftContainer}>

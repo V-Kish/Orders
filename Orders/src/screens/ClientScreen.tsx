@@ -29,7 +29,14 @@ export const ClientScreen = () => {
       navigator().navigate('ChatListScreen');
   }
 
+  const selectedClientDetails = useSelector((state: reduxTypes) => state.clients.selectedUser);
+  let userPhone;
 
+  if(selectedClientDetails.user !== undefined){
+    userPhone = selectedClientDetails.user.phone;
+  } else{
+    userPhone = '+3800000000';
+  }
   return (
     <View style={styles.container}>
       <HeaderView
@@ -45,7 +52,7 @@ export const ClientScreen = () => {
       </ScrollView>
 
       <View style={styles.floatMenu}>
-          <TouchableOpacity style={styles.floatButton} onPress={()=>{Chat.goTell("380965204163")}}>
+          <TouchableOpacity style={styles.floatButton} onPress={()=>{Chat.goTell(`${userPhone}`)}}>
             <Image source={CHAT_ICONS.detailsPhone} style={styles.img}/>
           </TouchableOpacity>
 
