@@ -37,6 +37,9 @@ export const HomeView = () => {
       }),
     );
     setRefreshing(false);
+    // clear selected user
+
+    //
   }, [searchParam]);
   const orders = useSelector((state: reduxTypes) => state.dictionaries.orders);
 

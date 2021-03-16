@@ -49,7 +49,7 @@ export type reduxTypes = {
       id: number
     }
   };
-  
+
   start: {
     startApp: string;
     isAuthStack: boolean;

@@ -36,10 +36,12 @@ class GetOrderInfo {
       sQuery: '',
     },
     pagination = false,
+    clientId = -1
   ) {
     let bodyRequest = body;
     bodyRequest.sQuery = searchText;
     bodyRequest.status = status;
+    bodyRequest.clientId = clientId;
     try {
       const response = await MethodsRequest.getOrders(bodyRequest);
       console.log('response orders',response)
