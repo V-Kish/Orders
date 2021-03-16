@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
-
 import {mockupHeightToDP as hp} from '../../constants/Dimensions';
-
 import {navigator} from '../../Core/Navigator';
 import {DRAWER_ICONS} from '../../constants/icons';
 import {COLORS} from '../../constants/colors';
@@ -18,24 +16,31 @@ import {
 import {PreloaderChat} from '../../View/Chat/PreloderChat/PreloderChat';
 import {FloatButton} from '../../View/Components/FloatButon';
 import {ModalNewChat} from '../../View/Chat/ModalNewChat/ModalNewChat';
-import {Clients} from '../../functions/Clients';
-import {UserDataProvider} from '../../DataProvider/UserDataProvider';
 import {reduxTypes} from "../../Types";
+import {ClearSelectedChat} from "../../store/actions/Clients";
+import {showModalCreateNewChat} from "../../store/actions/AppStart";
+
 export const ChatListScreen = () => {
   const dispatch = useDispatch();
     const selectedChatUser = useSelector((state: reduxTypes) => state.clients.selectedChatUser);
   const [preloader, setPreloader] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     setPreloader(false);
     let body = {
         pageIndex: 1,
         pageSize: 10,
         isRead: -1,
-        clientId: selectedChatUser.id,
+        clientId: -1,
     }
     Chat.getChatList(dispatch,body).then(
-      (succes) => setPreloader(true),
+      (succes) => {
+          console.log('getChatList succes',succes)
+          setPreloader(true);
+          if (selectedChatUser.id !== -1 && succes.length === 0){
+              dispatch(showModalCreateNewChat(true))
+          }
+      },
       (error) => setPreloader(true),
     );
     dispatch(
@@ -45,9 +50,11 @@ export const ChatListScreen = () => {
         isRead: -1,
       }),
     );
-
-  }, [selectedChatUser]);
+  }, []);
   const handleTextChange = (text: string) => {
+      if (selectedChatUser.id !== -1 ){
+          dispatch(ClearSelectedChat());
+      }
     Chat.getChatList(dispatch, text).then();
     dispatch(chatListSearchParamAction({searchText: text}));
   };
@@ -55,11 +62,11 @@ export const ChatListScreen = () => {
     navigator().toGoBack();
   }
   const openModalCreateNewChat = () => {
-      // if (selectedUser.id === -1){
-      //     navigator().navigate('CustomersScreen')
-      //     return
-      // }
-    setShowModal(!showModal);
+      if (selectedChatUser.id === -1){
+          navigator().navigate('CustomersScreen')
+          return
+      }
+      dispatch(showModalCreateNewChat(true))
   };
   return (
     <View style={styles.container}>
@@ -77,7 +84,7 @@ export const ChatListScreen = () => {
       {/*// Float Button // */}
       <FloatButton clickFn={openModalCreateNewChat} />
       {/*// Modal Create new Chat // */}
-      <ModalNewChat isShow={showModal} fnClose={openModalCreateNewChat} />
+      <ModalNewChat  />
       <PreloaderChat isHide={preloader} />
     </View>
   );

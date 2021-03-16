@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
-  ActivityIndicator,
   Modal,
   Text,
   TouchableOpacity,
@@ -16,22 +15,28 @@ import {
   mockupWidthToDP as wp,
 } from '../../../constants/Dimensions';
 import {HeaderView} from '../../HeaderView/HeaderView';
-import {Chat} from '../../../functions/Chat';
 import {useDispatch, useSelector} from 'react-redux';
 import {UserDataProvider} from '../../../DataProvider/UserDataProvider';
-import {reduxTypes} from "../../../Types";
+import {reduxTypes} from '../../../Types';
+import {ClearSelectedChat} from '../../../store/actions/Clients';
+import {selectedItemChatAction} from '../../../store/actions/Chat';
+import {navigator} from '../../../Core/Navigator';
+import { showModalCreateNewChat } from '../../../store/actions/AppStart';
 
-export const ModalNewChat = ({isShow = false, fnClose}) => {
+export const ModalNewChat = () => {
   const dispatch = useDispatch();
   // states
   const [inputTheme, setInputTheme] = useState('');
   const [inputMessage, setInputMessage] = useState('');
   const [errorInputTheme, setErrorInputTheme] = useState({});
   const [errorInputMessage, setErrorInputMessage] = useState({});
-  //
+  // use selector
+  const isShow = useSelector((state: reduxTypes) => state.start.showModal);
 
-  const selectedChatUser = useSelector((state: reduxTypes) => state.clients.selectedChatUser);
-  console.warn(selectedChatUser)
+  const selectedChatUser = useSelector(
+    (state: reduxTypes) => state.clients.selectedChatUser,
+  );
+  console.warn(selectedChatUser);
   // create new chat
   const createNewChat = async () => {
     if (inputTheme === '') {
@@ -49,22 +54,24 @@ export const ModalNewChat = ({isShow = false, fnClose}) => {
       message: inputMessage,
     };
     console.warn(body);
-  return
+
     const result = await UserDataProvider.createNewChat(body);
-    if (result.statusCode === 200){
-      Chat.getChatList(dispatch).then();
-      fnClose()
-      dispatch(ClearSelectedChat())
+    console.log('create new chat result',result)
+    if (result.statusCode === 200) {
+      dispatch(showModalCreateNewChat(false));
+      dispatch(ClearSelectedChat());
       setInputTheme('');
       setInputMessage('');
-
+      dispatch(selectedItemChatAction(result.data));
+      navigator().navigate('ChatScreen');
+      // Chat.getChatList(dispatch).then();
     }
   };
 
   return (
     <Modal
       visible={isShow}
-      onRequestClose={() => fnClose()}
+      onRequestClose={() => dispatch(showModalCreateNewChat(false))}
       animationType={'slide'}>
       <View style={styles.container}>
         <HeaderView
@@ -73,7 +80,7 @@ export const ModalNewChat = ({isShow = false, fnClose}) => {
           color={COLORS.HEADER_BLUE}
           ordersSettings={true}
           desc={selectedChatUser.userName}
-          onPress={() => fnClose()}
+          onPress={() => dispatch(showModalCreateNewChat(false))}
         />
         <View style={styles.mainContainer}>
           {/*// Theme // */}

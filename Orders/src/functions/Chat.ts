@@ -41,25 +41,25 @@ class Chat {
           // @ts-ignore
           dispatch(ChatListAction(list.data));
         }
-        return false;
+        return list.data;
       }
       if (list.statusCode === 403 && list.statusMessage === 'forbidden') {
         // @ts-ignore
         navigator().navigate('ErrorScreen');
         // dispatch(PreloaderMain(false));
-        return;
+        return [];
       }
       if (list.statusCode === 403) {
         // alert(list.data.message);
         navigator().navigate('ErrorScreen');
         // dispatch(PreloaderMain(false));
-        return;
+        return [];
       }
       if (list.statusCode !== 200) {
         // @ts-ignore
         // alert(list.result.message);
         // dispatch(PreloaderMain(false));
-        return false;
+        return [];
       }
     } catch (ex) {
       // dispatch(PreloaderMain(false));
