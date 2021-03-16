@@ -54,7 +54,7 @@ export const ModalNewChat = ({isShow = false, fnClose}) => {
     if (result.statusCode === 200){
       Chat.getChatList(dispatch).then();
       fnClose()
-      dispatch()
+      dispatch(ClearSelectedChat())
       setInputTheme('');
       setInputMessage('');
 
