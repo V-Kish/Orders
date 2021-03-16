@@ -17,14 +17,23 @@ import {
 } from '../../store/actions/Chat';
 import {PreloaderChat} from '../../View/Chat/PreloderChat/PreloderChat';
 import {FloatButton} from '../../View/Components/FloatButon';
-import { ModalNewChat } from '../../View/Chat/ModalNewChat/ModalNewChat';
+import {ModalNewChat} from '../../View/Chat/ModalNewChat/ModalNewChat';
+import {Clients} from '../../functions/Clients';
+import {UserDataProvider} from '../../DataProvider/UserDataProvider';
 export const ChatListScreen = () => {
   const dispatch = useDispatch();
+  let  selectedUser = {id: -1};
   const [preloader, setPreloader] = useState(false);
   const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     setPreloader(false);
-    Chat.getChatList(dispatch).then(
+    let body = {
+        pageIndex: 1,
+        pageSize: 10,
+        isRead: -1,
+        clientId: selectedUser.id,
+    }
+    Chat.getChatList(dispatch,body).then(
       (succes) => setPreloader(true),
       (error) => setPreloader(true),
     );
@@ -35,6 +44,7 @@ export const ChatListScreen = () => {
         isRead: -1,
       }),
     );
+
   }, []);
   const handleTextChange = (text: string) => {
     Chat.getChatList(dispatch, text).then();
@@ -44,6 +54,10 @@ export const ChatListScreen = () => {
     navigator().toGoBack();
   }
   const openModalCreateNewChat = () => {
+      // if (selectedUser.id === -1){
+      //     navigator().navigate('CustomersScreen')
+      //     return
+      // }
     setShowModal(!showModal);
   };
   return (
@@ -62,7 +76,7 @@ export const ChatListScreen = () => {
       {/*// Float Button // */}
       <FloatButton clickFn={openModalCreateNewChat} />
       {/*// Modal Create new Chat // */}
-      <ModalNewChat isShow={showModal} fnClose={openModalCreateNewChat}/>
+      <ModalNewChat isShow={showModal} fnClose={openModalCreateNewChat} />
       <PreloaderChat isHide={preloader} />
     </View>
   );
