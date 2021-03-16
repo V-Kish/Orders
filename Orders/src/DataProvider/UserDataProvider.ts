@@ -66,6 +66,7 @@ class UserDataProvider {
       body,
     );
   }
+
   // Get messages from chat
   static async getChatMessages(body) {
     console.log('getChatMessages body',body)

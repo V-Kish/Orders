@@ -41,10 +41,12 @@ export const CustomerListItem = (props) => {
         isRead: -1,
         clientId: selectedChatUser.id,
         };
-        Chat.getChatList(dispatch,body).then(
+        console.log('getChatList succes start', body);
+        Chat.getChatList(dispatch,'',body).then(
         (succes) => {
             console.log('getChatList succes', succes);
-            if (selectedChatUser.id !== -1 && succes.length === 0) {
+            console.log('getChatList succes body', body);
+            if (selectedChatUser.id !== -1 && succes.Items.length === 0) {
             dispatch(showModalCreateNewChat(true))
             }
         },

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, ScrollView, ActivityIndicator} from 'react-native';
+import {View, StyleSheet, ScrollView, ActivityIndicator, RefreshControl} from 'react-native';
 import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
@@ -12,9 +12,28 @@ import {GetOrderInfo} from "../../functions/GetOrderInfo";
 import {Chat} from "../../functions/Chat";
 import {COLORS} from "../../constants/colors";
 import { FloatButton } from '../Components/FloatButon';
+import {ClearSelectedChat} from "../../store/actions/Clients";
+import {chatListPagination} from "../../store/actions/Chat";
 
-export const ChatListView = () => {
+export const ChatListView =  () => {
     const dispatch = useDispatch();
+    // refresh
+    const [refreshing, setRefreshing] = React.useState(false);
+    const onRefresh = React.useCallback(async () => {
+        setRefreshing(true);
+    const response = await Chat.getChatList(dispatch);
+        setRefreshing(false);
+        dispatch(ClearSelectedChat());
+        dispatch(
+            chatListPagination({
+                pageIndex: 1,
+                pageSize: 10,
+                isRead: -1,
+            }),
+        );
+    }, []);
+    //
+
     const [statePreloader, setStatePreloader] = useState(true);
     const chatListInfo = useSelector((state: reduxTypes) => state.chat.chatListInfo);
     const paginationBody = useSelector((state: reduxTypes) => state.chat.paginationBody);
@@ -54,6 +73,13 @@ export const ChatListView = () => {
               await loadMorePagination();
             }
           }}
+          refreshControl={
+              <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={onRefresh}
+                  colors={[COLORS.STATUS_BLUE]}
+              />
+          }
       >
         {ListChats.map((item : chatItem) => (
             <ChatListItem item={item} key={item.id}/>

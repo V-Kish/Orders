@@ -6,7 +6,7 @@ import {
   Modal,
   Text,
   TouchableOpacity,
-  TextInput,
+  TextInput, ActivityIndicator,
 } from 'react-native';
 import {COLORS} from '../../../constants/colors';
 import {ICONS} from '../../../constants/icons';
@@ -19,9 +19,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {UserDataProvider} from '../../../DataProvider/UserDataProvider';
 import {reduxTypes} from '../../../Types';
 import {ClearSelectedChat} from '../../../store/actions/Clients';
-import {selectedItemChatAction} from '../../../store/actions/Chat';
+import {chatListPagination, selectedItemChatAction} from '../../../store/actions/Chat';
 import {navigator} from '../../../Core/Navigator';
 import { showModalCreateNewChat } from '../../../store/actions/AppStart';
+import {Chat} from "../../../functions/Chat";
 
 export const ModalNewChat = () => {
   const dispatch = useDispatch();
@@ -30,13 +31,13 @@ export const ModalNewChat = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [errorInputTheme, setErrorInputTheme] = useState({});
   const [errorInputMessage, setErrorInputMessage] = useState({});
+  const [preloaderBtn, setPreloaderBtn] = useState(false);
   // use selector
   const isShow = useSelector((state: reduxTypes) => state.start.showModal);
 
   const selectedChatUser = useSelector(
     (state: reduxTypes) => state.clients.selectedChatUser,
   );
-  console.warn(selectedChatUser);
   // create new chat
   const createNewChat = async () => {
     if (inputTheme === '') {
@@ -47,24 +48,42 @@ export const ModalNewChat = () => {
       setErrorInputMessage(styles.errorInput);
       return;
     }
-
+    setPreloaderBtn(true);
     const body = {
       clientId: selectedChatUser.id,
       theme: inputTheme,
       message: inputMessage,
     };
-    console.warn(body);
 
     const result = await UserDataProvider.createNewChat(body);
-    console.log('create new chat result',result)
+
     if (result.statusCode === 200) {
+      // const list = await UserDataProvider.getListChats({ pageIndex: 1,
+      //   pageSize: 10,
+      //   isRead: -1});
+    const list = await  Chat.getChatList(dispatch,'',{
+        pageIndex: 1,
+        pageSize: 10,
+        isRead: -1,
+        clientId: selectedChatUser.id,
+      })
+      console.log('listzzzzzz',list)
+      const chat = list.Items.filter((item) => (item.rootId === -1 ? item.id : item.rootId) === result.data.id);
+
       dispatch(showModalCreateNewChat(false));
       dispatch(ClearSelectedChat());
       setInputTheme('');
       setInputMessage('');
-      dispatch(selectedItemChatAction(result.data));
-      navigator().navigate('ChatScreen');
+      if (chat) {
+        dispatch(selectedItemChatAction(chat[0]));
+        navigator().navigate('ChatScreen');
+      } else {
+        navigator().navigate('ChatListScreen');
+      }
+      setPreloaderBtn(false);
       // Chat.getChatList(dispatch).then();
+    }else {
+      setPreloaderBtn(false);
     }
   };
 
@@ -119,7 +138,12 @@ export const ModalNewChat = () => {
           </View>
           <View style={styles.wrapBtn}>
             <TouchableOpacity style={styles.btnSend} onPress={createNewChat}>
-              <Text style={styles.textBtn}>Надіслати</Text>
+              {preloaderBtn && (
+                  <ActivityIndicator size="small" color={COLORS.FONT_WHITE} />
+              )}
+              {!preloaderBtn && (
+                  <Text style={styles.textBtn}>Надіслати</Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>
@@ -155,6 +179,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp(20),
     paddingVertical: hp(15),
     borderRadius: 5,
+    justifyContent:'center',
+    alignItems:'center',
+    width:wp(160)
   },
   textBtn: {
     fontFamily: 'Roboto-Regular',

@@ -87,12 +87,10 @@ export const pushMessagesHandler = {
         isRead: -1,
       }),
     );
-    console.log('evendData _openChat list', list);
     const chat = list.data.Items.filter(
       (item) =>
         (item.rootId === -1 ? item.id : item.rootId) === evendData.rootId,
     );
-    console.log('evendData _openChat chat', chat);
     if (chat) {
       dispatch(selectedItemChatAction(chat[0]));
       navigator().navigate('ChatScreen');

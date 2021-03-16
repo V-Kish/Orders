@@ -25,6 +25,7 @@ export const ChatListScreen = () => {
     const selectedChatUser = useSelector((state: reduxTypes) => state.clients.selectedChatUser);
   const [preloader, setPreloader] = useState(false);
 
+
   useEffect(() => {
     setPreloader(false);
     let body = {
@@ -33,9 +34,8 @@ export const ChatListScreen = () => {
         isRead: -1,
         clientId: -1,
     }
-    Chat.getChatList(dispatch,body).then(
+    Chat.getChatList(dispatch,'',body).then(
       (succes) => {
-          console.log('getChatList succes',succes)
           setPreloader(true);
           if (selectedChatUser.id !== -1 && succes.length === 0){
               dispatch(showModalCreateNewChat(true))

@@ -54,7 +54,7 @@ export type reduxTypes = {
     selectedUser: {any},
     selectedUserOperations: any
   };
-  
+
   start: {
     startApp: string;
     isAuthStack: boolean;
