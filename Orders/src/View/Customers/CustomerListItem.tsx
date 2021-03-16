@@ -16,7 +16,6 @@ import { SelectClientChatAction } from '../../store/actions/Clients';
 
 export const CustomerListItem = (props) => {
     const dispatch = useDispatch();
-    const selectedUser = useSelector((state: reduxTypes) => state.clients.selectedChatUser);
 
     function selectUserChat(selectedChatUser = {
         userName: '',
