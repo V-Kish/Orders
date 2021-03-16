@@ -13,6 +13,7 @@ import {Chat} from "../../functions/Chat";
 import {COLORS} from "../../constants/colors";
 import { FloatButton } from '../Components/FloatButon';
 import {ClearSelectedChat} from "../../store/actions/Clients";
+import {chatListPagination} from "../../store/actions/Chat";
 
 export const ChatListView =  () => {
     const dispatch = useDispatch();
@@ -23,6 +24,13 @@ export const ChatListView =  () => {
     const response = await Chat.getChatList(dispatch);
         setRefreshing(false);
         dispatch(ClearSelectedChat());
+        dispatch(
+            chatListPagination({
+                pageIndex: 1,
+                pageSize: 10,
+                isRead: -1,
+            }),
+        );
     }, []);
     //
 
