@@ -36,7 +36,6 @@ export const ChatListScreen = () => {
     }
     Chat.getChatList(dispatch,'',body).then(
       (succes) => {
-          console.log('getChatList succes',succes)
           setPreloader(true);
           if (selectedChatUser.id !== -1 && succes.length === 0){
               dispatch(showModalCreateNewChat(true))

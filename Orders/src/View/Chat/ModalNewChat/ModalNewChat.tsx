@@ -19,9 +19,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {UserDataProvider} from '../../../DataProvider/UserDataProvider';
 import {reduxTypes} from '../../../Types';
 import {ClearSelectedChat} from '../../../store/actions/Clients';
-import {selectedItemChatAction} from '../../../store/actions/Chat';
+import {chatListPagination, selectedItemChatAction} from '../../../store/actions/Chat';
 import {navigator} from '../../../Core/Navigator';
 import { showModalCreateNewChat } from '../../../store/actions/AppStart';
+import {Chat} from "../../../functions/Chat";
 
 export const ModalNewChat = () => {
   const dispatch = useDispatch();
@@ -36,7 +37,6 @@ export const ModalNewChat = () => {
   const selectedChatUser = useSelector(
     (state: reduxTypes) => state.clients.selectedChatUser,
   );
-  console.warn(selectedChatUser);
   // create new chat
   const createNewChat = async () => {
     if (inputTheme === '') {
@@ -53,17 +53,31 @@ export const ModalNewChat = () => {
       theme: inputTheme,
       message: inputMessage,
     };
-    console.warn(body);
 
     const result = await UserDataProvider.createNewChat(body);
-    console.log('create new chat result',result)
+
     if (result.statusCode === 200) {
+      const list = await UserDataProvider.getListChats({ pageIndex: 1,
+        pageSize: 10,
+        isRead: -1});
+      const chat = list.data.Items.filter((item) => (item.rootId === -1 ? item.id : item.rootId) === result.data.id);
+
       dispatch(showModalCreateNewChat(false));
       dispatch(ClearSelectedChat());
       setInputTheme('');
       setInputMessage('');
-      dispatch(selectedItemChatAction(result.data));
-      navigator().navigate('ChatScreen');
+      if (chat) {
+        dispatch(selectedItemChatAction(chat[0]));
+        navigator().navigate('ChatScreen');
+      } else {
+        navigator().navigate('ChatListScreen');
+      }
+      Chat.getChatList(dispatch,'',{
+        pageIndex: 1,
+        pageSize: 10,
+        isRead: -1,
+        clientId: selectedChatUser.id,
+      }).then()
       // Chat.getChatList(dispatch).then();
     }
   };
