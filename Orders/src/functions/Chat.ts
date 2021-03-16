@@ -20,6 +20,7 @@ class Chat {
       pageIndex: 1,
       pageSize: 10,
       isRead: -1,
+      clientId: -1,
     },
     pagination = false,
   ) {

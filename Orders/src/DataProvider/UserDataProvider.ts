@@ -18,7 +18,7 @@ class UserDataProvider {
   }
   // get User info
   static async getUserInfo() {
-    
+
     return fetchData(
       `rest/v1/${currentUser().userId}/${
         currentUser().userToken
@@ -68,6 +68,19 @@ class UserDataProvider {
         {
           message: body.message,
           rootId: body.rootId,
+        },
+    );
+  }
+  // send Message
+  static async createNewChat(body) {
+    return fetchData(
+        `/rest/v1/${currentUser().userId}/${currentUser().userToken}/loyaltyProg/messages`,
+        'POST',
+        {
+          clientId: body.clientId,
+          theme: body.theme,
+          message: body.message,
+          rootId: -1,
         },
     );
   }
