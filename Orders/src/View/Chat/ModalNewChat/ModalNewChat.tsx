@@ -6,7 +6,7 @@ import {
   Modal,
   Text,
   TouchableOpacity,
-  TextInput,
+  TextInput, ActivityIndicator,
 } from 'react-native';
 import {COLORS} from '../../../constants/colors';
 import {ICONS} from '../../../constants/icons';
@@ -31,6 +31,7 @@ export const ModalNewChat = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [errorInputTheme, setErrorInputTheme] = useState({});
   const [errorInputMessage, setErrorInputMessage] = useState({});
+  const [preloaderBtn, setPreloaderBtn] = useState(false);
   // use selector
   const isShow = useSelector((state: reduxTypes) => state.start.showModal);
 
@@ -47,7 +48,7 @@ export const ModalNewChat = () => {
       setErrorInputMessage(styles.errorInput);
       return;
     }
-
+    setPreloaderBtn(true);
     const body = {
       clientId: selectedChatUser.id,
       theme: inputTheme,
@@ -57,10 +58,17 @@ export const ModalNewChat = () => {
     const result = await UserDataProvider.createNewChat(body);
 
     if (result.statusCode === 200) {
-      const list = await UserDataProvider.getListChats({ pageIndex: 1,
+      // const list = await UserDataProvider.getListChats({ pageIndex: 1,
+      //   pageSize: 10,
+      //   isRead: -1});
+    const list = await  Chat.getChatList(dispatch,'',{
+        pageIndex: 1,
         pageSize: 10,
-        isRead: -1});
-      const chat = list.data.Items.filter((item) => (item.rootId === -1 ? item.id : item.rootId) === result.data.id);
+        isRead: -1,
+        clientId: selectedChatUser.id,
+      })
+      console.log('listzzzzzz',list)
+      const chat = list.Items.filter((item) => (item.rootId === -1 ? item.id : item.rootId) === result.data.id);
 
       dispatch(showModalCreateNewChat(false));
       dispatch(ClearSelectedChat());
@@ -72,13 +80,10 @@ export const ModalNewChat = () => {
       } else {
         navigator().navigate('ChatListScreen');
       }
-      Chat.getChatList(dispatch,'',{
-        pageIndex: 1,
-        pageSize: 10,
-        isRead: -1,
-        clientId: selectedChatUser.id,
-      }).then()
+      setPreloaderBtn(false);
       // Chat.getChatList(dispatch).then();
+    }else {
+      setPreloaderBtn(false);
     }
   };
 
@@ -133,7 +138,12 @@ export const ModalNewChat = () => {
           </View>
           <View style={styles.wrapBtn}>
             <TouchableOpacity style={styles.btnSend} onPress={createNewChat}>
-              <Text style={styles.textBtn}>Надіслати</Text>
+              {preloaderBtn && (
+                  <ActivityIndicator size="small" color={COLORS.FONT_WHITE} />
+              )}
+              {!preloaderBtn && (
+                  <Text style={styles.textBtn}>Надіслати</Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>
@@ -169,6 +179,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp(20),
     paddingVertical: hp(15),
     borderRadius: 5,
+    justifyContent:'center',
+    alignItems:'center',
+    width:wp(160)
   },
   textBtn: {
     fontFamily: 'Roboto-Regular',

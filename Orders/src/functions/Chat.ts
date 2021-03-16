@@ -32,7 +32,6 @@ class Chat {
     console.log('body pad', body);
     try {
       const list = await UserDataProvider.getListChats(body);
-      console.log('list', list);
       if (list.statusCode === 200) {
         if (pagination) {
           // @ts-ignore
