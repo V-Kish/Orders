@@ -24,6 +24,7 @@ import {showModalCreateNewChat} from "../../store/actions/AppStart";
 
 export const CustomerListItem = (props) => {
   const dispatch = useDispatch();
+  // const addNewChat = useSelector((state: reduxTypes) => state.clients.addNewChat);
 
     function selectUserChat(
         selectedChatUser = {
@@ -69,7 +70,15 @@ export const CustomerListItem = (props) => {
         <TouchableOpacity
           style={styles.leftWrapper}
           onPress={() => {
-            selectClient()
+            //if addNewChat === true
+            if(true){
+              selectUserChat({userName: props.item.name, id: props.item.id});
+              console.log(
+                `Open chat with user: ${props.item.name} and id: ${props.item.id}`,
+              );
+            } else{
+              selectClient()
+            }
           }}>
           {/*// Left //*/}
           <View style={styles.leftContainer}>
@@ -83,24 +92,30 @@ export const CustomerListItem = (props) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => {
-            selectUserChat({userName: props.item.name, id: props.item.id});
-            console.log(
-              `Open chat with user: ${props.item.name} and id: ${props.item.id}`,
-            );
-          }}
-          style={[styles.phoneButton, IconHelper.iconDiameter(60)]}>
-          <Image source={CHAT_ICONS.chat} style={styles.img} />
-        </TouchableOpacity>
+          {
+            //if addNewChat !== true
+            true &&
+            <>
+              <TouchableOpacity
+                onPress={() => {
+                  selectUserChat({userName: props.item.name, id: props.item.id});
+                  console.log(
+                    `Open chat with user: ${props.item.name} and id: ${props.item.id}`,
+                  );
+                }}
+                style={[styles.phoneButton, IconHelper.iconDiameter(60)]}>
+                <Image source={CHAT_ICONS.chat} style={styles.img} />
+              </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => {
-            Chat.goTell(props.item.phone);
-          }}
-          style={[styles.phoneButton, IconHelper.iconDiameter(60)]}>
-          <Image source={CHAT_ICONS.phone} style={styles.img} />
-        </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  Chat.goTell(props.item.phone);
+                }}
+                style={[styles.phoneButton, IconHelper.iconDiameter(60)]}>
+                <Image source={CHAT_ICONS.phone} style={styles.img} />
+              </TouchableOpacity>
+            </>
+          }
       </View>
     </View>
   );
