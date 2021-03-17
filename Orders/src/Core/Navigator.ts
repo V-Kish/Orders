@@ -132,7 +132,7 @@ class NavigatorImpl {
     if (length < 2) {
       return;
     }
-    if (this.state.prevScreen[this.state.prevScreen.length - 2].name ==='ChatListScreen'){
+    if (this.state.prevScreen[this.state.prevScreen.length - 2].name ==='ChatListScreen' && this.state.prevScreen[this.state.prevScreen.length - 1].name !== 'ChatScreen'){
       global.reload = !global.reload
     }
     this.navigate(this.state.prevScreen[this.state.prevScreen.length - 2].name);

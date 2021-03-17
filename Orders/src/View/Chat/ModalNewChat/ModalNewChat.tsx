@@ -72,6 +72,8 @@ export const ModalNewChat = () => {
       setInputMessage('');
       if (chat) {
         dispatch(selectedItemChatAction(chat[0]));
+        console.warn('chat[0]',chat[0])
+        global.selectedChatId = chat[0].id;
         navigator().navigate('ChatScreen');
       } else {
         navigator().navigate('ChatListScreen');
