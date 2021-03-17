@@ -9,8 +9,10 @@ import {
 import {navigator} from '../../Core/Navigator';
 
 import {COLORS} from '../../constants/colors';
-import {ICONS} from '../../constants/icons';
+import {useDispatch} from "react-redux";
+import {currentUser} from "../../Core/CurrentUser";
 export const DrawerContainer = () => {
+  const dispatch = useDispatch();
   return (
     <View style={styles.container}>
       {/*<View style={styles.wrapLogo}>*/}
@@ -40,6 +42,15 @@ export const DrawerContainer = () => {
           }}
           style={[styles.btns, {backgroundColor: COLORS.BUTTON_ORANGE}]}>
           <Text style={[styles.textsBtn]}>Клієнти системи</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+            onPress={() => {
+              navigator().closeDrawer();
+              currentUser().logout().then();
+              navigator().changeNavigationStateAuth(true, dispatch);
+            }}
+            style={[styles.btns, {backgroundColor: COLORS.HEADER_RED}]}>
+          <Text style={[styles.textsBtn]}>Вийти системи</Text>
         </TouchableOpacity>
       </View>
     </View>

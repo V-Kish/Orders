@@ -36,6 +36,16 @@ import {AvoidScrollView} from '../Components/AvoidScrollView';
 import {dateParse, dateTimeToTimeString, dateTimeToTimeStringDatePick} from '../../helpers/DateParse';
 export const OrderUserView = () => {
   const dispatch = useDispatch();
+
+  // Dictionary settings array
+  const maxMinutes = useSelector(
+      (state: reduxTypes) => state.start.maxMinutes,
+  );
+  const minMinutes = useSelector(
+      (state: reduxTypes) => state.start.minMinutes,
+  );
+  //
+
   const [disabledBtn, setDisabled] = useState(false);
   const [inputValue, setInputValue] = useState('');  // date
   // from
@@ -44,6 +54,8 @@ export const OrderUserView = () => {
   const [showFrom, setShowFrom] = useState(false);
   let minutes = dateFrom.getHours() * 60 + dateFrom.getMinutes();
   //
+
+
 
   const userData: userDataTypes = useSelector(
     (state: reduxTypes) => state.ditUser.editUser,
@@ -174,6 +186,17 @@ export const OrderUserView = () => {
       return;
     }
     const currentDate = selectedDate || date;
+    let min =  currentDate.getHours() * 60 + currentDate.getMinutes()
+    if (min  < parseInt(minMinutes[0].value)){
+      Alert.alert('Увага',`Мінімальна кількість часу в хвилинах для проведення заявки: ${minMinutes[0].value}`);
+      setShowFrom(Platform.OS === 'ios');
+      return;
+    }
+    if (min  > parseInt(maxMinutes[0].value)){
+      Alert.alert('Увага',`Максимальна кількість часу в хвилинах для проведення заявки: ${maxMinutes[0].value}`);
+      setShowFrom(Platform.OS === 'ios');
+      return;
+    }
     setShowFrom(Platform.OS === 'ios');
     setDateFrom(currentDate);
   };

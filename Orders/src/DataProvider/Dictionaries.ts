@@ -11,9 +11,7 @@ import {
   getOrders,
 } from '../store/actions/Dictionaries';
 import {MethodsRequest} from './MethodsRequest';
-import {GetOrderInfo} from '../functions/GetOrderInfo';
-import {navigator} from '../Core/Navigator';
-import {PreloaderMain} from "../store/actions/AppStart";
+import {PreloaderMain, settingsAppAction} from "../store/actions/AppStart";
 
 class Dictionaries {
   private _onDictionariesLoad: () => void;
@@ -24,6 +22,7 @@ class Dictionaries {
   private _ordersStatusesStatus: boolean;
   private _listDepartmentsStatus: boolean;
   private _getOrdersStatus: boolean;
+  private _loadSettingsStatus: boolean;
   constructor() {
     this._onDictionariesLoad = null;
     this._listDepartmentsStatus = false;
@@ -32,6 +31,7 @@ class Dictionaries {
     this._typesOperationStatus = false;
     this._ordersStatusesStatus = false;
     this._getOrdersStatus = false;
+    this._loadSettingsStatus = false;
   }
   static InitDictionaries(onDictionariesLoad: () => void, dispatch) {
     if (typeof onDictionariesLoad === 'function') {
@@ -43,6 +43,7 @@ class Dictionaries {
     this._loadDepartmentsGroups(dispatch).then();
     this._loadTypesOperation(dispatch).then();
     this._LoadOrdersStatus(dispatch).then();
+    this._loadSettings(dispatch).then();
   }
 
   // Валюти
@@ -81,6 +82,16 @@ class Dictionaries {
       'GET',
     );
   }
+  // Налаштування
+  static async settingsApp(body) {
+    return fetchData(
+      `rest/v1/${currentUser().userId}/${
+        currentUser().userToken
+      }/dictionary/dic_settings/get`,
+      'POST',
+      body,
+    );
+  }
   // Список відділень
   static async loadDepartments(body: Departments = {rootType: 0, sQuery: ''}) {
     return fetchData(
@@ -101,6 +112,7 @@ class Dictionaries {
       this._getOrdersStatus &&
       this._listDepartmentsStatus &&
       this._departmentsStatus &&
+      this._loadSettingsStatus &&
       this._typesOperationStatus &&
       this._ordersStatusesStatus
     ) {
@@ -146,6 +158,28 @@ class Dictionaries {
       }
       dispatch(listCurrencies(response.data));
       this._listCurrenciesStatus = true;
+      this.onComplete();
+    } catch (ex) {
+      AppLog.error('_loadCurrencies', ex);
+      await currentUser().logout();
+      dispatch(PreloaderMain(false));
+    }
+  }
+  static async _loadSettings(dispatch) {
+    this._loadSettingsStatus = false;
+    try {
+      const body = {
+        names: ['OrderWaitLifeMinTime', 'OrderWaitLifeMaxTime'],
+      };
+      const response = await Dictionaries.settingsApp(body);
+      console.log('settings response',response)
+      if (response.statusCode !== 200) {
+        await currentUser().logout();
+        dispatch(PreloaderMain(false));
+        return;
+      }
+       dispatch(settingsAppAction(response.result));
+      this._loadSettingsStatus = true;
       this.onComplete();
     } catch (ex) {
       AppLog.error('_loadCurrencies', ex);
