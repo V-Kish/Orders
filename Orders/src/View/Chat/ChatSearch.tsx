@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     zIndex: 999,
     width: '100%',
     justifyContent: 'center',
-    paddingHorizontal: wp(15),
+    paddingHorizontal: wp(5),
     marginLeft: hp(10),
     marginTop: hp(5),
     shadowColor: 'rgba(0,0,0,0)',

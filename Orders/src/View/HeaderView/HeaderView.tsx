@@ -21,7 +21,7 @@ export const HeaderView = ({
     <View style={{...styles.container, backgroundColor: color}}>
      <View style={{flexDirection:'row'}}>
        <View style={styles.imageView}>
-         <TouchableOpacity onPress={onPress !== false ? () => onPress() : null}>
+         <TouchableOpacity onPress={onPress !== false ? () => onPress() : null} style={styles.leftBtn}>
            <Image source={icon} style={styles.image} />
          </TouchableOpacity>
        </View>
@@ -41,7 +41,7 @@ export const HeaderView = ({
      </View>
       {rightIcon &&(
           <TouchableOpacity
-              onPress={onPressRight !== false ? () => onPressRight() : null}>
+              onPress={onPressRight !== false ? () => onPressRight() : null} style={styles.rightBtn}>
             <Image source={rightIcon} style={styles.image} />
           </TouchableOpacity>
       )}
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: hp(80),
-    paddingHorizontal: wp(20),
+    paddingHorizontal: wp(0),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -68,10 +68,22 @@ const styles = StyleSheet.create({
   imageView: {
     justifyContent: 'center',
   },
+  leftBtn:{
+    height: hp(80),
+    justifyContent: 'center',
+    paddingLeft:wp(13),
+    paddingRight:wp(15),
+  },
+  rightBtn:{
+    height: hp(80),
+    justifyContent: 'center',
+    paddingLeft:wp(15),
+    paddingRight:wp(20),
+  },
   image: {
     resizeMode: 'contain',
-    width: hp(25),
-    height: hp(25),
+    width: hp(32),
+    height: hp(32),
   },
   textContainer: {
     paddingHorizontal: wp(10),
