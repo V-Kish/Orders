@@ -20,6 +20,9 @@ export const ChatScreen = () => {
   const selectedItemChat = useSelector(
     (state: reduxTypes) => state.chat.selectedChat,
   );
+
+  console.log(selectedItemChat);
+
   function goBack() {
     navigator().toGoBack();
   }

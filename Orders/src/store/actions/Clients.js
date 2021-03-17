@@ -52,12 +52,13 @@ export const ClearSelectedChat = (value) => {
 };
 
 
-export const SelectedClientDetails = (value, operations) => {
+export const SelectedClientDetails = (value, operations, orders) => {
     return {
         type: SELECTED_CLIENT_DETAILS,
         payload: {
             value,
-            operations
+            operations,
+            orders
         },
     };
 };

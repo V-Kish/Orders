@@ -29,13 +29,15 @@ class Clients {
             body.sQuery = searchText;
             console.log("KUSHI SEARCH",body)
             const list = await UserDataProvider.getClients(body);
-            console.log(list.data);
+            
             if (list.statusCode === 200) {
                 if (pagination) {
                     // @ts-ignore
+                    console.log("LOADED CLIENTS TO PAGINATE: ", list.data);
                     dispatch(ClientsListPaginationAction(list.data));
                 } else {
                     // @ts-ignore
+                    console.log("LOADED CLIENTS FIRST TIME: ", list.data);
                     dispatch(ClientsListAction(list.data));
                 }
                 return false;
@@ -79,10 +81,10 @@ class Clients {
             const list = await UserDataProvider.getSelectedClient(body, Data.clientId);
 
             const operations = await UserDataProvider.getSelectedClientOperations(body, Data.clientId);
-            console.log("GET SELECTED USER OPERATIONS",operations.data.operations);
+            console.log("GET SELECTED USER OPERATIONS", {operations: operations.data.operations, orders: operations.data.orders });
 
             if (list.statusCode === 200) {
-                dispatch(SelectedClientDetails(list.data, operations.data.operations))
+                dispatch(SelectedClientDetails(list.data, operations.data.operations, operations.data.orders))
                 return false;
             }
             if (list.statusCode === 403 && list.statusMessage === 'forbidden') {

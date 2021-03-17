@@ -7,17 +7,20 @@ import {
 import { CustomerListItem } from './CustomerListItem';
 import {clientItem, reduxTypes} from "../../Types";
 import { useDispatch, useSelector } from 'react-redux';
+import { Clients } from '../../functions/Clients';
 
 
 export const CustomersListView = () => {
     const dispatch = useDispatch();
     const ClientsList = useSelector((state: reduxTypes) => state.clients.Items);
+    const ClientsListInfo = useSelector((state: reduxTypes) => state.clients.clientsListInfo);
+    console.log("LOADED CLIENTS TO PAGINATE: ", ClientsListInfo);
 
     function renderClients(){
         if(ClientsList !== undefined){ 
             if(ClientsList.length > 0){
-                return ClientsList.map((item) => (
-                    <CustomerListItem item={item} key={item.id}/>
+                return ClientsList.map((item, index) => (
+                    <CustomerListItem item={item} key={index}/>
                 ))
             } else {
                 return <Text>No users!</Text>
@@ -25,15 +28,41 @@ export const CustomersListView = () => {
         }
     }
 
+
+    const loadDataMore = ({layoutMeasurement, contentOffset, contentSize}) => {
+        const paddingToBottom = 500;
+        return (
+            layoutMeasurement.height + contentOffset.y >=
+            contentSize.height - paddingToBottom
+        );
+    };
+
+
+    async function loadMorePagination() {
+        if (!(ClientsListInfo.PageIndex * ClientsListInfo.PageSize < ClientsListInfo.TotalItems)) {
+            return;
+        }
+        let body = {};
+        body.pageIndex = ++ClientsListInfo.PageIndex;
+        body.PageSize = ClientsListInfo.PageSize;
+        body.query = '';
+        try {
+          await  Clients.getClientsList(dispatch, '', true, body).then();
+             console.log('LOADING');
+        } catch (ex) {
+             console.log("SOME ERROR");
+        }
+
+    }
+
     return (
         <View style={styles.containers}>
 
             <ScrollView
                 onScroll={async ({nativeEvent}) => {
-                    // if (loadDataMore(nativeEvent) && statePreloader ) {
-                    // await loadMorePagination();
-                    // }
-                    console.log("SCROOLLING CLIENTS!")
+                    if (loadDataMore(nativeEvent)) {
+                        await loadMorePagination();
+                    }
                 }}
 
                 contentContainerStyle={styles.clientsList}

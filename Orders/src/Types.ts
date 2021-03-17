@@ -43,6 +43,12 @@ export type reduxTypes = {
     }
   };
   clients: {
+    clientsListInfo:{
+      TotalItems: number;
+      TotalPages: number;
+      PageIndex: number;
+      PageSize: number;
+    };
     Items: Array<any>;
     selectedChatUser: {
       userName: string,
@@ -52,7 +58,8 @@ export type reduxTypes = {
       selectedUserId: number
     },
     selectedUser: {any},
-    selectedUserOperations: any
+    selectedUserOperations: any,
+    selecetedUserOrders: any
   };
 
   start: {

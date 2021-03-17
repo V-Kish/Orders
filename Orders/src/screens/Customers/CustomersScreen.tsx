@@ -63,7 +63,7 @@ export const CustomersScreen = () => {
         title="Клієнти системи"
         color={COLORS.HEADER_BLUE}
         ordersSettings={true}
-        onPress={goBack}
+        onPress={() => navigator().openDrawer()}
       />
 
       <View style={styles.containerClients}>

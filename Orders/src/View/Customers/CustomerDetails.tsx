@@ -22,8 +22,8 @@ export const CustomerDetails = (clientId) => {
   const selectedClient = useSelector((state: reduxTypes) => state.clients.selectedClientId);
   const selectedClientDetails = useSelector((state: reduxTypes) => state.clients.selectedUser);
   const selectedClientOperations = useSelector((state: reduxTypes) => state.clients.selectedUserOperations);
+  const selectedClientOrders = useSelector((state: reduxTypes) => state.clients.selectedUserOrders);
   const listCurrencies = useSelector((state: reduxTypes) => state.dictionaries.listCurrencies);
-
 
 
   useEffect(() => {
@@ -215,7 +215,9 @@ export const CustomerDetails = (clientId) => {
                         </View>
                       </View>
                   </View>
-
+                  
+                  {
+                    (selectedClientOrders !== undefined && selectedClientOrders.length > 0)  &&
                   <View style={[styles.ordersWrap]}>
                       <View style={[styles.leftBlock]}>
                         <Image source={CHAT_ICONS.detailsOrders} style={styles.statIcon}/>
@@ -240,7 +242,7 @@ export const CustomerDetails = (clientId) => {
 
                             
                             <View style={styles.operationWrap}>
-                              <View style={styles.operationsValue}>
+                              {/* <View style={styles.operationsValue}>
                                 <View style={styles.leftProps}>
                                   <Text style={[styles.operationValue, styles.currency]}>USD</Text>
                                   <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>2</Text>
@@ -250,76 +252,33 @@ export const CustomerDetails = (clientId) => {
                                   <Text style={[styles.operationValue, styles.success]}>{(22).toLocaleString('en')}</Text>
                                   <Text style={[styles.operationValue, styles.sumOrders]}>{(2000).toLocaleString('en')}</Text>
                                 </View>
-                              </View>
+                              </View> */}
 
-                              <View style={styles.operationsValue}>
-                                <View style={styles.leftProps}>
-                                  <Text style={[styles.operationValue, styles.currency]}>EUR</Text>
-                                  <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>2</Text>
-                                </View>
+                              {
+                                (selectedClientOrders !== undefined && selectedClientOrders.length > 0)  &&
+                                selectedClientOrders.map((order, index)=>{
+                                  return(
+                                    <View key={`order_${order.currencyId}`}  style={styles.operationsValue}>
+                                      <View style={styles.leftProps}>
+                                        <Text style={[styles.operationValue, styles.currency]}>{getCurrencyCode(order)}</Text>
+                                        <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>{order.orderBuyCountTotal+order.orderSaleCountTotal}</Text>
+                                      </View>
 
-                                <View style={styles.rightProps}>
-                                  <Text style={[styles.operationValue, styles.successOrdersValue]}>1</Text>
-                                  <Text style={[styles.operationValue, styles.sumOrdersValue]}>{(2000000).toLocaleString('en')}</Text>
-                                </View>
-                              </View>
-
-                              <View style={styles.operationsValue}>
-                                <View style={styles.leftProps}>
-                                  <Text style={[styles.operationValue, styles.currency]}>EUR</Text>
-                                  <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>2</Text>
-                                </View>
-
-                                <View style={styles.rightProps}>
-                                  <Text style={[styles.operationValue, styles.successOrdersValue]}>1</Text>
-                                  <Text style={[styles.operationValue, styles.sumOrdersValue]}>{(2000000).toLocaleString('en')}</Text>
-                                </View>
-                              </View>
-
-
-                              <View style={styles.operationsValue}>
-                                <View style={styles.leftProps}>
-                                  <Text style={[styles.operationValue, styles.currency]}>EUR</Text>
-                                  <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>2</Text>
-                                </View>
-
-                                <View style={styles.rightProps}>
-                                  <Text style={[styles.operationValue, styles.successOrdersValue]}>1</Text>
-                                  <Text style={[styles.operationValue, styles.sumOrdersValue]}>{(2000000).toLocaleString('en')}</Text>
-                                </View>
-                              </View>
-
-
-                              <View style={styles.operationsValue}>
-                                <View style={styles.leftProps}>
-                                  <Text style={[styles.operationValue, styles.currency]}>EUR</Text>
-                                  <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>2</Text>
-                                </View>
-
-                                <View style={styles.rightProps}>
-                                  <Text style={[styles.operationValue, styles.successOrdersValue]}>1</Text>
-                                  <Text style={[styles.operationValue, styles.sumOrdersValue]}>{(2000000).toLocaleString('en')}</Text>
-                                </View>
-                              </View>
-
-
-                              <View style={styles.operationsValue}>
-                                <View style={styles.leftProps}>
-                                  <Text style={[styles.operationValue, styles.currency]}>EUR</Text>
-                                  <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>2</Text>
-                                </View>
-
-                                <View style={styles.rightProps}>
-                                  <Text style={[styles.operationValue, styles.successOrdersValue]}>1</Text>
-                                  <Text style={[styles.operationValue, styles.sumOrdersValue]}>{(2000000).toLocaleString('en')}</Text>
-                                </View>
-                              </View>
+                                      <View style={styles.rightProps}>
+                                        <Text style={[styles.operationValue, styles.successOrdersValue]}>{order.orderBuyCountSuccess+order.orderSaleCountSuccess}</Text>
+                                        <Text style={[styles.operationValue, styles.sumOrdersValue]}>{(order.orderBuySum+order.orderSaleSum).toLocaleString('en')}</Text>
+                                      </View>
+                                    </View>
+                                  )
+                                })
+                              }
                             </View>
 
 
                         </View>
                       </View>
                   </View>
+                }
               </View>
             </View>
           </View>
@@ -412,14 +371,14 @@ const styles = StyleSheet.create({
   },
   imgProp :{
     resizeMode:'contain',
-    width:hw(40),
-    height:hp(40),
+    width:hw(35),
+    height:hp(35),
   },
   //NEW STYLES FOR STAT
   statWrapper: {
     flex: 1,
     flexDirection: 'column',
-    paddingLeft: 15
+    paddingHorizontal: hw(10)
   },
   buyWrap: {
     width: '100%',
@@ -428,7 +387,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderBottomColor: 'rgba(0,0,0,0.12)',
     borderBottomWidth: 1,
-    paddingBottom: 15
+    paddingBottom: hp(15)
   },
   saleWrap: {
     marginTop: 15,
@@ -438,22 +397,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderBottomColor: 'rgba(0,0,0,0.12)',
     borderBottomWidth: 1,
-    paddingBottom: 15
+    paddingBottom: hp(15)
   },
   ordersWrap: {
-    marginTop: 15,
+    marginTop: hp(15),
     width: '100%',
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    paddingBottom: 15
+    paddingBottom: hp(15)
   },
   leftBlock: {
     flexDirection: 'column',
     justifyContent: 'flex-start',
   },
   rightBlock: {
-    paddingLeft: 10,
+    paddingLeft: hw(10),
     flexDirection: 'column',
     width: '95%',
     justifyContent: 'flex-start',
@@ -496,7 +455,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   operationValue: {
-    fontSize: 18,
+    fontSize: 16,
   },
   leftProps: {
     alignItems: 'center',
@@ -517,17 +476,18 @@ const styles = StyleSheet.create({
     width: '50%'
   },
   qty: {
-    width: '50%'
+    width: '50%',
   },
   success: {
-    width: '50%'
+    width: '50%',
   },
   successOrdersValue: {
-    width: '20%'
+    width: '20%',
+    color: '#27AE60'
   },
   sumOrdersValue: {
     textAlign: 'right',
-    width: '80%'
+    width: '80%',
   },
   sumOrders: {
     width: '50%',

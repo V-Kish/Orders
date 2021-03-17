@@ -13,6 +13,7 @@ import {navigator} from '../Core/Navigator';
 import { CustomerDetails } from '../View/Customers/CustomerDetails';
 import { SelectClientChatAction } from '../store/actions/Clients';
 import { Chat } from '../functions/Chat';
+import { showModalCreateNewChat } from '../store/actions/AppStart';
 
 export const ClientScreen = () => {
   function goBack() {
@@ -21,21 +22,59 @@ export const ClientScreen = () => {
 
   const dispatch = useDispatch();
 
-  function selectUserChat(selectedChatUser = {
+
+  function selectUserChat(
+    selectedChatUser = {
       userName: '',
-      id: -1
+      id: -1,
+    },
+) {
+    dispatch(SelectClientChatAction(selectedChatUser));
+    navigator().navigate('ChatListScreen');
+    const body ={
+      pageIndex: 1,
+      pageSize: 10,
+      isRead: -1,
+      clientId: selectedChatUser.id,
+    };
+    console.log('getChatList succes start', body);
+    Chat.getChatList(dispatch,'',body).then(
+    (succes) => {
+        console.log('getChatList succes', succes);
+        console.log('getChatList succes body', body);
+        if (selectedChatUser.id !== -1 && succes.Items.length === 0) {
+        dispatch(showModalCreateNewChat(true))
+        }
+    },
+    (error) => {},
+    );
+}
+
+  function selectUserOrders(selectedUser = {
+    userName: '',
+    userId: -1,
   }){
-      dispatch(SelectClientChatAction(selectedChatUser));
-      navigator().navigate('ChatListScreen');
+    console.log(`OPEN ORDERS OF CLIENT: ${userName} WITH ID: ${userId}`)
+      // dispatch(SelectClientChatAction(selectedChatUser));
+      // navigator().navigate('ChatListScreen');
   }
 
+
+
+
+
   const selectedClientDetails = useSelector((state: reduxTypes) => state.clients.selectedUser);
-  let userPhone;
+  const selectedUserId = useSelector((state: reduxTypes) => state.clients.selectedClientId);
+  let userPhone, userName, userId;
 
   if(selectedClientDetails.user !== undefined){
     userPhone = selectedClientDetails.user.phone;
+    userName = selectedClientDetails.user.name;
+    userId = selectedUserId.selectedClientId;
   } else{
     userPhone = '+3800000000';
+    userName = '';
+    userId = -1;
   }
   return (
     <View style={styles.container}>
@@ -45,7 +84,7 @@ export const ClientScreen = () => {
         color={COLORS.HEADER_BLUE}
         // desc={orderData.system.orderNum}
         ordersSettings={true}
-        onPress={goBack}
+        onPress={() => navigator().openDrawer()}
       />
       <ScrollView contentContainerStyle={styles.mainContainer}>
             <CustomerDetails />
@@ -56,11 +95,11 @@ export const ClientScreen = () => {
             <Image source={CHAT_ICONS.detailsPhone} style={styles.img}/>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.floatButton} onPress={()=>{selectUserChat({userName: '', id: -1})}}>
+          <TouchableOpacity style={styles.floatButton} onPress={()=>{selectUserChat({userName: userName, id: userId})}}>
             <Image source={CHAT_ICONS.detailsChat} style={styles.img}/>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.floatButton} onPress={()=>{console.log("User operations!!!")}}>
+          <TouchableOpacity style={styles.floatButton} onPress={()=>{selectUserOrders({userName: userName, userId: userId})}}>
             <Image source={CHAT_ICONS.detailsOperation} style={styles.img}/>
           </TouchableOpacity>
       </View>

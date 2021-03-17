@@ -4,7 +4,8 @@ import {
     SELECT_CLIENT_CHAT,
     CLEAR_SELECTED_CHAT,
     SELECTED_CLIENT_DETAILS,
-    SELECTED_CLIENT_ID
+    SELECTED_CLIENT_ID,
+    CLIENTS_LIST_PAGINATION
   } from '../types';
 
 
@@ -17,7 +18,14 @@ const initialState = {
     },
     selectedUser: {},
     selectedClientId: {},
-    selectedUserOperations: []
+    selectedUserOperations: [],
+    selectedUserOrders: [],
+    clientsListInfo: {
+        TotalItems: 0,
+        TotalPages: 0,
+        PageIndex: 0,
+        PageSize: 0
+    }
 }
 
 
@@ -27,8 +35,14 @@ export const ClientsReducer = (state = initialState, action) => {
         case CLIENTS_LIST:
             return {
                 ...state,
-                Items: action.payload.Items
-            };
+                Items: action.payload.Items,
+                clientsListInfo: {
+                    TotalItems: action.payload.TotalItems,
+                    TotalPages: action.payload.TotalPages,
+                    PageIndex: action.payload.PageIndex,
+                    PageSize: action.payload.PageSize,
+                }
+        };
         case CLIENTS_LIST_SEARCH_PARAM:
             return {
                 ...state,
@@ -37,7 +51,18 @@ export const ClientsReducer = (state = initialState, action) => {
                     pageIndex: 1,
                     pageSize: 10,
                 },
-            };
+        };
+        case CLIENTS_LIST_PAGINATION:
+            return {
+            ...state,
+            Items: state.Items.concat(action.payload.Items),
+            clientsListInfo: {
+                TotalItems: action.payload.TotalItems,
+                TotalPages: action.payload.TotalPages,
+                PageIndex: action.payload.PageIndex,
+                PageSize: action.payload.PageSize,
+            }
+        };
         case SELECT_CLIENT_CHAT:
             return {
                 ...state,
@@ -55,7 +80,8 @@ export const ClientsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedUser: action.payload.value,
-                selectedUserOperations: action.payload.operations
+                selectedUserOperations: action.payload.operations,
+                selectedUserOrders: action.payload.orders
             }
         case SELECTED_CLIENT_ID:
             return {
