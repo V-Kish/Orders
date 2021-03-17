@@ -18,7 +18,7 @@ export const CustomersDetailsScreen = () => {
         title="Детальна інформація про клієнта"
         color={COLORS.HEADER_BLUE}
         ordersSettings={true}
-        onPress={() => {}}
+        onPress={() => goBack()} 
       />
     </View>
   );

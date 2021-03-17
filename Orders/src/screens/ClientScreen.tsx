@@ -84,7 +84,9 @@ export const ClientScreen = () => {
         color={COLORS.HEADER_BLUE}
         // desc={orderData.system.orderNum}
         ordersSettings={true}
-        onPress={() => navigator().openDrawer()}
+        onPress={()=>{
+          goBack()
+        }}
       />
       <ScrollView contentContainerStyle={styles.mainContainer}>
             <CustomerDetails />
