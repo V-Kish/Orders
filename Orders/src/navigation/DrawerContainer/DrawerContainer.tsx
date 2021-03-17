@@ -11,6 +11,7 @@ import {navigator} from '../../Core/Navigator';
 import {COLORS} from '../../constants/colors';
 import {useDispatch} from "react-redux";
 import {currentUser} from "../../Core/CurrentUser";
+import {AddNewChat} from "../../store/actions/Clients";
 export const DrawerContainer = () => {
   const dispatch = useDispatch();
   return (
@@ -38,6 +39,7 @@ export const DrawerContainer = () => {
         <TouchableOpacity
           onPress={() => {
             navigator().closeDrawer();
+            dispatch(AddNewChat(false));
             navigator().navigate('CustomersScreen');
           }}
           style={[styles.btns, {backgroundColor: COLORS.BUTTON_ORANGE}]}>

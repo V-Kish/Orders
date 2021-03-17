@@ -74,7 +74,6 @@ export const CustomerListItem = (props) => {
 
             if(addNewChat){
               selectUserChat({userName: props.item.name, id: props.item.id});
-              dispatch(AddNewChat(false));
             } else{
               selectClient()
             }

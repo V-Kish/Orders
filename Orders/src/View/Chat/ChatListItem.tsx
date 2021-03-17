@@ -11,6 +11,7 @@ import {currentUser} from '../../Core/CurrentUser';
 import {navigator} from '../../Core/Navigator';
 import {useDispatch} from 'react-redux';
 import {selectedItemChatAction} from '../../store/actions/Chat';
+import {AddNewChat} from "../../store/actions/Clients";
 
 export const ChatListItem = ({item}) => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export const ChatListItem = ({item}) => {
         style={styles.containers}
         onPress={() => {
           dispatch(selectedItemChatAction(item));
+          dispatch(AddNewChat(false));
           navigator().navigate('ChatScreen');
         }}>
         {/*// container //*/}

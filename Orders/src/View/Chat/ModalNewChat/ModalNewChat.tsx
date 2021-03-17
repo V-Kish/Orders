@@ -35,7 +35,6 @@ export const ModalNewChat = () => {
   // use selector
   const isShow = useSelector((state: reduxTypes) => state.start.showModal);
   const ListChats = useSelector((state: reduxTypes) => state.chat.Items);
-console.warn('ListChats',ListChats)
   const selectedChatUser = useSelector(
     (state: reduxTypes) => state.clients.selectedChatUser,
   );
@@ -59,18 +58,14 @@ console.warn('ListChats',ListChats)
     const result = await UserDataProvider.createNewChat(body);
 
     if (result.statusCode === 200) {
-      // const list = await UserDataProvider.getListChats({ pageIndex: 1,
-      //   pageSize: 10,
-      //   isRead: -1});
     const list = await  Chat.getChatList(dispatch,'',{
         pageIndex: 1,
         pageSize: 10,
         isRead: -1,
         clientId: selectedChatUser.id,
       })
-      console.log('listzzzzzz',list)
       const chat = list.Items.filter((item) => (item.rootId === -1 ? item.id : item.rootId) === result.data.id);
-
+      dispatch(AddNewChat(false));
       dispatch(showModalCreateNewChat(false));
       dispatch(ClearSelectedChat());
       setInputTheme('');
