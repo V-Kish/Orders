@@ -78,7 +78,6 @@ class Chat {
     let body: ChatMessagesList = Data;
     try {
       const result = await UserDataProvider.getChatMessages(body);
-      console.log('rewt list ', result);
       if (result.statusCode === 200) {
         console.log('rewt list ', result);
         if (pagination) {
