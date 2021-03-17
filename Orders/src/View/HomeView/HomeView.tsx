@@ -13,6 +13,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {reduxTypes} from '../../Types';
 import {paginationMainList} from '../../store/actions/EditUserInfo';
 import {GetOrderInfo} from '../../functions/GetOrderInfo';
+import { currentUser } from '../../Core/CurrentUser';
 
 export const HomeView = () => {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ export const HomeView = () => {
     //
   }, [searchParam]);
   const orders = useSelector((state: reduxTypes) => state.dictionaries.orders);
+  const selectedUserId = useSelector((state: reduxTypes) => state.clients.selectedClientId);
 
   const paginationBody = useSelector(
     (state: reduxTypes) => state.ditUser.paginationBody,
@@ -57,6 +59,12 @@ export const HomeView = () => {
     if (!(orders.PageIndex * orders.PageSize < orders.TotalItems)) {
       return;
     }
+    let userID;
+
+    if(selectedUserId !== undefined){
+      userID = selectedUserId.selectedClientId;
+    }
+
     setStatePreloader(false);
     let body = {};
     body.pageIndex = ++paginationBody.pageIndex;
@@ -70,6 +78,7 @@ export const HomeView = () => {
         searchParam.status.id,
         body,
         true,
+        userID
       );
       setStatePreloader(true);
     } catch (ex) {

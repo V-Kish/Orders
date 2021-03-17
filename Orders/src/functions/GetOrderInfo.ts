@@ -46,6 +46,7 @@ class GetOrderInfo {
       const response = await MethodsRequest.getOrders(bodyRequest);
       console.log('response orders',response)
       if (response.statusCode === 200 && !pagination) {
+        console.log("DEFAULT ORDERS DATA: ", response.data);
         dispatch(getOrders(response.data));
       }
       if (response.statusCode === 200 && pagination) {

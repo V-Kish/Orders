@@ -11,9 +11,11 @@ import {orderDataTypes, reduxTypes} from '../Types';
 import {useDispatch, useSelector} from 'react-redux';
 import {navigator} from '../Core/Navigator';
 import { CustomerDetails } from '../View/Customers/CustomerDetails';
-import { SelectClientChatAction } from '../store/actions/Clients';
+import { SelectClientChatAction, SelectClientOrdersAction } from '../store/actions/Clients';
 import { Chat } from '../functions/Chat';
 import { showModalCreateNewChat } from '../store/actions/AppStart';
+import { GetOrderInfo } from '../functions/GetOrderInfo';
+import { getOrders } from '../store/actions/Dictionaries';
 
 export const ClientScreen = () => {
   function goBack() {
@@ -50,14 +52,7 @@ export const ClientScreen = () => {
     );
 }
 
-  function selectUserOrders(selectedUser = {
-    userName: '',
-    userId: -1,
-  }){
-    console.log(`OPEN ORDERS OF CLIENT: ${userName} WITH ID: ${userId}`)
-      // dispatch(SelectClientChatAction(selectedChatUser));
-      // navigator().navigate('ChatListScreen');
-  }
+
 
 
 
@@ -65,6 +60,49 @@ export const ClientScreen = () => {
 
   const selectedClientDetails = useSelector((state: reduxTypes) => state.clients.selectedUser);
   const selectedUserId = useSelector((state: reduxTypes) => state.clients.selectedClientId);
+
+  //ORDERS
+  const selectedClientOrdersList = useSelector((state: reduxTypes) => state.clients.selectedClientOrdersList);
+  const orders = useSelector((state: reduxTypes) => state.dictionaries.orders);
+
+
+
+  function selectUserOrders(selectedUser = {
+    userName: '',
+    userId: -1,
+  }){
+    dispatch(SelectClientOrdersAction(selectedUser));
+
+    navigator().navigate('HomeScreen');
+
+
+    const body ={
+      pageIndex: 1,
+      pageSize: 10,
+      operationType: 'all',
+      status: -1,
+      departmentId: -1,
+      sQuery: '',
+    };
+
+    console.log('getChatList succes start', body);
+    GetOrderInfo.getOrders(dispatch,'', -1, body, false, userId).then(
+    (succes) => {
+        console.log("ORDERS: ", orders);
+        console.log('GET CLIENT ORDERS succes', succes);
+        console.log('GET CLIENT ORDERS SUCCESS body', body);
+
+        dispatch(getOrders(succes.data));
+    },
+    (error) => {
+      console.log("SOME ERROR!")
+    },
+    );
+  }
+
+
+  //
+
   let userPhone, userName, userId;
 
   if(selectedClientDetails.user !== undefined){
@@ -88,7 +126,7 @@ export const ClientScreen = () => {
           goBack()
         }}
       />
-      <ScrollView contentContainerStyle={styles.mainContainer}>
+      <ScrollView contentContainerStyle={[styles.mainContainer]}>
             <CustomerDetails />
       </ScrollView>
 
@@ -115,6 +153,9 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     paddingHorizontal: hp(10),
+    minHeight: "100%",
+    width: '100%',
+    flexDirection: 'column'
   },
   floatMenu: {
     position: "absolute",

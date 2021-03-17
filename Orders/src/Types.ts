@@ -59,7 +59,8 @@ export type reduxTypes = {
     },
     selectedUser: {any},
     selectedUserOperations: any,
-    selecetedUserOrders: any
+    selecetedUserOrders: any,
+    selectedClientOrdersList: any
   };
 
   start: {

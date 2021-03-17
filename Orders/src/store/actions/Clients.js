@@ -6,7 +6,8 @@ import {
     SELECT_CLIENT_CHAT,
     CLEAR_SELECTED_CHAT,
     SELECTED_CLIENT_DETAILS,
-    SELECTED_CLIENT_ID
+    SELECTED_CLIENT_ID,
+    SELECT_CLIENT_ORDERS
   } from '../types';
 
 export const ClientsListAction = (value) => {
@@ -43,6 +44,14 @@ export const SelectClientChatAction = (value) => {
         payload: value,
     };
 };
+
+export const SelectClientOrdersAction = (value) =>{
+    return {
+        type: SELECT_CLIENT_ORDERS,
+        payload: value
+    };
+}
+
 
 export const ClearSelectedChat = (value) => {
     return {

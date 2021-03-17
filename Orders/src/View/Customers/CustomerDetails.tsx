@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Text, Image, ActivityIndicator} from 'react-native';
 import {CHAT_ICONS, ICONS} from '../../constants/icons';
 import {COLORS} from '../../constants/colors';
 import {mockupHeightToDP as hp} from '../../constants/Dimensions';
@@ -27,12 +27,12 @@ export const CustomerDetails = (clientId) => {
 
 
   useEffect(() => {
-    setPreloader(false);
+    setPreloader(true);
     // let clientId = 50;
     Clients.getSelectedUser(dispatch, {clientId: selectedClient.selectedClientId})
       .then(
         (succes) => {
-          setPreloader(true)
+          setPreloader(false)
         },
         (error) => setPreloader(true),
       );
@@ -277,18 +277,22 @@ export const CustomerDetails = (clientId) => {
             </View>
           </View>
     
-          <PreloaderChat isHide={preloader} />
+          {preloader && (
+              <View style={styles.preloader}>
+                  <ActivityIndicator size="large" color={COLORS.HEADER_BLUE} />
+              </View>
+          )}
         </>
       )
     }
 
     return (
       <>
-        <View style={styles.propsWrapper}>
-        
-        </View>
-  
-        <PreloaderChat isHide={preloader} />
+        {preloader && (
+              <View style={styles.preloader}>
+                  <ActivityIndicator size="large" color={COLORS.HEADER_BLUE} />
+              </View>
+          )}
       </>
     )
   }
@@ -302,6 +306,16 @@ export const CustomerDetails = (clientId) => {
   
 };
 const styles = StyleSheet.create({
+  preloader: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    bottom: 0,
+    backgroundColor: 'rgba(255,255,255,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 999,
+},
   container: {
     flex: 1,
     paddingTop: 15,
@@ -310,7 +324,8 @@ const styles = StyleSheet.create({
   },
   propsWrapper:{
     width: "83%",
-    paddingHorizontal: 8
+    height: '100%',
+    paddingHorizontal: 8,
   },
   propContainer: {
     flexDirection: 'row',

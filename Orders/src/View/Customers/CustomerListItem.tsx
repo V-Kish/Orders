@@ -19,13 +19,11 @@ import {navigator} from '../../Core/Navigator';
 
 import {clientItem, reduxTypes} from '../../Types';
 import {useDispatch, useSelector} from 'react-redux';
-import {SelectClientChatAction, SelectedClientId} from '../../store/actions/Clients';
+import {SelectClientChatAction, SelectClientOrdersAction, SelectedClientId} from '../../store/actions/Clients';
 import {showModalCreateNewChat} from "../../store/actions/AppStart";
 
 export const CustomerListItem = (props) => {
   const dispatch = useDispatch();
-
-  // const selectedClient = useSelector((state: reduxTypes) => state.clients.selectedClientId);
 
     function selectUserChat(
         selectedChatUser = {
@@ -36,10 +34,10 @@ export const CustomerListItem = (props) => {
         dispatch(SelectClientChatAction(selectedChatUser));
         navigator().navigate('ChatListScreen');
         const body ={
-        pageIndex: 1,
-        pageSize: 10,
-        isRead: -1,
-        clientId: selectedChatUser.id,
+          pageIndex: 1,
+          pageSize: 10,
+          isRead: -1,
+          clientId: selectedChatUser.id,
         };
         console.log('getChatList succes start', body);
         Chat.getChatList(dispatch,'',body).then(
@@ -54,9 +52,14 @@ export const CustomerListItem = (props) => {
         );
     }
 
-    function selectClient(){
+    function selectClient(selectedChatUser = {
+        userName: '',
+        id: -1,
+      },){
         dispatch(SelectedClientId({selectedClientId: props.item.id}));
         navigator().navigate('ClientScreen');
+
+
     }
 
   return (

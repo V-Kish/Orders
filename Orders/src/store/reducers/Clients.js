@@ -5,7 +5,8 @@ import {
     CLEAR_SELECTED_CHAT,
     SELECTED_CLIENT_DETAILS,
     SELECTED_CLIENT_ID,
-    CLIENTS_LIST_PAGINATION
+    CLIENTS_LIST_PAGINATION,
+    SELECT_CLIENT_ORDERS
   } from '../types';
 
 
@@ -25,7 +26,8 @@ const initialState = {
         TotalPages: 0,
         PageIndex: 0,
         PageSize: 0
-    }
+    },
+    selectedClientOrdersList: []
 }
 
 
@@ -87,6 +89,11 @@ export const ClientsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedClientId: action.payload
+            }
+        case SELECT_CLIENT_ORDERS:
+            return {
+                ...state,
+                selectedClientOrders: action.payload
             }
         default:
             return state;
