@@ -24,7 +24,7 @@ import {showModalCreateNewChat} from "../../store/actions/AppStart";
 
 export const CustomerListItem = (props) => {
   const dispatch = useDispatch();
-  // const addNewChat = useSelector((state: reduxTypes) => state.clients.addNewChat);
+  const addNewChat = useSelector((state: reduxTypes) => state.clients.addNewChat);
 
     function selectUserChat(
         selectedChatUser = {
@@ -71,7 +71,8 @@ export const CustomerListItem = (props) => {
           style={styles.leftWrapper}
           onPress={() => {
             //if addNewChat === true
-            if(true){
+
+            if(addNewChat){
               selectUserChat({userName: props.item.name, id: props.item.id});
               console.log(
                 `Open chat with user: ${props.item.name} and id: ${props.item.id}`,
@@ -93,8 +94,7 @@ export const CustomerListItem = (props) => {
         </TouchableOpacity>
 
           {
-            //if addNewChat !== true
-            true &&
+            !addNewChat &&
             <>
               <TouchableOpacity
                 onPress={() => {
