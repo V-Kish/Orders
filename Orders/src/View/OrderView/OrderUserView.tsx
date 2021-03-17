@@ -50,7 +50,7 @@ export const OrderUserView = () => {
   const [inputValue, setInputValue] = useState('');  // date
   // from
   // plus 12 hours
-  const [dateFrom, setDateFrom] = useState(new Date(new Date().setHours(12,30,0)));
+  const [dateFrom, setDateFrom] = useState(new Date(new Date().setHours(0,parseInt(minMinutes[0].value),0)));
   const [showFrom, setShowFrom] = useState(false);
   let minutes = dateFrom.getHours() * 60 + dateFrom.getMinutes();
   //
