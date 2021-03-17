@@ -234,12 +234,12 @@ export const CustomerDetails = (clientId) => {
 
                           <View style={styles.operations}>
                             <View style={styles.operationsTitle}>
-                              <View style={styles.leftProps}>
+                              <View style={styles.leftOrderProps}>
                                   <Text style={[styles.operationTitle, styles.currency]}>Валюта</Text>
                                   <Text style={[styles.operationTitle, styles.qty, styles.mlTitle]}>Всього</Text>
                               </View>
 
-                              <View style={styles.rightProps}>
+                              <View style={styles.leftOrderProps}>
                                   <Text style={[styles.operationTitle, styles.success]}>Успішних</Text>
                                   <Text style={[styles.operationTitle, styles.sumOrders]}>Сума</Text>
                               </View>
@@ -253,12 +253,12 @@ export const CustomerDetails = (clientId) => {
                                 selectedClientOrders.map((order, index)=>{
                                   return(
                                     <View key={`order_${order.currencyId}`}  style={styles.operationsValue}>
-                                      <View style={styles.leftProps}>
+                                      <View style={styles.leftOrderProps}>
                                         <Text style={[styles.operationValue, styles.currency]}>{getCurrencyCode(order)}</Text>
                                         <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>{order.orderBuyCountTotal+order.orderSaleCountTotal}</Text>
                                       </View>
 
-                                      <View style={styles.rightProps}>
+                                      <View style={styles.leftOrderProps}>
                                         <Text style={[styles.operationValue, styles.successOrdersValue]}>{numberWithSpaces(order.orderBuyCountSuccess+order.orderSaleCountSuccess)}</Text>
                                         <Text style={[styles.operationValue, styles.sumOrdersValue]}>{numberWithSpaces(order.orderBuySum+order.orderSaleSum)}</Text>
                                       </View>
@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   propsWrapper:{
-    width: "83%",
+    width: "84%",
     height: '100%',
     paddingHorizontal: 8,
   },
@@ -333,7 +333,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15
   },
   propName: {
-    fontSize: 18,
+    fontSize: 16,
     paddingRight: 10,
     lineHeight: 20,
     color: 'black',
@@ -356,22 +356,6 @@ const styles = StyleSheet.create({
       borderTopWidth: 1,
       marginTop: 15,
       paddingVertical: 15
-  },
-  floatMenu: {
-      position: "absolute",
-      right: 0,
-      top: 10
-  },
-  floatButton: {
-    height: 60,
-    width: 60,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20,
-    borderColor: '#F2F2F2',
-    borderWidth: 1,
-    borderRadius: 8
   },
   img: {
     resizeMode:'contain',
@@ -470,9 +454,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    width: '50%'
+    width: '70%'
   },
   rightProps: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    width: '30%'
+  },
+
+  leftOrderProps: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    width: '50%'
+  },
+  rightOrderProps: {
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
