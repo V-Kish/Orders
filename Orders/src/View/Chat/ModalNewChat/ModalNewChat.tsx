@@ -18,7 +18,7 @@ import {HeaderView} from '../../HeaderView/HeaderView';
 import {useDispatch, useSelector} from 'react-redux';
 import {UserDataProvider} from '../../../DataProvider/UserDataProvider';
 import {reduxTypes} from '../../../Types';
-import {ClearSelectedChat} from '../../../store/actions/Clients';
+import {ClearSelectedChat, AddNewChat} from '../../../store/actions/Clients';
 import {chatListPagination, selectedItemChatAction} from '../../../store/actions/Chat';
 import {navigator} from '../../../Core/Navigator';
 import { showModalCreateNewChat } from '../../../store/actions/AppStart';
@@ -86,11 +86,15 @@ export const ModalNewChat = () => {
       setPreloaderBtn(false);
     }
   };
-
+const closeModal = () =>{
+  dispatch(showModalCreateNewChat(false))
+    dispatch(ClearSelectedChat());
+  navigator().navigate('CustomersScreen')
+}
   return (
     <Modal
       visible={isShow}
-      onRequestClose={() => dispatch(showModalCreateNewChat(false))}
+      onRequestClose={closeModal}
       animationType={'slide'}>
       <View style={styles.container}>
         <HeaderView
@@ -99,7 +103,7 @@ export const ModalNewChat = () => {
           color={COLORS.HEADER_BLUE}
           ordersSettings={true}
           desc={selectedChatUser.userName}
-          onPress={() => dispatch(showModalCreateNewChat(false))}
+          onPress={closeModal}
         />
         <View style={styles.mainContainer}>
           {/*// Theme // */}
