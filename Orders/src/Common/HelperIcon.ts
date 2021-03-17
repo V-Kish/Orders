@@ -47,7 +47,7 @@ class IconHelper {
         if (firstCharacter === '') {
             firstCharacter = 'U';
         }
-        return firstCharacter;
+        return firstCharacter.toUpperCase();
     }
     static getColor(firstChar) {
         let result = {

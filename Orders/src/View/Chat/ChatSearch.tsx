@@ -4,7 +4,7 @@ import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
-import {CHAT_ICONS, ICONS} from '../../constants/icons';
+import {CHAT_ICONS} from '../../constants/icons';
 
 export const ChatSearch = ({changeCurrentText}) => {
   const [myTimeout, setMyTimeout] = useState();
