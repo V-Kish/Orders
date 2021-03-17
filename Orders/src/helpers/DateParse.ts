@@ -26,6 +26,11 @@ export function convertToUTCString(date: string, timeOffset = '+03:00') {
     const minutes = `0${date.getMinutes()}`.slice(-2);
     return `${hours}:${minutes}`;
   }
+export function dateTimeToTimeStringOrders(date: Date) {
+    const hours = `0${date.getHours() + 1}`.slice(-2);
+    const minutes = `0${date.getMinutes()}`.slice(-2);
+    return `${hours}:${minutes}`;
+}
 export function dateTimeToTimeStringDatePick(date: Date) {
     const hours = `0${date.getHours() + 1}`.slice(-2);
     const minutes = `0${date.getMinutes()}`.slice(-2);

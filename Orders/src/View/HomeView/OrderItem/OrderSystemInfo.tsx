@@ -5,14 +5,14 @@ import {
     mockupWidthToDP as wp,
   } from '../../../constants/Dimensions';
 import { OrderStatus } from '../../Components/OrderStatus'
-import { convertToUTCString, dateParse, dateTimeToDateString, dateTimeToTimeString } from '../../../helpers/DateParse';
+import { convertToUTCString, dateParse, dateTimeToDateString, dateTimeToTimeString, dateTimeToTimeStringOrders } from '../../../helpers/DateParse';
 
 export const OrderSystemInfo = ({item}) => {
   return (<View style={styles.orderInfoView}>
             <View style={styles.orderInfoDates}>
                 <Text style={styles.orderDate}>{dateTimeToDateString(
                         dateParse(convertToUTCString(item.system.statusDate)))}</Text>
-                <Text style={styles.orderDate}>{dateTimeToTimeString(
+                <Text style={styles.orderDate}>{dateTimeToTimeStringOrders(
                         dateParse(convertToUTCString(item.system.statusDate)))}</Text>
             </View>
             <OrderStatus type={item.system.type}/>
