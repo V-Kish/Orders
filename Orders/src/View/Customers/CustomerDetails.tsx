@@ -124,7 +124,7 @@ export const CustomerDetails = (clientId) => {
             <View style={styles.more}>
               <View style={{flexDirection: 'row', alignItems: 'center', paddingBottom: 15}}>
                   <Image source={CHAT_ICONS.detailsStatistics} style={styles.imgProp}/>
-                  <Text style={[styles.value, {lineHeight: 26, marginLeft: 10, fontSize: 18}]}>Статистика операцій клієнта</Text>
+                  <Text style={[styles.value, {lineHeight: 26, marginLeft: 10, fontSize: 16}]}>Статистика операцій клієнта</Text>
               </View>
 
               <View style={styles.statWrapper}>
@@ -325,22 +325,22 @@ const styles = StyleSheet.create({
   propsWrapper:{
     width: "84%",
     height: '100%',
-    paddingHorizontal: 8,
+    paddingHorizontal: 8
   },
   propContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 15
+    paddingVertical: 10
   },
   propName: {
-    fontSize: 16,
+    fontSize: 14,
     paddingRight: 10,
     lineHeight: 20,
     color: 'black',
     fontWeight: '400'
   },
   value: {
-    fontSize: 20,
+    fontSize: 18,
     lineHeight: 20,
     fontWeight: "bold",
     color: "rgba(0,0,0,1)"
@@ -411,7 +411,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   statTitle: {
-    fontSize: 16,
+    fontSize: 14,
     color: 'black',
     fontWeight: '400',
     lineHeight: 18
@@ -432,10 +432,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 5,
   },
   operationTitle: {
-    fontSize: 13,
+    fontSize: 11,
     color: "rgba(0,0,0,0.7)"
   },
   noBuy:{
@@ -448,7 +448,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   operationValue: {
-    fontSize: 16,
+    fontSize: 14,
   },
   leftProps: {
     alignItems: 'center',
