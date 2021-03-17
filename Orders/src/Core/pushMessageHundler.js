@@ -60,12 +60,7 @@ export const pushMessagesHandler = {
     }
   },
   _updateChat: async function (evendData, dispatch) {
-    console.log('evendData _updateChat', evendData);
-    console.log(
-      'evendData navigator().getCurrentScreen()',
-      navigator().getCurrentScreen(),
-    );
-    if (navigator().getCurrentScreen() === 'ChatScreen') {
+    if (navigator().getCurrentScreen() === 'ChatScreen' &&  global.selectedChatId === evendData.rootId) {
       Chat.getChatMessages(dispatch, {
         pageSize: 20,
         pageIndex: 1,

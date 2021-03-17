@@ -23,6 +23,7 @@ export const ChatListItem = ({item}) => {
           dispatch(selectedItemChatAction(item));
           dispatch(AddNewChat(false));
           navigator().navigate('ChatScreen');
+          global.selectedChatId = item.rootId;
         }}>
         {/*// container //*/}
         <View style={styles.wrap}>
