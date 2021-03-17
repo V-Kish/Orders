@@ -37,7 +37,7 @@ export const CustomerDetails = (clientId) => {
         (error) => setPreloader(true),
       );
 
-  }, []);
+  }, [selectedClient]);
 
 
   function getCurrencyCode(operation: {
@@ -116,111 +116,209 @@ export const CustomerDetails = (clientId) => {
             }
     
             <View style={styles.more}>
-              <View style={[styles.propContainer, {alignItems: 'center',}]}>
+              <View style={{flexDirection: 'row', alignItems: 'center', paddingBottom: 15}}>
                   <Image source={CHAT_ICONS.detailsStatistics} style={styles.imgProp}/>
                   <Text style={[styles.value, {lineHeight: 26, marginLeft: 10, fontSize: 18}]}>Статистика операцій клієнта</Text>
               </View>
 
-              <View style={{flex: 1, flexDirection: 'column'}}>
-                  <View style={styles.currencyTitle}>
-                    <Image source={CHAT_ICONS.detailsBuy} style={styles.currencyImg}/>
-                    <Text style={{marginLeft: 10, fontSize: 15}}>Купівля валюти</Text>
-                  </View>
+              <View style={styles.statWrapper}>
+                  <View style={[styles.buyWrap]}>
+                      <View style={[styles.leftBlock]}>
+                        <Image source={CHAT_ICONS.detailsBuy} style={styles.statIcon}/>
+                      </View>
 
-                  <View style={styles.currencyProps}>
-                      {
-                        selectedClientOperations.map((operation)=>{
-                          if(operation.buyCount === 0){
-                            return null
-                          }
-                          return (
-                            <View key={`buy_${operation.id}`} style={styles.currencyPropsRow}>
-                              <View style={styles.currencyLeft}>
-                                <View style={styles.statWrapper}>
-                                  <Text style={styles.propTitle}>Валюта</Text>
-                                  <Text style={styles.propValue}>{getCurrencyCode(operation)}</Text>
+                      <View style={[styles.rightBlock]}>
+                          <Text style={styles.statTitle}>Купівля валюти</Text>
+
+                          <View style={styles.operations}>
+                              <View style={styles.operationsTitle}>
+                                <View style={styles.leftProps}>
+                                    <Text style={[styles.operationTitle, styles.currency]}>Валюта</Text>
+                                    <Text style={[styles.operationTitle, styles.qty, styles.mlTitle]}>Кількість</Text>
                                 </View>
-                                <View style={[styles.statWrapper, {marginLeft: 40}]}>
-                                  <Text style={styles.propTitle}>Кількість</Text>
-                                  <Text style={styles.propValue}>{operation.buyCount}</Text>
+
+                                <View style={styles.rightProps}>
+                                    <Text style={[styles.operationTitle, styles.sum]}>Сума</Text>
                                 </View>
                               </View>
-                              <View style={styles.statWrapper}>
-                                <Text style={styles.propTitle}>Сума</Text>
-                                <Text style={styles.propValue}>{operation.buySum}</Text>
+
+
+
+                              <View style={styles.operationWrap}>
+                                  {
+                                    selectedClientOperations.map((operation, index)=>{
+                                      if(operation.buyCount === 0){
+                                        return null
+                                      }
+                                      return (
+                                        <View key={`buy_${index}`} style={styles.operationsValue}>
+                                          <View style={styles.leftProps}>
+                                              <Text style={[styles.operationValue, styles.currency]}>{getCurrencyCode(operation)}</Text>
+
+                                              <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>{operation.buyCount}</Text>
+                                          </View>
+
+                                          <View style={styles.rightProps}>
+                                              <Text style={[styles.operationValue, styles.sum]}>{operation.buySum}</Text>
+                                          </View>
+                                        </View>
+                                      ) 
+                                    })
+                                  }
+                              </View>
+                          </View>
+                      </View>
+                  </View>
+
+                  <View style={[styles.saleWrap]}>
+                      <View style={[styles.leftBlock]}>
+                        <Image source={CHAT_ICONS.detailsSale} style={styles.statIcon}/>
+                      </View>
+
+                      <View style={[styles.rightBlock]}>
+                        <Text style={styles.statTitle}>Продаж валюти</Text>
+
+                        <View style={styles.operations}>
+                            <View style={styles.operationsTitle}>
+                              <View style={styles.leftProps}>
+                                  <Text style={[styles.operationTitle, styles.currency]}>Валюта</Text>
+                                  <Text style={[styles.operationTitle, styles.qty, styles.mlTitle]}>Кількість</Text>
+                              </View>
+
+                              <View style={styles.rightProps}>
+                                  <Text style={[styles.operationTitle, styles.sum]}>Сума</Text>
                               </View>
                             </View>
-                          )
-                        })
-                      }
+
+                            <View style={styles.operationWrap}>
+                                  {
+                                    selectedClientOperations.map((operation, index)=>{
+                                      if(operation.saleCount === 0){
+                                        return null
+                                      }
+                                      return (
+                                        <View key={`sale_${index}`} style={styles.operationsValue}>
+                                          <View style={styles.leftProps}>
+                                              <Text style={[styles.operationValue, styles.currency]}>{getCurrencyCode(operation)}</Text>
+
+                                              <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>{operation.saleCount}</Text>
+                                          </View>
+
+                                          <View style={styles.rightProps}>
+                                              <Text style={[styles.operationValue, styles.sum]}>{operation.saleSum.toLocaleString('en')}</Text>
+                                          </View>
+                                        </View>
+                                      ) 
+                                    })
+                                  }
+                            </View>
+                        </View>
+                      </View>
                   </View>
 
-                  <View style={[styles.currencyTitle, {marginTop: 20}]}>
-                    <Image source={CHAT_ICONS.detailsSale} style={styles.currencyImg}/>
-                    <Text style={{marginLeft: 10, fontSize: 15}}>Продаж валюти</Text>
-                  </View>
+                  <View style={[styles.ordersWrap]}>
+                      <View style={[styles.leftBlock]}>
+                        <Image source={CHAT_ICONS.detailsOrders} style={styles.statIcon}/>
+                      </View>
 
-                  <View style={[styles.currencyProps, ]}>
-                      {
-                        selectedClientOperations.map((operation)=>{
-                          if(operation.saleCount === 0){
-                            return null
-                          }
-                          return (
-                            <View key={`sale_${operation.id}`} style={styles.currencyPropsRow}>
-                              <View style={styles.currencyLeft}>
-                                <View style={styles.statWrapper}>
-                                  <Text style={styles.propTitle}>Валюта</Text>
-                                  <Text style={styles.propValue}>{getCurrencyCode(operation)}</Text>
-                                </View>
-                                <View style={[styles.statWrapper, {marginLeft: 40}]}>
-                                  <Text style={styles.propTitle}>Кількість</Text>
-                                  <Text style={styles.propValue}>{operation.saleCount}</Text>
-                                </View>
+                      <View style={[styles.rightBlock]}>
+                        <Text style={styles.statTitle}>Замовлення</Text>
+
+                          <View style={styles.operations}>
+                            <View style={styles.operationsTitle}>
+                              <View style={styles.leftProps}>
+                                  <Text style={[styles.operationTitle, styles.currency]}>Валюта</Text>
+                                  <Text style={[styles.operationTitle, styles.qty, styles.mlTitle]}>Всього</Text>
                               </View>
 
-                              <View style={styles.statWrapper}>
-                                <Text style={styles.propTitle}>Сума</Text>
-                                <Text style={styles.propValue}>{operation.saleSum}</Text>
+                              <View style={styles.rightProps}>
+                                  <Text style={[styles.operationTitle, styles.success]}>Успішних</Text>
+                                  <Text style={[styles.operationTitle, styles.sumOrders]}>Сума</Text>
                               </View>
                             </View>
-                          )
-                        })
-                      }
-                  </View>
 
-                  <View style={[styles.currencyTitle, {marginTop: 20}]}>
-                    <Image source={CHAT_ICONS.detailsSale} style={styles.currencyImg}/>
-                    <Text style={{marginLeft: 10, fontSize: 15}}>Замомлення</Text>
-                  </View>
 
-                  <View style={[styles.currencyProps, ]}>
-                      {
-                        selectedClientOperations.map((operation)=>{
-                          if(operation.saleCount === 0){
-                            return null
-                          }
-                          return (
-                            <View key={`sale_${operation.id}`} style={styles.currencyPropsRow}>
-                              <View style={styles.currencyLeft}>
-                                <View style={styles.statWrapper}>
-                                  <Text style={styles.propTitle}>Валюта</Text>
-                                  <Text style={styles.propValue}>{getCurrencyCode(operation)}</Text>
+                            
+                            <View style={styles.operationWrap}>
+                              <View style={styles.operationsValue}>
+                                <View style={styles.leftProps}>
+                                  <Text style={[styles.operationValue, styles.currency]}>USD</Text>
+                                  <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>2</Text>
                                 </View>
-                                <View style={[styles.statWrapper, {marginLeft: 40}]}>
-                                  <Text style={styles.propTitle}>Всього</Text>
-                                  <Text style={styles.propValue}>{operation.saleCount}</Text>
+
+                                <View style={styles.rightProps}>
+                                  <Text style={[styles.operationValue, styles.success]}>{(22).toLocaleString('en')}</Text>
+                                  <Text style={[styles.operationValue, styles.sumOrders]}>{(2000).toLocaleString('en')}</Text>
                                 </View>
                               </View>
 
-                              <View style={styles.statWrapper}>
-                                <Text style={styles.propTitle}>Сума</Text>
-                                <Text style={styles.propValue}>{operation.saleSum}</Text>
+                              <View style={styles.operationsValue}>
+                                <View style={styles.leftProps}>
+                                  <Text style={[styles.operationValue, styles.currency]}>EUR</Text>
+                                  <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>2</Text>
+                                </View>
+
+                                <View style={styles.rightProps}>
+                                  <Text style={[styles.operationValue, styles.successOrdersValue]}>1</Text>
+                                  <Text style={[styles.operationValue, styles.sumOrdersValue]}>{(2000000).toLocaleString('en')}</Text>
+                                </View>
+                              </View>
+
+                              <View style={styles.operationsValue}>
+                                <View style={styles.leftProps}>
+                                  <Text style={[styles.operationValue, styles.currency]}>EUR</Text>
+                                  <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>2</Text>
+                                </View>
+
+                                <View style={styles.rightProps}>
+                                  <Text style={[styles.operationValue, styles.successOrdersValue]}>1</Text>
+                                  <Text style={[styles.operationValue, styles.sumOrdersValue]}>{(2000000).toLocaleString('en')}</Text>
+                                </View>
+                              </View>
+
+
+                              <View style={styles.operationsValue}>
+                                <View style={styles.leftProps}>
+                                  <Text style={[styles.operationValue, styles.currency]}>EUR</Text>
+                                  <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>2</Text>
+                                </View>
+
+                                <View style={styles.rightProps}>
+                                  <Text style={[styles.operationValue, styles.successOrdersValue]}>1</Text>
+                                  <Text style={[styles.operationValue, styles.sumOrdersValue]}>{(2000000).toLocaleString('en')}</Text>
+                                </View>
+                              </View>
+
+
+                              <View style={styles.operationsValue}>
+                                <View style={styles.leftProps}>
+                                  <Text style={[styles.operationValue, styles.currency]}>EUR</Text>
+                                  <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>2</Text>
+                                </View>
+
+                                <View style={styles.rightProps}>
+                                  <Text style={[styles.operationValue, styles.successOrdersValue]}>1</Text>
+                                  <Text style={[styles.operationValue, styles.sumOrdersValue]}>{(2000000).toLocaleString('en')}</Text>
+                                </View>
+                              </View>
+
+
+                              <View style={styles.operationsValue}>
+                                <View style={styles.leftProps}>
+                                  <Text style={[styles.operationValue, styles.currency]}>EUR</Text>
+                                  <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>2</Text>
+                                </View>
+
+                                <View style={styles.rightProps}>
+                                  <Text style={[styles.operationValue, styles.successOrdersValue]}>1</Text>
+                                  <Text style={[styles.operationValue, styles.sumOrdersValue]}>{(2000000).toLocaleString('en')}</Text>
+                                </View>
                               </View>
                             </View>
-                          )
-                        })
-                      }
+
+
+                        </View>
+                      </View>
                   </View>
               </View>
             </View>
@@ -317,34 +415,126 @@ const styles = StyleSheet.create({
     width:hw(40),
     height:hp(40),
   },
-  currencyImg: {
-    resizeMode:'contain',
-    width:hw(20),
-    height:hp(20),
+  //NEW STYLES FOR STAT
+  statWrapper: {
+    flex: 1,
+    flexDirection: 'column',
+    paddingLeft: 15
   },
-  currencyLeft: {
-    width:'50%',
-    flexDirection: 'row'
-  },
-  currencyProps: {
-    width: '100%',
-    flexDirection: 'column'
-  },
-  currencyPropsRow: {
+  buyWrap: {
     width: '100%',
     flexDirection: 'row',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
+    borderBottomColor: 'rgba(0,0,0,0.12)',
+    borderBottomWidth: 1,
+    paddingBottom: 15
+  },
+  saleWrap: {
     marginTop: 15,
-    paddingLeft: 30
-  },
-  currencyTitle: {
+    width: '100%',
     flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    borderBottomColor: 'rgba(0,0,0,0.12)',
+    borderBottomWidth: 1,
+    paddingBottom: 15
   },
-  propTitle: {
-    fontSize: 14,
-    color: 'rgba(0,0,0,0.5)'
+  ordersWrap: {
+    marginTop: 15,
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    paddingBottom: 15
   },
-  propValue: {
-    fontSize: 20
+  leftBlock: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+  },
+  rightBlock: {
+    paddingLeft: 10,
+    flexDirection: 'column',
+    width: '95%',
+    justifyContent: 'flex-start',
+  },
+  statTitle: {
+    fontSize: 16,
+    color: 'black',
+    fontWeight: '400',
+    lineHeight: 18
+  },
+  statIcon: {
+    resizeMode:'contain',
+    width:hw(18),
+    height:hp(18),
+  },
+  operations: {
+    flexDirection: 'column',
+    
+  },
+  operationWrap: {
+    
+  },
+  operationsTitle: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  operationTitle: {
+    fontSize: 13,
+    color: "rgba(0,0,0,0.7)"
+  },
+  noBuy:{
+    paddingVertical: 15
+  },
+  operationsValue: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  operationValue: {
+    fontSize: 18,
+  },
+  leftProps: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    width: '50%'
+  },
+  rightProps: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    width: '50%'
+  },
+  mlTitle: {
+    marginLeft: 0
+  },
+  currency: {
+    width: '50%'
+  },
+  qty: {
+    width: '50%'
+  },
+  success: {
+    width: '50%'
+  },
+  successOrdersValue: {
+    width: '20%'
+  },
+  sumOrdersValue: {
+    textAlign: 'right',
+    width: '80%'
+  },
+  sumOrders: {
+    width: '50%',
+    textAlign: 'right'
+  },
+  sum: {
+    width: '100%',
+    textAlign: 'right'
   }
 });
