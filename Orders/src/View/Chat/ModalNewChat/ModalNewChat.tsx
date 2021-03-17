@@ -34,7 +34,8 @@ export const ModalNewChat = () => {
   const [preloaderBtn, setPreloaderBtn] = useState(false);
   // use selector
   const isShow = useSelector((state: reduxTypes) => state.start.showModal);
-
+  const ListChats = useSelector((state: reduxTypes) => state.chat.Items);
+console.warn('ListChats',ListChats)
   const selectedChatUser = useSelector(
     (state: reduxTypes) => state.clients.selectedChatUser,
   );
@@ -89,7 +90,9 @@ export const ModalNewChat = () => {
 const closeModal = () =>{
   dispatch(showModalCreateNewChat(false))
     dispatch(ClearSelectedChat());
-  navigator().navigate('CustomersScreen')
+  if (ListChats.length === 0){
+    navigator().navigate('CustomersScreen')
+  }
 }
   return (
     <Modal
