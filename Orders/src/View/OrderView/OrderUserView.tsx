@@ -16,7 +16,7 @@ import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
-import {ICONS} from '../../constants/icons';
+import {ICONS, CHAT_ICONS} from '../../constants/icons';
 import {COLORS} from '../../constants/colors';
 import {ButtonView} from './ButtonView';
 import {useDispatch, useSelector} from 'react-redux';
@@ -248,7 +248,7 @@ export const OrderUserView = () => {
           style={styles.containers}
           onPress={() => Linking.openURL(`tel:${userData.user.phone}`)}>
           <Text style={styles.textDefault}>Номер телефону: </Text>
-          <Image source={ICONS.phoneIcon} style={styles.imgPhone} />
+          <Image source={CHAT_ICONS.detailsPhone} style={styles.imgPhone} />
           <Text style={styles.userPhone}>{userData.user.phone}</Text>
         </TouchableOpacity>
         <View style={styles.containers}>
