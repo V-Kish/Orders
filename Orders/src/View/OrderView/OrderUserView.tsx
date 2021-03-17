@@ -412,6 +412,7 @@ const styles = StyleSheet.create({
   },
   textDefaultSecond: {
     fontSize: hp(18),
+    flexWrap: "wrap"
   },
   userName: {
     fontSize: hp(22),
@@ -440,7 +441,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   department: {
-    fontSize: hp(22),
+    fontSize: hp(20),
+    flexWrap: "wrap",
     fontWeight: 'bold',
   },
   containerButtons: {
