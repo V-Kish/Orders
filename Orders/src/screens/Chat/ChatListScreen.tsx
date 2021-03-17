@@ -22,7 +22,7 @@ import {showModalCreateNewChat} from "../../store/actions/AppStart";
 
 export const ChatListScreen = () => {
   const dispatch = useDispatch();
-
+    const selectedChatUser = useSelector((state: reduxTypes) => state.clients.selectedChatUser);
   const [preloader, setPreloader] = useState(false);
 
 

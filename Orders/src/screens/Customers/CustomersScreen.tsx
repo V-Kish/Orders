@@ -21,8 +21,6 @@ import {reduxTypes} from "../../Types";
 export const CustomersScreen = () => {
   const dispatch = useDispatch();
   const [preloader, setPreloader] = useState(false);
-    const addNewChat = useSelector((state: reduxTypes) => state.clients.addNewChat);
-    console.warn(addNewChat)
   useEffect(() => {
     setPreloader(false);
     Clients.getClientsList(dispatch, '', false, {pageIndex: 1, PageSize: 20, query: ""})
