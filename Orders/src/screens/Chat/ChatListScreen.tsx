@@ -50,7 +50,8 @@ export const ChatListScreen = () => {
         isRead: -1,
       }),
     );
-  }, []);
+  }, [global.reload]);
+
   const handleTextChange = (text: string) => {
       if (selectedChatUser.id !== -1 ){
           dispatch(ClearSelectedChat());

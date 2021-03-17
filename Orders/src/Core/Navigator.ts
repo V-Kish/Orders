@@ -5,6 +5,7 @@ import {readData} from './readData';
 import {saveData} from './saveData';
 import {ChangeStackNavigation} from '../store/actions/AppStart';
 import {Dispatch} from 'redux';
+import {Chat} from "../functions/Chat";
 
 type state = {
   prevScreen: Array<any>;
@@ -130,6 +131,9 @@ class NavigatorImpl {
     const length = this.state.prevScreen.length;
     if (length < 2) {
       return;
+    }
+    if (this.state.prevScreen[this.state.prevScreen.length - 2].name ==='ChatListScreen'){
+      global.reload = true
     }
     this.navigate(this.state.prevScreen[this.state.prevScreen.length - 2].name);
     this.state.prevScreen.splice(length - 1, 2);
