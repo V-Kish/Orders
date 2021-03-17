@@ -58,6 +58,8 @@ export type reduxTypes = {
   start: {
     startApp: string;
     isAuthStack: boolean;
+    maxMinutes:Array<any>;
+    minMinutes:Array<any>;
   };
   dictionaries: {
     listDepartments: Array<any>;

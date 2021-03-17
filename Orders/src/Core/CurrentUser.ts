@@ -70,12 +70,16 @@ class CurrentUserImpl {
   }
   async logout() {
     const logoutUser = await UserDataProvider.userLogout();
-    this._user = {
-      userToken: null,
-      userId: null,
-    };
-    await AsyncStorage.removeItem('secureUserData');
-    await AsyncStorage.removeItem('appState');
+    console.log('logoutUser',logoutUser)
+    if (logoutUser.statusCode === 200){
+      this._user = {
+        userToken: null,
+        userId: null,
+        userName: null,
+      };
+      await AsyncStorage.removeItem('secureUserData');
+      await AsyncStorage.removeItem('appState');
+    }
   }
 }
 
