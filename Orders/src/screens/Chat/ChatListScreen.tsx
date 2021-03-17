@@ -17,12 +17,12 @@ import {PreloaderChat} from '../../View/Chat/PreloderChat/PreloderChat';
 import {FloatButton} from '../../View/Components/FloatButon';
 import {ModalNewChat} from '../../View/Chat/ModalNewChat/ModalNewChat';
 import {reduxTypes} from "../../Types";
-import {ClearSelectedChat} from "../../store/actions/Clients";
+import {AddNewChat, ClearSelectedChat} from "../../store/actions/Clients";
 import {showModalCreateNewChat} from "../../store/actions/AppStart";
 
 export const ChatListScreen = () => {
   const dispatch = useDispatch();
-    const selectedChatUser = useSelector((state: reduxTypes) => state.clients.selectedChatUser);
+
   const [preloader, setPreloader] = useState(false);
 
 
@@ -63,6 +63,7 @@ export const ChatListScreen = () => {
   }
   const openModalCreateNewChat = () => {
       if (selectedChatUser.id === -1){
+          dispatch(AddNewChat(true));
           navigator().navigate('CustomersScreen')
           return
       }

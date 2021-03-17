@@ -9,18 +9,20 @@ import {DRAWER_ICONS} from '../../constants/icons';
 import {COLORS} from '../../constants/colors';
 import { CustomersListView } from '../../View/Customers/CustomersListView';
 import { CustomersSearch } from '../../View/Customers/CustomersSearch';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { Clients } from '../../functions/Clients';
 import { chatListPagination } from '../../store/actions/Chat';
 import { PreloaderChat } from '../../View/Chat/PreloderChat/PreloderChat';
 import { ClientsListAction, ClientsListSearchParamAction } from '../../store/actions/Clients';
+import {reduxTypes} from "../../Types";
 
 
 
 export const CustomersScreen = () => {
   const dispatch = useDispatch();
   const [preloader, setPreloader] = useState(false);
-
+    const addNewChat = useSelector((state: reduxTypes) => state.clients.addNewChat);
+    console.warn(addNewChat)
   useEffect(() => {
     setPreloader(false);
     Clients.getClientsList(dispatch, '', false, {pageIndex: 1, PageSize: 20, query: ""})
@@ -28,7 +30,7 @@ export const CustomersScreen = () => {
           (succes) => setPreloader(true),
           (error) => setPreloader(true),
         );
-    
+
         dispatch(
           ClientsListAction({
             pageIndex: 1,
@@ -39,8 +41,8 @@ export const CustomersScreen = () => {
 
   }, []);
 
-  
-  
+
+
   function goBack() {
     navigator().toGoBack();
   }
@@ -55,7 +57,7 @@ export const CustomersScreen = () => {
   };
 
 
-  
+
   return (
     <View style={styles.container}>
       <HeaderView
@@ -69,7 +71,7 @@ export const CustomersScreen = () => {
       <View style={styles.containerClients}>
         <CustomersSearch changeCurrentText={handleTextChange} />
       </View>
-      
+
       <CustomersListView />
       <PreloaderChat isHide={preloader} />
     </View>

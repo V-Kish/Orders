@@ -60,7 +60,8 @@ export type reduxTypes = {
     selectedUser: {any},
     selectedUserOperations: any,
     selecetedUserOrders: any,
-    selectedClientOrdersList: any
+    selectedClientOrdersList: any,
+    addNewChat:boolean
   };
 
   start: {

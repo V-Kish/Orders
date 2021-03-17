@@ -7,7 +7,8 @@ import {
     CLEAR_SELECTED_CHAT,
     SELECTED_CLIENT_DETAILS,
     SELECTED_CLIENT_ID,
-    SELECT_CLIENT_ORDERS
+    SELECT_CLIENT_ORDERS,
+    ADD_NEW_CHAT
   } from '../types';
 
 export const ClientsListAction = (value) => {
@@ -75,6 +76,12 @@ export const SelectedClientDetails = (value, operations, orders) => {
 export const SelectedClientId = (value) => {
     return {
         type: SELECTED_CLIENT_ID,
+        payload: value,
+    };
+};
+export const AddNewChat = (value) => {
+    return {
+        type: ADD_NEW_CHAT,
         payload: value,
     };
 };
