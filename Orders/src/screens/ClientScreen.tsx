@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   },
   floatMenu: {
     position: "absolute",
-    right: 20,
+    right: 10,
     top: 80
 },
 floatButton: {
