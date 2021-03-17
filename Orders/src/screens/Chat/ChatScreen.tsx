@@ -61,7 +61,7 @@ export const ChatScreen = () => {
         color={COLORS.HEADER_BLUE}
         ordersSettings={true}
         onPress={goBack}
-        rightIcon={ICONS.callWhite}
+        rightIcon={ICONS.phoneIcon}
         onPressRight={() =>Chat.goTell(selectedItemChat.clientPhone)}
       />
       <ChatView />

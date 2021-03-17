@@ -4,7 +4,7 @@ import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
-import {CHAT_ICONS, ICONS} from '../../constants/icons';
+import {CHAT_ICONS} from '../../constants/icons';
 
 export const ChatSearch = ({changeCurrentText}) => {
   const [myTimeout, setMyTimeout] = useState();
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     zIndex: 999,
     width: '100%',
     justifyContent: 'center',
-    paddingHorizontal: wp(15),
+    paddingHorizontal: wp(5),
     marginLeft: hp(10),
     marginTop: hp(5),
     shadowColor: 'rgba(0,0,0,0)',

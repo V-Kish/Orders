@@ -77,8 +77,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingRight: hp(20),
     width: '10%',
-
+    height:hp(60),
     justifyContent: 'flex-end',
+    alignItems:'center'
   },
   image: {
     resizeMode: 'contain',
