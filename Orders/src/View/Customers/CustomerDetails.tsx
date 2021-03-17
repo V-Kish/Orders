@@ -55,7 +55,6 @@ export const CustomerDetails = (clientId) => {
 
   function renderProps(){
     if(selectedClientDetails.user !== undefined && selectedClientDetails.cards !== undefined){
-      // let currencyOperations = [];
 
 
 

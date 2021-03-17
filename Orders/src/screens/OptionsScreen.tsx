@@ -16,15 +16,19 @@ import {HeaderView} from '../View/HeaderView/HeaderView';
 import {ICONS} from '../constants/icons';
 import {COLORS} from '../constants/colors';
 import {Counter} from '../View/Components/Counter';
+import { useDispatch } from 'react-redux';
+import { AddNewChat } from '../store/actions/Clients';
 export const OptionsScreen = () => {
-
+  const dispatch = useDispatch();
   let counter = 0;
   return (
     <View style={styles.container}>
       <HeaderView icon={ICONS.logoSmall} title="Робота з клієнтами" />
       <View style={styles.wrapBtn}>
         <TouchableOpacity
-          onPress={() => navigator().navigate('HomeScreen')}
+          onPress={() => {
+            navigator().navigate('HomeScreen')
+          }}
           style={[styles.btns, {backgroundColor: COLORS.BUTTON_LIGHT_GREEN}]}>
           <Text style={[styles.textsBtn]}>Замовлення на обмін</Text>
           <Counter counter={counter} />
@@ -36,7 +40,10 @@ export const OptionsScreen = () => {
           <Counter counter={counter} />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigator().navigate('CustomersScreen')}
+          onPress={() => {
+            dispatch(AddNewChat(false));
+            navigator().navigate('CustomersScreen')
+          }}
           style={[styles.btns, {backgroundColor: COLORS.BUTTON_ORANGE}]}>
           <Text style={[styles.textsBtn]}>Клієнти системи</Text>
         </TouchableOpacity>
