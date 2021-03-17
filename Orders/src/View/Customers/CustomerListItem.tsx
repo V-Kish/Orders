@@ -19,7 +19,7 @@ import {navigator} from '../../Core/Navigator';
 
 import {clientItem, reduxTypes} from '../../Types';
 import {useDispatch, useSelector} from 'react-redux';
-import {SelectClientChatAction, SelectClientOrdersAction, SelectedClientId} from '../../store/actions/Clients';
+import {AddNewChat, SelectClientChatAction, SelectClientOrdersAction, SelectedClientId} from '../../store/actions/Clients';
 import {showModalCreateNewChat} from "../../store/actions/AppStart";
 
 export const CustomerListItem = (props) => {
@@ -74,9 +74,7 @@ export const CustomerListItem = (props) => {
 
             if(addNewChat){
               selectUserChat({userName: props.item.name, id: props.item.id});
-              console.log(
-                `Open chat with user: ${props.item.name} and id: ${props.item.id}`,
-              );
+              dispatch(AddNewChat(false));
             } else{
               selectClient()
             }
