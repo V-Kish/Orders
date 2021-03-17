@@ -39,7 +39,13 @@ export const CustomerDetails = (clientId) => {
 
   }, [selectedClient]);
 
-
+  function numberWithSpaces(x:string) {
+    if (x !== undefined) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    } else {
+        return x
+    }
+  }
   function getCurrencyCode(operation: {
     currencyId: number
   }){
@@ -159,7 +165,7 @@ export const CustomerDetails = (clientId) => {
                                           </View>
 
                                           <View style={styles.rightProps}>
-                                              <Text style={[styles.operationValue, styles.sum]}>{operation.buySum}</Text>
+                                              <Text style={[styles.operationValue, styles.sum]}>{numberWithSpaces(operation.buySum)}</Text>
                                           </View>
                                         </View>
                                       ) 
@@ -205,7 +211,7 @@ export const CustomerDetails = (clientId) => {
                                           </View>
 
                                           <View style={styles.rightProps}>
-                                              <Text style={[styles.operationValue, styles.sum]}>{operation.saleSum.toLocaleString('en')}</Text>
+                                              <Text style={[styles.operationValue, styles.sum]}>{numberWithSpaces(operation.saleSum)}</Text>
                                           </View>
                                         </View>
                                       ) 
@@ -242,18 +248,6 @@ export const CustomerDetails = (clientId) => {
 
                             
                             <View style={styles.operationWrap}>
-                              {/* <View style={styles.operationsValue}>
-                                <View style={styles.leftProps}>
-                                  <Text style={[styles.operationValue, styles.currency]}>USD</Text>
-                                  <Text style={[styles.operationValue, styles.qty, styles.mlTitle]}>2</Text>
-                                </View>
-
-                                <View style={styles.rightProps}>
-                                  <Text style={[styles.operationValue, styles.success]}>{(22).toLocaleString('en')}</Text>
-                                  <Text style={[styles.operationValue, styles.sumOrders]}>{(2000).toLocaleString('en')}</Text>
-                                </View>
-                              </View> */}
-
                               {
                                 (selectedClientOrders !== undefined && selectedClientOrders.length > 0)  &&
                                 selectedClientOrders.map((order, index)=>{
@@ -265,8 +259,8 @@ export const CustomerDetails = (clientId) => {
                                       </View>
 
                                       <View style={styles.rightProps}>
-                                        <Text style={[styles.operationValue, styles.successOrdersValue]}>{order.orderBuyCountSuccess+order.orderSaleCountSuccess}</Text>
-                                        <Text style={[styles.operationValue, styles.sumOrdersValue]}>{(order.orderBuySum+order.orderSaleSum).toLocaleString('en')}</Text>
+                                        <Text style={[styles.operationValue, styles.successOrdersValue]}>{numberWithSpaces(order.orderBuyCountSuccess+order.orderSaleCountSuccess)}</Text>
+                                        <Text style={[styles.operationValue, styles.sumOrdersValue]}>{numberWithSpaces(order.orderBuySum+order.orderSaleSum)}</Text>
                                       </View>
                                     </View>
                                   )
