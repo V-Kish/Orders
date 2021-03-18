@@ -23,6 +23,7 @@ class Dictionaries {
   private _listDepartmentsStatus: boolean;
   private _getOrdersStatus: boolean;
   private _loadSettingsStatus: boolean;
+  private _loadCounters: boolean;
   constructor() {
     this._onDictionariesLoad = null;
     this._listDepartmentsStatus = false;
@@ -32,6 +33,7 @@ class Dictionaries {
     this._ordersStatusesStatus = false;
     this._getOrdersStatus = false;
     this._loadSettingsStatus = false;
+    this._loadCounters = false;
   }
   static InitDictionaries(onDictionariesLoad: () => void, dispatch) {
     if (typeof onDictionariesLoad === 'function') {
@@ -100,6 +102,16 @@ class Dictionaries {
       }/departments/load`,
       'POST',
       body,
+    );
+  }
+  //
+
+  static async getCounters() {
+    return fetchData(
+        `/rest/v1/${currentUser().userId}/${
+            currentUser().userToken
+        }/departments/load`,
+        'POST',
     );
   }
   //
