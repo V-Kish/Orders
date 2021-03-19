@@ -16,6 +16,7 @@ import {
 } from '../../../helpers/StatusToType';
 import {COLORS} from '../../../constants/colors';
 import { currentUser } from '../../../Core/CurrentUser';
+import {SelectedClientId} from "../../../store/actions/Clients";
 
 export const OrderItem = ({item}) => {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ export const OrderItem = ({item}) => {
   )
   item.detail.regionName = region.name
   const handleItemPress = () => {
+    dispatch(SelectedClientId({selectedClientId:item.detail.clientId}))
     GetOrderInfo.getOrder(dispatch, item);
   };
   return (

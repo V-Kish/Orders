@@ -237,8 +237,10 @@ export const OrderUserView = () => {
       />
       <View style={styles.blockContainer}>
         <TouchableOpacity onPress={() => {
-          navigator().navigate('ClientScreen');
-        }} style={styles.containers}>
+          console.log('userData.user',userData.user)
+            navigator().navigate('ClientScreen');
+          }}
+          style={styles.containers}>
           <Text style={styles.textDefault}>Клієнт: </Text>
           <Text style={styles.userName}>{userData.user.name}</Text>
         </TouchableOpacity>

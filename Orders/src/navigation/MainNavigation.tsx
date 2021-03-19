@@ -34,7 +34,6 @@ export const MainNavigation = () => {
           currentUser().restoreUserData = response;
           try {
             const deviceTokenOld = await readData('DeviceToken');
-            console.log('deviceTokenOld', deviceTokenOld);
             await UserDataProvider.checkTokenDevice(deviceTokenOld);
             await Dictionaries.InitDictionaries(function () {
               navigator().changeNavigationStateAuth(false, dispatch);
