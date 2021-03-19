@@ -163,8 +163,9 @@ class UserDataProvider {
         userToken,
       )
         .then(
-          (response) => {
+          async (response) => {
             console.log('send firebase token', response);
+            await saveData('DeviceToken', deviceToken);
             resolve(response);
           },
           (error) => {
