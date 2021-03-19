@@ -179,21 +179,15 @@ class UserDataProvider {
   }
 
   static checkTokenDevice(tokenFromAsync: string) {
-    console.log('FIREBASE TOKEN token tokenFromAsync', tokenFromAsync);
     messaging()
       .getToken()
       .then(
         async (deviceToken) => {
-          console.log(
-            'FIREBASE TOKEN token getDeviceToken deviceToken',
-            deviceToken,
-          );
           if (deviceToken !== tokenFromAsync) {
             const result = await UserDataProvider.sendTokenFb(
               currentUser().userToken,
               deviceToken,
             );
-            console.log('FIREBASE TOKEN send new token response', result);
             if (result.statusCode === 200) {
               await saveData('DeviceToken', deviceToken);
             }
