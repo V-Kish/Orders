@@ -4,6 +4,7 @@ import messaging from '@react-native-firebase/messaging';
 import {PhoneInfo} from '../Core/PhoneInfo';
 import {AuthBodyToken} from '../Types';
 import {AppLog} from '../Common/AppLog';
+import {saveData} from '../Core/saveData';
 class UserDataProvider {
   // Авторизація користувача
   static async AuthorizationFetch(body) {
@@ -18,7 +19,6 @@ class UserDataProvider {
   }
   // get User info
   static async getUserInfo() {
-
     return fetchData(
       `rest/v1/${currentUser().userId}/${
         currentUser().userToken
@@ -33,7 +33,7 @@ class UserDataProvider {
         currentUser().userToken
       }/loyaltyProg/users/load`,
       'POST',
-      body
+      body,
     );
   }
   // GET SELECTED CLIENT
@@ -43,7 +43,7 @@ class UserDataProvider {
         currentUser().userToken
       }/loyaltyProg/users/${clientId}/info`,
       'GET',
-      body
+      body,
     );
   }
   // GET SELECTED CLIENT OPERATIONS
@@ -53,7 +53,7 @@ class UserDataProvider {
         currentUser().userToken
       }/loyaltyProg/user/${clientId}/full-stat`,
       'GET',
-      body
+      body,
     );
   }
   // Get list chats
@@ -69,7 +69,7 @@ class UserDataProvider {
 
   // Get messages from chat
   static async getChatMessages(body) {
-    console.log('getChatMessages body',body)
+    console.log('getChatMessages body', body);
     return fetchData(
       `/rest/v1/${currentUser().userId}/${
         currentUser().userToken
@@ -84,25 +84,45 @@ class UserDataProvider {
   // send Message
   static async sendMessage(body) {
     return fetchData(
-        `/rest/v1/${currentUser().userId}/${currentUser().userToken}/loyaltyProg/messages`,
-        'POST',
-        {
-          message: body.message,
-          rootId: body.rootId,
-        },
+      `/rest/v1/${currentUser().userId}/${
+        currentUser().userToken
+      }/loyaltyProg/messages`,
+      'POST',
+      {
+        message: body.message,
+        rootId: body.rootId,
+      },
     );
   }
   // send Message
   static async createNewChat(body) {
     return fetchData(
-        `/rest/v1/${currentUser().userId}/${currentUser().userToken}/loyaltyProg/messages`,
-        'POST',
-        {
-          clientId: body.clientId,
-          theme: body.theme,
-          message: body.message,
-          rootId: -1,
-        },
+      `/rest/v1/${currentUser().userId}/${
+        currentUser().userToken
+      }/loyaltyProg/messages`,
+      'POST',
+      {
+        clientId: body.clientId,
+        theme: body.theme,
+        message: body.message,
+        rootId: -1,
+      },
+    );
+  }
+  // send Message
+  static async sendTokenFb(userToken: string | null, deviceToken: string) {
+    const deviceInfo = await PhoneInfo.getDeviceInfo();
+    const body: AuthBodyToken = {
+      token: deviceToken,
+      deviceInfo: JSON.stringify(deviceInfo),
+    };
+    return fetchData(
+      `/rest/v1/${currentUser().userId}/${
+        currentUser().userToken
+      }/user/firebase/cloud-messaging/save-token`,
+      'POST',
+      body,
+      userToken,
     );
   }
   static async getTokenFireBase() {
@@ -123,6 +143,7 @@ class UserDataProvider {
         });
     });
   }
+
   static async saveTokenToDatabase(
     userToken: string | null,
     deviceToken: unknown,
@@ -143,7 +164,7 @@ class UserDataProvider {
       )
         .then(
           (response) => {
-            AppLog.log('send firebase token', response);
+            console.log('send firebase token', response);
             resolve(response);
           },
           (error) => {
@@ -154,6 +175,32 @@ class UserDataProvider {
           reject(error);
         });
     });
+  }
+
+  static checkTokenDevice(tokenFromAsync: string) {
+    console.log('FIREBASE TOKEN token tokenFromAsync', tokenFromAsync);
+    messaging()
+      .getToken()
+      .then(
+        async (deviceToken) => {
+          console.log(
+            'FIREBASE TOKEN token getDeviceToken deviceToken',
+            deviceToken,
+          );
+          if (deviceToken !== tokenFromAsync) {
+            const result = await UserDataProvider.sendTokenFb(
+              currentUser().userToken,
+              deviceToken,
+            );
+            console.log('FIREBASE TOKEN send new token response', result);
+            if (result.statusCode === 200) {
+              await saveData('DeviceToken', deviceToken);
+            }
+          }
+        },
+        (error) => {},
+      )
+      .catch((error) => {});
   }
 }
 export {UserDataProvider};

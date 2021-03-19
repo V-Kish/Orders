@@ -236,10 +236,12 @@ export const OrderUserView = () => {
         list={preparedList}
       />
       <View style={styles.blockContainer}>
-        <View style={styles.containers}>
+        <TouchableOpacity onPress={() => {
+          navigator().navigate('ClientScreen');
+        }} style={styles.containers}>
           <Text style={styles.textDefault}>Клієнт: </Text>
           <Text style={styles.userName}>{userData.user.name}</Text>
-        </View>
+        </TouchableOpacity>
         <View style={styles.containers}>
           <Text style={styles.textDefault}>Номер карти: </Text>
           <Text style={styles.userCard}>{userData.cards[0]?.number}</Text>

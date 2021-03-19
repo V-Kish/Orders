@@ -174,7 +174,6 @@ class NavigatorImpl {
         break;
     }
   }
-
   changeNavigationStateAuth(value: boolean, dispatch: Dispatch<any>) {
     dispatch(ChangeStackNavigation(value));
   }

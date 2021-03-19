@@ -12,6 +12,8 @@ import {MethodsRequest} from '../DataProvider/MethodsRequest';
 import {getOrdersCount} from '../store/actions/Dictionaries';
 import { PreloaderMain } from '../store/actions/AppStart';
 import {MainPreloaderView} from "../View/MainPreloaderView";
+import {UserDataProvider} from "../DataProvider/UserDataProvider";
+import {readData} from "../Core/readData";
 export const MainNavigation = () => {
   const dispatch = useDispatch();
   async function getUserData() {
@@ -31,6 +33,9 @@ export const MainNavigation = () => {
         } else {
           currentUser().restoreUserData = response;
           try {
+            const deviceTokenOld = await readData('DeviceToken');
+            console.log('deviceTokenOld', deviceTokenOld);
+            await UserDataProvider.checkTokenDevice(deviceTokenOld);
             await Dictionaries.InitDictionaries(function () {
               navigator().changeNavigationStateAuth(false, dispatch);
               navigator().state.prevScreen.push({
