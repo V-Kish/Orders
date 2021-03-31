@@ -130,9 +130,9 @@ export const ClientScreen = () => {
           goBack()
         }}
       />
-      <ScrollView contentContainerStyle={[styles.mainContainer]} ref={ref => global.refScrollClient = ref}  keyboardShouldPersistTaps={'handled'}>
+          <ScrollView contentContainerStyle={[styles.mainContainer]} ref={ref => global.refScrollClient = ref}  keyboardShouldPersistTaps={'handled'}>
             <CustomerDetails />
-          <AddNewNotes clientId={selectedUserId.selectedClientId} />
+          {/*<AddNewNotes clientId={selectedUserId.selectedClientId} />*/}
       </ScrollView>
 
       <View style={styles.floatMenu}>

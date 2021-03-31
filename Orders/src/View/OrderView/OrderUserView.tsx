@@ -421,6 +421,8 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: hp(22),
     fontWeight: 'bold',
+    color: COLORS.HEADER_BLUE,
+    textDecorationLine: 'underline',
   },
   userCard: {
     fontSize: hp(22),

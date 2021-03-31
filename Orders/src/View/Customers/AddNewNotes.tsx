@@ -46,7 +46,7 @@ export const AddNewNotes = ({clientId}) => {
     }
   };
   return (
-    <View style={{ paddingHorizontal: hw(10)}}>
+    <View>
       <View>
         <Text style={styles.title}>Нова нотатка по клієнту</Text>
       </View>
@@ -64,7 +64,7 @@ export const AddNewNotes = ({clientId}) => {
         </View>
       </View>
       <View style={[styles.row, styles.containerBtns]}>
-        <TouchableOpacity style={styles.wrapCancel} onPress={clearInput} >
+        <TouchableOpacity style={styles.wrapCancel} onPress={clearInput}  >
           <Text style={styles.btnText}>СКАСУВАТИ</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.wrapAccept} onPress={sendForm}>

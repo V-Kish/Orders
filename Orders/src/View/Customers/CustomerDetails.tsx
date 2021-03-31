@@ -81,9 +81,8 @@ export const CustomerDetails = (clientId) => {
         userBonusBalance = 'false'
         userReshta = 'false'
       }
-      console.log('notesList',notesList)
       return (
-        <>
+        <View>
           <View style={styles.propsWrapper}>
             <View onLayout={(event)=>{
               global.refHeightCD = event.nativeEvent.layout.height
@@ -308,6 +307,7 @@ export const CustomerDetails = (clientId) => {
                 </View>
                 )
               })}
+              <AddNewNotes clientId={selectedClient.selectedClientId} />
             </View>
           </View>
           {preloader && (
@@ -315,7 +315,7 @@ export const CustomerDetails = (clientId) => {
                   <ActivityIndicator size="large" color={COLORS.HEADER_BLUE} />
               </View>
           )}
-        </>
+        </View>
       )
     }
 
@@ -331,7 +331,7 @@ export const CustomerDetails = (clientId) => {
   }
 
   return(
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps={'handled'}>
       {renderProps()}
     </ScrollView>
   );
@@ -553,16 +553,17 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-between',
-    paddingBottom:hp(10)
+    paddingBottom:hp(10),
+    marginTop:hp(10)
   },
   notesName:{
     fontFamily:'Roboto-Regular',
     fontSize:hp(16),
-    color:COLORS.HEADER_RED
+    color:COLORS.FONT_GRAY_SILVER
   },
   notesDate:{
     fontFamily:'Roboto-Regular',
-    fontSize:hp(16),
+    fontSize:hp(14),
     color:COLORS.FONT_GRAY_SILVER
   }
 });
