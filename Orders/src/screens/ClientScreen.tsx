@@ -16,6 +16,7 @@ import { Chat } from '../functions/Chat';
 import { showModalCreateNewChat } from '../store/actions/AppStart';
 import { GetOrderInfo } from '../functions/GetOrderInfo';
 import { getOrders } from '../store/actions/Dictionaries';
+import {AddNewNotes} from "../View/Customers/AddNewNotes";
 
 export const ClientScreen = () => {
   function goBack() {
@@ -129,8 +130,9 @@ export const ClientScreen = () => {
           goBack()
         }}
       />
-      <ScrollView contentContainerStyle={[styles.mainContainer]} ref={ref => global.refScrollClient = ref}>
+      <ScrollView contentContainerStyle={[styles.mainContainer]} ref={ref => global.refScrollClient = ref}  keyboardShouldPersistTaps={'handled'}>
             <CustomerDetails />
+          <AddNewNotes clientId={selectedUserId.selectedClientId} />
       </ScrollView>
 
       <View style={styles.floatMenu}>

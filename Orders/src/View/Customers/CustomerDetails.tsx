@@ -31,7 +31,6 @@ export const CustomerDetails = (clientId) => {
   const selectedClientOrders = useSelector((state: reduxTypes) => state.clients.selectedUserOrders);
   const listCurrencies = useSelector((state: reduxTypes) => state.dictionaries.listCurrencies);
 
-
   useEffect(() => {
     setPreloader(true);
     // let clientId = 50;
@@ -309,10 +308,8 @@ export const CustomerDetails = (clientId) => {
                 </View>
                 )
               })}
-              <AddNewNotes clientId={selectedClient.selectedClientId} />
             </View>
           </View>
-
           {preloader && (
               <View style={styles.preloader}>
                   <ActivityIndicator size="large" color={COLORS.HEADER_BLUE} />

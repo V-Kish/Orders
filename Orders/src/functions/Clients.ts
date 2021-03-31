@@ -122,7 +122,7 @@ class Clients {
         try {
             let body = {
                 pageIndex: 1,
-                pageSize: 20,
+                pageSize: 30,
                 clientId: Data.clientId,
                 userId: -1,
                 dateFrom: null,

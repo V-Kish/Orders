@@ -9,12 +9,10 @@ import {DRAWER_ICONS} from '../../constants/icons';
 import {COLORS} from '../../constants/colors';
 import { CustomersListView } from '../../View/Customers/CustomersListView';
 import { CustomersSearch } from '../../View/Customers/CustomersSearch';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { Clients } from '../../functions/Clients';
-import { chatListPagination } from '../../store/actions/Chat';
 import { PreloaderChat } from '../../View/Chat/PreloderChat/PreloderChat';
 import { ClientsListAction, ClientsListSearchParamAction } from '../../store/actions/Clients';
-import {reduxTypes} from "../../Types";
 
 
 

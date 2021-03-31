@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, ScrollView, Text } from 'react-native';
 import {
   mockupHeightToDP as hp,
@@ -12,12 +12,13 @@ import { Clients } from '../../functions/Clients';
 
 export const CustomersListView = () => {
     const dispatch = useDispatch();
+    const [statePreloader, setStatePreloader] = useState(true);
     const ClientsList = useSelector((state: reduxTypes) => state.clients.Items);
     const ClientsListInfo = useSelector((state: reduxTypes) => state.clients.clientsListInfo);
     console.log("LOADED CLIENTS TO PAGINATE: ", ClientsListInfo);
 
     function renderClients(){
-        if(ClientsList !== undefined){ 
+        if(ClientsList !== undefined){
             if(ClientsList.length > 0){
                 return ClientsList.map((item, index) => (
                     <CustomerListItem item={item} key={index}/>
@@ -30,7 +31,7 @@ export const CustomersListView = () => {
 
 
     const loadDataMore = ({layoutMeasurement, contentOffset, contentSize}) => {
-        const paddingToBottom = 500;
+        const paddingToBottom = 200;
         return (
             layoutMeasurement.height + contentOffset.y >=
             contentSize.height - paddingToBottom
@@ -42,13 +43,21 @@ export const CustomersListView = () => {
         if (!(ClientsListInfo.PageIndex * ClientsListInfo.PageSize < ClientsListInfo.TotalItems)) {
             return;
         }
+        setStatePreloader(false);
         let body = {};
         body.pageIndex = ++ClientsListInfo.PageIndex;
         body.PageSize = ClientsListInfo.PageSize;
         body.query = '';
         try {
-          await  Clients.getClientsList(dispatch, '', true, body).then();
-             console.log('LOADING');
+            console.log('LOADING FETCH',ClientsListInfo);
+          await  Clients.getClientsList(dispatch, '', true, body).then(
+              () =>  setTimeout(()=>{
+                  setStatePreloader(true)
+              },100),() =>   setTimeout(()=>{
+                  setStatePreloader(true)
+              },100)
+          );
+
         } catch (ex) {
              console.log("SOME ERROR");
         }
@@ -60,7 +69,7 @@ export const CustomersListView = () => {
 
             <ScrollView
                 onScroll={async ({nativeEvent}) => {
-                    if (loadDataMore(nativeEvent)) {
+                    if (loadDataMore(nativeEvent) && statePreloader) {
                         await loadMorePagination();
                     }
                 }}
@@ -88,4 +97,3 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }
   });
-  

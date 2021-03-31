@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {
-  mockupHeightToDP as hp,
+  mockupHeightToDP as hp, mockupWidthToDP as hw,
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
 import {COLORS} from '../../constants/colors';
@@ -28,7 +28,6 @@ export const AddNewNotes = ({clientId}) => {
   const clearInput = () => {
     setTextInput('');
     setCounterText(0);
-    console.warn(global.refScrollClient)
     if (global.refScrollClient !== null){
      setTimeout(()=>{
        global.refScrollClient.scrollToEnd()
@@ -47,7 +46,7 @@ export const AddNewNotes = ({clientId}) => {
     }
   };
   return (
-    <View>
+    <View style={{ paddingHorizontal: hw(10)}}>
       <View>
         <Text style={styles.title}>Нова нотатка по клієнту</Text>
       </View>
@@ -65,7 +64,7 @@ export const AddNewNotes = ({clientId}) => {
         </View>
       </View>
       <View style={[styles.row, styles.containerBtns]}>
-        <TouchableOpacity style={styles.wrapCancel} onPress={clearInput}>
+        <TouchableOpacity style={styles.wrapCancel} onPress={clearInput} >
           <Text style={styles.btnText}>СКАСУВАТИ</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.wrapAccept} onPress={sendForm}>
@@ -109,6 +108,9 @@ const styles = StyleSheet.create({
   },
   wrapCancel: {
     marginRight: wp(20),
+    paddingHorizontal: wp(20),
+    paddingVertical: wp(10),
+    borderRadius: 5,
   },
   wrapAccept: {
     backgroundColor: COLORS.BUTTON_LIGHT_GREEN,
