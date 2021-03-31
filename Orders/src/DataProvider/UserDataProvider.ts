@@ -125,6 +125,35 @@ class UserDataProvider {
       userToken,
     );
   }
+      //////// NOTES ///////
+  // Додати нотатку по користувачу
+ // body :
+      // "clientId": 1,
+      // 	"comment": "Some" // 1 - 512 символів
+  static async notesAdd(body) {
+    return fetchData(`rest/v1/${currentUser().userId}/${currentUser().userToken}/loyaltyProg/users/notes/add`, 'POST', body);
+  }
+  // Отримати нотатку
+  static async getNotes(body) {
+    return fetchData(`rest/v1/${currentUser().userId}/${currentUser().userToken}/loyaltyProg/users/notes/${body.noteId}`, 'GET');
+  }
+  // Видалити нотатку
+  static async deleteNotes(body) {
+    return fetchData(`rest/v1/${currentUser().userId}/${currentUser().userToken}/loyaltyProg/users/notes/${body.noteId}`, 'DELETE');
+  }
+  // Завантажити список нотаток по користувачу
+  // "pageIndex": 1,
+  // "pageSize": 10,
+  // "clientId": 1,
+  // "userId": -1,
+  // "dateFrom": null,
+  // "dateFrom": null,
+  // "sQuery": ""
+  static async allNotes(body) {
+    console.log('allNotesallNotes',`rest/v1/${currentUser().userId}/${currentUser().userToken}/loyaltyProg/users/notes/load`)
+    return fetchData(`rest/v1/${currentUser().userId}/${currentUser().userToken}/loyaltyProg/users/notes/load`, 'POST',body);
+  }
+  //////// NOTES END ///////
   static async getTokenFireBase() {
     return new Promise((resolve, reject) => {
       messaging()

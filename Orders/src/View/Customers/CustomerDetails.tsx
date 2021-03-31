@@ -14,6 +14,10 @@ import { Clients } from '../../functions/Clients';
 import { PreloaderChat } from '../Chat/PreloderChat/PreloderChat';
 import { SelectedClientDetails } from '../../store/actions/Clients';
 import { reduxTypes } from '../../Types';
+import {currentUser} from "../../Core/CurrentUser";
+import { dateTimeToDateString } from '../../Common/getTime';
+import { dateParse, dateTimeToTimeString, dateTimeToTimeStringOrders } from '../../helpers/DateParse';
+import { convertToUTCString } from '../../helpers/DateParse';
 
 
 export const CustomerDetails = (clientId) => {
@@ -21,6 +25,7 @@ export const CustomerDetails = (clientId) => {
   const dispatch = useDispatch();
   const selectedClient = useSelector((state: reduxTypes) => state.clients.selectedClientId);
   const selectedClientDetails = useSelector((state: reduxTypes) => state.clients.selectedUser);
+  const notesList = useSelector((state: reduxTypes) => state.clients.notesList);
   const selectedClientOperations = useSelector((state: reduxTypes) => state.clients.selectedUserOperations);
   const selectedClientOrders = useSelector((state: reduxTypes) => state.clients.selectedUserOrders);
   const listCurrencies = useSelector((state: reduxTypes) => state.dictionaries.listCurrencies);
@@ -29,6 +34,7 @@ export const CustomerDetails = (clientId) => {
   useEffect(() => {
     setPreloader(true);
     // let clientId = 50;
+    Clients.getAllNotes(dispatch,{clientId:selectedClient.selectedClientId}).then()
     Clients.getSelectedUser(dispatch, {clientId: selectedClient.selectedClientId})
       .then(
         (succes) => {
@@ -36,6 +42,7 @@ export const CustomerDetails = (clientId) => {
         },
         (error) => setPreloader(true),
       );
+
 
   }, [selectedClient]);
 
@@ -74,7 +81,6 @@ export const CustomerDetails = (clientId) => {
         userBonusBalance = 'false'
         userReshta = 'false'
       }
-      
       return (
         <>
           <View style={styles.propsWrapper}>
@@ -82,7 +88,7 @@ export const CustomerDetails = (clientId) => {
                 <Image source={CHAT_ICONS.detailsInfo} style={styles.imgProp}/>
                 <Text style={[styles.value, {lineHeight: 26, marginLeft: 10}]}>{userGroup.toLowerCase().includes('vip')? `${userName} VIP`:userName}</Text>
             </View>
-    
+
             {
               userGroup !== 'false' &&
               <View style={styles.propContainer}>
@@ -90,7 +96,7 @@ export const CustomerDetails = (clientId) => {
                   <Text style={styles.value}>{userGroup}</Text>
               </View>
             }
-    
+
             {
               userCard !== 'false' &&
               <View style={styles.propContainer}>
@@ -98,12 +104,12 @@ export const CustomerDetails = (clientId) => {
                   <Text style={styles.value}>{userCard}</Text>
               </View>
             }
-    
+
             <View style={styles.propContainer}>
               <Text style={styles.propName}>Телефон:</Text>
               <TouchableOpacity onPress={()=>{Chat.goTell(`${userPhone}`)}}><Text style={[styles.value, styles.phone]}>{userPhone}</Text></TouchableOpacity>
             </View>
-    
+
             {
               userBonusBalance !== 'false' &&
               <View style={styles.propContainer}>
@@ -111,7 +117,7 @@ export const CustomerDetails = (clientId) => {
                 <Text style={styles.value}>{userBonusBalance} UAH</Text>
               </View>
             }
-    
+
             {
               userReshta !== 'false' &&
               <View style={styles.propContainer}>
@@ -119,7 +125,7 @@ export const CustomerDetails = (clientId) => {
                 <Text style={styles.value}>{userReshta} UAH</Text>
               </View>
             }
-    
+
             <View style={styles.more}>
               <View style={{flexDirection: 'row', alignItems: 'center', paddingBottom: 15}}>
                   <Image source={CHAT_ICONS.detailsStatistics} style={styles.imgProp}/>
@@ -167,7 +173,7 @@ export const CustomerDetails = (clientId) => {
                                               <Text style={[styles.operationValue, styles.sum]}>{numberWithSpaces(operation.buySum)}</Text>
                                           </View>
                                         </View>
-                                      ) 
+                                      )
                                     })
                                   }
                               </View>
@@ -213,14 +219,14 @@ export const CustomerDetails = (clientId) => {
                                               <Text style={[styles.operationValue, styles.sum]}>{numberWithSpaces(operation.saleSum)}</Text>
                                           </View>
                                         </View>
-                                      ) 
+                                      )
                                     })
                                   }
                             </View>
                         </View>
                       </View>
                   </View>
-                  
+
                   {
                     (selectedClientOrders !== undefined && selectedClientOrders.length > 0)  &&
                   <View style={[styles.ordersWrap]}>
@@ -245,7 +251,7 @@ export const CustomerDetails = (clientId) => {
                             </View>
 
 
-                            
+
                             <View style={styles.operationWrap}>
                               {
                                 (selectedClientOrders !== undefined && selectedClientOrders.length > 0)  &&
@@ -274,8 +280,33 @@ export const CustomerDetails = (clientId) => {
                 }
               </View>
             </View>
+
+            <View>
+              {/*// header notes //*/}
+              <View style={styles.notesHeader}>
+                <Image source={ICONS.notes}  style={styles.img}/>
+                <Text style={[styles.value, {lineHeight: 26, marginLeft: 10, fontSize: 16}]}>Нотатки по клієнту</Text>
+              </View>
+              {/*// main container  //*/}
+              {notesList.map(item => {
+                return (
+                <View style={[styles.borderBottom,styles.mainContainerNotes]} key={item.id}>
+                  <View><Text>Gastroenteritis means inflammation of stomach as well as the gastrointestinal tract.</Text></View>
+                  <View style={[styles.dateAndName]}>
+                    <Text style={styles.notesName}>{item.userName}</Text>
+                    {item.date && (
+                        <Text style={styles.notesDate}>
+                          {`${dateTimeToDateString(dateParse(convertToUTCString(item.date)))} ${dateTimeToTimeString(dateParse(convertToUTCString(item.date)))}`}
+                        </Text>
+                    )}
+                  </View>
+                </View>
+                )
+              })}
+
+            </View>
           </View>
-    
+
           {preloader && (
               <View style={styles.preloader}>
                   <ActivityIndicator size="large" color={COLORS.HEADER_BLUE} />
@@ -295,14 +326,14 @@ export const CustomerDetails = (clientId) => {
       </>
     )
   }
-  
+
   return(
     <ScrollView contentContainerStyle={styles.container}>
       {renderProps()}
     </ScrollView>
   );
 
-  
+
 };
 const styles = StyleSheet.create({
   preloader: {
@@ -348,7 +379,7 @@ const styles = StyleSheet.create({
       color: 'black'
   },
   more: {
-      flex: 1,
+      // flex: 1,
       flexDirection: 'column',
       justifyContent: 'flex-start',
       borderTopColor: 'rgba(0, 0, 0, 0.12)',
@@ -422,10 +453,10 @@ const styles = StyleSheet.create({
   },
   operations: {
     flexDirection: 'column',
-    
+
   },
   operationWrap: {
-    
+
   },
   operationsTitle: {
     alignItems: 'center',
@@ -501,5 +532,34 @@ const styles = StyleSheet.create({
   sum: {
     width: '100%',
     textAlign: 'right'
+  },
+
+  // NOTES
+  notesHeader:{
+    flexDirection:'row',
+    alignItems:'center'
+  },
+  mainContainerNotes:{
+    marginBottom:hp(10)
+  },
+  borderBottom:{
+    borderBottomColor: 'rgba(0, 0, 0, 0.12)',
+    borderBottomWidth: 1,
+  },
+  dateAndName:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between',
+    paddingBottom:hp(10)
+  },
+  notesName:{
+    fontFamily:'Roboto-Regular',
+    fontSize:hp(16),
+    color:COLORS.HEADER_RED
+  },
+  notesDate:{
+    fontFamily:'Roboto-Regular',
+    fontSize:hp(16),
+    color:COLORS.FONT_GRAY_SILVER
   }
 });

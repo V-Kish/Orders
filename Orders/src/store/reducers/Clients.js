@@ -6,7 +6,7 @@ import {
     SELECTED_CLIENT_DETAILS,
     SELECTED_CLIENT_ID,
     CLIENTS_LIST_PAGINATION,
-    SELECT_CLIENT_ORDERS, ADD_NEW_CHAT
+    SELECT_CLIENT_ORDERS, ADD_NEW_CHAT, SELECTED_CLIENT_NOTES
 } from '../types';
 
 
@@ -28,7 +28,8 @@ const initialState = {
         PageSize: 0
     },
     selectedClientOrdersList: [],
-    addNewChat:false
+    addNewChat:false,
+    notesList:[],
 }
 
 
@@ -70,6 +71,11 @@ export const ClientsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedChatUser: action.payload
+            };
+            case SELECTED_CLIENT_NOTES:
+            return {
+                ...state,
+                notesList: action.payload
             };
         case CLEAR_SELECTED_CHAT:
             return {

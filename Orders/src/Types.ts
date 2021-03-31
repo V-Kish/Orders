@@ -61,7 +61,8 @@ export type reduxTypes = {
     selectedUserOperations: any,
     selecetedUserOrders: any,
     selectedClientOrdersList: any,
-    addNewChat:boolean
+    addNewChat:boolean,
+    notesList:Array<any>
   };
 
   start: {
@@ -115,6 +116,10 @@ export type ClientsList = {
 }
 export type SelectedClient = {
   clientId: number;
+}
+export type getAllNotesBody = {
+  clientId:  number;
+  userId:  number;
 }
 export type ChatMessagesList = {
   pageIndex: number;
