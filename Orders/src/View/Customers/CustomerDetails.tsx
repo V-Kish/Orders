@@ -18,6 +18,7 @@ import {currentUser} from "../../Core/CurrentUser";
 import { dateTimeToDateString } from '../../Common/getTime';
 import { dateParse, dateTimeToTimeString, dateTimeToTimeStringOrders } from '../../helpers/DateParse';
 import { convertToUTCString } from '../../helpers/DateParse';
+import { AddNewNotes } from './AddNewNotes';
 
 
 export const CustomerDetails = (clientId) => {
@@ -81,9 +82,14 @@ export const CustomerDetails = (clientId) => {
         userBonusBalance = 'false'
         userReshta = 'false'
       }
+      console.log('notesList',notesList)
       return (
         <>
           <View style={styles.propsWrapper}>
+            <View onLayout={(event)=>{
+              global.refHeightCD = event.nativeEvent.layout.height
+            }}>
+
             <View style={[styles.propContainer, {alignItems: 'center',}]}>
                 <Image source={CHAT_ICONS.detailsInfo} style={styles.imgProp}/>
                 <Text style={[styles.value, {lineHeight: 26, marginLeft: 10}]}>{userGroup.toLowerCase().includes('vip')? `${userName} VIP`:userName}</Text>
@@ -280,7 +286,7 @@ export const CustomerDetails = (clientId) => {
                 }
               </View>
             </View>
-
+            </View>
             <View>
               {/*// header notes //*/}
               <View style={styles.notesHeader}>
@@ -291,7 +297,7 @@ export const CustomerDetails = (clientId) => {
               {notesList.map(item => {
                 return (
                 <View style={[styles.borderBottom,styles.mainContainerNotes]} key={item.id}>
-                  <View><Text>Gastroenteritis means inflammation of stomach as well as the gastrointestinal tract.</Text></View>
+                  <View><Text>{item.comment}</Text></View>
                   <View style={[styles.dateAndName]}>
                     <Text style={styles.notesName}>{item.userName}</Text>
                     {item.date && (
@@ -303,7 +309,7 @@ export const CustomerDetails = (clientId) => {
                 </View>
                 )
               })}
-
+              <AddNewNotes clientId={selectedClient.selectedClientId} />
             </View>
           </View>
 
@@ -540,7 +546,7 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   mainContainerNotes:{
-    marginBottom:hp(10)
+    marginVertical:hp(10)
   },
   borderBottom:{
     borderBottomColor: 'rgba(0, 0, 0, 0.12)',

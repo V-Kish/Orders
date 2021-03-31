@@ -129,7 +129,7 @@ export const ClientScreen = () => {
           goBack()
         }}
       />
-      <ScrollView contentContainerStyle={[styles.mainContainer]}>
+      <ScrollView contentContainerStyle={[styles.mainContainer]} ref={ref => global.refScrollClient = ref}>
             <CustomerDetails />
       </ScrollView>
 
@@ -145,6 +145,13 @@ export const ClientScreen = () => {
           <TouchableOpacity style={styles.floatButton} onPress={()=>{selectUserOrders({userName: userName, userId: userId})}}>
             <Image source={CHAT_ICONS.detailsOperation} style={styles.img}/>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.floatButton} onPress={()=>{
+              if (global.refHeightCD !== null && global.refScrollClient !== null){
+                  global.refScrollClient.scrollTo({x:global.refHeightCD,y:global.refHeightCD})
+              }
+          }}>
+              <Image source={ICONS.notes} style={styles.img}/>
+          </TouchableOpacity>
       </View>
     </View>
   );
@@ -156,6 +163,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     paddingHorizontal: hp(10),
+    paddingBottom: hp(10),
     minHeight: "100%",
     width: '100%',
     flexDirection: 'column'

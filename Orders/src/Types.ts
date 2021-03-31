@@ -121,6 +121,10 @@ export type getAllNotesBody = {
   clientId:  number;
   userId:  number;
 }
+export type addNotesBody = {
+  clientId:number;
+  comment:string;
+}
 export type ChatMessagesList = {
   pageIndex: number;
   pageSize:  number;

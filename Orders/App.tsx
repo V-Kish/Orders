@@ -5,6 +5,8 @@ import {MainNavigation} from './src/navigation/MainNavigation';
 import { pushMessagesHandler } from './src/Core/pushMessageHundler';
 declare const global: {HermesInternal: null | {}};
 global.reload = false;
+global.refScrollClient = null;
+global.refHeightCD = 0;
 global.pushMessagesHandler = pushMessagesHandler;
 const App = () => {
   return (
