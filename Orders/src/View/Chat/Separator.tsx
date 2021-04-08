@@ -61,7 +61,7 @@ export const Separator = ({date}) => {
     }
     return (
         <View style={styles.containerReceivedMessage}>
-            <Text style={styles.textTime}>{getTime(date, false, false, false, () => returnDay())}</Text>
+            <Text style={styles.textTime}>{getTime(date, false, false, true, () => returnDay())}</Text>
       </View>
     );
 };

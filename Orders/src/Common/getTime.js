@@ -10,13 +10,17 @@ export function getTime(
   returnDay = null,
 ) {
   if (!type) {
+    console.log('getTime moment 1')
     if (!chatTime) {
+      console.log('getTime moment 2')
       return moment(dateString, 'DD.MM.YYYYTHH:mm:ss').format('HH:mm');
     } else {
+
       const lastMessageTime = dateParse(
-        convertToUTCString(dateString, global.__timeOffset__),
+        convertToUTCString(dateString),
       );
       const currentTime = new Date();
+
       if (
         lastMessageTime.getDate() === currentTime.getDate() &&
         lastMessageTime.getMonth() === currentTime.getMonth() &&
@@ -30,6 +34,10 @@ export function getTime(
             return returnDay();
           } else {
             // return  getMonth(dateString)
+            console.log('getTime moment getMonth dateString', dateString)
+            console.log('getTime moment getMonth', getMonth(dateString))
+            console.log('getTime moment lastMessageTime',moment(dateString, 'DD.MM.YYYYTHH:mm:ss').format('DD') +
+                getMonth(dateString))
             return (
               moment(dateString, 'DD.MM.YYYYTHH:mm:ss').format('DD') +
               getMonth(dateString)
@@ -47,6 +55,7 @@ export function getTime(
 }
 function getMonth(dateStr) {
   let month = moment(dateStr, 'DD.MM.YYYYTHH:mm:ss').format('MMMM');
+  console.log('getTime moment month ',month)
   switch (month) {
     case 'січень':
       return ' січ';
@@ -54,7 +63,7 @@ function getMonth(dateStr) {
       return ' лют';
     case 'березень':
       return ' бер';
-    case 'квітень ':
+    case 'квітень':
       return ' квіт';
     case 'травень':
       return ' трав';

@@ -8,6 +8,7 @@ import {
   mockupHeightToDP as hp,
   mockupWidthToDP as wp,
 } from '../../constants/Dimensions';
+import {convertToUTCString, dateParse, dateTimeToDateString, dateTimeToTimeStringOrders} from "../../helpers/DateParse";
 
 export const ChatTime = ({date}) => {
   let days: any[] = [];
