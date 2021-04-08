@@ -8,7 +8,7 @@ import {
 import {useDispatch} from 'react-redux';
 import { MyMessage } from '../Components/MyMessage';
 import { ReceivedMessage } from '../Components/ReceivedMessage';
-import {getTime} from "../../Common/getTime";
+import {getTime, dateTimeToDateString} from "../../Common/getTime";
 import {CHAT_COLORS} from "../../constants/colors";
 import moment from "moment";
 
@@ -59,10 +59,9 @@ export const Separator = ({date}) => {
             return false;
         }
     }
-console.warn(date)
     return (
         <View style={styles.containerReceivedMessage}>
-            <Text style={styles.textTime}>{getTime(date, false, false, true, () => returnDay())}</Text>
+            <Text style={styles.textTime}>{getTime(date, false, false, false, () => returnDay())}</Text>
       </View>
     );
 };

@@ -48,7 +48,7 @@ export const FormModal = ({
                 <CustomFormInputs inputs={inputs}/>
             </View>
             <CustomModalButtons
-                customButton={{visible: true, title: 'Скасувати', style: 'redButton'}}
+                customButton={{visible: true, title: 'Скасувати заявку', style: 'redButton'}}
                 customButtonPress={sendConfirmAction}
                 cancelButton={true}
                 cancelButtonPress={closeModal}

@@ -100,6 +100,22 @@ export const OrderUserView = () => {
   const switchSendOnWorkModal = () => {
     setModalSendOnWorkVisible(!modalSendOnWorkVisible);
   };
+  const changeToStatusTwo = async () => {
+    const response = await MethodsRequest.changeStatusOrder(
+        orderData.system.orderId,
+        {orderStatusId: 2, comment: ''},
+    );
+    if (response.statusCode === 200) {
+      await GetOrderInfo.getOrders(
+          dispatch,
+          searchParamSelector.searchText,
+          searchParamSelector.status.id,
+      );
+      navigator().navigate('HomeScreen');
+      return;
+    }
+    Alert.alert(response.statusMessage);
+  };
   const switchDepartmentModal = () => {
     dispatch(
       selectedDepartment({
@@ -365,6 +381,16 @@ export const OrderUserView = () => {
           </View>
         )}
       <View style={styles.containerButtons}>
+        {orderData.system.status === 3 && (
+          <View style={{marginRight: wp(20)}}>
+            <ButtonView
+                title={'Повернути статус'}
+                color={COLORS.BUTTON_BUY_SALE_YELLOW}
+                textColor={'black'}
+                onPress={changeToStatusTwo}
+            />
+          </View>
+        )}
         {orderData.system.status !== 5 && orderData.system.status !== 4 && (
           <ButtonView
             title={'Відхилити'}

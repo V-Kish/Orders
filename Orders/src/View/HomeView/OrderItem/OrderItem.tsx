@@ -20,7 +20,7 @@ import {SelectedClientId} from "../../../store/actions/Clients";
 
 export const OrderItem = ({item}) => {
   const dispatch = useDispatch();
-  console.log('zzz item',item)
+
   const listCurrencies = useSelector(
     (state: reduxTypes) => state.dictionaries.listCurrencies,
   );

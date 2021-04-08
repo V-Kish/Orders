@@ -12,15 +12,15 @@ export const CustomModalButtons = ({
     buttonOk = false,
     cancelButton = false,
     cancelButtonPress = ()=>{},
-    customButton = {visible: false, title: '', style: "submitButton"}, 
+    customButton = {visible: false, title: '', style: "submitButton"},
     customButtonPress = ()=>{}
 }) => {
-  
+
     return <View style={styles.buttonsView}>
             {cancelButton && <ModalButton
                 onPress={cancelButtonPress}
                 style="cancelButton"
-                title="Скасувати"
+                title="Закрити"
             />}
             {customButton.visible && <ModalButton
                 onPress={customButtonPress}
@@ -32,7 +32,7 @@ export const CustomModalButtons = ({
                 title="Ок"
             />}
         </View>
-  
+
 };
 
 const styles = StyleSheet.create({

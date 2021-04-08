@@ -64,10 +64,12 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     operationTypeCircle_buy: {
-        backgroundColor: COLORS.STATUS_GREEN
+       // backgroundColor: COLORS.STATUS_GREEN
+        backgroundColor: COLORS.STATUS_RED
     },
     operationTypeCircle_sale: {
-        backgroundColor: COLORS.STATUS_RED
+        backgroundColor: COLORS.STATUS_GREEN
+      //  backgroundColor: COLORS.STATUS_RED
     },
     operationTypeCircle_cross: {
         backgroundColor: COLORS.STATUS_YELLOW
