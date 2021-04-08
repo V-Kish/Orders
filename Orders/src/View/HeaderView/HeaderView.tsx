@@ -16,9 +16,10 @@ export const HeaderView = ({
   onPress = false,
   rightIcon = null,
   onPressRight = false,
+                             clickUser = false
 }) => {
   return (
-    <View style={{...styles.container, backgroundColor: color}}>
+    <TouchableOpacity activeOpacity={1} onPress={clickUser !== false ? () => clickUser() : null} style={{...styles.container, backgroundColor: color}}>
      <View style={{flexDirection:'row'}}>
        <View style={styles.imageView}>
          <TouchableOpacity onPress={onPress !== false ? () => onPress() : null} style={styles.leftBtn}>
@@ -45,7 +46,7 @@ export const HeaderView = ({
             <Image source={rightIcon} style={styles.image} />
           </TouchableOpacity>
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 

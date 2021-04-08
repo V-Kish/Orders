@@ -13,6 +13,7 @@ import {Chat} from '../../functions/Chat';
 import {ChatView} from '../../View/Chat/ChatView';
 import {chatMessagesPagination} from '../../store/actions/Chat';
 import {PreloaderChat} from '../../View/Chat/PreloderChat/PreloderChat';
+import {SelectedClientId} from "../../store/actions/Clients";
 
 export const ChatScreen = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,9 @@ export const ChatScreen = () => {
 
   function goBack() {
     navigator().toGoBack();
+  }
+  function goToUser() {
+    navigator().navigate('ClientScreen')
   }
   useEffect(() => {
     setPreloader(false);
@@ -60,6 +64,7 @@ export const ChatScreen = () => {
         title={selectedItemChat.clientName}
         color={COLORS.HEADER_BLUE}
         ordersSettings={true}
+        clickUser={goToUser}
         onPress={goBack}
         rightIcon={ICONS.phoneIcon}
         onPressRight={() =>Chat.goTell(selectedItemChat.clientPhone)}

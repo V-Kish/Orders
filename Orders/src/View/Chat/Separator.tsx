@@ -59,7 +59,7 @@ export const Separator = ({date}) => {
             return false;
         }
     }
-
+console.warn(date)
     return (
         <View style={styles.containerReceivedMessage}>
             <Text style={styles.textTime}>{getTime(date, false, false, true, () => returnDay())}</Text>

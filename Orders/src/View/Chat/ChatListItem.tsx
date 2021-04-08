@@ -11,10 +11,11 @@ import {currentUser} from '../../Core/CurrentUser';
 import {navigator} from '../../Core/Navigator';
 import {useDispatch} from 'react-redux';
 import {selectedItemChatAction} from '../../store/actions/Chat';
-import {AddNewChat} from "../../store/actions/Clients";
+import {AddNewChat, SelectedClientId} from "../../store/actions/Clients";
 
 export const ChatListItem = ({item}) => {
   const dispatch = useDispatch();
+  console.warn(item.clientId)
   return (
     <View>
       <TouchableOpacity
@@ -24,6 +25,7 @@ export const ChatListItem = ({item}) => {
           dispatch(AddNewChat(false));
           navigator().navigate('ChatScreen');
           global.selectedChatId = item.rootId;
+          dispatch(SelectedClientId({selectedClientId: item.clientId}));
         }}>
         {/*// container //*/}
         <View style={styles.wrap}>
