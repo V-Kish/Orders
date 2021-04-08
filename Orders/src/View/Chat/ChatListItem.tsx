@@ -15,7 +15,6 @@ import {AddNewChat, SelectedClientId} from "../../store/actions/Clients";
 
 export const ChatListItem = ({item}) => {
   const dispatch = useDispatch();
-  console.warn(item.clientId)
   return (
     <View>
       <TouchableOpacity

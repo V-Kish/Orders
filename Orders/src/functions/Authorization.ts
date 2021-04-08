@@ -20,7 +20,6 @@ class Authorization {
     body.appCode = 'OrdersApp';
     try {
       const authorization = await UserDataProvider.AuthorizationFetch(body);
-      console.warn(authorization)
       if (
         authorization.statusCode === 403 &&
         authorization.statusMessage === 'forbidden'
