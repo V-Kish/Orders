@@ -12,6 +12,7 @@ import {
 } from '../store/actions/Dictionaries';
 import {MethodsRequest} from './MethodsRequest';
 import {PreloaderMain, settingsAppAction} from "../store/actions/AppStart";
+import {Alert} from "react-native";
 
 class Dictionaries {
   private _onDictionariesLoad: () => void;
@@ -154,8 +155,8 @@ class Dictionaries {
       this.onComplete();
     } catch (ex) {
       AppLog.error('_loadDepartments', ex);
-      await currentUser().logout();
       dispatch(PreloaderMain(false));
+      await currentUser().logout();
     }
   }
   // Заповнили список валют
@@ -173,8 +174,8 @@ class Dictionaries {
       this.onComplete();
     } catch (ex) {
       AppLog.error('_loadCurrencies', ex);
-      await currentUser().logout();
       dispatch(PreloaderMain(false));
+      await currentUser().logout();
     }
   }
   static async _loadSettings(dispatch) {
@@ -195,8 +196,8 @@ class Dictionaries {
       this.onComplete();
     } catch (ex) {
       AppLog.error('_loadCurrencies', ex);
-      await currentUser().logout();
       dispatch(PreloaderMain(false));
+      await currentUser().logout();
     }
   }
   // групи відділень
@@ -214,8 +215,8 @@ class Dictionaries {
       this.onComplete();
     } catch (ex) {
       AppLog.error('_loadDepartmentsGroups', ex);
-      await currentUser().logout();
       dispatch(PreloaderMain(false));
+      await currentUser().logout();
     }
   }
   // Типи операцій
@@ -233,8 +234,8 @@ class Dictionaries {
       this.onComplete();
     } catch (ex) {
       AppLog.error('_loadTypesOperation', ex);
-      await currentUser().logout();
       dispatch(PreloaderMain(false));
+      await currentUser().logout();
     }
   }
   // Статуси заявок
@@ -243,8 +244,8 @@ class Dictionaries {
     try {
       const response = await Dictionaries.ordersStatus();
       if (response.statusCode !== 200) {
-        await currentUser().logout();
         dispatch(PreloaderMain(false));
+        await currentUser().logout();
         return;
       }
       dispatch(loadOrdersStatus(response.result));
@@ -252,8 +253,8 @@ class Dictionaries {
       this.onComplete();
     } catch (ex) {
       AppLog.error('_LoadOrdersStatus', ex);
-      await currentUser().logout();
       dispatch(PreloaderMain(false));
+      await currentUser().logout();
     }
   } // Загрузити замовлення
   static async _getOrders(dispatch) {
@@ -278,6 +279,10 @@ class Dictionaries {
         return;
       }
     } catch (ex) {
+      dispatch(PreloaderMain(false));
+      if (ex.toString() === 'TypeError: Network request failed'){
+        Alert.alert('Увага', 'Відсутнє підключення до інтернету')
+      }
     }
   }
 }

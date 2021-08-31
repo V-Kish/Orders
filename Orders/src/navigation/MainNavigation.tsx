@@ -21,6 +21,7 @@ export const MainNavigation = () => {
       .secureUserDataGet()
       .then(async (response) => {
         const date = JSON.parse(response);
+        console.log('currentUser().restoreUserData date',date)
         if (date === null || date.userToken === null) {
           navigator().changeNavigationStateAuth(true, dispatch);
           navigator().state.prevScreen.push({
@@ -32,6 +33,7 @@ export const MainNavigation = () => {
           },400)
         } else {
           currentUser().restoreUserData = response;
+          console.log('currentUser().restoreUserData',currentUser().restoreUserData)
           try {
             const deviceTokenOld = await readData('DeviceToken');
             await UserDataProvider.checkTokenDevice(deviceTokenOld);
@@ -46,6 +48,7 @@ export const MainNavigation = () => {
               },200)
             }, dispatch);
           } catch (ex) {
+
           }
           try {
             const response = await MethodsRequest.getOrdersNumber();

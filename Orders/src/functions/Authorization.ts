@@ -8,6 +8,7 @@ import {Dictionaries} from '../DataProvider/Dictionaries';
 import {MethodsRequest} from '../DataProvider/MethodsRequest';
 import {getOrdersCount} from '../store/actions/Dictionaries';
 import {PreloaderMain} from '../store/actions/AppStart';
+import {Alert} from "react-native";
 
 class Authorization {
   // Список регіонів
@@ -46,6 +47,9 @@ class Authorization {
       currentUser().userId = authorization.data.userId;
     } catch (ex) {
       dispatch(PreloaderMain(false));
+      if (ex.toString() === 'TypeError: Network request failed'){
+        Alert.alert('Увага', 'Відсутнє підключення до інтернету')
+      }
       return;
     }
     // send firebase token to server
