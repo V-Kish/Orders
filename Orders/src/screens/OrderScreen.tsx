@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, BackHandler} from 'react-native';
 import {ICONS} from '../constants/icons';
 import {COLORS} from '../constants/colors';
 import {HeaderView} from '../View/HeaderView/HeaderView';
@@ -9,12 +9,29 @@ import {orderDataTypes, reduxTypes} from '../Types';
 import {useSelector} from 'react-redux';
 import {navigator} from '../Core/Navigator';
 export const OrderScreen = () => {
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
   const orderData: orderDataTypes = useSelector(
     (state: reduxTypes) => state.dictionaries.orderData,
   );
+  const [inputValue, setInputValue] = useState(''); // date
+
   function goBack() {
     navigator().toGoBack();
+    setInputValue('');
   }
+  function handleBackButtonClick() {
+    setInputValue('');
+    return false;
+  }
+
   return (
     <View style={styles.container}>
       <HeaderView
@@ -26,7 +43,7 @@ export const OrderScreen = () => {
         onPress={goBack}
       />
       <View style={styles.mainContainer}>
-        <OrderUserView />
+        <OrderUserView setInputValue={setInputValue} inputValue={inputValue} />
       </View>
     </View>
   );

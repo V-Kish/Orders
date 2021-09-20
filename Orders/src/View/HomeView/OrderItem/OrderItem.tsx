@@ -15,12 +15,10 @@ import {
   statusToType,
 } from '../../../helpers/StatusToType';
 import {COLORS} from '../../../constants/colors';
-import { currentUser } from '../../../Core/CurrentUser';
 import {SelectedClientId} from "../../../store/actions/Clients";
 
 export const OrderItem = ({item}) => {
   const dispatch = useDispatch();
-
   const listCurrencies = useSelector(
     (state: reduxTypes) => state.dictionaries.listCurrencies,
   );
@@ -44,9 +42,7 @@ export const OrderItem = ({item}) => {
   ).additionalInfo.loyaltyProgGroupId;
   item.system.type = statusToType(item.system.status);
   item.detail.sumTo = recalculateSumResult(item);
-  const region = listDepartmentGroup.find(
-    (region) => region.id === item.detail.loyaltyProgGroupId
-  )
+  const region = listDepartmentGroup.find((region) => region.id === item.detail.loyaltyProgGroupId)
   item.detail.regionName = region.name
   const handleItemPress = () => {
     dispatch(SelectedClientId({selectedClientId:item.detail.clientId}))

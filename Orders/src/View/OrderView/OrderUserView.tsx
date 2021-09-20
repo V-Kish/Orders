@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   View,
@@ -28,13 +28,12 @@ import {
   selectedItemDep,
 } from '../../store/actions/Dictionaries';
 import {selectedDepartment} from '../../store/actions/EditUserInfo';
-import {UserDataProvider} from '../../DataProvider/UserDataProvider';
 import {MethodsRequest} from '../../DataProvider/MethodsRequest';
 import {navigator} from '../../Core/Navigator';
 import {GetOrderInfo} from '../../functions/GetOrderInfo';
 import {AvoidScrollView} from '../Components/AvoidScrollView';
-import {dateParse, dateTimeToTimeString, dateTimeToTimeStringDatePick} from '../../helpers/DateParse';
-export const OrderUserView = () => {
+import { dateTimeToTimeString, dateTimeToTimeStringDatePick} from '../../helpers/DateParse';
+export const OrderUserView = ({setInputValue,inputValue}) => {
   const dispatch = useDispatch();
 
   // Dictionary settings array
@@ -47,7 +46,6 @@ export const OrderUserView = () => {
   //
 
   const [disabledBtn, setDisabled] = useState(false);
-  const [inputValue, setInputValue] = useState('');  // date
   // from
   // plus 12 hours
   const [dateFrom, setDateFrom] = useState(new Date(new Date().setHours(0,parseInt(minMinutes[0].value),0)));
@@ -193,9 +191,6 @@ export const OrderUserView = () => {
     }
     setDisabled(false);
   };
-  console.log('minutes',minutes);
-
-
   const onChangeFrom = (event, selectedDate) => {
     if (event.type === 'dismissed') {
       setShowFrom(Platform.OS === 'ios');
@@ -352,7 +347,7 @@ export const OrderUserView = () => {
             style={styles.input}
             textAlignVertical={'top'}
             value={inputValue}
-            onChangeText={(e) => setInputValue(e)}
+              onChangeText={(e) => setInputValue(e)}
             multiline={true}
             placeholder={'Мінімальна кількість символів - 1, максимальна 500'}
           />
